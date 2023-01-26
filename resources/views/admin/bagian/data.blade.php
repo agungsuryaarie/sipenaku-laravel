@@ -1,7 +1,20 @@
 @extends('layouts.app')
-
-
 @section('content')
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">{{ $menu }}</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">{{ $menu }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -14,7 +27,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="bagian_datatable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th style="width:5%">No</th>
@@ -22,21 +35,7 @@
                                         <th class="text-center" style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>Internet</td>
-                                        <td>
-                                            <div class="text-center">
-                                                <a href="#" class="btn btn-success btn-xs"data-toggle="modal"
-                                                    data-target="#modal-edit">
-                                                    <i class="fas fa-edit"></i></a>
-                                                <a href="#" class="btn btn-danger btn-xs">
-                                                    <i class="fas fa-trash"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>
@@ -139,4 +138,30 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        $(function() {
+            var table = $('#bagian_datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('bagian.index') }}",
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'nama_bagian',
+                        name: 'nama_bagian'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
+        });
+    </script>
 @endsection
