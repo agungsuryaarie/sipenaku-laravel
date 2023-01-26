@@ -12,14 +12,12 @@
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<<<<<<< HEAD
+
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-=======
 
->>>>>>> b5172e0ab515b80ab0d98c0b244454142cc4d264
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
 
