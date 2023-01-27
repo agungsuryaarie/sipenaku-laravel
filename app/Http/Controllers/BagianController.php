@@ -13,35 +13,14 @@ class BagianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function index(Request $request)
-    // {
-    //     $menu = 'Bagian';
-    //     if ($request->ajax()) {
-
-    //         $data = Bagian::latest()->get();
-    //         return Datatables::of($data)
-    //             ->addIndexColumn()
-    //             ->addColumn('action', function ($row) {
-    //                 $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-    //                 return $actionBtn;
-    //             })
-    //             ->rawColumns(['action'])
-    //             ->make(true);
-    //     }
-    //     return view('admin.bagian.data', compact('menu'));
-    // }
 
     public function index()
     {
         $menu = 'Bagian';
         if (request()->ajax()) {
             $data = Bagian::latest()->get();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                    return $actionBtn;
-                })
+            return datatables()->of($data)
+                ->addColumn('action', 'admin.bagian.action')
                 ->rawColumns(['action'])
                 ->addIndexColumn()
                 ->make(true);
