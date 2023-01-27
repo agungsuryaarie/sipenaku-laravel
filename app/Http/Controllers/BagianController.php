@@ -13,17 +13,12 @@ class BagianController extends Controller
     {
         $menu = 'Bagian';
         if ($request->ajax()) {
-
             $data = Bagian::latest()->get();
-
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs editBagian"><i class="fas fa-edit"></i></a>';
-
                     $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteBagian"><i class="fas fa-trash"></i></a>';
-
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -64,7 +59,6 @@ class BagianController extends Controller
     public function destroy($id)
     {
         Bagian::find($id)->delete();
-
         return response()->json(['success' => 'Bagian deleted successfully.']);
     }
 }

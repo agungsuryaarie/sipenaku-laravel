@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\BagianController;
+use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\SubkegiatanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,12 +28,15 @@ Route::get('user', [UserController::class, 'index'])->name('user.index');
 Route::resource('bagian', BagianController::class);
 
 // kegiatan
-Route::get('kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.index');
+Route::resource('kegiatan', KegiatanController::class);
 
 // sub-kegiatan
 Route::get('sub-kegiatan', function () {
-    return view('admin.sub-kegiatan.data');
+    $menu = "Sub Kegiatan";
+    return view('admin.sub-kegiatan.data', compact('menu'));
 });
+
+Route::get('subkegiatan/{id}', [SubkegiatanController::class, 'index'])->name('subkegiatan.index');
 
 // rekening
 Route::get('rekening', function () {

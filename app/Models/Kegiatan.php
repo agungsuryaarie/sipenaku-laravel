@@ -16,6 +16,11 @@ class Kegiatan extends Model
         'id_bagian',
     ];
 
+    public function bagian()
+    {
+        return $this->belongsTo(Bagian::class, 'id_bagian');
+    }
+
     public function subkegiatan()
     {
         return $this->hasMany(Subkegiatan::class, 'id_kegiatan');

@@ -13,4 +13,9 @@ class Bagian extends Model
     protected $fillable = [
         'nama_bagian'
     ];
+
+    public function kegiatan()
+    {
+        return $this->hasMany(kegiatan::class, 'id_kegiatan');
+    }
 }

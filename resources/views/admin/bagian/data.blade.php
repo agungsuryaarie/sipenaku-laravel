@@ -11,7 +11,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="bagian_datatable" class="table table-bordered table-striped data-table">
+                            <table class="table table-bordered table-striped data-table">
                                 <thead>
                                     <tr>
                                         <th style="width:5%">No</th>
