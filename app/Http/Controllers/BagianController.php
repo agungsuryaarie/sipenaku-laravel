@@ -36,8 +36,12 @@ class BagianController extends Controller
         $menu = 'Bagian';
         if (request()->ajax()) {
             $data = Bagian::latest()->get();
-            return datatables()->of($data)
-                ->addColumn('action', 'admin.bagian.action')
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
                 ->rawColumns(['action'])
                 ->addIndexColumn()
                 ->make(true);
