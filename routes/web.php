@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\BagianController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,13 +21,10 @@ Route::get('/', function () {
 });
 
 // user
-Route::get('user', function () {
-    return view('admin.user.data');
-});
+Route::get('user', [UserController::class, 'index'])->name('user.index');
 
 // bagian
 Route::resource('bagian', BagianController::class);
-
 
 // kegiatan
 Route::get('kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.index');
@@ -39,6 +38,7 @@ Route::get('sub-kegiatan', function () {
 Route::get('rekening', function () {
     return view('admin.rekening.data');
 });
+
 // setting
 Route::get('setting', function () {
     return view('admin.setting.data');
