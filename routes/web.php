@@ -24,9 +24,7 @@ Route::get('user', function () {
 });
 
 // bagian
-Route::get('bagian', [BagianController::class, 'index'])->name('bagian.index');
-Route::post('bagian/store', [BagianController::class, 'store'])->name('bagian.store');
-Route::post('bagian/{id}/edit', [BagianController::class, 'edit'])->name('bagian.edit');
+Route::resource('bagian', BagianController::class);
 
 
 // kegiatan

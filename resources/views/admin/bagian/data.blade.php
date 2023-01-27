@@ -21,8 +21,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ 'user/add' }}" class="btn btn-info btn-xs" data-toggle="modal"
-                                data-target="#modal-tambah">
+                            <a href="javascript:void(0)" id="createNewProduct" class="btn btn-info btn-xs">
                                 <i class="fas fa-plus-circle"></i> Tambah</a>
                         </div>
                         <!-- /.card-header -->
@@ -35,7 +34,7 @@
                                         <th class="text-center" style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
-                                {{-- <tbody></tbody> --}}
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>
@@ -44,107 +43,52 @@
         </div>
     </section>
 
-    {{-- Modal Tambah --}}
-    <div class="modal fade" id="modal-tambah">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade" id="ajaxModel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Bagian</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h4 class="modal-title" id="modelHeading"></h4>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('bagian.store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <section class="content">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <!-- left column -->
-                                    <div class="col-md-12">
-                                        <div class="card card-default">
-                                            <!-- /.card-header -->
-                                            <!-- form start -->
-
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-9">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Nama Bagian <span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="text" name="nama_bagian" class="form-control"
-                                                                id="" placeholder="Nama bagian">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /.card-body -->
-
-                                        </div>
-                                    </div>
-                                </div>
+                    <form id="bagianForm" name="bagianForm" class="form-horizontal">
+                        <input type="hidden" name="bagian_id" id="bagian_id">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-4 control-label">Nama Bagian</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="nama_bagian" name="nama_bagian"
+                                    placeholder="Enter Name" value="" maxlength="50" required="">
                             </div>
-                        </section>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary btn-sm" id="saveBtn" value="create">Save changes
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    {{-- Modal Edit --}}
-    <div class="modal fade" id="modal-edit">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Bagian</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <section class="content">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <!-- left column -->
-                                <div class="col-md-12">
-                                    <div class="card card-default">
-                                        <!-- /.card-header -->
-                                        <!-- form start -->
-                                        <form>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-9">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Nama Bagian <span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="text" class="form-control" id=""
-                                                                placeholder="Nama bagian">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /.card-body -->
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 @section('script')
-    {{-- <script>
+    <script type="text/javascript">
         $(function() {
+
+            /*------------------------------------------
+             --------------------------------------------
+             Pass Header Token
+             --------------------------------------------
+             --------------------------------------------*/
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            /*------------------------------------------
+            --------------------------------------------
+            Render DataTable
+            --------------------------------------------
+            --------------------------------------------*/
             var table = $('#bagian_datatable').DataTable({
                 processing: true,
                 serverSide: true,
@@ -165,56 +109,87 @@
                     },
                 ]
             });
-        });
-    </script> --}}
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
+            /*------------------------------------------
+            --------------------------------------------
+            Click to Button
+            --------------------------------------------
+            --------------------------------------------*/
+            $('#createNewProduct').click(function() {
+                $('#saveBtn').val("create-bagian");
+                $('#bagian_id').val('');
+                $('#bagianForm').trigger("reset");
+                $('#modelHeading').html("Tambah Bagian");
+                $('#ajaxModel').modal('show');
             });
-            $('#bagian_datatable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ url('bagian') }}",
-                columns: [{
-                        data: 'id',
-                        name: 'id'
-                    },
-                    {
-                        data: 'nama_bagian',
-                        name: 'nama_bagian'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false
-                    },
-                ],
-                order: [
-                    [0, 'desc']
-                ]
+
+            /*------------------------------------------
+            --------------------------------------------
+            Click to Edit Button
+            --------------------------------------------
+            --------------------------------------------*/
+            $('body').on('click', '.editBagian', function() {
+                var bagian_id = $(this).data('id');
+                $.get("{{ route('bagian.index') }}" + '/' + bagian_id + '/edit', function(
+                    data) {
+                    $('#modelHeading').html("Edit Product");
+                    $('#saveBtn').val("edit-user");
+                    $('#ajaxModel').modal('show');
+                    $('#bagian_id').val(data.id);
+                    $('#nama_bagian').val(data.nama_bagian);
+                })
             });
-            $('body').on('click', '.delete', function() {
-                if (confirm("Delete Record?") == true) {
-                    var id = $(this).data('id');
-                    // ajax
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ url('delete-company') }}",
-                        data: {
-                            id: id
-                        },
-                        dataType: 'json',
-                        success: function(res) {
-                            var oTable = $('#bagian_datatable').dataTable();
-                            oTable.fnDraw(false);
-                        }
-                    });
-                }
+
+            /*------------------------------------------
+            --------------------------------------------
+            Create Bagian Code
+            --------------------------------------------
+            --------------------------------------------*/
+            $('#saveBtn').click(function(e) {
+                e.preventDefault();
+                $(this).html('Sending..');
+
+                $.ajax({
+                    data: $('#bagianForm').serialize(),
+                    url: "{{ route('bagian.store') }}",
+                    type: "POST",
+                    dataType: 'json',
+                    success: function(data) {
+
+                        $('#bagianForm').trigger("reset");
+                        $('#ajaxModel').modal('hide');
+                        table.draw();
+
+                    },
+                    error: function(data) {
+                        console.log('Error:', data);
+                        $('#saveBtn').html('Save Changes');
+                    }
+                });
             });
+
+            /*------------------------------------------
+            --------------------------------------------
+            Delete Bagian Code
+            --------------------------------------------
+            --------------------------------------------*/
+            $('body').on('click', '.deleteBagian', function() {
+
+                var bagian_id = $(this).data("id");
+                confirm("Are You sure want to delete !");
+
+                $.ajax({
+                    type: "DELETE",
+                    url: "{{ route('bagian.store') }}" + '/' + bagian_id,
+                    success: function(data) {
+                        table.draw();
+                    },
+                    error: function(data) {
+                        console.log('Error:', data);
+                    }
+                });
+            });
+
         });
     </script>
 @endsection
