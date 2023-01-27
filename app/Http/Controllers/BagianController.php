@@ -48,15 +48,14 @@ class BagianController extends Controller
     {
         Bagian::updateOrCreate(
             [
-                'id' => $request->product_id
+                'id' => $request->bagian_id
             ],
             [
-                'name' => $request->name,
-                'detail' => $request->detail
+                'nama_bagian' => $request->nama_bagian,
             ]
         );
 
-        return response()->json(['success' => 'Product saved successfully.']);
+        return response()->json(['success' => 'Bagian saved successfully.']);
     }
     /**
      * Show the form for editing the specified resource.
@@ -80,6 +79,6 @@ class BagianController extends Controller
     {
         Bagian::find($id)->delete();
 
-        return response()->json(['success' => 'Product deleted successfully.']);
+        return response()->json(['success' => 'Bagian deleted successfully.']);
     }
 }

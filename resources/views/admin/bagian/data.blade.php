@@ -21,7 +21,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="javascript:void(0)" id="createNewProduct" class="btn btn-info btn-xs">
+                            <a href="javascript:void(0)" id="createNewBagian" class="btn btn-info btn-xs">
                                 <i class="fas fa-plus-circle"></i> Tambah</a>
                         </div>
                         <!-- /.card-header -->
@@ -115,7 +115,7 @@
             Click to Button
             --------------------------------------------
             --------------------------------------------*/
-            $('#createNewProduct').click(function() {
+            $('#createNewBagian').click(function() {
                 $('#saveBtn').val("create-bagian");
                 $('#bagian_id').val('');
                 $('#bagianForm').trigger("reset");
