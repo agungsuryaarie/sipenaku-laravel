@@ -1,6 +1,14 @@
 @extends('layouts.app')
-
 @section('content')
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Dashboard</h1>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -14,7 +22,8 @@
                         <div class="icon">
                             <i class="fa fa-building"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ 'bagian' }}" class="small-box-footer">Selengkapnya <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
@@ -28,7 +37,7 @@
                         <div class="icon">
                             <i class="fa fa-user-check"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Selengkapnya <i
+                        <a href="{{ 'user' }}" class="small-box-footer">Selengkapnya <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -41,7 +50,7 @@
                         <div class="icon">
                             <i class="fa fa-list"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Selengkapnya <i
+                        <a href="{{ 'kegiatan' }}" class="small-box-footer">Selengkapnya <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
@@ -55,7 +64,7 @@
                         <div class="icon">
                             <i class="fa fa-list"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Selengkapnya <i
+                        <a href="{{ 'sub-kegiatan' }}" class="small-box-footer">Selengkapnya <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>

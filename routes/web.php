@@ -24,9 +24,7 @@ Route::get('/', function () {
 Route::get('user', [UserController::class, 'index'])->name('user.index');
 
 // bagian
-Route::get('bagian', [BagianController::class, 'index'])->name('bagian.index');
-Route::post('bagian/store', [BagianController::class, 'store'])->name('bagian.store');
-Route::post('bagian/{id}/edit', [BagianController::class, 'edit'])->name('bagian.edit');
+Route::resource('bagian', BagianController::class);
 
 // kegiatan
 Route::get('kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.index');
