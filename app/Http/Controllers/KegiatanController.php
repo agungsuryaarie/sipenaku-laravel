@@ -8,6 +8,7 @@ use DataTables;
 
 class KegiatanController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
