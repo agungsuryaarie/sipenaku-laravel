@@ -35,6 +35,14 @@ class BagianController extends Controller
 
     public function store(Request $request)
     {
+        $validator = \Validator::make($request->all(), [
+            'nama_bagian' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
         Bagian::updateOrCreate(
             [
                 'id' => $request->bagian_id
@@ -49,8 +57,8 @@ class BagianController extends Controller
 
     public function edit($id)
     {
-        $product = Bagian::find($id);
-        return response()->json($product);
+        $bagian = Bagian::find($id);
+        return response()->json($bagian);
     }
 
     public function destroy($id)

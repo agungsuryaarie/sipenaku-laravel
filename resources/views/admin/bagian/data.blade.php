@@ -35,6 +35,11 @@
                     <h4 class="modal-title" id="modelHeading"></h4>
                 </div>
                 <div class="modal-body">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <form id="bagianForm" name="bagianForm" class="form-horizontal">
                         @csrf
                         <input type="hidden" name="bagian_id" id="bagian_id">
@@ -42,10 +47,9 @@
                             <label for="nama_bagian" class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control" id="nama_bagian" name="nama_bagian"
-                                    placeholder="Nama Bagian" value="" maxlength="50" required="">
+                                    placeholder="Nama Bagian" maxlength="50" required="">
                             </div>
                         </div>
-
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Simpan
                             </button>
@@ -97,16 +101,13 @@
 
             $("body").on("click", ".editBagian", function() {
                 var bagian_id = $(this).data("id");
-                $.get(
-                    "{{ route('bagian.index') }}" + "/" + bagian_id + "/edit",
-                    function(data) {
-                        $("#modelHeading").html("Edit Bagian");
-                        $("#saveBtn").val("edit-user");
-                        $("#ajaxModel").modal("show");
-                        $("#bagian_id").val(data.id);
-                        $("#nama_bagian").val(data.nama_bagian);
-                    }
-                );
+                $.get("{{ route('bagian.index') }}" + "/" + bagian_id + "/edit", function(data) {
+                    $("#modelHeading").html("Edit Bagian");
+                    $("#saveBtn").val("edit-bagian");
+                    $("#ajaxModel").modal("show");
+                    $("#bagian_id").val(data.id);
+                    $("#nama_bagian").val(data.nama_bagian);
+                });
             });
 
             $("#saveBtn").click(function(e) {
@@ -119,14 +120,24 @@
                     type: "POST",
                     dataType: "json",
                     success: function(data) {
-                        alertSuccess("Bagian Berhasil di tambah");
-                        $("#bagianForm").trigger("reset");
-                        $("#ajaxModel").modal("hide");
-                        table.draw();
-                    },
-                    error: function(data) {
-                        console.log("Error:", data);
-                        $("#saveBtn").html("Simpan");
+                        if (data.errors) {
+                            $('.alert-danger').html('');
+                            $.each(data.errors, function(key, value) {
+                                $('.alert-danger').show();
+                                $('.alert-danger').append('<strong><li>' +
+                                    value +
+                                    '</li></strong>');
+                                $(".alert-danger").fadeOut(5000);
+                                $("#saveBtn").html("Simpan");
+                                $('#bagianForm').trigger("reset");
+                            });
+                        } else {
+                            table.draw();
+                            alertSuccess("Bagian Berhasil di tambah");
+                            $('#bagianForm').trigger("reset");
+                            $("#saveBtn").html("Simpan");
+                            $('#ajaxModel').modal('hide');
+                        }
                     },
                 });
             });

@@ -7,6 +7,9 @@ function alertSuccess(message) {
             "</div>"
     );
     $(window).scrollTop(0);
+    setTimeout(function () {
+        $(".alert").alert("close");
+    }, 2000);
 }
 
 function alertDanger(message) {
@@ -18,5 +21,8 @@ function alertDanger(message) {
             "</div>"
     );
     $(window).scrollTop(0);
-    $("#alerts").delay(1000).fadeOut(3000);
+    setTimeout(function () {
+        $(".alert").alert("close");
+    }, 2000);
+    // $("#alerts").fadeOut(3000);
 }
