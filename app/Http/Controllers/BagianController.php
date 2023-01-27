@@ -13,21 +13,37 @@ class BagianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    // public function index(Request $request)
+    // {
+    //     $menu = 'Bagian';
+    //     if ($request->ajax()) {
+
+    //         $data = Bagian::latest()->get();
+    //         return Datatables::of($data)
+    //             ->addIndexColumn()
+    //             ->addColumn('action', function ($row) {
+    //                 $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+    //                 return $actionBtn;
+    //             })
+    //             ->rawColumns(['action'])
+    //             ->make(true);
+    //     }
+    //     return view('admin.bagian.data', compact('menu'));
+    // }
+
+    public function index()
     {
         $menu = 'Bagian';
-        if ($request->ajax()) {
-
+        if (request()->ajax()) {
             $data = Bagian::latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-xs" data-id="' . $row->id . '" data-toggle="modal"
-                    data-target="#modal-edit" id="getEditId"><i class="fas fa-edit"></i></a> 
-                    <a href="javascript:void(0)" class="delete btn btn-danger btn-xs"><i class="fas fa-trash"></i></a>';
+                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
+                ->addIndexColumn()
                 ->make(true);
         }
         return view('admin.bagian.data', compact('menu'));
@@ -62,7 +78,7 @@ class BagianController extends Controller
         ]);
 
         //redirect to index
-        return redirect()->route('bagian.index')->with(['status' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('bagian.data')->with(['status' => 'Data Berhasil Disimpan!']);
     }
 
     /**
