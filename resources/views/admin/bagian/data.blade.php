@@ -55,38 +55,41 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <section class="content">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <!-- left column -->
-                                <div class="col-md-12">
-                                    <div class="card card-default">
-                                        <!-- /.card-header -->
-                                        <!-- form start -->
-                                        <form>
+                    <form method="POST" action="{{ route('bagian.store') }}" enctype="multipart/form-data">
+                        @csrf
+                        <section class="content">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <!-- left column -->
+                                    <div class="col-md-12">
+                                        <div class="card card-default">
+                                            <!-- /.card-header -->
+                                            <!-- form start -->
+
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-9">
                                                         <div class="form-group">
                                                             <label for="exampleInputPassword1">Nama Bagian <span
                                                                     class="text-danger"> *</span></label>
-                                                            <input type="text" class="form-control" id=""
-                                                                placeholder="Nama bagian">
+                                                            <input type="text" name="nama_bagian" class="form-control"
+                                                                id="" placeholder="Nama bagian">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- /.card-body -->
-                                        </form>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </section>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
                         </div>
-                    </section>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

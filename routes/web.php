@@ -25,6 +25,9 @@ Route::get('user', function () {
 
 // bagian
 Route::get('bagian', [BagianController::class, 'index'])->name('bagian.index');
+Route::post('bagian/store', [BagianController::class, 'store'])->name('bagian.store');
+Route::post('bagian/{id}/edit', [BagianController::class, 'edit'])->name('bagian.edit');
+
 
 // kegiatan
 Route::get('kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.index');

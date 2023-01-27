@@ -49,7 +49,18 @@ class BagianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate form
+        $this->validate($request, [
+            'nama_bagian' => 'required|string|max:255',
+        ]);
+
+        //create post
+        Bagian::create([
+            'nama_bagian' => $request->nama_bagian,
+        ]);
+
+        //redirect to index
+        return redirect()->route('bagian.index')->with(['status' => 'Data Berhasil Disimpan!']);
     }
 
     /**
