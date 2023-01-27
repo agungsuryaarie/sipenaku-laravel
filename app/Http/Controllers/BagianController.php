@@ -13,32 +13,29 @@ class BagianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request)
     {
-        $menu = 'Bagian';
+        $menu = "Bagian";
         if ($request->ajax()) {
 
             $data = Bagian::latest()->get();
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
-                    return $actionBtn;
+
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-success btn-xs editBagian"><i class="fas fa-edit"></i></a>';
+
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="delete btn btn-danger btn-xs deleteBagian"><i class="fas fa-trash"></i></a>';
+
+                    return $btn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.bagian.data', compact('menu'));
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('admin.bagian.data', compact('menu'));
     }
 
     /**
@@ -49,51 +46,40 @@ class BagianController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        Bagian::updateOrCreate(
+            [
+                'id' => $request->product_id
+            ],
+            [
+                'name' => $request->name,
+                'detail' => $request->detail
+            ]
+        );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Bagian  $bagian
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Bagian $bagian)
-    {
-        //
+        return response()->json(['success' => 'Product saved successfully.']);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Bagian  $bagian
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bagian $bagian)
+    public function edit($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bagian  $bagian
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Bagian $bagian)
-    {
-        //
+        $product = Bagian::find($id);
+        return response()->json($product);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Bagian  $bagian
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bagian $bagian)
+    public function destroy($id)
     {
-        //
+        Bagian::find($id)->delete();
+
+        return response()->json(['success' => 'Product deleted successfully.']);
     }
 }

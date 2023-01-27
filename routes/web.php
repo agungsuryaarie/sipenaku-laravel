@@ -24,7 +24,8 @@ Route::get('user', function () {
 });
 
 // bagian
-Route::get('bagian', [BagianController::class, 'index'])->name('bagian.index');
+Route::resource('bagian', BagianController::class);
+
 
 // kegiatan
 Route::get('kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.index');
