@@ -35,7 +35,7 @@
                                         <th class="text-center" style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                {{-- <tbody></tbody> --}}
                             </table>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
     </div>
 @endsection
 @section('script')
-    <script>
+    {{-- <script>
         $(function() {
             var table = $('#bagian_datatable').DataTable({
                 processing: true,
@@ -164,6 +164,56 @@
                         searchable: false
                     },
                 ]
+            });
+        });
+    </script> --}}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#bagian_datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ url('bagian') }}",
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'nama_bagian',
+                        name: 'nama_bagian'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false
+                    },
+                ],
+                order: [
+                    [0, 'desc']
+                ]
+            });
+            $('body').on('click', '.delete', function() {
+                if (confirm("Delete Record?") == true) {
+                    var id = $(this).data('id');
+                    // ajax
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('delete-company') }}",
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            var oTable = $('#bagian_datatable').dataTable();
+                            oTable.fnDraw(false);
+                        }
+                    });
+                }
             });
         });
     </script>
