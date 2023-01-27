@@ -11,6 +11,6 @@ class Bagian extends Model
     protected $table = 'bagian';
 
     protected $fillable = [
-        'nama_bagian',
+        'nama_bagian'
     ];
 }
