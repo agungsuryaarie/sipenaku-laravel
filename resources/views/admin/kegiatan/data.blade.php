@@ -2,28 +2,28 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <a href="javascript:void(0)" id="createNewKegiatan" class="btn btn-info btn-xs">
-                                <i class="fas fa-plus-circle"></i> Tambah</a>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table class="table table-bordered table-striped data-table">
-                                <thead>
-                                    <tr>
-                                        <th style="width:5%">No</th>
-                                        <th>Kode Kegiatan</th>
-                                        <th>Nama Kegiatan</th>
-                                        <th>Bagian</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
+            <div class="col-12">
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <span class="text-bold">{{ $menu }}</span>
+                        <a href="javascript:void(0)" id="createNewKegiatan" class="btn btn-info btn-xs float-right">
+                            <i class="fas fa-plus-circle"></i> Tambah
+                        </a>
+
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-striped data-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:3%">No</th>
+                                    <th style="width:10%">Kode Kegiatan</th>
+                                    <th>Nama Kegiatan</th>
+                                    <th style="width:20%">Bagian</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -85,8 +85,6 @@
             </div>
         </div>
     </div>
-
-    
 @endsection
 
 @section('script')
@@ -187,7 +185,7 @@
 
                 $.ajax({
                     type: "DELETE",
-                    url: "{{ route('kegiatan.store') }}" + "/" + kegiatan_id,
+                    url: "{{ route('kegiatan.store') }}" + "/" + kegiatan_id + "/destroy",
                     data: {
                         _token: "{!! csrf_token() !!}",
                     },

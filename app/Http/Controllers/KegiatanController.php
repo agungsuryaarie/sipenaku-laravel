@@ -12,7 +12,7 @@ class KegiatanController extends Controller
 
     public function index(Request $request)
     {
-        $menu = 'Kegiatan';
+        $menu = 'Daftar Kegiatan';
         $bagian = Bagian::latest()->get();
         if ($request->ajax()) {
             $data = Kegiatan::with('bagian')->latest()->get();

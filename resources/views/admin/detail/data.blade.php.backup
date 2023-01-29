@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="card mt-4">
                 <div class="card-header">
-                    <span class="text-bold">{{ $menu }}</span>
+                    <div class="text-bold">{{ $menu }}</div>
                 </div>
                 <div class="card-body">
                     <div class="col-12">
@@ -13,8 +13,8 @@
                                 <div>Kegiatan</div>
                             </div>
                             <div class="col-10">
-                                <div>: {{ $subkegiatan->kegiatan->kode_kegiatan }}
-                                    {{ $subkegiatan->kegiatan->nama_kegiatan }}</div>
+                                <div>: {{ $rekening->subkegiatan->kegiatan->kode_kegiatan }}
+                                    {{ $rekening->subkegiatan->kegiatan->nama_kegiatan }}</div>
                             </div>
                         </div>
                         <div class="row">
@@ -22,7 +22,17 @@
                                 <div>Sub Kegiatan</div>
                             </div>
                             <div class="col-10">
-                                <div>: {{ $subkegiatan->kode_sub }} {{ $subkegiatan->nama_sub }}</div>
+                                <div>: {{ $rekening->subkegiatan->kode_sub }} {{ $rekening->subkegiatan->nama_sub }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <div>Rekening</div>
+                            </div>
+                            <div class="col-10">
+                                <div>: {{ $rekening->kode_rekening }} {{ $rekening->nama_rekening }}
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -30,7 +40,7 @@
                                 <div>Bidang</div>
                             </div>
                             <div class="col-10">
-                                <div>: {{ $subkegiatan->kegiatan->bagian->nama_bagian }}</div>
+                                <div>: {{ $rekening->subkegiatan->kegiatan->bagian->nama_bagian }}</div>
                             </div>
                         </div>
                     </div>
@@ -40,10 +50,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="javascript:void(0)" id="createNewRekening" class="btn btn-info btn-xs">
+                            <a href="javascript:void(0)" id="createNewDetail" class="btn btn-info btn-xs">
                                 <i class="fas fa-plus-circle"></i> Tambah
                             </a>
-                            <a href="{{ route('subkegiatan.index', $subkegiatan->kegiatan->id) }}" id="createNewSubkeg"
+                            <a href="{{ route('rekening.index', $rekening->subkegiatan->id) }}" id="createNewSubkeg"
                                 class="btn btn-warning btn-xs float-right">
                                 <i class="fas fa-reply"></i> Kembali
                             </a>
@@ -54,8 +64,11 @@
                                 <thead>
                                     <tr>
                                         <th style="width:3%">No</th>
-                                        <th style="width:15%">Kode Rekening</th>
-                                        <th>Nama Rekening</th>
+                                        <th>Uraian</th>
+                                        <th>Koefisien</th>
+                                        <th>Satuan</th>
+                                        <th>Harga</th>
+                                        <th>Jumlah</th>
                                         <th class="text-center" style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
@@ -80,45 +93,82 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="rekeningForm" name="rekeningForm" class="form-horizontal">
+                    <form id="detailForm" name="detailForm" class="form-horizontal">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="hidden" id="id_subkeg" name="id_subkeg" value="{{ $subkegiatan->id }}">
                                     <label>Kegiatan</label>
                                     <input type="text" class="form-control"
-                                        placeholder="{{ $subkegiatan->kegiatan->kode_kegiatan }} {{ $subkegiatan->kegiatan->nama_kegiatan }}"
+                                        placeholder="{{ $rekening->subkegiatan->kegiatan->kode_kegiatan }} {{ $rekening->subkegiatan->kegiatan->nama_kegiatan }}"
                                         disabled>
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="subkeg_id" id="subkeg_id">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="hidden" id="id_subkeg" name="id_subkeg" value="{{ $subkegiatan->id }}">
                                     <label>Sub Kegiatan</label>
                                     <input type="text" class="form-control"
-                                        placeholder="{{ $subkegiatan->kode_sub }} {{ $subkegiatan->nama_sub }}" disabled>
+                                        placeholder="{{ $rekening->subkegiatan->kode_sub }} {{ $rekening->subkegiatan->nama_sub }}"
+                                        disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="id_rekening " name="id_rekening">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Rekening</label>
+                                    <input type="text" class="form-control"
+                                        placeholder="{{ $rekening->kode_rekening }} {{ $rekening->nama_rekening }}"
+                                        disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Uraian<span class="text-danger">
+                                            *</span></label>
+                                    <input type="text" class="form-control" id="nama_detail" name="nama_detail"
+                                        placeholder="Uraian">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Kode Rekening<span class="text-danger">
+                                    <label for="exampleInputPassword1">Koefisien<span class="text-danger">
                                             *</span></label>
-                                    <input type="text" class="form-control" id="kode_rekening" name="kode_rekening"
-                                        placeholder="Kode Rekening">
+                                    <input type="text" class="form-control" id="koefisien" name="koefisien"
+                                        placeholder="Koefisien">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Nama Rekening<span class="text-danger">
+                                    <label for="exampleInputPassword1">Satuan<span class="text-danger">
                                             *</span></label>
-                                    <input type="text" class="form-control" id="nama_rekening" name="nama_rekening"
-                                        placeholder="Nama Rekening">
+                                    <input type="text" class="form-control" id="satuan" name="satuan"
+                                        placeholder="Satuan">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Harga<span class="text-danger">
+                                            *</span></label>
+                                    <input type="text" class="form-control" id="harga" name="harga"
+                                        placeholder="Harga">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Jumlah<span class="text-danger">
+                                            *</span></label>
+                                    <input type="text" class="form-control" id="jumlah" name="jumlah"
+                                        placeholder="Jumlah">
                                 </div>
                             </div>
                         </div>
@@ -145,18 +195,30 @@
             var table = $(".data-table").DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('rekening.index', $id) }}",
+                ajax: "{{ route('detail.index', $id) }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'kode_rekening',
-                        name: 'kode_rekening'
+                        data: 'nama_detail',
+                        name: 'nama_detail'
                     },
                     {
-                        data: 'nama_rekening',
-                        name: 'nama_rekening'
+                        data: 'koefisien',
+                        name: 'koefisien'
+                    },
+                    {
+                        data: 'satuan',
+                        name: 'satuan'
+                    },
+                    {
+                        data: 'harga',
+                        name: 'harga'
+                    },
+                    {
+                        data: 'jumlah',
+                        name: 'jumlah'
                     },
                     {
                         data: 'action',
@@ -167,26 +229,29 @@
                 ]
             });
 
-            $("#createNewRekening").click(function() {
-                $("#saveBtn").val("create-rekening");
-                $("#rekening_id").val("");
-                $("#rekeningForm").trigger("reset");
-                $("#modelHeading").html("Tambah Rekening");
+            $("#createNewDetail").click(function() {
+                $("#saveBtn").val("create-detail");
+                $("#detail_id").val("");
+                $("#detailForm").trigger("reset");
+                $("#modelHeading").html("Tambah Detail");
                 $("#ajaxModel").modal("show");
-                $("#deleteRekening").modal("show");
+                $("#deleteDetail").modal("show");
             });
 
-            $("body").on("click", ".editRekening", function() {
-                var rekening_id = $(this).data("id_subkeg");
-                $.get("{{ route('rekening.index', $subkegiatan->id) }}" + "/" + rekening_id + "/edit",
+            $("body").on("click", ".editDetail", function() {
+                var detail_id = $(this).data("id");
+                $.get("{{ route('detail.index', $rekening->id) }}" + "/" + detail_id + "/edit",
                     function(data) {
-                        $("#modelHeading").html("Edit Rekening");
-                        $("#saveBtn").val("edit-rekening");
+                        $("#modelHeading").html("Edit Detail");
+                        $("#saveBtn").val("edit-detail");
                         $("#ajaxModel").modal("show");
-                        $("#rekening_id").val(data.id);
-                        $("#id_subkeg").val(data.id_subkeg);
-                        $("#kode_rekening").val(data.kode_rekening);
-                        $("#nama_rekening").val(data.nama_rekening);
+                        $("#detail_id").val(data.id);
+                        $("#id_rekening").val(data.id_rekening);
+                        $("#nama_detail").val(data.nama_detail);
+                        $("#koefisien").val(data.koefisien);
+                        $("#satuan").val(data.satuan);
+                        $("#harga").val(data.harga);
+                        $("#jumlah").val(data.jumlah);
                     });
             });
 
@@ -195,8 +260,8 @@
                 $(this).html("menyimpan..");
 
                 $.ajax({
-                    data: $("#rekeningForm").serialize(),
-                    url: "{{ route('rekening.store') }}",
+                    data: $("#detailForm").serialize(),
+                    url: "{{ route('detail.store') }}",
                     type: "POST",
                     dataType: "json",
                     success: function(data) {
@@ -209,12 +274,12 @@
                                     '</li></strong>');
                                 $(".alert-danger").fadeOut(5000);
                                 $("#saveBtn").html("Simpan");
-                                $('#rekeningForm').trigger("reset");
+                                $('#detailForm').trigger("reset");
                             });
                         } else {
                             table.draw();
-                            alertSuccess("Rekening Berhasil di tambah");
-                            $('#rekeningForm').trigger("reset");
+                            alertSuccess("Detail Berhasil di tambah");
+                            $('#detailForm').trigger("reset");
                             $("#saveBtn").html("Simpan");
                             $('#ajaxModel').modal('hide');
                         }
@@ -222,18 +287,18 @@
                 });
             });
 
-            $("body").on("click", ".deleteRekening", function() {
+            $("body").on("click", ".deleteDetail", function() {
                 var subkeg_id = $(this).data("id");
                 confirm("Are You sure want to delete !");
 
                 $.ajax({
                     type: "DELETE",
-                    url: "{{ route('rekening.store') }}" + "/" + subkeg_id + "/destroy",
+                    url: "{{ route('detail.store') }}" + "/" + subkeg_id,
                     data: {
                         _token: "{!! csrf_token() !!}",
                     },
                     success: function(data) {
-                        alertDanger("Rekening Berhasil di hapus");
+                        alertDanger("Detail Berhasil di hapus");
                         table.draw();
                     },
                     error: function(data) {

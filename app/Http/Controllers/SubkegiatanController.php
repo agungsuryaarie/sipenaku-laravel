@@ -3,73 +3,76 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subkegiatan;
+use App\Models\Kegiatan;
 use Illuminate\Http\Request;
+use DataTables;
 
 class SubkegiatanController extends Controller
 {
-    public function index($id)
+    public function index(Request $request, $id)
     {
-        return $id;
+        $menu = 'Daftar Sub Kegiatan';
+        $id = $id;
+        $kegiatan = Kegiatan::where('id', $id)->first();
+        $subkegiatan = Subkegiatan::where('id_kegiatan', $id)->first();
+        if ($request->ajax()) {
+            $data = Subkegiatan::with('kegiatan')->where('id_kegiatan', $id)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('kode_subkeg', function ($data) {
+                    $link = '<a href="' . route('rekening.index', $data->id)  . '">' . $data->kode_sub . '</a>';
+                    return $link;
+                })
+                ->addColumn('nama_subkeg', function ($data) {
+                    $link = '<a href="' . route('rekening.index', $data->id)  . '">' . $data->nama_sub . '</a>';
+                    return $link;
+                })
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs editSubkeg"><i class="fas fa-edit"></i></a>';
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteSubkeg"><i class="fas fa-trash"></i></a>';
+                    return $btn;
+                })
+                ->rawColumns(['kode_subkeg', 'nama_subkeg', 'action'])
+                ->make(true);
+        }
+
+        return view('admin.sub-kegiatan.data', compact('menu', 'id', 'kegiatan', 'subkegiatan'));
     }
 
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $validator = \Validator::make($request->all(), [
+            'kode_sub' => 'required',
+            'nama_sub' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+
+        Subkegiatan::updateOrCreate(
+            [
+                'id' => $request->subkeg_id
+            ],
+            [
+                'kode_sub' => $request->kode_sub,
+                'nama_sub' => $request->nama_sub,
+                'id_kegiatan' => $request->id_kegiatan,
+            ]
+        );
+
+        return response()->json(['success' => 'Sub Kegiatan saved successfully.']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subkegiatan  $subkegiatan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subkegiatan $subkegiatan)
+    public function edit($kegiatan_id, $id)
     {
-        //
+        $subkeg = Subkegiatan::find($id);
+        return response()->json($subkeg);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Subkegiatan  $subkegiatan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Subkegiatan $subkegiatan)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subkegiatan  $subkegiatan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Subkegiatan $subkegiatan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Subkegiatan  $subkegiatan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Subkegiatan $subkegiatan)
-    {
-        //
+        Subkegiatan::find($id)->delete();
+        return response()->json(['success' => 'Sub Kegiatan deleted successfully.']);
     }
 }

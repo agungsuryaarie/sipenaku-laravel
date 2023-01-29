@@ -2,13 +2,13 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ '/' }}" class="brand-link">
-        <img src="dist/img/logo.png" alt="Logo Batu Bara" class="brand-image ml-5">
+        <img src="{{ url('dist/img/logo.png') }}" alt="Logo Batu Bara" class="brand-image ml-5">
         <span class="brand-text font-weight-light"><b>SIPENAKU</b></span>
     </a>
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-1 d-flex">
             <div class="image">
-                <img src="dist/img/user.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="{{ url('dist/img/user.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">Administrator</a>
@@ -70,38 +70,24 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ 'user' }}"
+                            <a href="{{ route('user.index') }}"
                                 class="nav-link {{ request()->segment(1) == 'user' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>User</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ 'bagian' }}"
+                            <a href="{{ route('bagian.index') }}"
                                 class="nav-link {{ request()->segment(1) == 'bagian' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Bagian</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ 'kegiatan' }}"
+                            <a href="{{ route('kegiatan.index') }}"
                                 class="nav-link {{ request()->segment(1) == 'kegiatan' ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Kegiatan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ 'sub-kegiatan' }}"
-                                class="nav-link {{ request()->segment(1) == 'sub-kegiatan' ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Sub Kegiatan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ 'rekening' }}"
-                                class="nav-link {{ request()->segment(1) == 'rekening' ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Kode Rekening</p>
+                                <p>Anggaran</p>
                             </a>
                         </li>
                         <li class="nav-item">

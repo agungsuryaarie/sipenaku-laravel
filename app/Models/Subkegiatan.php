@@ -16,8 +16,9 @@ class Subkegiatan extends Model
         'nama_sub',
     ];
 
+
     public function kegiatan()
     {
-        return $this->belongsTo(Kegiatan::class);
+        return $this->belongsTo(Kegiatan::class, 'id_kegiatan');
     }
 }
