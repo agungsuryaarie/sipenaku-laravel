@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\BagianController;
-use App\Http\Controllers\KegiatanController;
-use App\Http\Controllers\SubkegiatanController;
-use App\Http\Controllers\RekeningController;
-use App\Http\Controllers\DetailController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\BagianController;
+use App\Http\Controllers\Admin\KegiatanController;
+use App\Http\Controllers\Admin\SubkegiatanController;
+use App\Http\Controllers\Admin\RekeningController;
+use App\Http\Controllers\Admin\DetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,12 @@ use App\Http\Controllers\DetailController;
 |
 */
 
-Route::get('/', function () {
+// Route::get('/', function () {
+//     $menu = "Dashboard";
+//     return view('admin.dashboard', compact('menu'));
+// });
+
+Route::get('/dashboard', function () {
     $menu = "Dashboard";
     return view('admin.dashboard', compact('menu'));
 });
@@ -60,3 +66,6 @@ Route::get('setting', function () {
     $menu = "Sub Kegiatan";
     return view('admin.setting.data', compact('menu'));
 });
+
+
+require __DIR__ . '/front.php';
