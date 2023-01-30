@@ -30,12 +30,20 @@ class KegiatanController extends Controller
                 ->addColumn('bagian', function ($data) {
                     return $data->bagian->nama_bagian;
                 })
+                ->addColumn('pagu_kegiatan', function ($data) {
+                    if ($data->pagu_kegiatan == "") {
+                        $link = "Rp. " . "0";
+                    } else {
+                        $link = 'Rp. ' . number_format($data->pagu_kegiatan, 0, ',', '.');
+                    }
+                    return $link;
+                })
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs editKegiatan"><i class="fas fa-edit"></i></a>';
                     $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteKegiatan"><i class="fas fa-trash"></i></a>';
                     return $btn;
                 })
-                ->rawColumns(['kode_kegiatan', 'nama_kegiatan', 'bagian', 'action'])
+                ->rawColumns(['kode_kegiatan', 'nama_kegiatan', 'bagian', 'pagu_kegiatan', 'action'])
                 ->make(true);
         }
         return view('admin.kegiatan.data', compact('menu', 'bagian'));
@@ -46,7 +54,7 @@ class KegiatanController extends Controller
         $validator = \Validator::make($request->all(), [
             'kode_kegiatan' => 'required',
             'nama_kegiatan' => 'required',
-            'id_bagian' => 'required',
+            'bagian_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -60,7 +68,7 @@ class KegiatanController extends Controller
             [
                 'kode_kegiatan' => $request->kode_kegiatan,
                 'nama_kegiatan' => $request->nama_kegiatan,
-                'id_bagian' => $request->id_bagian,
+                'bagian_id' => $request->bagian_id,
             ]
         );
 

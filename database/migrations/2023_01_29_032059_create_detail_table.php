@@ -15,13 +15,19 @@ class CreateDetailTable extends Migration
     {
         Schema::create('detail', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_rekening');
-            $table->foreign('id_rekening')->references('id')->on('rekening')->onDelete('cascade');
             $table->string('nama_detail')->nullable();
-            $table->string('koefisien')->nullable();
+            $table->string('spesifikasi')->nullable();
+            $table->string('koefisien1')->nullable();
+            $table->string('koefisien2')->nullable();
             $table->string('satuan')->nullable();
             $table->string('harga')->nullable();
-            $table->string('jumlah')->nullable();
+            $table->string('jumlah')->default(0);
+            // $table->unsignedBigInteger('kegiatan_id');
+            // $table->unsignedBigInteger('subkegiatan_id');
+            $table->unsignedBigInteger('rekening_id');
+            // $table->foreign('kegiatan_id')->references('id')->on('kegiatan')->onDelete('cascade');
+            // $table->foreign('subkegiatan_id')->references('id')->on('subkegiatan')->onDelete('cascade');
+            $table->foreign('rekening_id')->references('id')->on('rekening')->onDelete('cascade');
             $table->timestamps();
         });
     }

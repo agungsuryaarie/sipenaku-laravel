@@ -13,16 +13,12 @@ class Kegiatan extends Model
     protected $fillable = [
         'kode_kegiatan',
         'nama_kegiatan',
-        'id_bagian',
+        'pagu_kegiatan',
+        'bagian_id',
     ];
 
     public function bagian()
     {
-        return $this->belongsTo(Bagian::class, 'id_bagian');
-    }
-
-    public function subkegiatan()
-    {
-        return $this->hasMany(Subkegiatan::class, 'id_kegiatan');
+        return $this->belongsTo(Bagian::class);
     }
 }

@@ -11,14 +11,15 @@ class Subkegiatan extends Model
     protected $table = 'subkegiatan';
 
     protected $fillable = [
-        'id_kegiatan',
+        'kegiatan_id',
         'kode_sub',
         'nama_sub',
+        'pagu_sub'
     ];
 
 
     public function kegiatan()
     {
-        return $this->belongsTo(Kegiatan::class, 'id_kegiatan');
+        return $this->belongsTo(Kegiatan::class);
     }
 }

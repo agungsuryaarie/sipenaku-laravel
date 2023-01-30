@@ -13,7 +13,8 @@
                                 <div>Kegiatan</div>
                             </div>
                             <div class="col-8">
-                                <div>: {{ $kegiatan->kode_kegiatan }} {{ $kegiatan->nama_kegiatan }}</div>
+                                <div>: {{ $kegiatan->kode_kegiatan ?? 'None' }}
+                                    {{ $kegiatan->nama_kegiatan ?? 'None' }}</div>
                             </div>
                         </div>
                         <div class="row">
@@ -21,7 +22,7 @@
                                 <div>Bagian</div>
                             </div>
                             <div class="col-8">
-                                <div>: {{ $kegiatan->bagian->nama_bagian }}</div>
+                                <div>: {{ $kegiatan->bagian->nama_bagian ?? 'None' }}</div>
                             </div>
                         </div>
                     </div>
@@ -48,6 +49,7 @@
                                         <th style="width:3%">No</th>
                                         <th style="width:15%">Kode Sub Kegiatan</th>
                                         <th>Nama Sub Kegiatan</th>
+                                        <th style="width:13%">Jumlah</th>
                                         <th class="text-center" style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
@@ -74,14 +76,14 @@
                     </div>
                     <form id="subkegForm" name="subkegForm" class="form-horizontal">
                         @csrf
-                        <input type="hidden" name="subkeg_id" id="subkeg_id">
+                        <input type="hidden" id="kegiatan_id" name="kegiatan_id" value="{{ $kegiatan->id ?? 'None' }}">
+                        <input type="hidden" id="subkeg_id" name="subkeg_id">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="hidden" id="id_kegiatan" name="id_kegiatan" value="{{ $kegiatan->id }}">
                                     <label>Kegiatan</label>
                                     <input type="text" class="form-control"
-                                        placeholder="{{ $kegiatan->kode_kegiatan }} {{ $kegiatan->nama_kegiatan }}"
+                                        placeholder="{{ $kegiatan->kode_kegiatan ?? 'None' }} {{ $kegiatan->nama_kegiatan ?? 'None' }}"
                                         disabled>
                                 </div>
                             </div>
@@ -141,6 +143,10 @@
                         name: 'nama_subkeg'
                     },
                     {
+                        data: 'pagu_sub',
+                        name: 'pagu_sub'
+                    },
+                    {
                         data: 'action',
                         name: 'action',
                         orderable: false,
@@ -160,13 +166,15 @@
 
             $("body").on("click", ".editSubkeg", function() {
                 var subkeg_id = $(this).data("id");
-                $.get("{{ route('subkegiatan.index', $kegiatan->id) }}" + "/" + subkeg_id + "/edit",
+                $.get("{{ route('subkegiatan.index', $subkegiatan->kegiatan->id ?? 'None') }}" + "/" +
+                    subkeg_id +
+                    "/edit",
                     function(data) {
                         $("#modelHeading").html("Edit Sub Kegiatan");
                         $("#saveBtn").val("edit-subkeg");
                         $("#ajaxModel").modal("show");
                         $("#subkeg_id").val(data.id);
-                        $("#id_kegiatan").val(data.id_kegiatan);
+                        $("#kegiatan_id").val(data.kegiatan_id);
                         $("#kode_sub").val(data.kode_sub);
                         $("#nama_sub").val(data.nama_sub);
                     });
@@ -195,7 +203,7 @@
                             });
                         } else {
                             table.draw();
-                            alertSuccess("Kegiatan Berhasil di tambah");
+                            alertSuccess("Sub Kegiatan Berhasil di tambah");
                             $('#subkegForm').trigger("reset");
                             $("#saveBtn").html("Simpan");
                             $('#ajaxModel').modal('hide');

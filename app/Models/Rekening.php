@@ -11,14 +11,21 @@ class Rekening extends Model
     protected $table = 'rekening';
 
     protected $fillable = [
-        'id_subkeg',
+        'id',
+        'subkegiatan_id',
         'kode_rekening',
         'nama_rekening',
+        'pagu_rekening'
     ];
 
 
     public function subkegiatan()
     {
-        return $this->belongsTo(Subkegiatan::class, 'id_subkeg');
+        return $this->belongsTo(Subkegiatan::class);
+    }
+
+    public function detail()
+    {
+        return $this->hasMany(Detail::class);
     }
 }

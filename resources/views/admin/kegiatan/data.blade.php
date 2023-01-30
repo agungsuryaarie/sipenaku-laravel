@@ -18,6 +18,7 @@
                                     <th style="width:3%">No</th>
                                     <th style="width:10%">Kode Kegiatan</th>
                                     <th>Nama Kegiatan</th>
+                                    <th style="width:13%">Jumlah</th>
                                     <th style="width:20%">Bagian</th>
                                     <th>Action</th>
                                 </tr>
@@ -67,7 +68,7 @@
                             <div class="col-md-9">
                                 <div class="form-group">
                                     <label>Bagian<span class="text-danger"> *</span></label>
-                                    <select class="browser-default custom-select" name="id_bagian" id="id_bagian">
+                                    <select class="browser-default custom-select" name="bagian_id" id="bagian_id">
                                         <option selected>Pilih Bagian</option>
                                         @foreach ($bagian as $item)
                                             <option value="{{ $item->id }}">{{ $item->nama_bagian }}</option>
@@ -113,6 +114,10 @@
                         name: 'nama_kegiatan'
                     },
                     {
+                        data: 'pagu_kegiatan',
+                        name: 'pagu_kegiatan'
+                    },
+                    {
                         data: 'bagian',
                         name: 'bagian.nama_bagian'
                     },
@@ -143,7 +148,7 @@
                     $("#kegiatan_id").val(data.id);
                     $("#kode_kegiatan").val(data.kode_kegiatan);
                     $("#nama_kegiatan").val(data.nama_kegiatan);
-                    $("#id_bagian").val(data.id_bagian);
+                    $("#bagian_id").val(data.bagian_id);
                 });
             });
 

@@ -17,8 +17,9 @@ class CreateRekeningTable extends Migration
             $table->id();
             $table->string('kode_rekening')->nullable();
             $table->string('nama_rekening')->nullable();
-            $table->unsignedBigInteger('id_subkeg');
-            $table->foreign('id_subkeg')->references('id')->on('subkegiatan')->onDelete('cascade');
+            $table->unsignedBigInteger('subkegiatan_id');
+            $table->foreign('subkegiatan_id')->references('id')->on('subkegiatan')->onDelete('cascade');
+            $table->string('pagu_rekening')->default(0);
             $table->timestamps();
         });
     }
