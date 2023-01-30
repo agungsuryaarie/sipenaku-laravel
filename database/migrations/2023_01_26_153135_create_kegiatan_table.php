@@ -17,8 +17,9 @@ class CreateKegiatanTable extends Migration
             $table->id();
             $table->string('kode_kegiatan')->nullable();
             $table->string('nama_kegiatan')->nullable();
-            $table->unsignedBigInteger('id_bagian');
-            $table->foreign('id_bagian')->references('id')->on('bagian')->onDelete('cascade');
+            $table->unsignedBigInteger('bagian_id');
+            $table->foreign('bagian_id')->references('id')->on('bagian')->onDelete('cascade');
+            $table->string('pagu_kegiatan')->default(0);
             $table->timestamps();
         });
     }

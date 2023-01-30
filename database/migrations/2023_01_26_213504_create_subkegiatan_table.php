@@ -17,8 +17,9 @@ class CreateSubkegiatanTable extends Migration
             $table->id();
             $table->string('kode_sub')->nullable();
             $table->string('nama_sub')->nullable();
-            $table->unsignedBigInteger('id_kegiatan');
-            $table->foreign('id_kegiatan')->references('id')->on('kegiatan')->onDelete('cascade');
+            $table->unsignedBigInteger('kegiatan_id');
+            $table->foreign('kegiatan_id')->references('id')->on('kegiatan')->onDelete('cascade');
+            $table->string('pagu_sub')->default(0);
             $table->timestamps();
         });
     }

@@ -11,18 +11,22 @@ class Detail extends Model
     protected $table = 'detail';
 
     protected $fillable = [
-        'id_subkeg',
-        'kode_detail',
+        'id',
         'nama_detail',
-        'koefisien',
+        'spesifikasi',
+        'koefisien1',
+        'koefisien2',
         'satuan',
         'harga',
         'jumlah',
+        // 'kegiatan_id',
+        // 'subkegiatan_id',
+        'rekening_id',
     ];
 
 
     public function rekening()
     {
-        return $this->belongsTo(Rekening::class, 'id_rekening');
+        return $this->belongsTo(Rekening::class);
     }
 }

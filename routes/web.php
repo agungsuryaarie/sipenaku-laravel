@@ -38,7 +38,7 @@ Route::delete('kegiatan/{id}/destroy', [KegiatanController::class, 'destroy'])->
 
 
 // sub-kegiatan
-Route::get('kegiatan/subkegiatan/{id}', [SubkegiatanController::class, 'index'])->name('subkegiatan.index');
+Route::get('kegiatan/subkegiatan/{subkegiatan}', [SubkegiatanController::class, 'index'])->name('subkegiatan.index');
 Route::post('kegiatan/subkegiatan', [SubkegiatanController::class, 'store'])->name('subkegiatan.store');
 Route::get('kegiatan/subkegiatan/{kegiatan_id}/{id}/edit', [SubkegiatanController::class, 'edit'])->name('subkegiatan.edit');
 Route::delete('kegiatan/subkegiatan/{id}/destroy', [SubkegiatanController::class, 'destroy'])->name('subkegiatan.destroy');
@@ -46,13 +46,13 @@ Route::delete('kegiatan/subkegiatan/{id}/destroy', [SubkegiatanController::class
 // rekening
 Route::get('kegiatan/rekening/{id}', [RekeningController::class, 'index'])->name('rekening.index');
 Route::post('kegiatan/rekening', [RekeningController::class, 'store'])->name('rekening.store');
-Route::get('kegiatan/rekening//{subkeg_id}/{id}/edit', [RekeningController::class, 'edit'])->name('rekening.edit');
+Route::get('kegiatan/rekening/{subkegiatan_id}/{id}/edit', [RekeningController::class, 'edit'])->name('rekening.edit');
 Route::delete('kegiatan/rekening/{id}/destroy', [RekeningController::class, 'destroy'])->name('rekening.destroy');
 
 // detail
 Route::get('kegiatan/detail/{id}', [DetailController::class, 'index'])->name('detail.index');
 Route::post('kegiatan/detail', [DetailController::class, 'store'])->name('detail.store');
-Route::get('kegiatan/detail/{id}/edit', [DetailController::class, 'edit'])->name('detail.edit');
+Route::get('kegiatan/detail/{rekening_id}/{id}/edit', [DetailController::class, 'edit'])->name('detail.edit');
 Route::delete('kegiatan/detail/{id}/destroy', [DetailController::class, 'destroy'])->name('detail.destroy');
 
 // setting
