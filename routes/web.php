@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BagianController;
 use App\Http\Controllers\Admin\KegiatanController;
 use App\Http\Controllers\Admin\SubkegiatanController;
 use App\Http\Controllers\Admin\RekeningController;
+use App\Http\Controllers\Admin\KartuController;
 use App\Http\Controllers\Admin\DetailController;
 
 /*
@@ -64,6 +65,9 @@ Route::get('kegiatan/detail/{id}', [DetailController::class, 'index'])->name('de
 Route::post('kegiatan/detail', [DetailController::class, 'store'])->name('detail.store');
 Route::get('kegiatan/detail/{rekening_id}/{id}/edit', [DetailController::class, 'edit'])->name('detail.edit');
 Route::delete('kegiatan/detail/{id}/destroy', [DetailController::class, 'destroy'])->name('detail.destroy');
+
+// Kartu Kendali
+Route::get('kartukendali', [KartuController::class, 'index'])->name('kartukendali.index');
 
 // setting
 Route::get('setting', function () {

@@ -71,7 +71,7 @@ h2 {
   margin-top: 0em;
   margin-bottom: 0em;
   color: #161613;
-  font-size: 3.25em;
+  font-size: 2.25em;
   line-height: 1.13em;
   font-weight: 700;
 }
@@ -1136,7 +1136,7 @@ figcaption {
 .gradient {
   position: absolute;
   left: 0%;
-  top: -25em;
+  top: -30em;
   right: 0%;
   bottom: 0%;
   z-index: -10;

@@ -45,7 +45,7 @@
         role="banner" class="navbar w-nav">
         <div class="nav-block">
             <a href="/" data-w-id="ad761d47-7853-493f-fa15-057342917d69" aria-current="page"
-                class="brand w-nav-brand w--current"><img src="assets/img/logo-sipenaku.png" loading="eager"
+                class="brand w-nav-brand w--current"><img src="{{ url('front/img/logo-sipenaku.png') }}" loading="eager"
                     alt="" class="logo" /></a>
             <div data-w-id="ad761d47-7853-493f-fa15-057342917d6b" class="nav">
                 <nav role="navigation" class="nav-menu w-nav-menu">
@@ -125,11 +125,11 @@
                     data-w-id="fb81bcce-4d37-85e0-208e-77cf7c1ffc2c" class="app-hero">
                     <div class="app-hero---wrapper">
                         <div class="app-hero">
-                            <img src="{{ url('front/img/ilustrasi-4.png') }}" class="banner-image" loading="eager"
+                            <img src="{{ url('front/img/ilustrasi-3.png') }}" class="banner-image" loading="eager"
                                 sizes="(max-width: 767px) 50vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
                                 srcset="
-                                {{ url('front/img/ilustrasi-4.png') }} 500w,
-                                {{ url('front/img/ilustrasi-4.png') }} 672w"
+                                {{ url('front/img/ilustrasi-3.png') }} 500w,
+                                {{ url('front/img/ilustrasi-3.png') }} 672w"
                                 alt="" class="image-app---hero" />
                             <div class="app-hero---shadow"></div>
                         </div>
@@ -162,11 +162,11 @@
                             <div class="app-focus---content">
                                 <div class="app-focus---shadow"></div>
                                 <div class="app-focus---image">
-                                    <img src="{{ url('front/img/pelaporan.svg') }}" loading="eager"
+                                    <img src="{{ url('front/img/planning_set.png') }}" loading="eager"
                                         sizes="(max-width: 479px) 50vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
                                         srcset="
-                                        {{ url('front/img/pelaporan.svg') }} 500w,
-                                        {{ url('front/img/pelaporan.svg') }} 504w"
+                                        {{ url('front/img/planning_set.png') }} 500w,
+                                        {{ url('front/img/planning_set.png') }} 504w"
                                         alt="" class="image-app---focus-1" />
                                     <img src="{{ url('front/img/tahunan.svg') }}" loading="eager"
                                         sizes="(max-width: 479px) 68vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
@@ -353,12 +353,11 @@
               opacity: 1;
               transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1)
                 rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-              transform-style: preserve-3d;
-            "
+              transform-style: preserve-3d;"
                     class="functions-large">
-                    <div class="block-functions-img">
+                    {{-- <div class="block-functions-img">
                         <img src="{{ url('front/img/logobb.png') }}" />
-                    </div>
+                    </div> --}}
                     <div class="block-functions-large">
                         <h2 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
                             style="
@@ -454,6 +453,16 @@
                         Pemerintah Kabupaten Batu Bara.
                     </p>
                 </div>
+                <div id="w-node-_17a85c95-fa82-5746-71bf-c8af53109a74-53109a73" class="footer-left">
+                    <h2 data-w-id="17a85c95-fa82-5746-71bf-c8af53109a75" class="heading-footer">
+                        Pemerintah Kabupaten batu Bara
+                    </h2>
+                    <p data-w-id="17a85c95-fa82-5746-71bf-c8af53109a79" class="paragraph">
+                        Sistem Informasi Penatausahaan Keuangan (SIPENAKU) dikembangkan
+                        dari basis SIMDA untuk mempermudah manajemen keuangan daerah pada
+                        Pemerintah Kabupaten Batu Bara.
+                    </p>
+                </div>
                 {{-- <div id="w-node-_17a85c95-fa82-5746-71bf-c8af53109a7b-53109a73"
                     data-w-id="17a85c95-fa82-5746-71bf-c8af53109a7b" class="footer-right">
                     <div class="block-button-footer">
@@ -472,8 +481,9 @@
             </div>
             <div id="w-node-c6cca3a7-263c-d0f4-ab69-a9e0451710a4-451710a4" class="footer-down">
                 <div data-w-id="c6cca3a7-263c-d0f4-ab69-a9e0451710a5" class="block-footer-down">
-                    <img src="assets/img/logo-sipenaku.png" loading="eager" alt="" class="logo-footer" /><a
-                        href="https://webflow.com/" target="_blank" class="link-footer">Powered by Me</a>
+                    <img src="{{ url('front/img/logo-b&w.png') }}" loading="eager" alt=""
+                        class="logo-footer" /><a href="https://webflow.com/" target="_blank"
+                        class="link-footer">Powered by Me</a>
                 </div>
                 <div data-w-id="c6cca3a7-263c-d0f4-ab69-a9e0451710a9" class="block-footer-down">
                     <a href="/template-info/style-guide" class="link-footer">Style Guide</a><a
