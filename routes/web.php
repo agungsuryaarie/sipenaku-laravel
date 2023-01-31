@@ -32,6 +32,10 @@ Route::get('/dashboard', function () {
 
 // user
 Route::get('user', [UserController::class, 'index'])->name('user.index');
+Route::post('user', [UserController::class, 'store'])->name('user.store');
+Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::delete('user/{id}/destroy', [UserController::class, 'destroy'])->name('user.destroy');
+
 
 // bagian
 Route::resource('bagian', BagianController::class);
