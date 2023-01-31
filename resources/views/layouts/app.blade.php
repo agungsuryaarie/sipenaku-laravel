@@ -45,8 +45,8 @@
         role="banner" class="navbar w-nav">
         <div class="nav-block">
             <a href="/" data-w-id="ad761d47-7853-493f-fa15-057342917d69" aria-current="page"
-                class="brand w-nav-brand w--current"><img src="{{ url('front/img/logo-sipenaku.png') }}" loading="eager"
-                    alt="" class="logo" /></a>
+                class="brand w-nav-brand w--current"><img src="{{ url('front/img/logo-sipenaku2.png') }}"
+                    loading="eager" alt="" class="logo" /></a>
             <div data-w-id="ad761d47-7853-493f-fa15-057342917d6b" class="nav">
                 <nav role="navigation" class="nav-menu w-nav-menu">
                     <a href="/" aria-current="page" class="nav-link w-nav-link w--current">Home<br /></a>
@@ -125,11 +125,11 @@
                     data-w-id="fb81bcce-4d37-85e0-208e-77cf7c1ffc2c" class="app-hero">
                     <div class="app-hero---wrapper">
                         <div class="app-hero">
-                            <img src="{{ url('front/img/ilustrasi-3.png') }}" class="banner-image" loading="eager"
+                            <img src="{{ url('front/img/ilustrasi-7.png') }}" class="banner-image" loading="eager"
                                 sizes="(max-width: 767px) 50vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
                                 srcset="
-                                {{ url('front/img/ilustrasi-3.png') }} 500w,
-                                {{ url('front/img/ilustrasi-3.png') }} 672w"
+                                {{ url('front/img/ilustrasi-7.png') }} 500w,
+                                {{ url('front/img/ilustrasi-7.png') }} 672w"
                                 alt="" class="image-app---hero" />
                             <div class="app-hero---shadow"></div>
                         </div>
@@ -348,85 +348,53 @@
         <div class="content-wide">
             <div class="w-layout-grid grid-functions">
                 <div id="w-node-f5c0af81-4013-be1e-5c3f-7e73946682be-379d5480"
-                    data-w-id="f5c0af81-4013-be1e-5c3f-7e73946682be"
-                    style="
-              opacity: 1;
-              transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1)
-                rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-              transform-style: preserve-3d;"
-                    class="functions-large">
-                    {{-- <div class="block-functions-img">
+                    data-w-id="f5c0af81-4013-be1e-5c3f-7e73946682be" class="functions-box">
+                    <div class="section-logo">
                         <img src="{{ url('front/img/logobb.png') }}" />
-                    </div> --}}
-                    <div class="block-functions-large">
-                        <h2 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
-                            style="
-                  opacity: 1;
-                  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1)
-                    rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-                  transform-style: preserve-3d;
-                "
-                            class="heading-tittle">
-                            Visi Pemerintah Kab. Batu bara
-                        </h2>
-                        <ul data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d"
-                            style="
-                  opacity: 1;
-                  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1)
-                    rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-                  transform-style: preserve-3d;
-                "
-                            class="paragraph">
-                            <li>
-                                Menjadikan Masyarakat Kabupaten Batu Bara Masyarakat Industri
-                                Yang Sejahtera, Mandiri Dan Berbudaya
-                            </li>
-                        </ul>
                     </div>
-                    <div class="block-functions-large">
-                        <h2 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4"
-                            style="
-                  opacity: 1;
-                  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1)
-                    rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-                  transform-style: preserve-3d;
-                "
-                            class="heading-tittle">
-                            Misi Pemerintah Kab. Batu bara
-                        </h2>
-                        <ul data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d"
-                            style="
-                  opacity: 1;
-                  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1)
-                    rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-                  transform-style: preserve-3d;
-                "
-                            class="paragraph">
-                            <li>
-                                Meningkatkan Pelayanan Aparatur Pemerintah Atas Pelayanan
-                                Publik Dan Investasi
-                            </li>
-                            <li>
-                                Meningkatkan jumlah dan Kualitas Infrastruktur dan Sarana
-                                Prasarana pendukung pertumbuhan Industri & Perekonomian
-                            </li>
-                            <li>
-                                Mewujudkan Masyarakat yang Produktif, Inovatif dan Berbudaya
-                            </li>
-                        </ul>
-                        <div data-w-id="8c53bd04-7308-a7ae-433a-7f4553973cfa"
-                            style="
-                  opacity: 1;
-                  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1)
-                    rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
-                  transform-style: preserve-3d;
-                "
-                            class="circle-button">
+                    <div class="functions-large">
+                        <div class="block-functions-large">
+                            <h2 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4" class="heading-tittle">
+                                Visi Pemerintah Kab. Batu bara
+                            </h2>
+                            <ul data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d" class="paragraph">
+                                <li>
+                                    Menjadikan Masyarakat Kabupaten Batu Bara Masyarakat Industri
+                                    Yang Sejahtera, Mandiri Dan Berbudaya
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="block-functions-large">
+                            <h2 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4" class="heading-tittle">
+                                Misi Pemerintah Kab. Batu bara
+                            </h2>
+                            <ul data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d" class="paragraph">
+                                <li>
+                                    Meningkatkan Pelayanan Aparatur Pemerintah Atas Pelayanan
+                                    Publik Dan Investasi
+                                </li>
+                                <li>
+                                    Meningkatkan jumlah dan Kualitas Infrastruktur dan Sarana
+                                    Prasarana pendukung pertumbuhan Industri & Perekonomian
+                                </li>
+                                <li>
+                                    Mewujudkan Masyarakat yang Produktif, Inovatif dan Berbudaya
+                                </li>
+                                <li>
+                                    Mewujudkan Industri Berbasis Sumber daya. . .
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div data-w-id="0407c09b-5da1-c573-6f18-f9acb82b7d4c"
+                        style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        class="block-button">
+                        <div class="circle-button">
                             <a href="https://www.batubarakab.go.id/pages/visi-dan-misi"
                                 class="link-circle-button w-inline-block"><img
                                     src="https://assets.website-files.com/638ff800599a0427a59d547f/6392a552e9d57182f30245c9_arrow_dark.svg"
-                                    loading="eager" alt="" class="icon-button" /></a>
-                            <div class="text-button">Selengkapnya</div>
+                                    loading="eager" alt="" class="icon-button"></a>
+                            <div class="text-button">Learn more</div>
                         </div>
                     </div>
                 </div>
@@ -443,10 +411,9 @@
         <div class="content">
             <div class="w-layout-grid grid-footer">
                 <div id="w-node-_17a85c95-fa82-5746-71bf-c8af53109a74-53109a73" class="footer-left">
-                    <h2 data-w-id="17a85c95-fa82-5746-71bf-c8af53109a75" class="heading-footer">
-                        The Spectrum mobile app is
-                        <span class="text-transparent">now available</span>
-                    </h2>
+                    <a href="/" data-w-id="ad761d47-7853-493f-fa15-057342917d69" aria-current="page"
+                        class="brand w-nav-brand w--current"><img src="{{ url('front/img/logo-sipenaku2.png') }}"
+                            loading="eager" alt="" class="logo-app" /></a>
                     <p data-w-id="17a85c95-fa82-5746-71bf-c8af53109a79" class="paragraph">
                         Sistem Informasi Penatausahaan Keuangan (SIPENAKU) dikembangkan
                         dari basis SIMDA untuk mempermudah manajemen keuangan daerah pada
@@ -455,40 +422,22 @@
                 </div>
                 <div id="w-node-_17a85c95-fa82-5746-71bf-c8af53109a74-53109a73" class="footer-left">
                     <h2 data-w-id="17a85c95-fa82-5746-71bf-c8af53109a75" class="heading-footer">
-                        Pemerintah Kabupaten batu Bara
+                        Pemerintah Kabupaten Batu Bara
                     </h2>
                     <p data-w-id="17a85c95-fa82-5746-71bf-c8af53109a79" class="paragraph">
-                        Sistem Informasi Penatausahaan Keuangan (SIPENAKU) dikembangkan
-                        dari basis SIMDA untuk mempermudah manajemen keuangan daerah pada
-                        Pemerintah Kabupaten Batu Bara.
+                        jl. Perintis Kemerdekaan no.164, Lima Puluh
                     </p>
                 </div>
-                {{-- <div id="w-node-_17a85c95-fa82-5746-71bf-c8af53109a7b-53109a73"
-                    data-w-id="17a85c95-fa82-5746-71bf-c8af53109a7b" class="footer-right">
-                    <div class="block-button-footer">
-                        <div class="text-button-footer">for iOS</div>
-                        <a href="/get-the-app" class="button-footer w-inline-block"><img
-                                src="https://assets.website-files.com/638ff800599a0427a59d547f/63967de5048bbbb0655e28ef_ios.svg"
-                                loading="eager" alt="" class="icon-button-footer" /></a>
-                    </div>
-                    <div class="block-button-footer">
-                        <div class="text-button-footer">for Android</div>
-                        <a href="/get-the-app" class="button-footer w-inline-block"><img
-                                src="https://assets.website-files.com/638ff800599a0427a59d547f/63967de5048e7c78359ea229_android.svg"
-                                loading="eager" alt="" class="icon-button-footer" /></a>
-                    </div>
-                </div> --}}
             </div>
             <div id="w-node-c6cca3a7-263c-d0f4-ab69-a9e0451710a4-451710a4" class="footer-down">
                 <div data-w-id="c6cca3a7-263c-d0f4-ab69-a9e0451710a5" class="block-footer-down">
-                    <img src="{{ url('front/img/logo-b&w.png') }}" loading="eager" alt=""
-                        class="logo-footer" /><a href="https://webflow.com/" target="_blank"
-                        class="link-footer">Powered by Me</a>
+                    <a href="" class="link-footer">Copyright © 2023 | Hak Cipta
+                        Dilindungi. </a>
                 </div>
                 <div data-w-id="c6cca3a7-263c-d0f4-ab69-a9e0451710a9" class="block-footer-down">
-                    <a href="/template-info/style-guide" class="link-footer">Style Guide</a><a
-                        href="/template-info/licensing" class="link-footer">Licensing</a><a
-                        href="/template-info/changelog" class="link-footer">Changelog</a>
+                    <a href="/template-info/style-guide" class="link-footer">Home</a><a
+                        href="/template-info/licensing" class="link-footer">Visi Misi</a><a
+                        href="/template-info/changelog" class="link-footer">Features</a>
                 </div>
             </div>
         </div>
