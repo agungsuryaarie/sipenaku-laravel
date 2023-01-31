@@ -8,7 +8,9 @@ use App\Http\Controllers\Admin\KegiatanController;
 use App\Http\Controllers\Admin\SubkegiatanController;
 use App\Http\Controllers\Admin\RekeningController;
 use App\Http\Controllers\Admin\KartuController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\DetailController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -70,10 +72,12 @@ Route::delete('kegiatan/detail/{id}/destroy', [DetailController::class, 'destroy
 Route::get('kartukendali', [KartuController::class, 'index'])->name('kartukendali.index');
 
 // setting
-Route::get('setting', function () {
-    $menu = "Sub Kegiatan";
-    return view('admin.setting.data', compact('menu'));
-});
+// Route::get('setting', function () {
+//     $menu = "Sub Kegiatan";
+//     return view('admin.setting.data', compact('menu'));
+// });
+
+Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
 
 
 require __DIR__ . '/front.php';
