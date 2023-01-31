@@ -5,7 +5,7 @@
         <b>Version</b> 2.0
     </div>
 </footer>
-<script src="{{ url('js/alert.js') }}"></script>
+<script src="{{ url('js/custom.js') }}"></script>
 <script src="{{ url('plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ url('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -34,29 +34,7 @@
 <script src="{{ url('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 @yield('script')
 {{-- Jam --}}
-<script>
-    window.onload = function() {
-        jam();
-    }
-
-    function jam() {
-        var e = document.getElementById('jam'),
-            d = new Date(),
-            h, m, s;
-        h = d.getHours();
-        m = set(d.getMinutes());
-        s = set(d.getSeconds());
-
-        e.innerHTML = h + ':' + m + ':' + s;
-
-        setTimeout('jam()', 1000);
-    }
-
-    function set(e) {
-        e = e < 10 ? '0' + e : e;
-        return e;
-    }
-</script>
+<script></script>
 
 </body>
 

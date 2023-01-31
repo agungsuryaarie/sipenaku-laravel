@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Rekening;
 use App\Models\Detail;
 use App\Models\Kegiatan;
@@ -75,7 +76,7 @@ class DetailController extends Controller
         $harga = preg_replace('/[^a-zA-Z0-9_ -]/s', '', $request->harga);
         $harga_bersih = str_replace('Rp ', '', $harga);
         $jumlah = preg_replace('/[^a-zA-Z0-9_ -]/s', '', $request->jumlah);
-        $total = str_replace('Rp ', '', $jumlah);
+        $total = str_replace('Rp. ', '', $jumlah);
 
         Detail::updateOrCreate(
             [

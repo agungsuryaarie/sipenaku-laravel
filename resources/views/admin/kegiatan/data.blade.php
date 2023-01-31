@@ -112,6 +112,11 @@
             var table = $(".data-table").DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
+                lengthChange: false,
+                autoWidth: false,
+                dom: 'Bfrtip',
+                buttons: ["excel", "pdf", "print", "colvis"],
                 ajax: "{{ route('kegiatan.index') }}",
                 columns: [{
                         data: 'DT_RowIndex',
