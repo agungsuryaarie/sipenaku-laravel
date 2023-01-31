@@ -172,7 +172,6 @@
             $("#saveBtn").click(function(e) {
                 e.preventDefault();
                 $(this).html("menyimpan..");
-
                 $.ajax({
                     data: $("#kegiatanForm").serialize(),
                     url: "{{ route('kegiatan.store') }}",

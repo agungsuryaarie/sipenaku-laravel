@@ -16,25 +16,11 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'id_bagian', 'nama_bagian', 'nip', 'nama', 'nohp', 'email', 'username', 'password', 'foto', 'level', 'status'
+        'bagian_id', 'nip', 'nama', 'nohp', 'email', 'username', 'password', 'foto', 'level', 'status'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function bagian()
+    {
+        return $this->belongsTo(Bagian::class);
+    }
 }

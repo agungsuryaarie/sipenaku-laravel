@@ -7,7 +7,10 @@ use App\Http\Controllers\Admin\BagianController;
 use App\Http\Controllers\Admin\KegiatanController;
 use App\Http\Controllers\Admin\SubkegiatanController;
 use App\Http\Controllers\Admin\RekeningController;
+use App\Http\Controllers\Admin\KartuController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\DetailController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -66,11 +69,16 @@ Route::post('kegiatan/detail', [DetailController::class, 'store'])->name('detail
 Route::get('kegiatan/detail/{rekening_id}/{id}/edit', [DetailController::class, 'edit'])->name('detail.edit');
 Route::delete('kegiatan/detail/{id}/destroy', [DetailController::class, 'destroy'])->name('detail.destroy');
 
+// Kartu Kendali
+Route::get('kartukendali', [KartuController::class, 'index'])->name('kartukendali.index');
+
 // setting
-Route::get('setting', function () {
-    $menu = "Sub Kegiatan";
-    return view('admin.setting.data', compact('menu'));
-});
+// Route::get('setting', function () {
+//     $menu = "Sub Kegiatan";
+//     return view('admin.setting.data', compact('menu'));
+// });
+
+Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
 
 
 require __DIR__ . '/front.php';
