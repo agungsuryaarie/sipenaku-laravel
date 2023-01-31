@@ -1,15 +1,27 @@
 @extends('admin.layouts.app')
 @section('content')
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">{{ $menu }}</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ '/' }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">{{ $menu }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="content">
         <div class="container-fluid">
             <div class="col-12">
-                <div class="card mt-4">
+                <div class="card">
                     <div class="card-header">
-                        <span class="text-bold">{{ $menu }}</span>
                         <a href="javascript:void(0)" id="createNewKegiatan" class="btn btn-info btn-xs float-right">
-                            <i class="fas fa-plus-circle"></i> Tambah
-                        </a>
-
+                            <i class="fas fa-plus-circle"></i> Tambah</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped data-table">
