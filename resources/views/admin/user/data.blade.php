@@ -34,7 +34,6 @@
                                         <th>NIP</th>
                                         <th>Nama</th>
                                         <th>Username</th>
-                                        <th class="text-center" style="width:10%">Foto</th>
                                         <th class="text-center" style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
@@ -48,7 +47,7 @@
     </section>
 
     <div class="modal fade" id="ajaxModel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="modelHeading"></h4>
@@ -59,296 +58,101 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="bagianForm" name="bagianForm" class="form-horizontal">
+                    <form id="userForm" name="userForm" class="form-horizontal">
                         @csrf
-                        <input type="hidden" name="bagian_id" id="bagian_id">
-                        <div class="form-group">
-                            <label for="nama_bagian" class="col-sm-2 control-label">Name</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" id="nama_bagian" name="nama_bagian"
-                                    placeholder="Nama Bagian" maxlength="50" required="">
+                        <input type="hidden" name="user_id" id="user_id">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Bagian<span class="text-danger"> *</span></label>
+                                        <select class="browser-default custom-select" name="bagian_id" id="bagian_id">
+                                            <option selected disabled>Pilih Bagian</option>
+                                            @foreach ($bagian as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->nama_bagian }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">NIP <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="nip" name="nip"
+                                            placeholder="NIP" autocomplete="off" value="{{ old('nip') }}" autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Nama <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="nama" name="nama"
+                                            placeholder="Nama" autocomplete="off" value="{{ old('nama') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Nomor Handphone <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="nohp" name="nohp"
+                                            placeholder="Nomor Handphone" autocomplete="off" value="{{ old('nohp') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Email <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="email" name="email"
+                                            placeholder="Email" autocomplete="off" value="{{ old('email') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Username <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="username" name="username"
+                                            placeholder="Username" autocomplete="off" value="{{ old('username') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password <span
+                                                class="text-danger">*</span></label>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="Password" autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Re-Password <span
+                                                class="text-danger">*</span></label>
+                                        <input type="password" class="form-control" id="repassword" name="repassword"
+                                            placeholder="Re-Password" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Level<span class="text-danger"> *</span></label>
+                                        <select name="level" id="level" class="form-control select2bs4"
+                                            style="width: 100%;">
+                                            <option selected disabled>{{ old('level', '..::Pilih Level::..') }}
+                                            <option value="2">User Bagian</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Simpan
-                            </button>
+                            <button type="submit" class="btn btn-primary btn-sm" id="saveBtn" value="create">
+                                <i class="fa fa-download"></i> Simpan</button>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Modal Tambah --}}
-    <div class="modal fade" id="modal-tambah">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Tambah User</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <section class="content">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <!-- left column -->
-                                <div class="col-md-12">
-                                    <div class="card card-default">
-                                        <!-- /.card-header -->
-                                        <!-- form start -->
-                                        <form>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Pilih bagian<span class="text-danger"> *</span></label>
-                                                            <select class="form-control select2bs4" style="width: 100%;">
-                                                                <option selected="selected">Alabama</option>
-                                                                <option>Alaska</option>
-                                                                <option>California</option>
-                                                                <option>Delaware</option>
-                                                                <option>Tennessee</option>
-                                                                <option>Texas</option>
-                                                                <option>Washington</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="exampleInputEmail1">Nama Bagian<span
-                                                                class="text-danger"> *</span></label>
-                                                        <input type="email" class="form-control" id="exampleInputEmail1"
-                                                            placeholder="Enter email">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">NIP <span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="text" class="form-control" id=""
-                                                                placeholder="NIP">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Nama<span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="text" class="form-control" id=""
-                                                                placeholder="Nama">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">No Handphone<span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="text" class="form-control" id=""
-                                                                placeholder="No handphone">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Email<span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="text" class="form-control" id=""
-                                                                placeholder="Email">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Username<span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="text" class="form-control" id=""
-                                                                placeholder="Username">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Password<span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="password" class="form-control" id=""
-                                                                placeholder="Password">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Retype Password<span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="password" class="form-control" id=""
-                                                                placeholder="Retype Password">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Level<span class="text-danger"> *</span></label>
-                                                            <select class="form-control select2bs4" style="width: 100%;">
-                                                                <option selected="selected">Alabama</option>
-                                                                <option>Alaska</option>
-                                                                <option>California</option>
-                                                                <option>Delaware</option>
-                                                                <option>Tennessee</option>
-                                                                <option>Texas</option>
-                                                                <option>Washington</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /.card-body -->
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- Modal Edit --}}
-    <div class="modal fade" id="modal-edit">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit User</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <section class="content">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <!-- left column -->
-                                <div class="col-md-12">
-                                    <div class="card card-default">
-                                        <!-- /.card-header -->
-                                        <!-- form start -->
-                                        <form>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Pilih bagian<span class="text-danger"> *</span></label>
-                                                            <select class="form-control select2bs4" style="width: 100%;">
-                                                                <option selected="selected">Alabama</option>
-                                                                <option>Alaska</option>
-                                                                <option>California</option>
-                                                                <option>Delaware</option>
-                                                                <option>Tennessee</option>
-                                                                <option>Texas</option>
-                                                                <option>Washington</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="exampleInputEmail1">Nama Bagian<span
-                                                                class="text-danger"> *</span></label>
-                                                        <input type="email" class="form-control"
-                                                            id="exampleInputEmail1" placeholder="Enter email">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">NIP <span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="text" class="form-control" id=""
-                                                                placeholder="NIP">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Nama<span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="text" class="form-control" id=""
-                                                                placeholder="Nama">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">No Handphone<span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="text" class="form-control" id=""
-                                                                placeholder="No handphone">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Email<span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="text" class="form-control" id=""
-                                                                placeholder="Email">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Username<span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="text" class="form-control" id=""
-                                                                placeholder="Username">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Password<span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="password" class="form-control" id=""
-                                                                placeholder="Password">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="exampleInputPassword1">Retype Password<span
-                                                                    class="text-danger"> *</span></label>
-                                                            <input type="password" class="form-control" id=""
-                                                                placeholder="Retype Password">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Level<span class="text-danger"> *</span></label>
-                                                            <select class="form-control select2bs4" style="width: 100%;">
-                                                                <option selected="selected">Alabama</option>
-                                                                <option>Alaska</option>
-                                                                <option>California</option>
-                                                                <option>Delaware</option>
-                                                                <option>Tennessee</option>
-                                                                <option>Texas</option>
-                                                                <option>Washington</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /.card-body -->
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -367,51 +171,70 @@
             var table = $(".data-table").DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('bagian.index') }}",
+                ajax: "{{ route('user.index') }}",
                 columns: [{
-                        data: "DT_RowIndex",
-                        name: "DT_RowIndex",
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
                     },
                     {
-                        data: "nama_bagian",
-                        name: "nama_bagian",
+                        data: 'bagian',
+                        name: 'bagian.nama_bagian'
                     },
                     {
-                        data: "action",
-                        name: "action",
+                        data: 'nip',
+                        name: 'nip'
+                    },
+                    {
+                        data: 'nama',
+                        name: 'nama'
+                    },
+                    {
+                        data: 'username',
+                        name: 'username'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
                         orderable: false,
-                        searchable: false,
+                        searchable: false
                     },
-                ],
+                ]
             });
 
-            $("#createNewBagian").click(function() {
-                $("#saveBtn").val("create-bagian");
-                $("#bagian_id").val("");
-                $("#bagianForm").trigger("reset");
-                $("#modelHeading").html("Tambah Bagian");
+            $("#createNewUser").click(function() {
+                $("#saveBtn").val("create-user");
+                $("#user_id").val("");
+                $("#userForm").trigger("reset");
+                $("#modelHeading").html("Tambah User");
                 $("#ajaxModel").modal("show");
-                $("#deleteBagian").modal("show");
+                $("#deleteUser").modal("show");
             });
 
-            $("body").on("click", ".editBagian", function() {
-                var bagian_id = $(this).data("id");
-                $.get("{{ route('bagian.index') }}" + "/" + bagian_id + "/edit", function(data) {
-                    $("#modelHeading").html("Edit Bagian");
-                    $("#saveBtn").val("edit-bagian");
+            $("body").on("click", ".editUser", function() {
+                var user_id = $(this).data("id");
+                $.get("{{ route('user.index') }}" + "/" + user_id + "/edit", function(data) {
+                    $("#modelHeading").html("Edit User");
+                    $("#saveBtn").val("edit-user");
                     $("#ajaxModel").modal("show");
-                    $("#bagian_id").val(data.id);
-                    $("#nama_bagian").val(data.nama_bagian);
+                    $("#user_id").val(data.id);
+                    $("#bagian_id").val(data.bagian_id);
+                    $("#nip").val(data.nip);
+                    $("#nama").val(data.nama);
+                    $("#nohp").val(data.nohp);
+                    $("#email").val(data.email);
+                    $("#username").val(data.username);
+                    $("#level").val(data.level);
                 });
             });
 
             $("#saveBtn").click(function(e) {
                 e.preventDefault();
-                $(this).html("menyimpan..");
-
+                $(this).html(
+                    "<span class='spinner-border spinner-border-sm'></span><span class='visually-hidden'><i> menyimpan...</i></span>"
+                );
                 $.ajax({
-                    data: $("#bagianForm").serialize(),
-                    url: "{{ route('bagian.store') }}",
+                    data: $("#userForm").serialize(),
+                    url: "{{ route('user.store') }}",
                     type: "POST",
                     dataType: "json",
                     success: function(data) {
@@ -423,13 +246,14 @@
                                     value +
                                     '</li></strong>');
                                 $(".alert-danger").fadeOut(5000);
-                                $("#saveBtn").html("Simpan");
-                                $('#bagianForm').trigger("reset");
+                                $("#saveBtn").html(
+                                    "<i class='fa fa-download'></i> Simpan");
+                                $('#userForm').trigger("reset");
                             });
                         } else {
                             table.draw();
-                            alertSuccess("Bagian Berhasil di tambah");
-                            $('#bagianForm').trigger("reset");
+                            alertSuccess("User Berhasil ditambah");
+                            $('#userForm').trigger("reset");
                             $("#saveBtn").html("Simpan");
                             $('#ajaxModel').modal('hide');
                         }
@@ -437,18 +261,18 @@
                 });
             });
 
-            $("body").on("click", ".deleteBagian", function() {
-                var bagian_id = $(this).data("id");
-                confirm("Are You sure want to delete !");
+            $("body").on("click", ".deleteUser", function() {
+                var user_id = $(this).data("id");
+                confirm("Apakah kamu ingin menghapus data ini ?");
 
                 $.ajax({
                     type: "DELETE",
-                    url: "{{ route('bagian.store') }}" + "/" + bagian_id,
+                    url: "{{ route('user.store') }}" + "/" + user_id + "/destroy",
                     data: {
                         _token: "{!! csrf_token() !!}",
                     },
                     success: function(data) {
-                        alertDanger("Bagian Berhasil di hapus");
+                        alertDanger("User Berhasil dihapus");
                         table.draw();
                     },
                     error: function(data) {
