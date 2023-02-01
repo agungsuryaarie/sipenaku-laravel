@@ -245,7 +245,7 @@
                                 $('.alert-danger').append('<strong><li>' +
                                     value +
                                     '</li></strong>');
-                                $(".alert-danger").fadeOut(5000);
+                                $(".alert-danger").fadeOut(3000);
                                 $("#saveBtn").html(
                                     "<i class='fa fa-download'></i> Simpan");
                                 $('#userForm').trigger("reset");
