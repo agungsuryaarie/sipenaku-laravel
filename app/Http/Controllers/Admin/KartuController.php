@@ -21,7 +21,7 @@ class KartuController extends Controller
 
         $menu = 'Kartu Kendali'; {
         }
-        return view('admin.kartu-kendali.data', compact('menu'));
+        return view('admin.kartukendali.data', compact('menu'));
     }
 
 

@@ -27,7 +27,7 @@
                         </div>
                         <div class="row">
                             <div class="col-2">
-                                <div>Bidang</div>
+                                <div>Bagian</div>
                             </div>
                             <div class="col-10">
                                 <div>: {{ $subkegiatan->kegiatan->bagian->nama_bagian ?? 'None' }}</div>

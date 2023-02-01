@@ -13,6 +13,23 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
+                @foreach ($kegiatan as $keg)
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h4>{{ 'Rp. ' . number_format($keg->pagu, 0, ',', '.') }}</h4>
+                                <p>{{ $keg->bagian->nama_bagian }}</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-building"></i>
+                            </div>
+                            <a href="{{ 'bagian' }}" class="small-box-footer">Selengkapnya <i
+                                    class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <div class="row">
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">

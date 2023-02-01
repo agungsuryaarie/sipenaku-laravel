@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BagianController;
 use App\Http\Controllers\Admin\KegiatanController;
@@ -23,15 +23,12 @@ use App\Http\Controllers\Admin\DetailController;
 |
 */
 
-// Route::get('/', function () {
+// Route::get('/dashboard', function () {
 //     $menu = "Dashboard";
 //     return view('admin.dashboard', compact('menu'));
 // });
 
-Route::get('/dashboard', function () {
-    $menu = "Dashboard";
-    return view('admin.dashboard', compact('menu'));
-});
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
 // user
 Route::get('user', [UserController::class, 'index'])->name('user.index');

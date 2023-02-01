@@ -14,11 +14,9 @@ class RekeningController extends Controller
     public function index(Request $request, $id)
     {
         $menu = 'Daftar Rekening';
-        $id = $id;
         $subkegiatan = Subkegiatan::where('id', $id)->first();
-        $rekening = Rekening::where('subkegiatan_id', $id)->first();
         if ($request->ajax()) {
-            $data = Rekening::where('subkegiatan_id', $id)->get();
+            $data = Rekening::where('subkegiatan_id', $id)->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_rekening', function ($data) {
@@ -41,7 +39,7 @@ class RekeningController extends Controller
                 ->rawColumns(['kode_rekening', 'nama_rekening', 'pagu_rekening', 'action'])
                 ->make(true);
         }
-        return view('admin.rekening.data', compact('menu', 'id', 'subkegiatan', 'rekening'));
+        return view('admin.rekening.data', compact('menu', 'id', 'subkegiatan'));
     }
 
 

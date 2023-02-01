@@ -13,11 +13,9 @@ class SubkegiatanController extends Controller
     public function index(Request $request, $id)
     {
         $menu = 'Daftar Sub Kegiatan';
-        $id = $id;
         $kegiatan = Kegiatan::where('id', $id)->first();
-        $subkegiatan = Subkegiatan::where('kegiatan_id', $id)->first();
         if ($request->ajax()) {
-            $data = Subkegiatan::with('kegiatan')->where('kegiatan_id', $id)->get();
+            $data = Subkegiatan::with('rekening')->where('kegiatan_id', $id)->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_subkeg', function ($data) {
@@ -45,7 +43,7 @@ class SubkegiatanController extends Controller
                 ->make(true);
         }
 
-        return view('admin.sub-kegiatan.data', compact('menu', 'id', 'kegiatan', 'subkegiatan'));
+        return view('admin.subkegiatan.data', compact('menu', 'id', 'kegiatan'));
     }
 
     public function store(Request $request)

@@ -22,4 +22,9 @@ class Subkegiatan extends Model
     {
         return $this->belongsTo(Kegiatan::class);
     }
+
+    public function rekening()
+    {
+        return $this->hasMany(Rekening::class);
+    }
 }
