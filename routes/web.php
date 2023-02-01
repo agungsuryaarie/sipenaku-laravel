@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BagianController;
 use App\Http\Controllers\Admin\KegiatanController;
@@ -23,15 +23,12 @@ use App\Http\Controllers\Admin\DetailController;
 |
 */
 
-// Route::get('/', function () {
+// Route::get('/dashboard', function () {
 //     $menu = "Dashboard";
 //     return view('admin.dashboard', compact('menu'));
 // });
 
-Route::get('/dashboard', function () {
-    $menu = "Dashboard";
-    return view('admin.dashboard', compact('menu'));
-});
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
 // user
 Route::get('user', [UserController::class, 'index'])->name('user.index');
@@ -59,6 +56,7 @@ Route::delete('kegiatan/subkegiatan/{id}/destroy', [SubkegiatanController::class
 // rekening
 Route::get('kegiatan/rekening/{id}', [RekeningController::class, 'index'])->name('rekening.index');
 Route::post('kegiatan/rekening', [RekeningController::class, 'store'])->name('rekening.store');
+Route::post('kegiatan/rekening/{id}/update', [RekeningController::class, 'update'])->name('rekening.update');
 Route::get('kegiatan/rekening/{subkegiatan_id}/{id}/edit', [RekeningController::class, 'edit'])->name('rekening.edit');
 Route::delete('kegiatan/rekening/{id}/destroy', [RekeningController::class, 'destroy'])->name('rekening.destroy');
 

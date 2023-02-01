@@ -27,7 +27,7 @@
                         </div>
                         <div class="row">
                             <div class="col-2">
-                                <div>Bidang</div>
+                                <div>Bagian</div>
                             </div>
                             <div class="col-10">
                                 <div>: {{ $subkegiatan->kegiatan->bagian->nama_bagian ?? 'None' }}</div>
@@ -50,7 +50,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table class="table table-bordered table-striped data-table">
+                            <table id="data-table" class="table table-bordered table-striped ">
                                 <thead>
                                     <tr>
                                         <th style="width:3%">No</th>
@@ -83,6 +83,8 @@
                     </div>
                     <form id="rekeningForm" name="rekeningForm" class="form-horizontal">
                         @csrf
+                        <input type="hidden" id="kegiatan_id" name="kegiatan_id"
+                            value="{{ $subkegiatan->kegiatan->id ?? 'None' }}">
                         <input type="hidden" id="subkegiatan_id" name="subkegiatan_id"
                             value="{{ $subkegiatan->id ?? 'None' }}">
                         <input type="hidden" name="rekening_id" id="rekening_id">
@@ -123,6 +125,14 @@
                                         placeholder="Nama Rekening">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Pagu Rekening<span class="text-danger">
+                                            *</span></label>
+                                    <input type="text" class="form-control rupiah" id="pagu_rekening"
+                                        name="pagu_rekening" placeholder="Pagu Rekening">
+                                </div>
+                            </div>
                         </div>
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Simpan
@@ -137,6 +147,30 @@
 
 @section('script')
     <script>
+        var rupiah = document.getElementById("pagu_rekening");
+        rupiah.addEventListener("keyup", function(e) {
+            rupiah.value = formatRupiah(this.value, "Rp. ");
+        });
+
+
+        /* Fungsi formatRupiah */
+        function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, "").toString(),
+                split = number_string.split(","),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+            if (ribuan) {
+                separator = sisa ? "." : "";
+                rupiah += separator + ribuan.join(".");
+            }
+
+            rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+            return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+        }
+
         $(function() {
             $.ajaxSetup({
                 headers: {
@@ -144,9 +178,14 @@
                 },
             });
 
-            var table = $(".data-table").DataTable({
+            var table = $("#data-table").DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
+                lengthChange: false,
+                autoWidth: false,
+                dom: 'Bfrtip',
+                buttons: ["excel", "pdf", "print", "colvis"],
                 ajax: "{{ route('rekening.index', $id) }}",
                 columns: [{
                         data: 'DT_RowIndex',
@@ -171,7 +210,8 @@
                         searchable: false
                     },
                 ]
-            });
+            })
+
 
             $("#createNewRekening").click(function() {
                 $("#saveBtn").val("create-rekening");
@@ -190,57 +230,88 @@
                         $("#modelHeading").html("Edit Rekening");
                         $("#saveBtn").val("edit-rekening");
                         $("#ajaxModel").modal("show");
-                        $("#rekening_id").val(data.id);
+                        $("#kegiatan_id").val(data.kegiatan_id);
                         $("#subkegiatan_id").val(data.subkegiatan_id);
+                        $("#rekening_id").val(data.id);
                         $("#kode_rekening").val(data.kode_rekening);
                         $("#nama_rekening").val(data.nama_rekening);
+                        $("#pagu_rekening").val(data.pagu_rekening);
                     });
             });
 
             $("#saveBtn").click(function(e) {
                 e.preventDefault();
                 $(this).html("menyimpan..");
-
-                $.ajax({
-                    data: $("#rekeningForm").serialize(),
-                    url: "{{ route('rekening.store') }}",
-                    type: "POST",
-                    dataType: "json",
-                    success: function(data) {
-                        if (data.errors) {
-                            $('.alert-danger').html('');
-                            $.each(data.errors, function(key, value) {
-                                $('.alert-danger').show();
-                                $('.alert-danger').append('<strong><li>' +
-                                    value +
-                                    '</li></strong>');
-                                $(".alert-danger").fadeOut(5000);
-                                $("#saveBtn").html("Simpan");
+                var rekening_id = $("#rekening_id").val();
+                if (rekening_id == '') {
+                    $.ajax({
+                        data: $("#rekeningForm").serialize(),
+                        url: "{{ route('rekening.store') }}" + "/" + rekening_id,
+                        type: "POST",
+                        dataType: "json",
+                        success: function(data) {
+                            if (data.errors) {
+                                $('.alert-danger').html('');
+                                $.each(data.errors, function(key, value) {
+                                    $('.alert-danger').show();
+                                    $('.alert-danger').append('<strong><li>' +
+                                        value +
+                                        '</li></strong>');
+                                    $(".alert-danger").fadeOut(5000);
+                                    $("#saveBtn").html("Simpan");
+                                    $('#rekeningForm').trigger("reset");
+                                });
+                            } else {
+                                table.draw();
+                                alertSuccess(data.success);
                                 $('#rekeningForm').trigger("reset");
-                            });
-                        } else {
-                            table.draw();
-                            alertSuccess("Rekening Berhasil di tambah");
-                            $('#rekeningForm').trigger("reset");
-                            $("#saveBtn").html("Simpan");
-                            $('#ajaxModel').modal('hide');
-                        }
-                    },
-                });
+                                $("#saveBtn").html("Simpan");
+                                $('#ajaxModel').modal('hide');
+                            }
+                        },
+                    });
+                } else {
+                    var rekening_id = $("#rekening_id").val();
+                    $.ajax({
+                        data: $("#rekeningForm").serialize(),
+                        url: "{{ route('rekening.store') }}" + "/" + rekening_id + "/update",
+                        type: "POST",
+                        dataType: "json",
+                        success: function(data) {
+                            if (data.errors) {
+                                $('.alert-danger').html('');
+                                $.each(data.errors, function(key, value) {
+                                    $('.alert-danger').show();
+                                    $('.alert-danger').append('<strong><li>' +
+                                        value +
+                                        '</li></strong>');
+                                    $(".alert-danger").fadeOut(5000);
+                                    $("#saveBtn").html("Simpan");
+                                    $('#rekeningForm').trigger("reset");
+                                });
+                            } else {
+                                table.draw();
+                                alertSuccess(data.success);
+                                $('#rekeningForm').trigger("reset");
+                                $("#saveBtn").html("Simpan");
+                                $('#ajaxModel').modal('hide');
+                            }
+                        },
+                    });
+                }
             });
 
             $("body").on("click", ".deleteRekening", function() {
-                var subkeg_id = $(this).data("id");
+                var rekening_id = $(this).data("id");
                 confirm("Are You sure want to delete !");
-
                 $.ajax({
                     type: "DELETE",
-                    url: "{{ route('rekening.store') }}" + "/" + subkeg_id + "/destroy",
+                    url: "{{ route('rekening.store') }}" + "/" + rekening_id + "/destroy",
                     data: {
                         _token: "{!! csrf_token() !!}",
                     },
                     success: function(data) {
-                        alertDanger("Rekening Berhasil di hapus");
+                        alertDanger(data.success);
                         table.draw();
                     },
                     error: function(data) {

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> d883742732407eb9c217a8730b8435a0f2b6b057
 use App\Http\Controllers\Controller;
 use App\Models\Rekening;
 use App\Models\Detail;
@@ -77,7 +80,7 @@ class DetailController extends Controller
         $harga = preg_replace('/[^a-zA-Z0-9_ -]/s', '', $request->harga);
         $harga_bersih = str_replace('Rp ', '', $harga);
         $jumlah = preg_replace('/[^a-zA-Z0-9_ -]/s', '', $request->jumlah);
-        $total = str_replace('Rp ', '', $jumlah);
+        $total = str_replace('Rp. ', '', $jumlah);
 
         Detail::updateOrCreate(
             [

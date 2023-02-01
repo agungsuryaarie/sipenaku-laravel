@@ -44,12 +44,14 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        //Translate Bahasa Indonesia
         $message = array(
             'bagian_id.required' => 'Instansi harus dipilih.',
             'bagian_id.unique' => 'Instansi sudah terdaftar.',
             'nip.required' => 'NIP harus diisi.',
             'nip.numeric' => 'NIP harus angka.',
             'nip.min' => 'NIP minimal 18 angka.',
+            'nip.unique' => 'NIP sudah terdaftar.',
             'nama.required' => 'Nama harus diisi.',
             'nohp.required' => 'Nomor Handphone harus diisi.',
             'nohp.numeric' => 'Nomor Handphone harus angka.',
@@ -58,7 +60,7 @@ class UserController extends Controller
             'email.unique' => 'Email sudah terdaftar.',
             'username.required' => 'Username harus diisi.',
             'username.min' => 'Username minimal 8.',
-            'username.unique' => 'username sudah terdaftar.',
+            'username.unique' => 'Username sudah terdaftar.',
             'password.required' => 'Password harus diisi.',
             'password.min' => 'Password minimal 8.',
             'repassword.required' => 'Harap konfirmasi password.',
@@ -66,13 +68,47 @@ class UserController extends Controller
             'repassword.min' => 'Password minimal 8.',
             'level.required' => 'Level harus dipilih.',
         );
+        //Check If Field Unique
+        if (!$request->user_id) {
+            //rule tambah data tanpa user_id
+            $ruleIns = 'required|unique:users,bagian_id';
+            $ruleNip = 'required|min:18|numeric|unique:users,nip';
+            $ruleEmail = 'required|email|unique:users,email';
+            $ruleUsername = 'required|unique:users,username|min:8';
+        } else {
+            //rule edit jika tidak ada user_id
+            $lastIns = User::where('id', $request->user_id)->first();
+            if ($lastIns->bagian_id == $request->bagian_id) {
+                $ruleIns = 'required';
+            } else {
+                $ruleIns = 'required|unique:users,bagian_id';
+            }
+            $lastNip = User::where('id', $request->user_id)->first();
+            if ($lastNip->nip == $request->nip) {
+                $ruleNip = 'required|min:18|numeric';
+            } else {
+                $ruleNip = 'required|min:18|numeric|unique:users,nip';
+            }
+            $lastEmail = User::where('id', $request->user_id)->first();
+            if ($lastEmail->email == $request->email) {
+                $ruleEmail = 'required|email';
+            } else {
+                $ruleEmail = 'required|email|unique:users,email';
+            }
+            $lastUsername = User::where('id', $request->user_id)->first();
+            if ($lastUsername->username == $request->username) {
+                $ruleUsername = 'required|min:8';
+            } else {
+                $ruleUsername = 'required|unique:users,username|min:8';
+            }
+        }
         $validator = Validator::make($request->all(), [
-            'bagian_id' => 'required|unique:users,bagian_id',
-            'nip' => 'required|min:18|numeric',
+            'bagian_id' => $ruleIns,
+            'nip' => $ruleNip,
             'nama' => 'required|max:255',
             'nohp' => 'required|numeric',
-            'email' => 'required|email|unique:users,email',
-            'username' => 'required|unique:users,username|min:8',
+            'email' => $ruleEmail,
+            'username' => $ruleUsername,
             'password' => 'required|min:8',
             'repassword' => 'required|same:password|min:8',
             'level' => 'required',

@@ -129,6 +129,11 @@
             var table = $(".data-table").DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
+                lengthChange: false,
+                autoWidth: false,
+                dom: 'Bfrtip',
+                buttons: ["excel", "pdf", "print", "colvis"],
                 ajax: "{{ route('subkegiatan.index', $id) }}",
                 columns: [{
                         data: 'DT_RowIndex',
@@ -203,7 +208,7 @@
                             });
                         } else {
                             table.draw();
-                            alertSuccess("Sub Kegiatan Berhasil di tambah");
+                            alertSuccess(data.success);
                             $('#subkegForm').trigger("reset");
                             $("#saveBtn").html("Simpan");
                             $('#ajaxModel').modal('hide');
@@ -222,7 +227,7 @@
                         _token: "{!! csrf_token() !!}",
                     },
                     success: function(data) {
-                        alertDanger("Sub Kegiatan Berhasil di hapus");
+                        alertDanger(data.success);
                         table.draw();
                     },
                     error: function(data) {

@@ -97,7 +97,7 @@
                         data-accordion="false">
                         <li class="nav-item">
                             <a href="{{ '/dashboard' }}"
-                                class="nav-link {{ request()->segment(1) == '' ? 'active' : '' }}">
+                                class="nav-link {{ request()->segment(1) == 'dashboard' ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -204,6 +204,7 @@
 
 
         <div class="content-wrapper">
+            <div id="alerts"></div>
             @yield('content')
         </div>
         @extends('admin.layouts.footer')

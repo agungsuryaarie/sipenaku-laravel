@@ -1,25 +1,11 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">{{ $menu }}</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ '/' }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">{{ $menu }}</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
     <section class="content">
         <div class="container-fluid">
             <div class="col-12">
-                <div class="card">
+                <div class="card mt-4">
                     <div class="card-header">
+                        <span class="text-bold">{{ $menu }}</span>
                         <a href="javascript:void(0)" id="createNewKegiatan" class="btn btn-info btn-xs float-right">
                             <i class="fas fa-plus-circle"></i> Tambah</a>
                     </div>
@@ -28,7 +14,7 @@
                             <thead>
                                 <tr>
                                     <th style="width:3%">No</th>
-                                    <th style="width:10%">Kode Kegiatan</th>
+                                    <th style="width:15%">Kode Kegiatan</th>
                                     <th>Nama Kegiatan</th>
                                     <th style="width:13%">Jumlah</th>
                                     <th style="width:20%">Bagian</th>
@@ -112,6 +98,11 @@
             var table = $(".data-table").DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
+                lengthChange: false,
+                autoWidth: false,
+                dom: 'Bfrtip',
+                buttons: ["excel", "pdf", "print", "colvis"],
                 ajax: "{{ route('kegiatan.index') }}",
                 columns: [{
                         data: 'DT_RowIndex',
