@@ -49,8 +49,8 @@
                     loading="eager" alt="" class="logo" /></a>
             <div data-w-id="ad761d47-7853-493f-fa15-057342917d6b" class="nav">
                 <nav role="navigation" class="nav-menu w-nav-menu">
-                    <a href="/" aria-current="page" class="nav-link w-nav-link w--current">Home<br /></a>
-                    <a href="/blog" class="nav-link w-nav-link">Visi Misi<br /></a>
+                    <a href="#home" aria-current="page" class="nav-link w-nav-link w--current">Home<br /></a>
+                    <a href="#features" class="nav-link w-nav-link">Visi Misi<br /></a>
                     <a href="/features" class="nav-link w-nav-link">Features<br /></a>
                 </nav>
                 <a href="#" class="nav-button w-inline-block">
@@ -138,15 +138,16 @@
             </div>
         </div>
     </div>
-    <div class="section wf-section">
-        <div class="content">
-            <div class="title-fitur">
-                <h3>Fitur Aplikasi</h3>
-            </div>
-            <div class="w-layout-grid grid-focus">
-                <div id="w-node-_921e641a-4364-ff47-fb5c-6dcbde77594e-379d5480"
-                    data-w-id="921e641a-4364-ff47-fb5c-6dcbde77594e"
-                    style="
+    <section id="features">
+        <div class="section wf-section">
+            <div class="content">
+                <div class="title-fitur">
+                    <h3>Fitur Aplikasi</h3>
+                </div>
+                <div class="w-layout-grid grid-focus">
+                    <div id="w-node-_921e641a-4364-ff47-fb5c-6dcbde77594e-379d5480"
+                        data-w-id="921e641a-4364-ff47-fb5c-6dcbde77594e"
+                        style="
               opacity: 0;
               -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
                 rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
@@ -156,39 +157,39 @@
                 rotateY(0) rotateZ(0) skew(0, 0);
               transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
                 rotateY(0) rotateZ(0) skew(0, 0);"
-                    class="app-focus">
-                    <div class="app-focus---sticky">
-                        <div class="app-focus---wrapper">
-                            <div class="app-focus---content">
-                                <div class="app-focus---shadow"></div>
-                                <div class="app-focus---image">
-                                    <img src="{{ url('front/img/planning_set.png') }}" loading="eager"
-                                        sizes="(max-width: 479px) 50vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                        srcset="
+                        class="app-focus">
+                        <div class="app-focus---sticky">
+                            <div class="app-focus---wrapper">
+                                <div class="app-focus---content">
+                                    <div class="app-focus---shadow"></div>
+                                    <div class="app-focus---image">
+                                        <img src="{{ url('front/img/planning_set.png') }}" loading="eager"
+                                            sizes="(max-width: 479px) 50vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
+                                            srcset="
                                         {{ url('front/img/planning_set.png') }} 500w,
                                         {{ url('front/img/planning_set.png') }} 504w"
-                                        alt="" class="image-app---focus-1" />
-                                    <img src="{{ url('front/img/tahunan.svg') }}" loading="eager"
-                                        sizes="(max-width: 479px) 68vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                        srcset="
+                                            alt="" class="image-app---focus-1" />
+                                        <img src="{{ url('front/img/tahunan.svg') }}" loading="eager"
+                                            sizes="(max-width: 479px) 68vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
+                                            srcset="
                         {{ url('front/img/tahunan.svg') }} 500w,
                         {{ url('front/img/tahunan.svg') }} 504w"
-                                        alt="" class="image-app---focus-2" />
-                                    <img src="{{ url('front/img/sakip.svg') }}" loading="eager"
-                                        sizes="(max-width: 479px) 63vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                        srcset="
+                                            alt="" class="image-app---focus-2" />
+                                        <img src="{{ url('front/img/sakip.svg') }}" loading="eager"
+                                            sizes="(max-width: 479px) 63vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
+                                            srcset="
                                         {{ url('front/img/sakip.svg') }} 500w,
                                         {{ url('front/img/sakip.svg') }} 505w"
-                                        alt="" class="image-app---focus-3" />
+                                            alt="" class="image-app---focus-3" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="w-node-_08be711c-a843-4fc0-e4ee-60f7d1119405-379d5480" class="focus">
-                    <div class="block-heading">
-                        <div data-w-id="f9864493-856f-116e-6930-cefa188abe50"
-                            style="
+                    <div id="w-node-_08be711c-a843-4fc0-e4ee-60f7d1119405-379d5480" class="focus">
+                        <div class="block-heading">
+                            <div data-w-id="f9864493-856f-116e-6930-cefa188abe50"
+                                style="
                   opacity: 0;
                   -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
                     rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
@@ -199,29 +200,29 @@
                   transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
                     rotateY(0) rotateZ(0) skew(0, 0);
                 "
-                            class="subtitle">
-                            <img src="{{ url('front/img/icon-subtitle.svg') }}" loading="eager" alt=""
-                                class="icon-subtitle" />
-                            <div class="text-subtitle">Style</div>
+                                class="subtitle">
+                                <img src="{{ url('front/img/icon-subtitle.svg') }}" loading="eager" alt=""
+                                    class="icon-subtitle" />
+                                <div class="text-subtitle">Style</div>
+                            </div>
+                            <h2 data-w-id="07760b71-66fa-e758-ae4e-9be5fb13e2a0"
+                                style="
+                  opacity: 0;
+                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
+                    rotateY(0) rotateZ(0) skew(0, 0);
+                "
+                                class="heading">
+                                Perencanaan Lima Tahunan
+                            </h2>
                         </div>
-                        <h2 data-w-id="07760b71-66fa-e758-ae4e-9be5fb13e2a0"
+                        <p data-w-id="9a85c6be-5cc1-b13b-8ff3-83555a5638dc"
                             style="
-                  opacity: 0;
-                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                    rotateY(0) rotateZ(0) skew(0, 0);
-                "
-                            class="heading">
-                            Perencanaan Lima Tahunan
-                        </h2>
-                    </div>
-                    <p data-w-id="9a85c6be-5cc1-b13b-8ff3-83555a5638dc"
-                        style="
                 opacity: 0;
                 -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
                   rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
@@ -232,48 +233,48 @@
                 transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
                   rotateY(0) rotateZ(0) skew(0, 0);
               "
-                        class="paragraph">
-                        Input data perencanaan lima tahunan yang dilakukan oleh fungsi
-                        perencana pada Pemerintah Daerah
-                    </p>
-                </div>
-                <div id="w-node-_993b666c-85f8-1653-1ef3-a82122c49510-379d5480" class="focus">
-                    <div class="block-heading">
-                        <div data-w-id="993b666c-85f8-1653-1ef3-a82122c49512"
-                            style="
-                  opacity: 0;
-                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                    rotateY(0) rotateZ(0) skew(0, 0);
-                "
-                            class="subtitle">
-                            <img src="{{ url('front/img/icon-subtitle.svg') }}" loading="eager" alt=""
-                                class="icon-subtitle" />
-                            <div class="text-subtitle">Tasks</div>
-                        </div>
-                        <h2 data-w-id="993b666c-85f8-1653-1ef3-a82122c49516"
-                            style="
-                  opacity: 0;
-                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                    rotateY(0) rotateZ(0) skew(0, 0);
-                "
-                            class="heading">
-                            Perencanaan Tahunan
-                        </h2>
+                            class="paragraph">
+                            Input data perencanaan lima tahunan yang dilakukan oleh fungsi
+                            perencana pada Pemerintah Daerah
+                        </p>
                     </div>
-                    <p data-w-id="993b666c-85f8-1653-1ef3-a82122c4951a"
-                        style="
+                    <div id="w-node-_993b666c-85f8-1653-1ef3-a82122c49510-379d5480" class="focus">
+                        <div class="block-heading">
+                            <div data-w-id="993b666c-85f8-1653-1ef3-a82122c49512"
+                                style="
+                  opacity: 0;
+                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
+                    rotateY(0) rotateZ(0) skew(0, 0);
+                "
+                                class="subtitle">
+                                <img src="{{ url('front/img/icon-subtitle.svg') }}" loading="eager" alt=""
+                                    class="icon-subtitle" />
+                                <div class="text-subtitle">Tasks</div>
+                            </div>
+                            <h2 data-w-id="993b666c-85f8-1653-1ef3-a82122c49516"
+                                style="
+                  opacity: 0;
+                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
+                    rotateY(0) rotateZ(0) skew(0, 0);
+                "
+                                class="heading">
+                                Perencanaan Tahunan
+                            </h2>
+                        </div>
+                        <p data-w-id="993b666c-85f8-1653-1ef3-a82122c4951a"
+                            style="
                 opacity: 0;
                 -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
                   rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
@@ -284,48 +285,48 @@
                 transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
                   rotateY(0) rotateZ(0) skew(0, 0);
               "
-                        class="paragraph">
-                        input data perencanaan tahunan yang dilakukan oleh fungsi
-                        perencana pada Pemerintah Daerah
-                    </p>
-                </div>
-                <div id="w-node-_4a90023a-9e8e-5ca0-356d-053b7a73f5c7-379d5480" class="focus">
-                    <div class="block-heading">
-                        <div data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5c9"
-                            style="
-                  opacity: 0;
-                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                    rotateY(0) rotateZ(0) skew(0, 0);
-                "
-                            class="subtitle">
-                            <img src="{{ url('front/img/icon-subtitle.svg') }}" loading="eager" alt=""
-                                class="icon-subtitle" />
-                            <div class="text-subtitle">Goals</div>
-                        </div>
-                        <h2 data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5cd"
-                            style="
-                  opacity: 0;
-                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                    rotateY(0) rotateZ(0) skew(0, 0);
-                "
-                            class="heading">
-                            Penganggaran
-                        </h2>
+                            class="paragraph">
+                            input data perencanaan tahunan yang dilakukan oleh fungsi
+                            perencana pada Pemerintah Daerah
+                        </p>
                     </div>
-                    <p data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5d1"
-                        style="
+                    <div id="w-node-_4a90023a-9e8e-5ca0-356d-053b7a73f5c7-379d5480" class="focus">
+                        <div class="block-heading">
+                            <div data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5c9"
+                                style="
+                  opacity: 0;
+                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
+                    rotateY(0) rotateZ(0) skew(0, 0);
+                "
+                                class="subtitle">
+                                <img src="{{ url('front/img/icon-subtitle.svg') }}" loading="eager" alt=""
+                                    class="icon-subtitle" />
+                                <div class="text-subtitle">Goals</div>
+                            </div>
+                            <h2 data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5cd"
+                                style="
+                  opacity: 0;
+                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
+                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
+                    rotateY(0) rotateZ(0) skew(0, 0);
+                "
+                                class="heading">
+                                Penganggaran
+                            </h2>
+                        </div>
+                        <p data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5d1"
+                            style="
                 opacity: 0;
                 -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
                   rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
@@ -336,14 +337,15 @@
                 transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
                   rotateY(0) rotateZ(0) skew(0, 0);
               "
-                        class="paragraph">
-                        Input data penganggaran yang dilakukan oleh fungsi penganggaran
-                        pada Pemerintah Daerah
-                    </p>
+                            class="paragraph">
+                            Input data penganggaran yang dilakukan oleh fungsi penganggaran
+                            pada Pemerintah Daerah
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <div class="section wf-section">
         <div class="content-wide">
             <div class="w-layout-grid grid-functions">

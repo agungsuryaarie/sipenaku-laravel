@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ url('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ url('dist/css/custom.css') }}">
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ url('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ url('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
@@ -154,6 +155,16 @@
                                         class="nav-link {{ request()->segment(1) == 'kartukendali' ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Kartu Kendali</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="#"
+                                        class="nav-link {{ request()->segment(1) == 'visi' ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Visi Misi
+                                        </p>
                                     </a>
                                 </li>
                             </ul>
