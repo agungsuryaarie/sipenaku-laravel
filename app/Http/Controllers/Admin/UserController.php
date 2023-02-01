@@ -69,29 +69,38 @@ class UserController extends Controller
             'level.required' => 'Level harus dipilih.',
         );
         //Check If Field Unique
-        $lastIns = User::where('id', $request->user_id)->first();
-        if ($lastIns->bagian_id == $request->bagian_id) {
-            $ruleIns = 'required';
-        } else {
+        if (!$request->user_id) {
+            //rule tambah data tanpa user_id
             $ruleIns = 'required|unique:users,bagian_id';
-        }
-        $lastNip = User::where('id', $request->user_id)->first();
-        if ($lastNip->nip == $request->nip) {
-            $ruleNip = 'required|min:18|numeric';
-        } else {
             $ruleNip = 'required|min:18|numeric|unique:users,nip';
-        }
-        $lastEmail = User::where('id', $request->user_id)->first();
-        if ($lastEmail->email == $request->email) {
-            $ruleEmail = 'required|email';
-        } else {
             $ruleEmail = 'required|email|unique:users,email';
-        }
-        $lastUsername = User::where('id', $request->user_id)->first();
-        if ($lastUsername->username == $request->username) {
-            $ruleUsername = 'required|min:8';
-        } else {
             $ruleUsername = 'required|unique:users,username|min:8';
+        } else {
+            //rule edit jika tidak ada user_id
+            $lastIns = User::where('id', $request->user_id)->first();
+            if ($lastIns->bagian_id == $request->bagian_id) {
+                $ruleIns = 'required';
+            } else {
+                $ruleIns = 'required|unique:users,bagian_id';
+            }
+            $lastNip = User::where('id', $request->user_id)->first();
+            if ($lastNip->nip == $request->nip) {
+                $ruleNip = 'required|min:18|numeric';
+            } else {
+                $ruleNip = 'required|min:18|numeric|unique:users,nip';
+            }
+            $lastEmail = User::where('id', $request->user_id)->first();
+            if ($lastEmail->email == $request->email) {
+                $ruleEmail = 'required|email';
+            } else {
+                $ruleEmail = 'required|email|unique:users,email';
+            }
+            $lastUsername = User::where('id', $request->user_id)->first();
+            if ($lastUsername->username == $request->username) {
+                $ruleUsername = 'required|min:8';
+            } else {
+                $ruleUsername = 'required|unique:users,username|min:8';
+            }
         }
         $validator = Validator::make($request->all(), [
             'bagian_id' => $ruleIns,
