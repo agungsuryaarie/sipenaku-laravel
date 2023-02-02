@@ -66,7 +66,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Bagian<span class="text-danger"> *</span></label>
-                                        <select class="browser-default custom-select" name="bagian_id" id="bagian_id">
+                                        <select class="browser-default custom-select select2" name="bagian_id"
+                                            id="bagian_id">
                                             <option selected disabled>Pilih Bagian</option>
                                             @foreach ($bagian as $item)
                                                 <option value="{{ $item->id }}">
@@ -280,6 +281,13 @@
                     },
                 });
             });
+
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
         });
     </script>
 @endsection

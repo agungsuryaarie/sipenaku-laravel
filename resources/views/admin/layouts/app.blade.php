@@ -157,23 +157,23 @@
                                         <p>Kartu Kendali</p>
                                     </a>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a href="#"
-                                        class="nav-link {{ request()->segment(1) == 'visi' ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            Visi Misi
-                                        </p>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link {{ request()->segment(1) == 'spj' ? 'active' : '' }}">
+                            <a href="{{ route('spj.index') }}"
+                                class="nav-link {{ request()->segment(1) == 'spj' ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-file"></i>
                                 <p>
                                     SPJ
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('profil.index') }}"
+                                class="nav-link {{ request()->segment(1) == 'profil' ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-laptop-code"></i>
+                                <p>
+                                    App Setting
                                 </p>
                             </a>
                         </li>
@@ -182,7 +182,7 @@
                                 class="nav-link {{ request()->segment(1) == 'setting' ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-cogs"></i>
                                 <p>
-                                    Setting
+                                    Aktivasi Sistem
                                 </p>
                             </a>
                         </li>

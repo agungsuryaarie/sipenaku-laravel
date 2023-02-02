@@ -16,3 +16,38 @@
 .mt-10{
     margin-top: 17px;
 }
+
+.radio-btn{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-right: 1em;
+    /* justify-content: space-evenly; */
+}
+.radio-btn .custom-radio{
+    margin-right: 1em;
+}
+
+.card-body-form{
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1.25rem;
+}
+
+.row-form {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-right: -7.5px;
+    margin-left: -7.5px;
+}
+
+.breadcrumb-spj{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}

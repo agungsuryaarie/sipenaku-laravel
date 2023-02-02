@@ -26,11 +26,12 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class=" table-responsive table-hover">
+                    <div class=" table-responsive">
                         <table class="table">
                             <tr>
                                 <td rowspan="4" style="width:4%">
-                                    <span class="badge badge-primary btn-sm">GU
+                                    <span class="badge badge-primary btn-sm"
+                                        style="display:flex; align-items:center; margin:auto">GU
                                         1</span>
                                 </td>
                                 <td style="width:4%">
