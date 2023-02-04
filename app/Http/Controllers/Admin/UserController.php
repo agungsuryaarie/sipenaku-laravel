@@ -210,4 +210,8 @@ class UserController extends Controller
         //redirect to index
         return redirect()->route('myprofil.index')->with(['status' => 'Password Berhasil Diupdate!']);
     }
+    public function updatefoto(Request $request, User $user)
+    {
+        //Break capekk
+    }
 }

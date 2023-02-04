@@ -192,4 +192,61 @@
             </div>
         </div>
     </div>
+    {{-- Modal Update Foto --}}
+    <div class="modal fade" id="modal-lg-f{{ $user->id }}">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Foto</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <form method="POST" action="{{ route('myprofil.update.foto', $user->id) }}">
+                            @csrf
+                            @method('put')
+                            <input type="hidden" name="id" value="{{ $user->id }}">
+                            <div class="card-body">
+                                <div class="col-md-12">
+                                    <div class="col-md-4">
+                                        <img src="{{ url('fotouser/blank.png') }}" alt="Image Profile"
+                                            class="img-thumbnail rounded img-preview" width="120px">
+                                    </div>
+                                    <div class="col-md-12 mt-2">
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" name="foto" class="custom-file-input"
+                                                    id="foto" onchange="previewImg();" accept=".png, .jpg, .jpeg">
+                                                <label class="custom-file-label">Pilih File</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-default btn-sm"
+                                        data-dismiss="modal">Kembali</button>
+                                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('script')
+    <script>
+        function previewImg() {
+            const foto = document.querySelector('#foto');
+            const img = document.querySelector('.img-preview');
+
+            const fileFoto = new FileReader();
+            fileFoto.readAsDataURL(foto.files[0]);
+
+            fileFoto.onload = function(e) {
+                img.src = e.target.result;
+            }
+        }
+    </script>
 @endsection
