@@ -38,6 +38,11 @@ Route::post('user', [UserController::class, 'store'])->name('user.store');
 Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::delete('user/{id}/destroy', [UserController::class, 'destroy'])->name('user.destroy');
 
+// my profil
+Route::get('my-profil', [UserController::class, 'myprofil'])->name('myprofil.index');
+Route::get('my-profil/{id}/update', [UserController::class, 'updateprofil'])->name('myprofil.update');
+Route::get('my-profil/{id}/update-password', [UserController::class, 'updatepass'])->name('myprofil.update.password');
+Route::get('my-profil/{id}/update-foto', [UserController::class, 'updatefoto'])->name('myprofil.update.foto');
 
 // bagian
 Route::resource('bagian', BagianController::class);
@@ -47,7 +52,6 @@ Route::get('kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.ind
 Route::post('kegiatan', [KegiatanController::class, 'store'])->name('kegiatan.store');
 Route::get('kegiatan/{id}/edit', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
 Route::delete('kegiatan/{id}/destroy', [KegiatanController::class, 'destroy'])->name('kegiatan.destroy');
-
 
 // sub-kegiatan
 Route::get('kegiatan/subkegiatan/{subkegiatan}', [SubkegiatanController::class, 'index'])->name('subkegiatan.index');
@@ -74,11 +78,8 @@ Route::get('kartu-kendali', [KartuController::class, 'index'])->name('kartukenda
 // SPJ
 Route::get('spj', [SpjController::class, 'index'])->name('spj.index');
 
-// Profil
-Route::get('profil', [ProfilController::class, 'index'])->name('profil.index');
-
-// Kartu Kendali
-// Route::get('visi-misi', [VisiMisiController::class, 'index'])->name('visimisi.index');
+// Visi & Misi
+Route::get('visi-misi', [ProfilController::class, 'index'])->name('visimisi.index');
 
 // Setting
 Route::get('setting', [SettingController::class, 'index'])->name('setting.index');

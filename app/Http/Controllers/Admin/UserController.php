@@ -143,10 +143,16 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-
     public function destroy($id)
     {
         User::find($id)->delete();
         return response()->json(['success' => 'User deleted successfully.']);
+    }
+
+    public function myprofil(Request $request)
+    {
+        $menu = 'Profil Saya';
+        $user = User::first();
+        return view('admin.myprofil.data', compact('user', 'menu'));
     }
 }
