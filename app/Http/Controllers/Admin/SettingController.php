@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Setting;
 use DataTables;
-
 
 class SettingController extends Controller
 {
@@ -18,40 +17,44 @@ class SettingController extends Controller
      */
     public function index(Request $request)
     {
-
-        $menu = 'Setting'; {
-        }
-        return view('admin.setting.data', compact('menu'));
+        $menu = 'Setting Jadwal';
+        $setting = Setting::first();
+        return view('admin.setting.data', compact('setting', 'menu'));
     }
-
-
-    public function create()
-    {
-    }
-
-
     public function store(Request $request)
     {
+        //validate form
+        $this->validate($request, [
+            'judul' => 'required',
+            'tglm' => 'required',
+            'jamm' => 'required',
+            'tgls' => 'required',
+            'jams' => 'required',
+        ]);
+        Setting::create(
+            [
+                'judul' => $request->judul,
+                'tgl_mulai' => $request->tglm,
+                'jam_mulai' => $request->jamm,
+                'tgl_selesai' => $request->tgls,
+                'jam_selesai' => $request->jams,
+            ]
+        );
+        //redirect to index
+        return redirect()->route('setting.index')->with(['status' => 'Data Berhasil Disimpan!']);
     }
-
-    public function show($id)
+    public function update(Request $request, Setting $set)
     {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        $set->update(
+            [
+                'judul' => $request->judul,
+                'tgl_mulai' => $request->tglm,
+                'jam_mulai' => $request->jamm,
+                'tgl_selesai' => $request->tgls,
+                'jam_selesai' => $request->jams,
+            ]
+        );
+        //redirect to index
+        return redirect()->route('setting.index')->with(['status' => 'Data Berhasil Diupdate!']);
     }
 }

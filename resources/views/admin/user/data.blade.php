@@ -148,7 +148,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-offset-2 col-sm-10">
+                        <div class="card-footer">
                             <button type="submit" class="btn btn-primary btn-sm" id="saveBtn" value="create">
                                 <i class="fa fa-download"></i> Simpan</button>
                         </div>

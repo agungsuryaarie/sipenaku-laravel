@@ -69,13 +69,9 @@ Route::delete('kegiatan/detail/{id}/destroy', [DetailController::class, 'destroy
 // Kartu Kendali
 Route::get('kartukendali', [KartuController::class, 'index'])->name('kartukendali.index');
 
-// setting
-// Route::get('setting', function () {
-//     $menu = "Sub Kegiatan";
-//     return view('admin.setting.data', compact('menu'));
-// });
-
 Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+Route::post('setting', [SettingController::class, 'store'])->name('setting.store');
+Route::put('setting/{set}/update-schedule', [SettingController::class, 'update'])->name('setting.update');
 
 
 require __DIR__ . '/front.php';
