@@ -29,7 +29,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Minimal</label>
-                                    <select class="form-control select2" style="width: 100%;">
+                                    <select class="form-control select2bs4" style="width: 100%;">
                                         <option selected="selected">Alabama</option>
                                         <option>Alaska</option>
                                         <option>California</option>
@@ -43,7 +43,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Kegiatan</label>
-                                    <select class="form-control select2" style="width: 100%;">
+                                    <select class="form-control select2bs4" style="width: 100%;">
                                         <option selected="selected">Kegiatan</option>
                                         <option>Alaska</option>
                                         <option>California</option>
@@ -57,7 +57,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Sub Kegiatan</label>
-                                    <select class="form-control select2" style="width: 100%;">
+                                    <select class="form-control select2bs4" style="width: 100%;">
                                         <option selected="selected">Sub Kegiatan</option>
                                         <option>Alaska</option>
                                         <option>California</option>
@@ -70,7 +70,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="input-group-append mt-10" id="#">
-                                    <button class="btn btn-sidebar btn-danger">
+                                    <button class="btn btn-sidebar btn-danger btn-sm">
                                         <i class="fas fa-search fa-fw"></i>
                                     </button>
                                 </div>
@@ -117,9 +117,6 @@
                 "buttons": ["excel", "pdf", "print"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
-
-        $('.select2').select2()
-
         //Initialize Select2 Elements
         $('.select2bs4').select2({
             theme: 'bootstrap4'

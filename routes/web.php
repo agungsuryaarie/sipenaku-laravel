@@ -69,7 +69,7 @@ Route::get('kegiatan/detail/{rekening_id}/{id}/edit', [DetailController::class, 
 Route::delete('kegiatan/detail/{id}/destroy', [DetailController::class, 'destroy'])->name('detail.destroy');
 
 // Kartu Kendali
-Route::get('kartukendali', [KartuController::class, 'index'])->name('kartukendali.index');
+Route::get('kartu-kendali', [KartuController::class, 'index'])->name('kartukendali.index');
 
 // SPJ
 Route::get('spj', [SpjController::class, 'index'])->name('spj.index');
