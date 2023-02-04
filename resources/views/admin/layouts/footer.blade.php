@@ -15,6 +15,9 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ url('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- bs-custom-file-input -->
+<script src="{{ url('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ url('dist/js/adminlte.js') }}"></script>
 <!-- Select2 -->

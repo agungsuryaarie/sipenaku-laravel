@@ -8,7 +8,9 @@ use App\Http\Controllers\Admin\KegiatanController;
 use App\Http\Controllers\Admin\SubkegiatanController;
 use App\Http\Controllers\Admin\RekeningController;
 use App\Http\Controllers\Admin\KartuController;
+use App\Http\Controllers\Admin\SpjController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\ProfilController;
 use App\Http\Controllers\Admin\DetailController;
 
 
@@ -69,6 +71,16 @@ Route::delete('kegiatan/detail/{id}/destroy', [DetailController::class, 'destroy
 // Kartu Kendali
 Route::get('kartukendali', [KartuController::class, 'index'])->name('kartukendali.index');
 
+// SPJ
+Route::get('spj', [SpjController::class, 'index'])->name('spj.index');
+
+// Profil
+Route::get('profil', [ProfilController::class, 'index'])->name('profil.index');
+
+// Kartu Kendali
+// Route::get('visi-misi', [VisiMisiController::class, 'index'])->name('visimisi.index');
+
+// Setting
 Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
 Route::post('setting', [SettingController::class, 'store'])->name('setting.store');
 Route::put('setting/{set}/update-schedule', [SettingController::class, 'update'])->name('setting.update');
