@@ -151,8 +151,8 @@
                         </div>
                         <div class="card-footer">
                             <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Kembali</button>
-                            <button type="submit" class="btn btn-primary btn-sm" id="saveBtn" value="create">
-                                <i class="fa fa-download"></i> Simpan</button>
+                            <button type="submit" class="btn btn-primary btn-sm" id="saveBtn"
+                                value="create">Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -248,8 +248,7 @@
                                     value +
                                     '</li></strong>');
                                 $(".alert-danger").fadeOut(3000);
-                                $("#saveBtn").html(
-                                    "<i class='fa fa-download'></i> Simpan");
+                                $("#saveBtn").html("Simpan");
                                 $('#userForm').trigger("reset");
                             });
                         } else {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Bagian;
 use DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class BagianController extends Controller
 {
@@ -31,9 +32,13 @@ class BagianController extends Controller
 
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        //Translate Bahasa Indonesia
+        $message = array(
+            'nama_bagian.required' => 'Nama Bagian harus diisi.',
+        );
+        $validator = Validator::make($request->all(), [
             'nama_bagian' => 'required',
-        ]);
+        ], $message);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);

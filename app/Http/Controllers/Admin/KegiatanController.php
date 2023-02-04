@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Kegiatan;
 use App\Models\Bagian;
 use DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class KegiatanController extends Controller
 {
@@ -51,11 +52,17 @@ class KegiatanController extends Controller
 
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        //Translate Bahasa Indonesia
+        $message = array(
+            'kode_kegiatan.required' => 'Kode Kegiatan harus diisi.',
+            'nama_kegiatan.required' => 'Nama Kegiatan harus diisi.',
+            'bagian_id.required' => 'Bagian harus dipilih.',
+        );
+        $validator = Validator::make($request->all(), [
             'kode_kegiatan' => 'required',
             'nama_kegiatan' => 'required',
             'bagian_id' => 'required',
-        ]);
+        ], $message);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
