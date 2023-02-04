@@ -155,4 +155,59 @@ class UserController extends Controller
         $user = User::first();
         return view('admin.myprofil.data', compact('user', 'menu'));
     }
+    public function updateprofil(Request $request, User $user)
+    {
+        $lastEmail = User::where('id', $request->id)->first();
+        if ($lastEmail->email == $request->email) {
+            $ruleEmail = 'required|email';
+        } else {
+            $ruleEmail = 'required|email|unique:users,email';
+        }
+        $lastUsername = User::where('id', $request->id)->first();
+        if ($lastUsername->username == $request->username) {
+            $ruleUsername = 'required|min:8';
+        } else {
+            $ruleUsername = 'required|unique:users,username|min:8';
+        }
+        //validate form
+        $this->validate($request, [
+            'nama' => 'required|max:255',
+            'nohp' => 'required|numeric',
+            'email' => $ruleEmail,
+            'username' => $ruleUsername,
+        ]);
+        $user->update(
+            [
+                'nama' => $request->nama,
+                'nohp' => $request->nohp,
+                'email' => $request->email,
+                'username' => $request->username,
+            ]
+        );
+        //redirect to index
+        return redirect()->route('myprofil.index')->with(['status' => 'Profil Berhasil Diupdate!']);
+    }
+    public function updatepass(Request $request, User $user)
+    {
+        //Translate Bahasa Indonesia
+        $message = array(
+            'npassword.required' => 'Password harus diisi.',
+            'npassword.min' => 'Password minimal 8.',
+            'nrepassword.required' => 'Harap konfirmasi password.',
+            'nrepassword.same' => 'Password harus sama.',
+            'nrepassword.min' => 'Password minimal 8.',
+        );
+        //validate form
+        $this->validate($request, [
+            'npassword' => 'required|min:8',
+            'nrepassword' => 'required|same:npassword|min:8',
+        ], $message);
+        $user->update(
+            [
+                'password' => Hash::make($request->npassword),
+            ]
+        );
+        //redirect to index
+        return redirect()->route('myprofil.index')->with(['status' => 'Password Berhasil Diupdate!']);
+    }
 }

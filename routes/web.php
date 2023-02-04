@@ -40,9 +40,9 @@ Route::delete('user/{id}/destroy', [UserController::class, 'destroy'])->name('us
 
 // my profil
 Route::get('my-profil', [UserController::class, 'myprofil'])->name('myprofil.index');
-Route::get('my-profil/{id}/update', [UserController::class, 'updateprofil'])->name('myprofil.update');
-Route::get('my-profil/{id}/update-password', [UserController::class, 'updatepass'])->name('myprofil.update.password');
-Route::get('my-profil/{id}/update-foto', [UserController::class, 'updatefoto'])->name('myprofil.update.foto');
+Route::put('my-profil/{user}/update', [UserController::class, 'updateprofil'])->name('myprofil.update');
+Route::put('my-profil/{user}/update-password', [UserController::class, 'updatepass'])->name('myprofil.update.password');
+Route::put('my-profil/{user}/update-foto', [UserController::class, 'updatefoto'])->name('myprofil.update.foto');
 
 // bagian
 Route::resource('bagian', BagianController::class);

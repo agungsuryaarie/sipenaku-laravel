@@ -45,6 +45,14 @@ class SettingController extends Controller
     }
     public function update(Request $request, Setting $set)
     {
+        //validate form
+        $this->validate($request, [
+            'judul' => 'required',
+            'tglm' => 'required',
+            'jamm' => 'required',
+            'tgls' => 'required',
+            'jams' => 'required',
+        ]);
         $set->update(
             [
                 'judul' => $request->judul,

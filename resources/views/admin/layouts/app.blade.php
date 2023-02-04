@@ -66,11 +66,11 @@
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-1 d-flex">
                     <div class="image">
-                        @if ($user->foto == null)
+                        {{-- @if ($user->foto == null) --}}
+                        <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2" alt="User Image">
+                        {{-- @else
                             <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2" alt="User Image">
-                        @else
-                            <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2" alt="User Image">
-                        @endif
+                        @endif --}}
                     </div>
                     <div class="info">
                         <a href="{{ route('myprofil.index') }}" class="d-block">Administrator</a>

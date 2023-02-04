@@ -80,14 +80,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">NIP <span class="text-danger">*</span></label>
+                                        <label>NIP <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="nip" name="nip"
                                             placeholder="NIP" autocomplete="off" value="{{ old('nip') }}" autofocus>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Nama <span class="text-danger">*</span></label>
+                                        <label>Nama <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="nama" name="nama"
                                             placeholder="Nama" autocomplete="off" value="{{ old('nama') }}">
                                     </div>
@@ -96,15 +96,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Nomor Handphone <span
-                                                class="text-danger">*</span></label>
+                                        <label>Nomor Handphone <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="nohp" name="nohp"
                                             placeholder="Nomor Handphone" autocomplete="off" value="{{ old('nohp') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Email <span class="text-danger">*</span></label>
+                                        <label>Email <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="email" name="email"
                                             placeholder="Email" autocomplete="off" value="{{ old('email') }}">
                                     </div>
@@ -113,16 +112,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Username <span
-                                                class="text-danger">*</span></label>
+                                        <label>Username <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" id="username" name="username"
                                             placeholder="Username" autocomplete="off" value="{{ old('username') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Password <span
-                                                class="text-danger">*</span></label>
+                                        <label>Password <span class="text-danger">*</span></label>
                                         <input type="password" class="form-control" id="password" name="password"
                                             placeholder="Password" autocomplete="off">
                                     </div>
@@ -131,8 +128,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Re-Password <span
-                                                class="text-danger">*</span></label>
+                                        <label>Re-Password <span class="text-danger">*</span></label>
                                         <input type="password" class="form-control" id="repassword" name="repassword"
                                             placeholder="Re-Password" autocomplete="off">
                                     </div>
