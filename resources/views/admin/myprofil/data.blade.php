@@ -30,7 +30,7 @@
                                     <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2"
                                         alt="User Avatar">
                                 @else
-                                    <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2"
+                                    <img src="{{ url('storage/fotouser/' . $user->foto) }}" class="img-circle elevation-2"
                                         alt="User Avatar">
                                 @endif
                             </div>
@@ -170,14 +170,14 @@
                                     <div class="form-group">
                                         <label>New Password <span class="text-danger">*</span></label>
                                         <input type="password" name="npassword" class="form-control"
-                                            value="{{ old('npassword') }}">
+                                            value="{{ old('npassword') }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Re-Password <span class="text-danger">*</span></label>
                                         <input type="password" name="nrepassword" class="form-control"
-                                            value="{{ old('rpassword') }}">
+                                            value="{{ old('rpassword') }}" required>
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -201,7 +201,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="card">
-                        <form method="POST" action="{{ route('myprofil.update.foto', $user->id) }}">
+                        <form method="POST" action="{{ route('myprofil.update.foto', $user->id) }}"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('put')
                             <input type="hidden" name="id" value="{{ $user->id }}">
@@ -215,7 +216,8 @@
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" name="foto" class="custom-file-input"
-                                                    id="foto" onchange="previewImg();" accept=".png, .jpg, .jpeg">
+                                                    id="foto" onchange="previewImg();" accept=".png, .jpg, .jpeg"
+                                                    required>
                                                 <label class="custom-file-label">Pilih File</label>
                                             </div>
                                         </div>

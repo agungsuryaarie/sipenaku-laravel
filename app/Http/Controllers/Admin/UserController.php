@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Bagian;
 use DataTables;
@@ -212,6 +212,23 @@ class UserController extends Controller
     }
     public function updatefoto(Request $request, User $user)
     {
-        //Break capekk
+        //Translate Bahasa Indonesia
+        $message = array(
+            'foto.images' => 'File harus image.',
+            'foto.mimes' => 'Foto harus jpeg,png,jpg.',
+            'foto,max' => 'File maksimal 1MB.',
+        );
+        $this->validate($request, [
+            'foto' => 'image|mimes:jpeg,png,jpg|max:1024'
+        ], $message);
+        $img = $request->file('foto');
+        $img->storeAs('public/fotouser/', $img->hashName());
+        //delete old
+        Storage::delete('public/fotouser/' . $user->foto);
+        $user->update([
+            'foto' => $img->hashName(),
+        ]);
+        //redirect to index
+        return redirect()->route('myprofil.index')->with(['status' => 'Foto Berhasil Diupdate!']);
     }
 }
