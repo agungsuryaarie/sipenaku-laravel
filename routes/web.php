@@ -77,6 +77,7 @@ Route::get('kartu-kendali', [KartuController::class, 'index'])->name('kartukenda
 
 // SPJ
 Route::get('spj', [SpjController::class, 'index'])->name('spj.index');
+Route::get('spj/create', [SpjController::class, 'create'])->name('spj.create');
 
 //app-Setting
 // Route::get('app-setting', [AppSettingController::class, 'index'])->name('setting.index');
