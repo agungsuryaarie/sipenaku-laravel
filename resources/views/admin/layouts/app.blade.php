@@ -168,21 +168,22 @@
                                 </p>
                             </a>
                         </li>
+
                         <li class="nav-item">
-                            <a href="{{ route('profil.index') }}"
-                                class="nav-link {{ request()->segment(1) == 'profil' ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-laptop-code"></i>
+                            <a href="{{ route('sistem.index') }}"
+                                class="nav-link {{ request()->segment(1) == 'sistem' ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-cogs"></i>
                                 <p>
-                                    App Setting
+                                    Aktivasi Sistem
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('setting.index') }}"
-                                class="nav-link {{ request()->segment(1) == 'setting' ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-cogs"></i>
+                                class="nav-link {{ request()->segment(1) == 'app-setting' ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-laptop-code"></i>
                                 <p>
-                                    Aktivasi Sistem
+                                    App Setting
                                 </p>
                             </a>
                         </li>
@@ -200,12 +201,11 @@
                 </nav>
             </div>
         </aside>
-
-
-
-        <div class="content-wrapper">
-            <div id="alerts"></div>
-            @yield('content')
-        </div>
-        @extends('admin.layouts.footer')
     </div>
+
+
+    <div class="content-wrapper">
+        <div id="alerts"></div>
+        @yield('content')
+    </div>
+    @extends('admin.layouts.footer')

@@ -22,13 +22,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="box-shadow mb-5">
+                        <div class="title mb-3">
+                            <h3>Filter Berdasarkan : </h3>
+                        </div>
                         <div class="row-kartu">
-                            <div class="title">
-                                <h3>Filter Berdasarkan : </h3>
-                            </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Minimal</label>
+                                    <label>Bagian</label>
                                     <select class="form-control select2" style="width: 100%;">
                                         <option selected="selected">Alabama</option>
                                         <option>Alaska</option>
@@ -40,7 +40,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Kegiatan</label>
                                     <select class="form-control select2" style="width: 100%;">
@@ -54,7 +54,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Sub Kegiatan</label>
                                     <select class="form-control select2" style="width: 100%;">
@@ -70,9 +70,8 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="input-group-append mt-10" id="#">
-                                    <button class="btn btn-sidebar btn-danger">
-                                        <i class="fas fa-search fa-fw"></i>
-                                    </button>
+                                    <button type="button" class="btn btn-block btn-primary btn-flat">
+                                        Search <i class="fas fa-search"></i></button>
                                 </div>
                             </div>
                         </div>

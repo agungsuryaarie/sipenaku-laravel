@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use DataTables;
 
 
-class SettingController extends Controller
+class SistemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +19,9 @@ class SettingController extends Controller
     public function index(Request $request)
     {
 
-        $menu = 'Setting'; {
+        $menu = 'Aktivasi Sistem'; {
         }
-        return view('admin.setting.data', compact('menu'));
+        return view('admin.sistem.data', compact('menu'));
     }
 
 

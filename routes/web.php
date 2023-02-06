@@ -9,8 +9,8 @@ use App\Http\Controllers\Admin\SubkegiatanController;
 use App\Http\Controllers\Admin\RekeningController;
 use App\Http\Controllers\Admin\KartuController;
 use App\Http\Controllers\Admin\SpjController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\ProfilController;
+use App\Http\Controllers\Admin\SistemController;
+use App\Http\Controllers\Admin\AppSettingController;
 use App\Http\Controllers\Admin\DetailController;
 
 
@@ -74,14 +74,12 @@ Route::get('kartukendali', [KartuController::class, 'index'])->name('kartukendal
 // SPJ
 Route::get('spj', [SpjController::class, 'index'])->name('spj.index');
 
-// Profil
-Route::get('profil', [ProfilController::class, 'index'])->name('profil.index');
-
-// Kartu Kendali
-// Route::get('visi-misi', [VisiMisiController::class, 'index'])->name('visimisi.index');
-
 // Setting
-Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+Route::get('app-setting', [AppSettingController::class, 'index'])->name('setting.index');
+Route::get('app-setting/{id}/update', [AppSettingController::class, 'update'])->name('setting.update');
+
+// sistem
+Route::get('sistem', [SistemController::class, 'index'])->name('sistem.index');
 
 
 require __DIR__ . '/front.php';

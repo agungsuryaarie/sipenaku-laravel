@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Spectrum - Webflow HTML website template</title>
+    <title>Sipenaku - Sistem Informasi Management Keuangan Kabupaten Batu Bara</title>
     <meta
         content="Spectrum Webflow template is highly suitable for creating websites for mobile applications, startups, software apps, blockchain, SaaS, and technology businesses."
         name="description" />
@@ -21,9 +21,6 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="Webflow" name="generator" />
     <link href="{{ url('front/css/style.css') }}" rel="stylesheet" type="text/css" />
-    <!--[if lt IE 9
-      ]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script>
-      <![endif]-->
     <script type="text/javascript">
         !(function(o, c) {
             var n = c.documentElement,
@@ -34,8 +31,7 @@
             (n.className += t + "touch");
         })(window, document);
     </script>
-    <link href="https://assets.website-files.com/638ff800599a0427a59d547f/638ffcb3d84c13960e961d9e_Favicon.png"
-        rel="shortcut icon" type="image/x-icon" />
+    <link href="{{ url('front/img/logobb.png') }}" rel="shortcut icon" type="image/x-icon" />
     <link href="https://assets.website-files.com/638ff800599a0427a59d547f/638ffcb76d73471597a67644_Webclip.png"
         rel="apple-touch-icon" />
 </head>
@@ -50,8 +46,8 @@
             <div data-w-id="ad761d47-7853-493f-fa15-057342917d6b" class="nav">
                 <nav role="navigation" class="nav-menu w-nav-menu">
                     <a href="#home" aria-current="page" class="nav-link w-nav-link w--current">Home<br /></a>
-                    <a href="#features" class="nav-link w-nav-link">Visi Misi<br /></a>
-                    <a href="/features" class="nav-link w-nav-link">Features<br /></a>
+                    <a href="#features" class="nav-link w-nav-link">Features<br /></a>
+                    <a href="#visimisi" class="nav-link w-nav-link">Visi Misi<br /></a>
                 </nav>
                 <a href="#" class="nav-button w-inline-block">
                     <div class="text-button">Login</div>
@@ -64,348 +60,169 @@
     </div>
     <div data-w-id="1eca2369-89bd-f1c6-fa62-6c2cf67beff7" style="opacity: 0" class="gradient-hero">
         <div class="noise"></div>
+        <img src="{{ url('front/img/fff.png') }}" class="">
     </div>
-    <div data-w-id="c636bd80-a8e8-7ca5-e24f-032b659a852f" class="section-hero wf-section">
-        <div class="content">
-            <div class="w-layout-grid grid-hero">
-                <div id="w-node-_3bce429c-06f2-53cc-882e-3e390d408fec-379d5480" class="block-hero">
-                    <h1 data-w-id="9ca6e8f7-a4c2-0a56-88da-c5d695c5b1be"
-                        style="
-                opacity: 0;
-                -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                  rotateY(0) rotateZ(0) skew(0, 0);
-              "
-                        class="heading-hero">
-                        Sistem Informasi Management Keuangan Kabupaten Batu Bara
-                    </h1>
-                    <p data-w-id="399786d8-9b63-0c6f-2d2a-350f4a978791"
-                        style="
-                opacity: 0;
-                -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                  rotateY(0) rotateZ(0) skew(0, 0);
-              "
-                        class="paragraph-hero">
-                        Elit malesuada ultricies enim, viverra lectus nunc placerat nunc.
-                        Ipsum, odio massa amet nulla id rhoncus est.
-                    </p>
-                    <div data-w-id="0407c09b-5da1-c573-6f18-f9acb82b7d4c"
-                        style="
-                opacity: 0;
-                -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                  rotateY(0) rotateZ(0) skew(0, 0);
-              "
-                        class="block-button">
-                        <a href="/get-the-app" class="button w-inline-block"><img
-                                src="https://assets.website-files.com/638ff800599a0427a59d547f/6391742ca197854d05d9c954_download_white.svg"
-                                loading="eager" alt="" class="icon-button" />
-                            <div class="text-button white">Mulai</div>
-                        </a>
-                        <div class="circle-button"></div>
-                    </div>
-                </div>
-                <div id="w-node-fb81bcce-4d37-85e0-208e-77cf7c1ffc2c-379d5480"
-                    data-w-id="fb81bcce-4d37-85e0-208e-77cf7c1ffc2c" class="app-hero">
-                    <div class="app-hero---wrapper">
-                        <div class="app-hero">
-                            <img src="{{ url('front/img/ilustrasi-7.png') }}" class="banner-image" loading="eager"
-                                sizes="(max-width: 767px) 50vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                srcset="
-                                {{ url('front/img/ilustrasi-7.png') }} 500w,
-                                {{ url('front/img/ilustrasi-7.png') }} 672w"
-                                alt="" class="image-app---hero" />
-                            <div class="app-hero---shadow"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <section id="features">
-        <div class="section wf-section">
+    <section id="home">
+        <div data-w-id="c636bd80-a8e8-7ca5-e24f-032b659a852f" class="section-hero wf-section">
             <div class="content">
-                <div class="title-fitur">
-                    <h3>Fitur Aplikasi</h3>
-                </div>
-                <div class="w-layout-grid grid-focus">
-                    <div id="w-node-_921e641a-4364-ff47-fb5c-6dcbde77594e-379d5480"
-                        data-w-id="921e641a-4364-ff47-fb5c-6dcbde77594e"
-                        style="
-              opacity: 0;
-              -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-              -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-              -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                rotateY(0) rotateZ(0) skew(0, 0);
-              transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                rotateY(0) rotateZ(0) skew(0, 0);"
-                        class="app-focus">
-                        <div class="app-focus---sticky">
-                            <div class="app-focus---wrapper">
-                                <div class="app-focus---content">
-                                    <div class="app-focus---shadow"></div>
-                                    <div class="app-focus---image">
-                                        <img src="{{ url('front/img/planning_set.png') }}" loading="eager"
-                                            sizes="(max-width: 479px) 50vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                            srcset="
-                                        {{ url('front/img/planning_set.png') }} 500w,
-                                        {{ url('front/img/planning_set.png') }} 504w"
-                                            alt="" class="image-app---focus-1" />
-                                        <img src="{{ url('front/img/tahunan.svg') }}" loading="eager"
-                                            sizes="(max-width: 479px) 68vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                            srcset="
-                        {{ url('front/img/tahunan.svg') }} 500w,
-                        {{ url('front/img/tahunan.svg') }} 504w"
-                                            alt="" class="image-app---focus-2" />
-                                        <img src="{{ url('front/img/sakip.svg') }}" loading="eager"
-                                            sizes="(max-width: 479px) 63vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
-                                            srcset="
-                                        {{ url('front/img/sakip.svg') }} 500w,
-                                        {{ url('front/img/sakip.svg') }} 505w"
-                                            alt="" class="image-app---focus-3" />
-                                    </div>
-                                </div>
-                            </div>
+                <div class="w-layout-grid grid-hero">
+                    <div id="w-node-_3bce429c-06f2-53cc-882e-3e390d408fec-379d5480" class="block-hero">
+                        <h1 data-w-id="9ca6e8f7-a4c2-0a56-88da-c5d695c5b1be"class="heading-hero">
+                            Sistem Informasi Management Keuangan Kabupaten Batu Bara
+                        </h1>
+                        <p data-w-id="399786d8-9b63-0c6f-2d2a-350f4a978791"class="paragraph-hero">
+                            Elit malesuada ultricies enim, viverra lectus nunc placerat nunc.
+                            Ipsum, odio massa amet nulla id rhoncus est.
+                        </p>
+                        <div data-w-id="0407c09b-5da1-c573-6f18-f9acb82b7d4c" class="block-button">
+                            <a href="/get-the-app" class="button w-inline-block">
+                                <div class="text-button white">Mulai</div>
+                            </a>
+                            <div class="circle-button"></div>
                         </div>
                     </div>
-                    <div id="w-node-_08be711c-a843-4fc0-e4ee-60f7d1119405-379d5480" class="focus">
-                        <div class="block-heading">
-                            <div data-w-id="f9864493-856f-116e-6930-cefa188abe50"
-                                style="
-                  opacity: 0;
-                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                    rotateY(0) rotateZ(0) skew(0, 0);
-                "
-                                class="subtitle">
-                                <img src="{{ url('front/img/icon-subtitle.svg') }}" loading="eager" alt=""
-                                    class="icon-subtitle" />
-                                <div class="text-subtitle">Style</div>
+                    <div id="w-node-fb81bcce-4d37-85e0-208e-77cf7c1ffc2c-379d5480"
+                        data-w-id="fb81bcce-4d37-85e0-208e-77cf7c1ffc2c" class="app-hero">
+                        <div class="app-hero---wrapper">
+                            <div class="app-hero">
+                                <img src="{{ url('front/img/ilustrasi-8.png') }}" class="banner-image" loading="eager"
+                                    sizes="(max-width: 767px) 50vw, (max-width: 991px) 252px, (max-width: 1439px) 280px, (max-width: 1919px) 300px, 320px"
+                                    srcset="
+                                {{ url('front/img/ilustrasi-8.png') }} 500w,
+                                {{ url('front/img/ilustrasi-8.png') }} 672w"
+                                    alt="" class="image-app---hero" />
+                                <div class="app-hero---shadow"></div>
                             </div>
-                            <h2 data-w-id="07760b71-66fa-e758-ae4e-9be5fb13e2a0"
-                                style="
-                  opacity: 0;
-                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                    rotateY(0) rotateZ(0) skew(0, 0);
-                "
-                                class="heading">
-                                Perencanaan Lima Tahunan
-                            </h2>
                         </div>
-                        <p data-w-id="9a85c6be-5cc1-b13b-8ff3-83555a5638dc"
-                            style="
-                opacity: 0;
-                -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                  rotateY(0) rotateZ(0) skew(0, 0);
-              "
-                            class="paragraph">
-                            Input data perencanaan lima tahunan yang dilakukan oleh fungsi
-                            perencana pada Pemerintah Daerah
-                        </p>
-                    </div>
-                    <div id="w-node-_993b666c-85f8-1653-1ef3-a82122c49510-379d5480" class="focus">
-                        <div class="block-heading">
-                            <div data-w-id="993b666c-85f8-1653-1ef3-a82122c49512"
-                                style="
-                  opacity: 0;
-                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                    rotateY(0) rotateZ(0) skew(0, 0);
-                "
-                                class="subtitle">
-                                <img src="{{ url('front/img/icon-subtitle.svg') }}" loading="eager" alt=""
-                                    class="icon-subtitle" />
-                                <div class="text-subtitle">Tasks</div>
-                            </div>
-                            <h2 data-w-id="993b666c-85f8-1653-1ef3-a82122c49516"
-                                style="
-                  opacity: 0;
-                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                    rotateY(0) rotateZ(0) skew(0, 0);
-                "
-                                class="heading">
-                                Perencanaan Tahunan
-                            </h2>
-                        </div>
-                        <p data-w-id="993b666c-85f8-1653-1ef3-a82122c4951a"
-                            style="
-                opacity: 0;
-                -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                  rotateY(0) rotateZ(0) skew(0, 0);
-              "
-                            class="paragraph">
-                            input data perencanaan tahunan yang dilakukan oleh fungsi
-                            perencana pada Pemerintah Daerah
-                        </p>
-                    </div>
-                    <div id="w-node-_4a90023a-9e8e-5ca0-356d-053b7a73f5c7-379d5480" class="focus">
-                        <div class="block-heading">
-                            <div data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5c9"
-                                style="
-                  opacity: 0;
-                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                    rotateY(0) rotateZ(0) skew(0, 0);
-                "
-                                class="subtitle">
-                                <img src="{{ url('front/img/icon-subtitle.svg') }}" loading="eager" alt=""
-                                    class="icon-subtitle" />
-                                <div class="text-subtitle">Goals</div>
-                            </div>
-                            <h2 data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5cd"
-                                style="
-                  opacity: 0;
-                  -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                    rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                  transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                    rotateY(0) rotateZ(0) skew(0, 0);
-                "
-                                class="heading">
-                                Penganggaran
-                            </h2>
-                        </div>
-                        <p data-w-id="4a90023a-9e8e-5ca0-356d-053b7a73f5d1"
-                            style="
-                opacity: 0;
-                -webkit-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -moz-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                -ms-transform: translate3d(0, 15px, 0) scale3d(1, 1, 1)
-                  rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
-                transform: translate3d(0, 15px, 0) scale3d(1, 1, 1) rotateX(0)
-                  rotateY(0) rotateZ(0) skew(0, 0);
-              "
-                            class="paragraph">
-                            Input data penganggaran yang dilakukan oleh fungsi penganggaran
-                            pada Pemerintah Daerah
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <div class="section wf-section">
-        <div class="content-wide">
-            <div class="w-layout-grid grid-functions">
-                <div id="w-node-f5c0af81-4013-be1e-5c3f-7e73946682be-379d5480"
-                    data-w-id="f5c0af81-4013-be1e-5c3f-7e73946682be" class="functions-box">
-                    <div class="section-logo">
-                        <img src="{{ url('front/img/logobb.png') }}" />
+    <section id="features">
+        <div class="section wf-section">
+            <div class="content">
+                <h2 data-w-id="9a2dfb51-1c08-f11b-cf75-ece1757f0eb3" class="heading">Fitur Aplikasi</h2>
+                <div class="w-layout-grid grid-features">
+                    <div id="w-node-dcc960b3-abed-aaf9-d0c3-1b59732bf5d4-379d5480"
+                        data-w-id="dcc960b3-abed-aaf9-d0c3-1b59732bf5d4" class="features">
+                        <div class="icon-features-bg"><img src=" {{ url('front/img/Calendar_Monochromatic.svg') }}"
+                                loading="eager" alt="" class="icon-features"></div>
+                        <h5 class="heading-features">Perencanaan Lima Tahunan</h5>
+                        <p class="paragraph-features">Input data perencanaan lima tahunan yang dilakukan oleh fungsi
+                            perencana pada Pemerintah Daerah</p>
                     </div>
-                    <div class="functions-large">
-                        <div class="block-functions-large">
-                            <h2 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4" class="heading-tittle">
-                                Visi Pemerintah Kab. Batu bara
-                            </h2>
-                            <ul data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d" class="paragraph">
-                                <li>
-                                    Menjadikan Masyarakat Kabupaten Batu Bara Masyarakat Industri
-                                    Yang Sejahtera, Mandiri Dan Berbudaya
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="block-functions-large">
-                            <h2 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4" class="heading-tittle">
-                                Misi Pemerintah Kab. Batu bara
-                            </h2>
-                            <ul data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d" class="paragraph">
-                                <li>
-                                    Meningkatkan Pelayanan Aparatur Pemerintah Atas Pelayanan
-                                    Publik Dan Investasi
-                                </li>
-                                <li>
-                                    Meningkatkan jumlah dan Kualitas Infrastruktur dan Sarana
-                                    Prasarana pendukung pertumbuhan Industri & Perekonomian
-                                </li>
-                                <li>
-                                    Mewujudkan Masyarakat yang Produktif, Inovatif dan Berbudaya
-                                </li>
-                                <li>
-                                    Mewujudkan Industri Berbasis Sumber daya. . .
-                                </li>
-                            </ul>
-                        </div>
+                    <div id="w-node-_739467ac-32c4-e8a0-a160-77cadd3688c7-379d5480"
+                        data-w-id="739467ac-32c4-e8a0-a160-77cadd3688c7"class="features">
+                        <div class="icon-features-bg"><img src="{{ url('front/img/Calculator_Monochromatic.svg') }}"
+                                loading="eager" alt="" class="icon-features"></div>
+                        <h5 class="heading-features">Perencanaan Tahunan</h5>
+                        <p class="paragraph-features">Input data perencanaan tahunan yang dilakukan oleh fungsi
+                            perencana
+                            pada Pemerintah Daerah</p>
                     </div>
-                    <div data-w-id="0407c09b-5da1-c573-6f18-f9acb82b7d4c"
-                        style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                        class="block-button">
-                        <div class="circle-button">
-                            <a href="https://www.batubarakab.go.id/pages/visi-dan-misi"
-                                class="link-circle-button w-inline-block"><img
-                                    src="https://assets.website-files.com/638ff800599a0427a59d547f/6392a552e9d57182f30245c9_arrow_dark.svg"
-                                    loading="eager" alt="" class="icon-button"></a>
-                            <div class="text-button">Learn more</div>
-                        </div>
+                    <div id="w-node-f58d2cf8-736b-0aab-98d8-69c9c47ca8e8-379d5480"
+                        data-w-id="f58d2cf8-736b-0aab-98d8-69c9c47ca8e8"class="features">
+                        <div class="icon-features-bg"><img src="{{ url('front/img/Bank note_Monochromatic.svg') }}"
+                                loading="eager" alt="" class="icon-features"></div>
+                        <h5 class="heading-features">Pengangaran</h5>
+                        <p class="paragraph-features">Input data penganggaran yang dilakukan oleh fungsi penganggaran
+                            pada
+                            Pemerintah Daerah</p>
+                    </div>
+                    <div id="w-node-_311ad2c7-47e2-ebb0-122b-bf6339f9ab36-379d5480"
+                        data-w-id="311ad2c7-47e2-ebb0-122b-bf6339f9ab36" class="features">
+                        <div class="icon-features-bg"><img src="{{ url('front/img/Accountant_Monochromatic.svg') }}"
+                                loading="eager" alt="" class="icon-features"></div>
+                        <h5 class="heading-features">Penatausahaan</h5>
+                        <p class="paragraph-features">Input seluruh transaksi keuangan baik penerimaan dan pengeluaran
+                            dalam satu tahun anggaran yang dilakukan oleh fungsi penatausahaan pada Pemerintah Daerah
+                        </p>
+                    </div>
+                    <div id="w-node-ede8888f-bd98-3ac0-d4c4-5c0fff663286-379d5480"
+                        data-w-id="ede8888f-bd98-3ac0-d4c4-5c0fff663286"class="features">
+                        <div class="icon-features-bg"><img src="{{ url('front/img/Team work_Monochromatic.svg') }}"
+                                loading="eager" alt="" class="icon-features"></div>
+                        <h5 class="heading-features">Pelaporan</h5>
+                        <p class="paragraph-features">Menghasilkan laporan keuangan Pemerintah Daerah berupa Laporan
+                            Realisasi Anggaran, Laporan Operasional, Neraca, Laporan perubahan ekuitas, Catatan atas
+                            laporan
+                            keuangan, Laporan Perubahan SAL, Laporan Arus Kas.</p>
+                    </div>
+                    <div id="w-node-_7b5598ba-075a-2d2c-167d-205a35011197-379d5480"
+                        data-w-id="7b5598ba-075a-2d2c-167d-205a35011197"class="features">
+                        <div class="icon-features-bg"><img
+                                src="{{ url('front/img/Team building _Monochromatic.svg') }}" loading="eager"
+                                alt="" class="icon-features"></div>
+                        <h5 class="heading-features">Sakip</h5>
+                        <p class="paragraph-features">Input kinerja Pemerintah Daerah sesuai dengan pertanggungjawaban
+                            yang
+                            ada</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div data-w-id="88c26a7d-3953-e420-b7d0-81c8acd3651e" style="opacity: 1" class="gradient">
-            <div class="noise"></div>
+    </section>
+    <section id="visimisi">
+        <div class="section wf-section">
+            <div class="content-wide">
+                <div class="w-layout-grid grid-functions">
+                    <div id="w-node-f5c0af81-4013-be1e-5c3f-7e73946682be-379d5480"
+                        data-w-id="f5c0af81-4013-be1e-5c3f-7e73946682be" class="functions-box">
+                        <div class="section-logo">
+                            <img src="{{ url('front/img/logobb.png') }}" />
+                        </div>
+                        <div class="functions-large">
+                            <div class="block-functions-large">
+                                <h2 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4" class="heading-tittle">
+                                    Visi Pemerintah Kab. Batu bara
+                                </h2>
+                                <ul data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d" class="paragraph">
+                                    <li>
+                                        Menjadikan Masyarakat Kabupaten Batu Bara Masyarakat Industri
+                                        Yang Sejahtera, Mandiri Dan Berbudaya
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="block-functions-large">
+                                <h2 data-w-id="71f7e26d-6fc1-55e0-f6cb-c91733b2f8a4" class="heading-tittle">
+                                    Misi Pemerintah Kab. Batu bara
+                                </h2>
+                                <ul data-w-id="213a3136-58b5-88ff-5f8a-0fdeb92a462d" class="paragraph">
+                                    <li>
+                                        Meningkatkan Pelayanan Aparatur Pemerintah Atas Pelayanan
+                                        Publik Dan Investasi
+                                    </li>
+                                    <li>
+                                        Meningkatkan jumlah dan Kualitas Infrastruktur dan Sarana
+                                        Prasarana pendukung pertumbuhan Industri & Perekonomian
+                                    </li>
+                                    <li>
+                                        Mewujudkan Masyarakat yang Produktif, Inovatif dan Berbudaya
+                                    </li>
+                                    <li>
+                                        Mewujudkan Industri Berbasis Sumber daya. . .
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div data-w-id="0407c09b-5da1-c573-6f18-f9acb82b7d4c"
+                            style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                            class="block-button">
+                            <div class="circle-button">
+                                <a href="#" class="nav-button w-inline-block">
+                                    <div class="text-button">Selengkapnya</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-w-id="88c26a7d-3953-e420-b7d0-81c8acd3651e" style="opacity: 1" class="gradient">
+                <div class="noise"></div>
+            </div>
         </div>
-    </div>
+    </section>
 
 
 
@@ -437,9 +254,9 @@
                         Dilindungi. </a>
                 </div>
                 <div data-w-id="c6cca3a7-263c-d0f4-ab69-a9e0451710a9" class="block-footer-down">
-                    <a href="/template-info/style-guide" class="link-footer">Home</a><a
-                        href="/template-info/licensing" class="link-footer">Visi Misi</a><a
-                        href="/template-info/changelog" class="link-footer">Features</a>
+                    <a href="#home" class="link-footer">Home</a>
+                    <a href="#features"class="link-footer">Features</a>
+                    <a href="#visimisi"class="link-footer">Visi Misi</a>
                 </div>
             </div>
         </div>
@@ -449,8 +266,9 @@
     </footer>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
-        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=638ff800599a0427a59d547f"
+        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+    </script>
     <script src="{{ url('front/js/webflow.js') }}" type="text/javascript"></script>
 </body>
 
