@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\RekeningController;
 use App\Http\Controllers\Admin\KartuController;
 use App\Http\Controllers\Admin\SpjController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\ProfilController;
+use App\Http\Controllers\Admin\AppSettingController;
 use App\Http\Controllers\Admin\DetailController;
 
 
@@ -77,6 +77,10 @@ Route::get('kartu-kendali', [KartuController::class, 'index'])->name('kartukenda
 
 // SPJ
 Route::get('spj', [SpjController::class, 'index'])->name('spj.index');
+
+//app-Setting
+// Route::get('app-setting', [AppSettingController::class, 'index'])->name('setting.index');
+// Route::get('app-setting/{id}/update', [AppSettingController::class, 'update'])->name('setting.update');
 
 // Visi & Misi
 Route::get('visi-misi', [ProfilController::class, 'index'])->name('visimisi.index');

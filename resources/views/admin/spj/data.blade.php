@@ -20,7 +20,7 @@
         <div class="container-fluid">
             <div class="row-form">
                 <div class="col-md-11">
-                    <div class="card">
+                    <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Form Input SPJ</h3>
                         </div>

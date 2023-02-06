@@ -219,10 +219,16 @@
                 </nav>
             </div>
         </aside>
-
         <div class="content-wrapper">
             <div id="alerts"></div>
             @yield('content')
         </div>
         @extends('admin.layouts.footer')
     </div>
+
+
+    {{-- <div class="content-wrapper">
+        <div id="alerts"></div>
+        @yield('content')
+    </div>
+    @extends('admin.layouts.footer') --}}

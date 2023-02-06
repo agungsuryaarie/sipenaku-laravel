@@ -1,16 +1,16 @@
-<?php
+pj<?php
 
-namespace App\Models;
+    namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Model;
 
-class Setting extends Model
-{
-    use HasFactory;
-    protected $table = 'setting';
+    class Setting extends Model
+    {
+        use HasFactory;
+        protected $table = 'setting';
 
-    protected $fillable = [
-        'judul', 'tgl_mulai', 'jam_mulai', 'tgl_selesai', 'jam_selesai'
-    ];
-}
+        protected $fillable = [
+            'judul', 'tgl_mulai', 'jam_mulai', 'tgl_selesai', 'jam_selesai'
+        ];
+    }
