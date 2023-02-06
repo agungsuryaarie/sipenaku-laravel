@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Bagian;
 use DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class BagianController extends Controller
 {
@@ -19,7 +20,7 @@ class BagianController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs editBagian"><i class="fas fa-edit"></i></a>';
-                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteBagian"><i class="fas fa-trash"></i></a>';
+                    $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteBagian"><i class="fas fa-trash"></i></a><center>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -31,9 +32,13 @@ class BagianController extends Controller
 
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        //Translate Bahasa Indonesia
+        $message = array(
+            'nama_bagian.required' => 'Nama Bagian harus diisi.',
+        );
+        $validator = Validator::make($request->all(), [
             'nama_bagian' => 'required',
-        ]);
+        ], $message);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);

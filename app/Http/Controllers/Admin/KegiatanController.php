@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Kegiatan;
 use App\Models\Bagian;
 use DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class KegiatanController extends Controller
 {
@@ -40,7 +41,7 @@ class KegiatanController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs editKegiatan"><i class="fas fa-edit"></i></a>';
-                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteKegiatan"><i class="fas fa-trash"></i></a>';
+                    $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteKegiatan"><i class="fas fa-trash"></i></a><center>';
                     return $btn;
                 })
                 ->rawColumns(['kode_kegiatan', 'nama_kegiatan', 'bagian', 'pagu_kegiatan', 'action'])
@@ -51,11 +52,17 @@ class KegiatanController extends Controller
 
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        //Translate Bahasa Indonesia
+        $message = array(
+            'kode_kegiatan.required' => 'Kode Kegiatan harus diisi.',
+            'nama_kegiatan.required' => 'Nama Kegiatan harus diisi.',
+            'bagian_id.required' => 'Bagian harus dipilih.',
+        );
+        $validator = Validator::make($request->all(), [
             'kode_kegiatan' => 'required',
             'nama_kegiatan' => 'required',
             'bagian_id' => 'required',
-        ]);
+        ], $message);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);

@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\SubkegiatanController;
 use App\Http\Controllers\Admin\RekeningController;
 use App\Http\Controllers\Admin\KartuController;
 use App\Http\Controllers\Admin\SpjController;
-use App\Http\Controllers\Admin\SistemController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AppSettingController;
 use App\Http\Controllers\Admin\DetailController;
 
@@ -38,6 +38,11 @@ Route::post('user', [UserController::class, 'store'])->name('user.store');
 Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::delete('user/{id}/destroy', [UserController::class, 'destroy'])->name('user.destroy');
 
+// my profil
+Route::get('my-profil', [UserController::class, 'myprofil'])->name('myprofil.index');
+Route::put('my-profil/{user}/update', [UserController::class, 'updateprofil'])->name('myprofil.update');
+Route::put('my-profil/{user}/update-password', [UserController::class, 'updatepass'])->name('myprofil.update.password');
+Route::put('my-profil/{user}/update-foto', [UserController::class, 'updatefoto'])->name('myprofil.update.foto');
 
 // bagian
 Route::resource('bagian', BagianController::class);
@@ -47,7 +52,6 @@ Route::get('kegiatan', [KegiatanController::class, 'index'])->name('kegiatan.ind
 Route::post('kegiatan', [KegiatanController::class, 'store'])->name('kegiatan.store');
 Route::get('kegiatan/{id}/edit', [KegiatanController::class, 'edit'])->name('kegiatan.edit');
 Route::delete('kegiatan/{id}/destroy', [KegiatanController::class, 'destroy'])->name('kegiatan.destroy');
-
 
 // sub-kegiatan
 Route::get('kegiatan/subkegiatan/{subkegiatan}', [SubkegiatanController::class, 'index'])->name('subkegiatan.index');
@@ -69,17 +73,22 @@ Route::get('kegiatan/detail/{rekening_id}/{id}/edit', [DetailController::class, 
 Route::delete('kegiatan/detail/{id}/destroy', [DetailController::class, 'destroy'])->name('detail.destroy');
 
 // Kartu Kendali
-Route::get('kartukendali', [KartuController::class, 'index'])->name('kartukendali.index');
+Route::get('kartu-kendali', [KartuController::class, 'index'])->name('kartukendali.index');
 
 // SPJ
 Route::get('spj', [SpjController::class, 'index'])->name('spj.index');
 
-// Setting
-Route::get('app-setting', [AppSettingController::class, 'index'])->name('setting.index');
-Route::get('app-setting/{id}/update', [AppSettingController::class, 'update'])->name('setting.update');
+//app-Setting
+// Route::get('app-setting', [AppSettingController::class, 'index'])->name('setting.index');
+// Route::get('app-setting/{id}/update', [AppSettingController::class, 'update'])->name('setting.update');
 
-// sistem
-Route::get('sistem', [SistemController::class, 'index'])->name('sistem.index');
+// Visi & Misi
+Route::get('visi-misi', [ProfilController::class, 'index'])->name('visimisi.index');
+
+// Setting
+Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+Route::post('setting', [SettingController::class, 'store'])->name('setting.store');
+Route::put('setting/{set}/update-schedule', [SettingController::class, 'update'])->name('setting.update');
 
 
 require __DIR__ . '/front.php';

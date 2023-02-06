@@ -1,5 +1,20 @@
 @extends('admin.layouts.app')
 @section('content')
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">{{ $menu }}</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ '/' }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">{{ $menu }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="content">
         <div class="container-fluid">
             <div class="col-12">
@@ -18,7 +33,7 @@
                                     <th>Nama Kegiatan</th>
                                     <th style="width:13%">Jumlah</th>
                                     <th style="width:20%">Bagian</th>
-                                    <th>Action</th>
+                                    <th class="text-center" style="width: 10%">Action</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -44,39 +59,37 @@
                     <form id="kegiatanForm" name="kegiatanForm" class="form-horizontal">
                         @csrf
                         <input type="hidden" name="kegiatan_id" id="kegiatan_id">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Kode Kegiatan <span class="text-danger">
-                                            *</span></label>
-                                    <input type="text" class="form-control" id="kode_kegiatan" name="kode_kegiatan"
-                                        placeholder="Kode Kegiatan">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Nama Kegiatan <span class="text-danger">
-                                            *</span></label>
-                                    <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan"
-                                        placeholder="Nama Kegiatan">
-                                </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Kode Kegiatan <span class="text-danger">
+                                        *</span></label>
+                                <input type="text" class="form-control" id="kode_kegiatan" name="kode_kegiatan"
+                                    placeholder="Kode Kegiatan">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <label>Bagian<span class="text-danger"> *</span></label>
-                                    <select class="browser-default custom-select" name="bagian_id" id="bagian_id">
-                                        <option selected>Pilih Bagian</option>
-                                        @foreach ($bagian as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nama_bagian }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Nama Kegiatan <span class="text-danger">
+                                        *</span></label>
+                                <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan"
+                                    placeholder="Nama Kegiatan">
                             </div>
                         </div>
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Simpan
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Bagian<span class="text-danger"> *</span></label>
+                                <select class="browser-default custom-select select2bs4" name="bagian_id" id="bagian_id">
+                                    <option selected disabled>Pilih Bagian</option>
+                                    @foreach ($bagian as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nama_bagian }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-default btn-sm"
+                                data-dismiss="modal">&nbsp;Kembali</button>
+                            <button type="submit" class="btn btn-primary btn-sm" id="saveBtn" value="create">&nbsp;Simpan
                             </button>
                         </div>
                     </form>
@@ -157,7 +170,9 @@
 
             $("#saveBtn").click(function(e) {
                 e.preventDefault();
-                $(this).html("menyimpan..");
+                $(this).html(
+                    "<span class='spinner-border spinner-border-sm'></span><span class='visually-hidden'><i> menyimpan...</i></span>"
+                );
                 $.ajax({
                     data: $("#kegiatanForm").serialize(),
                     url: "{{ route('kegiatan.store') }}",
@@ -177,7 +192,7 @@
                             });
                         } else {
                             table.draw();
-                            alertSuccess("Kegiatan Berhasil di tambah");
+                            alertSuccess("Kegiatan Berhasil ditambah");
                             $('#kegiatanForm').trigger("reset");
                             $("#saveBtn").html("Simpan");
                             $('#ajaxModel').modal('hide');
@@ -205,6 +220,10 @@
                     },
                 });
             });
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
         });
     </script>
 @endsection

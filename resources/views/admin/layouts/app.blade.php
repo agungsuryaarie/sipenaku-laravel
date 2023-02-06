@@ -66,10 +66,15 @@
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-1 d-flex">
                     <div class="image">
-                        <img src="{{ url('dist/img/user.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                        {{-- @if ($user->foto == null) --}}
+                        <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2" alt="User Image">
+                        {{-- @else
+                            <img src="{{ url('storage/fotouser/' . $user->foto) }}" class="img-circle elevation-2"
+                                alt="User Image">
+                        @endif --}}
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Administrator</a>
+                        <a href="{{ route('myprofil.index') }}" class="d-block">Administrator</a>
                         <small class="text-muted">
                             Administrator
                         </small>
@@ -110,7 +115,8 @@
                             request()->segment(1) == 'kegiatan' ||
                             request()->segment(1) == 'sub-kegiatan' ||
                             request()->segment(1) == 'rekening' ||
-                            request()->segment(1) == 'kartu-kendali'
+                            request()->segment(1) == 'kartu-kendali' ||
+                            request()->segment(1) == 'visi-misi'
                                 ? 'menu-open'
                                 : '' }}">
                             <a href="#"
@@ -119,7 +125,8 @@
                                 request()->segment(1) == 'kegiatan' ||
                                 request()->segment(1) == 'sub-kegiatan' ||
                                 request()->segment(1) == 'rekening' ||
-                                request()->segment(1) == 'kartu-kendali'
+                                request()->segment(1) == 'kartu-kendali' ||
+                                request()->segment(1) == 'visi-misi'
                                     ? 'active'
                                     : '' }}">
                                 <i class="nav-icon fas fa-layer-group"></i>
@@ -157,6 +164,27 @@
                                         <p>Kartu Kendali</p>
                                     </a>
                                 </li>
+
+                                <li class="nav-item {{ request()->segment(1) == 'visi-misi' ? 'menu-open' : '' }}">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            App Setting
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('visimisi.index') }}"
+                                                class="nav-link {{ request()->segment(1) == 'visi-misi' ? 'active' : '' }}">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>
+                                                    Visi & Misi
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -168,22 +196,12 @@
                                 </p>
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('sistem.index') }}"
-                                class="nav-link {{ request()->segment(1) == 'sistem' ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-cogs"></i>
-                                <p>
-                                    Aktivasi Sistem
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a href="{{ route('setting.index') }}"
-                                class="nav-link {{ request()->segment(1) == 'app-setting' ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-laptop-code"></i>
+                                class="nav-link {{ request()->segment(1) == 'setting' ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-calendar"></i>
                                 <p>
-                                    App Setting
+                                    Schedule
                                 </p>
                             </a>
                         </li>
@@ -201,11 +219,16 @@
                 </nav>
             </div>
         </aside>
+        <div class="content-wrapper">
+            <div id="alerts"></div>
+            @yield('content')
+        </div>
+        @extends('admin.layouts.footer')
     </div>
 
 
-    <div class="content-wrapper">
+    {{-- <div class="content-wrapper">
         <div id="alerts"></div>
         @yield('content')
     </div>
-    @extends('admin.layouts.footer')
+    @extends('admin.layouts.footer') --}}

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Bagian;
 use DataTables;
@@ -33,7 +33,7 @@ class UserController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs editUser"><i class="fas fa-edit"></i></a>';
-                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteUser"><i class="fas fa-trash"></i></a>';
+                    $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteUser"><i class="fas fa-trash"></i></a><center>';
                     return $btn;
                 })
                 ->rawColumns(['bagian', 'nip', 'nama', 'username', 'foto', 'action'])
@@ -143,10 +143,92 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-
     public function destroy($id)
     {
         User::find($id)->delete();
         return response()->json(['success' => 'User deleted successfully.']);
+    }
+
+    public function myprofil(Request $request)
+    {
+        $menu = 'Profil Saya';
+        $user = User::first();
+        return view('admin.myprofil.data', compact('user', 'menu'));
+    }
+    public function updateprofil(Request $request, User $user)
+    {
+        $lastEmail = User::where('id', $request->id)->first();
+        if ($lastEmail->email == $request->email) {
+            $ruleEmail = 'required|email';
+        } else {
+            $ruleEmail = 'required|email|unique:users,email';
+        }
+        $lastUsername = User::where('id', $request->id)->first();
+        if ($lastUsername->username == $request->username) {
+            $ruleUsername = 'required|min:8';
+        } else {
+            $ruleUsername = 'required|unique:users,username|min:8';
+        }
+        //validate form
+        $this->validate($request, [
+            'nama' => 'required|max:255',
+            'nohp' => 'required|numeric',
+            'email' => $ruleEmail,
+            'username' => $ruleUsername,
+        ]);
+        $user->update(
+            [
+                'nama' => $request->nama,
+                'nohp' => $request->nohp,
+                'email' => $request->email,
+                'username' => $request->username,
+            ]
+        );
+        //redirect to index
+        return redirect()->route('myprofil.index')->with(['status' => 'Profil Berhasil Diupdate!']);
+    }
+    public function updatepass(Request $request, User $user)
+    {
+        //Translate Bahasa Indonesia
+        $message = array(
+            'npassword.required' => 'Password harus diisi.',
+            'npassword.min' => 'Password minimal 8.',
+            'nrepassword.required' => 'Harap konfirmasi password.',
+            'nrepassword.same' => 'Password harus sama.',
+            'nrepassword.min' => 'Password minimal 8.',
+        );
+        //validate form
+        $this->validate($request, [
+            'npassword' => 'required|min:8',
+            'nrepassword' => 'required|same:npassword|min:8',
+        ], $message);
+        $user->update(
+            [
+                'password' => Hash::make($request->npassword),
+            ]
+        );
+        //redirect to index
+        return redirect()->route('myprofil.index')->with(['status' => 'Password Berhasil Diupdate!']);
+    }
+    public function updatefoto(Request $request, User $user)
+    {
+        //Translate Bahasa Indonesia
+        $message = array(
+            'foto.images' => 'File harus image.',
+            'foto.mimes' => 'Foto harus jpeg,png,jpg.',
+            'foto,max' => 'File maksimal 1MB.',
+        );
+        $this->validate($request, [
+            'foto' => 'image|mimes:jpeg,png,jpg|max:1024'
+        ], $message);
+        $img = $request->file('foto');
+        $img->storeAs('public/fotouser/', $img->hashName());
+        //delete old
+        Storage::delete('public/fotouser/' . $user->foto);
+        $user->update([
+            'foto' => $img->hashName(),
+        ]);
+        //redirect to index
+        return redirect()->route('myprofil.index')->with(['status' => 'Foto Berhasil Diupdate!']);
     }
 }

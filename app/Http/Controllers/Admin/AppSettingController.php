@@ -12,10 +12,10 @@ class AppSettingController extends Controller
 
     public function index()
     {
-        $menu = 'Setting';
+        $menu = 'app-Setting';
         $appsetting = AppSetting::first();
 
-        return view('admin.setting.data', compact('menu', 'appsetting'));
+        return view('admin.app-setting.data', compact('menu', 'appsetting'));
     }
     public function edit(AppSetting $appsetting)
     {

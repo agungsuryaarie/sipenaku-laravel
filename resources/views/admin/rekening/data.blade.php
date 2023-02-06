@@ -134,8 +134,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Simpan
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-sm" id="saveBtn" value="create">Simpan
                             </button>
                         </div>
                     </form>
@@ -241,7 +241,9 @@
 
             $("#saveBtn").click(function(e) {
                 e.preventDefault();
-                $(this).html("menyimpan..");
+                $(this).html(
+                    "<span class='spinner-border spinner-border-sm'></span><span class='visually-hidden'><i> menyimpan...</i></span>"
+                );
                 var rekening_id = $("#rekening_id").val();
                 if (rekening_id == '') {
                     $.ajax({

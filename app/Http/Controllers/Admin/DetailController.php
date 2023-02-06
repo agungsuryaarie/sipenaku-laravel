@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d883742732407eb9c217a8730b8435a0f2b6b057
 use App\Http\Controllers\Controller;
 use App\Models\Rekening;
 use App\Models\Detail;
@@ -50,7 +46,7 @@ class DetailController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs editDetail"><i class="fas fa-edit"></i></a>';
-                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteDetail"><i class="fas fa-trash"></i></a>';
+                    $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteDetail"><i class="fas fa-trash"></i></a><center>';
                     return $btn;
                 })
                 ->rawColumns(['nama_detail', 'harga', 'action'])
