@@ -81,7 +81,7 @@
 <li class="nav-item">
     <a href="{{ route('appsetting.index') }}"
         class="nav-link {{ request()->segment(1) == 'app-setting' ? 'active' : '' }}">
-        <i class="nav-icon fa fa-calendar"></i>
+        <i class="nav-icon fa fa-cogs"></i>
         <p>
             Setting Aplikasi
         </p>
