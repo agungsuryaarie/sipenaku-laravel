@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a href="{{ '/dashboard' }}" class="nav-link {{ request()->segment(1) == 'dashboard' ? 'active' : '' }}">
+    <a href="{{ route('dashboard.index') }}" class="nav-link {{ request()->segment(1) == 'dashboard' ? 'active' : '' }}">
         <i class="nav-icon fas fa-tachometer-alt"></i>
         <p>
             Dashboard
@@ -102,7 +102,7 @@
 <div class="user-panel mt-3">
 </div>
 <li class="nav-item">
-    <a href="#" class="nav-link">
+    <a href="{{ route('logout') }}" class="nav-link">
         <i class="nav-icon fas fa-sign-out-alt"></i>
         <p>
             Logout

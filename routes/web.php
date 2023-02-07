@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\SpjController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AppSettingController;
 use App\Http\Controllers\Admin\DetailController;
-
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +25,11 @@ use App\Http\Controllers\Admin\DetailController;
 |
 */
 
-// Route::get('/dashboard', function () {
-//     $menu = "Dashboard";
-//     return view('admin.dashboard', compact('menu'));
-// });
+Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::post('login/verify', [AuthController::class, 'verifikasi'])->name('login.verifikasi');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 // user
 Route::get('user', [UserController::class, 'index'])->name('user.index');
