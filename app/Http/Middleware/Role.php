@@ -20,7 +20,7 @@ class Role
         if (!Auth::check()) {
             return redirect('login');
         }
-        $user = Auth::users();
+        $user = Auth::user();
         if ($user->level == $rules) {
             return $next($request);
         }

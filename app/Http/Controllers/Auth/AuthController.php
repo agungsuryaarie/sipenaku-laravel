@@ -17,7 +17,7 @@ class AuthController extends Controller
                 return redirect()->intended('dashboard.index');
             }
         }
-
+        // dd($user);
         return view('auth.login');
     }
     public function verifikasi(Request $request)
@@ -37,7 +37,6 @@ class AuthController extends Controller
         if (Auth::attempt($kredensial)) {
             $request->session()->regenerate();
             $user = Auth::user();
-
             if ($user->level == 1) {
                 return redirect()->intended('dashboard.index');
             } elseif ($user->level == 2) {
