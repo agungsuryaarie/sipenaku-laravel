@@ -63,7 +63,9 @@ Route::delete('kegiatan/subkegiatan/{id}/destroy', [SubkegiatanController::class
 Route::get('kegiatan/rekening/{id}', [RekeningController::class, 'index'])->name('rekening.index');
 Route::post('kegiatan/rekening', [RekeningController::class, 'store'])->name('rekening.store');
 Route::post('kegiatan/rekening/{id}/update', [RekeningController::class, 'update'])->name('rekening.update');
+
 Route::get('kegiatan/rekening/{subkegiatan_id}/{id}/edit', [RekeningController::class, 'edit'])->name('rekening.edit');
+
 Route::delete('kegiatan/rekening/{id}/destroy', [RekeningController::class, 'destroy'])->name('rekening.destroy');
 
 // detail
@@ -80,11 +82,12 @@ Route::get('spj', [SpjController::class, 'index'])->name('spj.index');
 Route::get('spj/create', [SpjController::class, 'create'])->name('spj.create');
 
 //app-Setting
-// Route::get('app-setting', [AppSettingController::class, 'index'])->name('setting.index');
-// Route::get('app-setting/{id}/update', [AppSettingController::class, 'update'])->name('setting.update');
+Route::get('appsetting', [AppSettingController::class, 'index'])->name('appsetting.index');
+Route::get('appsetting/{appsetting}/edit', [AppSettingController::class, 'edit'])->name('appsetting.edit');
+Route::put('appsetting/{appsetting}/update', [AppSettingController::class, 'update'])->name('appsetting.update');
 
 // Visi & Misi
-Route::get('visi-misi', [ProfilController::class, 'index'])->name('visimisi.index');
+// Route::get('visi-misi', [ProfilController::class, 'index'])->name('visimisi.index');
 
 // Setting
 Route::get('setting', [SettingController::class, 'index'])->name('setting.index');

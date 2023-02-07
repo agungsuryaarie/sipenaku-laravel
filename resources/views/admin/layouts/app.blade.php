@@ -20,6 +20,11 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ url('dist/css/custom.css') }}">
+
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{ url('plugins/summernote/summernote-bs4.min.css') }}">
+
+
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ url('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ url('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
@@ -164,27 +169,6 @@
                                         <p>Kartu Kendali</p>
                                     </a>
                                 </li>
-
-                                <li class="nav-item {{ request()->segment(1) == 'visi-misi' ? 'menu-open' : '' }}">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            App Setting
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="{{ route('visimisi.index') }}"
-                                                class="nav-link {{ request()->segment(1) == 'visi-misi' ? 'active' : '' }}">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>
-                                                    Visi & Misi
-                                                </p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -202,6 +186,15 @@
                                 <i class="nav-icon fa fa-calendar"></i>
                                 <p>
                                     Schedule
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('appsetting.index') }}"
+                                class="nav-link {{ request()->segment(1) == 'app-setting' ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-calendar"></i>
+                                <p>
+                                    Setting Aplikasi
                                 </p>
                             </a>
                         </li>
@@ -223,9 +216,9 @@
             <div id="alerts"></div>
             @yield('content')
         </div>
-        @extends('admin.layouts.footer')
-    </div>
 
+    </div>
+    @extends('admin.layouts.footer')
 
     {{-- <div class="content-wrapper">
         <div id="alerts"></div>

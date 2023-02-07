@@ -23,40 +23,45 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
-                            <a href="javascript:void(0)" id="" class="btn btn-info btn-xs float-right">
-                                <i class="fas fa-plus-circle"></i> Edit</a>
-                        </div>
-                        <form>
+                        <!-- form start -->
+                        <form method="POST"
+                            action="{{ route('appsetting.update', $appsetting->id) }}"enctype="multipart/form-data">
+                            @csrf
+                            @method('put')
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Nama Aplikasi</label>
                                     <input type="text" class="form-control" name="nama_aplikasi"
-                                        value="{{ old('nama_aplikasi', $appsetting->nama_aplikasi) }}"
-                                        placeholder="Nama Aplikasi" disabled>
+                                        placeholder="Nama Aplikasi" autocomplete="off"
+                                        value="{{ old('nama_aplikasi', $appsetting->nama_aplikasi) }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Keterangan aplikasi</label>
-                                    <textarea class="form-control" rows="3" name="keterangan_aplikasi" value="{{ $appsetting->keterangan_aplikasi }}"></textarea>
+                                    <label>Keterangan Aplikasi</label>
+                                    <input type="text" class="form-control" name="keterangan_aplikasi"
+                                        placeholder="Keterangan Aplikasi" autocomplete="off"
+                                        value="{{ old('keterangan_aplikasi', $appsetting->keterangan_aplikasi) }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Visi Kabupaten Batu Bara</label>
-                                    <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                    <label>Visi Kab. Batu Bara</label>
+                                    <textarea name="visi" id="texteditor1" required>{{ old('visi', $appsetting->visi) }}</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Misi Kab. Batu Bara</label>
+                                    <textarea name="misi" id="texteditor2" required>{{ old('misi', $appsetting->misi) }}</textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Logo Website</label><br>
+                                    <img src="{{ url('storage/logo/' . $appsetting->gambar) }}"
+                                        style="width: 234px; height:53px;">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Misi Kabupaten Batu Bara</label>
-                                    <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">Image</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                    </div>
+                                    <label>Ganti Logo</label>
+                                    <input type="file" class="form-control" type="text" name="gambar">
                                 </div>
                             </div>
+
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
@@ -66,4 +71,29 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script>
+        $(function() {
+            // Summernote
+            $('#texteditor1').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+        $(function() {
+            // Summernote
+            $('#texteditor2').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
+    </script>
 @endsection

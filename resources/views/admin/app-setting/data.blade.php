@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Setting</h1>
+                    <h1 class="m-0">{{ $menu }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -16,67 +16,79 @@
                 </div>
             </div>
         </div>
-        </div>
+    </section>
+
+
+    <section class="content">
         <div class="container-fluid">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="float-right">
-                            <a href="#" class="btn btn-info btn-xs"data-toggle="modal" data-target="#modal-lg">
-                                <i class="fa fa-edit">
-                                </i>&nbsp;Setting</a>
-                        </div>
-                    </div>
                     <div class="card-body">
+                        <div class="card-header">
+                            <div class="float-right">
+                                <a href="{{ route('appsetting.edit', $appsetting->id) }}"
+                                    class="btn btn-warning btn-xs text-white">
+                                    <i class="fa fa-edit">
+                                    </i>Edit</a>
+                            </div>
+                        </div>
                         <div class=" table-responsive">
                             <table class="table">
                                 <tr>
-                                    <td rowspan="4" style="width:4%">
-                                        <span class="badge badge-primary btn-sm"
-                                            style="display:flex; align-items:center; margin:auto">GU
-                                            1</span>
-                                    </td>
                                     <td style="width:4%">
-                                        Tanggal Mulai
+                                        Nama Aplikasi
                                     </td>
                                     <td style="width:0%">
                                         :
                                     </td>
                                     <td style="width:20%">
-                                        26-01-2023
+                                        {{ $appsetting->nama_aplikasi }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Tanggal Selesai
+                                        Keterangan Aplikasi
                                     </td>
                                     <td>
                                         :
                                     </td>
                                     <td>
-                                        26-01-2023
+                                        {{ $appsetting->keterangan_aplikasi }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Jam Mulai
+                                        Visi kab. Batu Bara
                                     </td>
                                     <td>
                                         :
                                     </td>
                                     <td>
-                                        08.00
+                                        {!! $appsetting->visi !!}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Jam Selesai
+                                        Misi kab. Batu Bara
                                     </td>
                                     <td>
                                         :
                                     </td>
                                     <td>
-                                        16.00
+                                        {!! $appsetting->misi !!}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Logo Aplikasi
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        <img class="profile-user-img img-fluid"
+                                            src="{{ url('storage/logo/' . $appsetting->gambar) }}"
+                                            alt="User profile picture">
                                     </td>
                                 </tr>
                             </table>
@@ -85,67 +97,41 @@
                 </div>
             </div>
         </div>
+        {{-- <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary card-outline">
+                        <div class="card-body box-profile">
+                            <div class="text-center">
+                                <img class="profile-user-img img-fluid"
+                                    src="{{ url('storage/logo/' . $appsetting->gambar) }}" alt="User profile picture">
+                            </div>
 
+                            <h3 class="profile-username text-center mb-5"></h3>
 
-        <div class="modal fade" id="modal-lg">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Setting</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card">
-                            <form>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label>Pilih GU</label>
-                                        <select class="form-control select2" style="width: 100%;">
-                                            <option selected="selected">::Pilih::</option>
-                                            <option>Alaska</option>
-                                            <option>California</option>
-                                            <option>Delaware</option>
-                                            <option>Tennessee</option>
-                                            <option>Texas</option>
-                                            <option>Washington</option>
-                                        </select>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Tanggal Mulai</label>
-                                                <input type="date" class="form-control" id="" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Tanggal Selesai</label>
-                                                <input type="date" class="form-control" id="" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>jam Mulai</label>
-                                                <input type="time" class="form-control" id="" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Jam Selesai</label>
-                                                <input type="time" class="form-control" id="" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer float-right">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </form>
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <b>Nama Aplikasi</b> <a class="float-right">{{ $appsetting->nama_aplikasi }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Keterangan Aplikasi</b> <a
+                                        class="float-right">{{ $appsetting->keterangan_aplikasi }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Visi kab. Batu Bara</b> <a class="float-right">{{ $appsetting->visi }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Misi kab. Batu Bara</b> <a class="float-right">{{ $appsetting->misi }}</a>
+                                </li>
+                            </ul>
+
+                            <a href="{{ route('appsetting.edit', $appsetting->id) }}"
+                                class="btn btn-primary btn-sm float-right" title="Edit"><i class="fa fa-edit">
+                                </i></a>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div> --}}
     </section>
 @endsection

@@ -16,6 +16,10 @@
 <script src="{{ url('dist/js/adminlte.js') }}"></script>
 <!-- Select2 -->
 <script src="{{ url('plugins/select2/js/select2.full.min.js') }}"></script>
+
+<!-- Summernote -->
+<script src="{{ url('plugins/summernote/summernote-bs4.min.js') }}"></script>
+
 <!-- DataTables  & Plugins -->
 <script src="{{ url('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ url('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
