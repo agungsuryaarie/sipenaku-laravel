@@ -7,7 +7,7 @@
     <div class="wrapper">
         @include('admin.layouts.nav')
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="{{ '/' }}" class="brand-link">
+            <a href="{{ '/dashboard' }}" class="brand-link">
                 <img src="{{ url('dist/img/logo.png') }}" alt="Logo Batu Bara" class="brand-image">
                 <span class="brand-text font-weight-light"><b>SIPENAKU</b></span>
             </a>
@@ -25,7 +25,7 @@
                         <a href="{{ route('myprofil.index') }}" class="d-block">{{ Auth::user()->nama }}</a>
                         <small class="text-muted">
                             @if (Auth::user()->level == 1)
-                                Administrator
+                                administrator
                             @else
                                 user
                             @endif

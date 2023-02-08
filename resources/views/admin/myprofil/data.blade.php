@@ -22,16 +22,16 @@
                     <div class="col-md-4">
                         <div class="card card-widget widget-user">
                             <div class="widget-user-header bg-info">
-                                <h3 class="widget-user-username">{{ $user->nama }}</h3>
-                                <h5 class="widget-user-desc">{{ $user->bagian->nama_bagian }}</h5>
+                                <h3 class="widget-user-username">{{ Auth::user()->nama }}</h3>
+                                <h5 class="widget-user-desc">{{ Auth::user()->bagian->nama_bagian }}</h5>
                             </div>
                             <div class="widget-user-image">
-                                @if ($user->foto == null)
+                                @if (Auth::user()->foto == null)
                                     <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2"
-                                        alt="User Avatar">
+                                        alt="User Image">
                                 @else
-                                    <img src="{{ url('storage/fotouser/' . $user->foto) }}" class="img-circle elevation-2"
-                                        alt="User Avatar">
+                                    <img src="{{ url('storage/fotouser/' . Auth::user()->foto) }}"
+                                        class="img-circle elevation-2" alt="User Image">
                                 @endif
                             </div>
                             <div class="card-footer">

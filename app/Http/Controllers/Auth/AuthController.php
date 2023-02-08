@@ -10,9 +10,6 @@ class AuthController extends Controller
 {
     public function index()
     {
-        if (Auth::user()) {
-            return redirect()->intended('dashboard');
-        }
         return view('auth.login');
     }
     public function login(Request $request)

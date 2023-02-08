@@ -15,18 +15,18 @@ class Role
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, $level)
     {
-
-        if (Auth::check() && Auth::user()->level == 1 || Auth::user()->level == 2) {
+        if (Auth::check() && Auth::user()->level == $level) {
             return $next($request);
         }
+        return redirect('login')->with('Maaf, kamu tidak memiliki hak akses!');
         // Cara 1
         // if (!Auth::check()) {
         //     return redirect('login');
         // }
         // $user = Auth::user();
-        // if ($user->level == 1 || $user->level == 2) {
+        // if ($user->level == $level) {
         //     return $next($request);
         // }
         // Cara 2
@@ -34,9 +34,8 @@ class Role
         //     return $next($request);
         // }
         // Cara 3
-        // if (in_array($request->user()->level, $levels)) {
+        // if (in_array($request->user()->level, $level)) {
         //     return $next($request);
         // }
-        return redirect('login')->with('Maaf, kamu tidak memiliki hak akses!');
     }
 }
