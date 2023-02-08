@@ -10,26 +10,22 @@ class AuthController extends Controller
 {
     public function index()
     {
-        if ($user = Auth::user()) {
-            if ($user->level == 1) {
-                return redirect()->intended('dashboard.index');
-            } elseif ($user->level == 2) {
-                return redirect()->intended('dashboard.index');
-            }
+        if (Auth::user()) {
+            return redirect()->intended('dashboard');
         }
-        // dd($user);
         return view('auth.login');
     }
-    public function verifikasi(Request $request)
+    public function login(Request $request)
     {
         //validate form
         $kredensial =  $request->validate(
             [
-                'username' => 'required',
+                'username' => 'required|min:8',
                 'password' => 'required',
             ],
             [
                 'username.required' => 'Username tidak boleh kosong.',
+                'username.min' => 'Username minimal 8 karakter.',
                 'password.required' => 'Password tidak boleh kosong.',
             ]
         );
@@ -37,12 +33,10 @@ class AuthController extends Controller
         if (Auth::attempt($kredensial)) {
             $request->session()->regenerate();
             $user = Auth::user();
-            if ($user->level == 1) {
-                return redirect()->intended('dashboard.index');
-            } elseif ($user->level == 2) {
-                return redirect()->intended('dashboard.index');
+            if ($user) {
+                return redirect()->intended('dashboard');
             }
-            return redirect()->intended('dashboard.index');
+            return redirect()->intended('login');
         }
         return back()->withErrors(['username' => 'Maaf username dan password salah!'])->onlyInput('username');
     }
@@ -55,6 +49,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('login');
     }
 }

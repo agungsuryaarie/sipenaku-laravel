@@ -25,11 +25,14 @@ use App\Http\Controllers\Auth\AuthController;
 |
 */
 
-Route::get('login', [AuthController::class, 'index'])->name('login');
-Route::post('login/verify', [AuthController::class, 'verifikasi'])->name('login.verifikasi');
-Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::controller(AuthController::class)->group(function () {
+    Route::get('login', 'index')->name('login');
+    Route::post('login', 'login');
+    Route::get('logout', 'logout')->name('logout');
+});
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['auth', 'checkUser']);
 
 // user
 Route::get('user', [UserController::class, 'index'])->name('user.index');

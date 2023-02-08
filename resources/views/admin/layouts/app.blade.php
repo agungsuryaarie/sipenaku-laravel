@@ -13,17 +13,21 @@
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-1 d-flex">
                     <div class="image">
-                        {{-- @if ($user->foto == null) --}}
-                        <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2" alt="User Image">
-                        {{-- @else
-                            <img src="{{ url('storage/fotouser/' . $user->foto) }}" class="img-circle elevation-2"
-                                alt="User Image">
-                        @endif --}}
+                        @if (Auth::user()->foto == null)
+                            <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2" alt="User Image">
+                        @else
+                            <img src="{{ url('storage/fotouser/' . Auth::user()->foto) }}"
+                                class="img-circle elevation-2" alt="User Image">
+                        @endif
                     </div>
                     <div class="info">
-                        <a href="{{ route('myprofil.index') }}" class="d-block">Administrator</a>
+                        <a href="{{ route('myprofil.index') }}" class="d-block">{{ Auth::user()->nama }}</a>
                         <small class="text-muted">
-                            Administrator
+                            @if (Auth::user()->level == 1)
+                                Administrator
+                            @else
+                                user
+                            @endif
                         </small>
                     </div>
                 </div>

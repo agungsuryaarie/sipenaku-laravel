@@ -8,13 +8,13 @@
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-                <form action="{{ route('login.verifikasi') }}" method="post">
+                <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <div class="input-group">
                             <input type="text" name="username"
                                 class="form-control @error('username') is-invalid @enderror" placeholder="Username"
-                                autocomplete="off" autofocus value="{{ old('username') }}">
+                                autofocus value="{{ old('username') }}" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-user"></span>

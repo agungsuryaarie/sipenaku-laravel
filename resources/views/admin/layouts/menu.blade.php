@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a href="{{ route('dashboard.index') }}" class="nav-link {{ request()->segment(1) == 'dashboard' ? 'active' : '' }}">
+    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->segment(1) == 'dashboard' ? 'active' : '' }}">
         <i class="nav-icon fas fa-tachometer-alt"></i>
         <p>
             Dashboard
