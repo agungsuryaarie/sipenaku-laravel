@@ -60,27 +60,6 @@
                 <p>Kartu Kendali</p>
             </a>
         </li>
-
-        <li class="nav-item {{ request()->segment(1) == 'visi-misi' ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>
-                    App Setting
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{ route('visimisi.index') }}"
-                        class="nav-link {{ request()->segment(1) == 'visi-misi' ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>
-                            Visi & Misi
-                        </p>
-                    </a>
-                </li>
-            </ul>
-        </li>
     </ul>
 </li>
 <li class="nav-item">
@@ -96,6 +75,15 @@
         <i class="nav-icon fa fa-calendar"></i>
         <p>
             Schedule
+        </p>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ route('appsetting.index') }}"
+        class="nav-link {{ request()->segment(1) == 'app-setting' ? 'active' : '' }}">
+        <i class="nav-icon fa fa-cogs"></i>
+        <p>
+            Setting Aplikasi
         </p>
     </a>
 </li>

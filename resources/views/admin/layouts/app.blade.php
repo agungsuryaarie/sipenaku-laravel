@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 @include('admin.layouts.head')
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -50,6 +51,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
+
                         @include('admin.layouts.menu')
                     </ul>
                 </nav>
@@ -59,5 +61,5 @@
             <div id="alerts"></div>
             @yield('content')
         </div>
-        @extends('admin.layouts.footer')
     </div>
+    @include('admin.layouts.footer')
