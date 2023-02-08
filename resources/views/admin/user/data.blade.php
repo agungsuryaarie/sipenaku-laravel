@@ -34,6 +34,7 @@
                                         <th>NIP</th>
                                         <th>Nama</th>
                                         <th>Username</th>
+                                        <th class="text-center">Foto</th>
                                         <th class="text-center" style="width: 10%">Action</th>
                                     </tr>
                                 </thead>
@@ -189,6 +190,10 @@
                     {
                         data: 'username',
                         name: 'username'
+                    },
+                    {
+                        data: 'foto',
+                        name: 'foto'
                     },
                     {
                         data: 'action',

@@ -32,6 +32,10 @@ class UserController extends Controller
                 ->addColumn('bagian', function ($data) {
                     return $data->bagian->nama_bagian;
                 })
+                ->addColumn('foto', function ($data) {
+                    $foto = '<center><img src="' . url("storage/fotouser/" . $data->foto) . '" width="40px" class="img rounded"><center>';
+                    return $foto;
+                })
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-xs editUser"><i class="fas fa-edit"></i></a>';
                     $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteUser"><i class="fas fa-trash"></i></a><center>';
