@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Bagian;
 use DataTables;
@@ -152,7 +153,8 @@ class UserController extends Controller
     public function myprofil(Request $request)
     {
         $menu = 'Profil Saya';
-        $user = User::first();
+        $id = Auth::user()->id;
+        $user = User::where('id', $id)->first();
         return view('admin.myprofil.data', compact('user', 'menu'));
     }
     public function updateprofil(Request $request, User $user)

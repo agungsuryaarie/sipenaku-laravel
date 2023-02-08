@@ -22,7 +22,8 @@
                         @endif
                     </div>
                     <div class="info">
-                        <a href="{{ route('myprofil.index') }}" class="d-block">{{ Auth::user()->nama }}</a>
+                        <a href="{{ route('myprofil.index', Auth::user()->id) }}"
+                            class="d-block">{{ Auth::user()->nama }}</a>
                         <small class="text-muted">
                             @if (Auth::user()->level == 1)
                                 administrator

@@ -32,17 +32,17 @@ Route::controller(AuthController::class)->group(function () {
 });
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // my profil
+    Route::get('my-profil', [UserController::class, 'myprofil'])->name('myprofil.index');
+    Route::put('my-profil/{user}/update', [UserController::class, 'updateprofil'])->name('myprofil.update');
+    Route::put('my-profil/{user}/update-password', [UserController::class, 'updatepass'])->name('myprofil.update.password');
+    Route::put('my-profil/{user}/update-foto', [UserController::class, 'updatefoto'])->name('myprofil.update.foto');
     Route::group(['middleware' => ['checkUser:1']], function () {
         // user
         Route::get('user', [UserController::class, 'index'])->name('user.index');
         Route::post('user', [UserController::class, 'store'])->name('user.store');
         Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
         Route::delete('user/{id}/destroy', [UserController::class, 'destroy'])->name('user.destroy');
-        // my profil
-        Route::get('my-profil', [UserController::class, 'myprofil'])->name('myprofil.index');
-        Route::put('my-profil/{user}/update', [UserController::class, 'updateprofil'])->name('myprofil.update');
-        Route::put('my-profil/{user}/update-password', [UserController::class, 'updatepass'])->name('myprofil.update.password');
-        Route::put('my-profil/{user}/update-foto', [UserController::class, 'updatefoto'])->name('myprofil.update.foto');
         // bagian
         Route::resource('bagian', BagianController::class);
         // kegiatan
@@ -81,11 +81,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('setting/{set}/update-schedule', [SettingController::class, 'update'])->name('setting.update');
     });
     Route::group(['middleware' => ['checkUser:2']], function () {
-        // my profil
-        Route::get('my-profil', [UserController::class, 'myprofil'])->name('myprofil.index');
-        Route::put('my-profil/{user}/update', [UserController::class, 'updateprofil'])->name('myprofil.update');
-        Route::put('my-profil/{user}/update-password', [UserController::class, 'updatepass'])->name('myprofil.update.password');
-        Route::put('my-profil/{user}/update-foto', [UserController::class, 'updatefoto'])->name('myprofil.update.foto');
         // SPJ
         Route::get('spj', [SpjController::class, 'index'])->name('spj.index');
         Route::get('spj/create', [SpjController::class, 'create'])->name('spj.create');
