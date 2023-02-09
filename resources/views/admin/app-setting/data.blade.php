@@ -110,7 +110,7 @@
                     </div>
                     <div class="card-body text-center">
                         <h6>Opss, profil aplikasi belum diatur . . .</h6><br>
-                        <img class="mb-0" src="{{ url('dist/img/ils/not-found-data.jpg') }}" width="400px">
+                        <img class="mb-5 mt-5" src="{{ url('dist/img/ils/set.png') }}" width="250px">
                     </div>
                 </div>
             </div>
