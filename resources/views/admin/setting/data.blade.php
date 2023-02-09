@@ -154,7 +154,7 @@
                         </div>
                     </div>
                     <div class="card-body text-center">
-                        <h6>Opss, Jadwal belum diatur . . .</h6><br>
+                        <h6>Opss, jadwal belum diatur . . .</h6><br>
                         <img class="mb-0" src="{{ url('dist/img/ils/not-found-data.jpg') }}" width="400px">
                     </div>
                 </div>
