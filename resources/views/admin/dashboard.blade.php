@@ -4,7 +4,8 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
+                    <h1 class="m-0">Dashboard {{ Auth::user()->bagian->nama_bagian }}
+                    </h1>
                 </div>
             </div>
         </div>
@@ -12,13 +13,13 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                @foreach ($kegiatan as $keg)
+            @if (Auth::user()->level == 1)
+                <div class="row">
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h4>{{ 'Rp. ' . number_format($keg->pagu, 0, ',', '.') }}</h4>
-                                <p>{{ $keg->bagian->nama_bagian }}</p>
+                                <h3>0</h3>
+                                <p>Bagian</p>
                             </div>
                             <div class="icon">
                                 <i class="fa fa-building"></i>
@@ -27,64 +28,84 @@
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                @endforeach
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-6">
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                            <h3>0</h3>
-                            <p>Bagian</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-building"></i>
-                        </div>
-                        <a href="{{ 'bagian' }}" class="small-box-footer">Selengkapnya <i
-                                class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>0</h3>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>0</h3>
 
-                            <p>Account User</p>
+                                <p>Account User</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-user-check"></i>
+                            </div>
+                            <a href="{{ 'user' }}" class="small-box-footer">Selengkapnya <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                        <div class="icon">
-                            <i class="fa fa-user-check"></i>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>0</h3>
+                                <p>Kegiatan</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-list"></i>
+                            </div>
+                            <a href="{{ 'kegiatan' }}" class="small-box-footer">Selengkapnya <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                        <a href="{{ 'user' }}" class="small-box-footer">Selengkapnya <i
-                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>0</h3>
+                                <p>Sub Kegiatan</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-list"></i>
+                            </div>
+                            <a href="{{ 'sub-kegiatan' }}" class="small-box-footer">Selengkapnya <i
+                                    class="fas fa-arrow-circle-right"></i></a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-6">
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>0</h3>
-                            <p>Kegiatan</p>
+            @endif
+    </section>
+    @if (Auth::user()->level == 2)
+        <section class="content">
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <div class="info-box p-3">
+                        <div class="image">
+                            @if (Auth::user()->foto == null)
+                                <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2">
+                            @else
+                                <img src="{{ url('storage/fotouser/' . Auth::user()->foto) }}"
+                                    class="img-circle elevation-2" width="100px">
+                            @endif
                         </div>
-                        <div class="icon">
-                            <i class="fa fa-list"></i>
+                        <div class="info-box-content">
+                            <span class="info-box-number">{{ Auth::user()->bagian->nama_bagian }}</span>
+                            <span class="info-box-number">
+                                @if (Auth::user()->level == 2)
+                                    @foreach ($kegiatan as $keg)
+                                        <p>Anggaran :&nbsp;{{ 'Rp. ' . number_format($keg->pagu, 0, ',', '.') }}</h4>
+                                    @endforeach
+                                @endif
+                            </span>
                         </div>
-                        <a href="{{ 'kegiatan' }}" class="small-box-footer">Selengkapnya <i
-                                class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>0</h3>
-                            <p>Sub Kegiatan</p>
+                        <div class="float-right d-none d-sm-inline-block">
+                            <a href="#" class="btn btn-success btn-round btn-xs mr-2 mb-2"><i
+                                    class="fa fa-wallet"></i>&nbsp;&nbsp;GU 1 mulai Jumat, 06 Januari 2023 | Pukul :
+                                08:00:00 - Selasa, 28 Februari 2023 | Pukul : 23:59:00</a>
+                            <a href="#" class="btn btn-danger btn-round btn-xs mb-2"><i
+                                    class="fas fa-clock"></i>&nbsp;&nbsp;
+                                <span id="berakhir">Berakhir dalam 19 hari 6 jam
+                                    25 menit 34 detik lagi . . .</span></a>
                         </div>
-                        <div class="icon">
-                            <i class="fa fa-list"></i>
-                        </div>
-                        <a href="{{ 'sub-kegiatan' }}" class="small-box-footer">Selengkapnya <i
-                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
-    </section>
+        </section>
+    @endif
 @endsection
