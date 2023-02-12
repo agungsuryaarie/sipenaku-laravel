@@ -28,29 +28,26 @@
                     <div class="col-lg-4 pt-4 pt-lg-0 order-2 order-lg-2 content" data-aos="fade-right">
                         <h3 class="mb-4">Visi Pemerintah Kab.Batu Bara</h3>
                         <ul>
-                            <li>Ullamco laboris nisi ut aliquip ex ea commodoconsequat.</li>
-                            <li>Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                            <li>Ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda
-                                mastiro dolore eu fugiat nulla pariatur.</li>
+                            <li>Menjadikan masyarakat Kabupaten Batub Bara Masyarakat Industri yang Sejahtera,
+                                Mandiri dan Berbudaya</li>
                         </ul>
                     </div>
                     <div class="col-lg-4 pt-4 pt-lg-0 order-2 order-lg-2 content" data-aos="fade-right">
                         <h3 class="mb-4">Misi Pemerintah Kab.Batu Bara</h3>
                         <ul>
-                            <li>Ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat.</li>
-                            <li>Duis aute irure dolor in reprehenderit in voluptate
-                                velit.</li>
-                            <li>Ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda
-                                mastiro dolore eu fugiat nulla pariatur.</li>
+                            <li>Meningkatkan Pelayanan Aparatur Pemerintah atas Pelayanan Publik dan Investasi
+                            </li>
+                            <li> Meningkatkan Jumlah dan Kualitas Infrastruktur dan Sarana Prasarana pendukung pertumbuhan
+                                Industri dan Perekonomian Masyarakat</li>
+                            <li>Mewujudkan Masyarakat yang Produktif, Inovatif dan Berbu. . .
+                            </li>
                         </ul>
 
                     </div>
                 </div>
                 <div class="btn-more d-flex align-items-center justify-content-center">
-                    <a href="#" class="read-more">Read More <i class="bi bi-long-arrow-right"></i></a>
+                    <a href="https://batubarakab.go.id/pages/visi-dan-misi" class="read-more">Read More <i
+                            class="bi bi-long-arrow-right"></i></a>
                 </div>
             </div>
         </section>
