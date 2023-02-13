@@ -103,7 +103,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-right">
-                            <a href="#" class="btn btn-info btn-xs"data-toggle="modal" data-target="#modal-lg">
+                            <a href="{{ route('appsetting.create') }}" class="btn btn-info btn-xs">
                                 <i class="fa fa-plus-circle">
                                 </i></a>
                         </div>

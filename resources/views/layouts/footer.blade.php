@@ -7,9 +7,7 @@
                 <div class="col-lg-4 col-md-6 footer-contact">
                     <img src="{{ url('front/img/logo-sipenaku-white.png') }}"class="img-fluid mb-3" style="width:50%"
                         alt="">
-                    <p>Sistem Informasi Penataan Keuangan (SIPENAKU) dikembangkan dari basis SIMDA untuk
-                        mempermudah
-                        manajemen keuangan daerah pada Pemerintah Kabupaten Batu Bara.</p>
+                    <p>{{ old('keterangan_aplikasi', $appsetting->keterangan_aplikasi) }}</p>
                 </div>
 
                 <div class="col-lg-4 col-md-6 footer-newsletter">

@@ -73,6 +73,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('spj/create', [SpjController::class, 'create'])->name('spj.create');
         //app-Setting
         Route::get('appsetting', [AppSettingController::class, 'index'])->name('appsetting.index');
+        Route::get('appsetting/create', [AppSettingController::class, 'create'])->name('appsetting.create');
+        Route::post('appsetting', [AppSettingController::class, 'store'])->name('appsetting.store');
         Route::get('appsetting/{appsetting}/edit', [AppSettingController::class, 'edit'])->name('appsetting.edit');
         Route::put('appsetting/{appsetting}/update', [AppSettingController::class, 'update'])->name('appsetting.update');
         // Setting

@@ -19,6 +19,51 @@ class AppSettingController extends Controller
         return view('admin.app-setting.data', compact('menu', 'appsetting'));
     }
 
+    public function create(Request $request)
+
+    {
+        $menu = 'Tambah Data';
+        return view('admin.app-setting.create', compact('menu'));
+    }
+
+    public function store(Request $request, AppSetting $appsetting)
+    {
+
+        //Translate Bahasa Indonesia
+        $message = array(
+            'foto.images' => 'File harus image.',
+            'foto.mimes' => 'Foto harus jpeg,png,jpg.',
+            'foto,max' => 'File maksimal 1MB.',
+        );
+        //validate form
+        $this->validate($request, [
+            'nama_aplikasi' => 'required|string|max:255',
+            'keterangan_aplikasi' => 'required',
+            'visi' => 'required',
+            'misi' => 'required',
+            'gambar' => 'image|mimes:jpeg,png,jpg|max:1024',
+        ], $message);
+        //check if image & logo is uploaded
+        if ($request->hasFile('gambar')) {
+            // upload new image and new logo
+            $img = $request->file('gambar');
+            $img->storeAs('public/logo', $img->hashName());
+            // delete old image and old logo
+            Storage::delete('public/logo/' . $appsetting->gambar);
+            // update sambutan with img & logo
+            $appsetting->create([
+                'nama_aplikasi' => $request->nama_aplikasi,
+                'keterangan_aplikasi' => $request->keterangan_aplikasi,
+                'visi' => $request->visi,
+                'misi' => $request->misi,
+                'gambar' => $img->hashName(),
+            ]);
+        }
+
+        //redirect to index
+        return redirect()->route('appsetting.index')->with(['status' => 'Data Berhasil Diubah!']);
+    }
+
     public function edit(Request $request, AppSetting $appsetting)
     {
         $menu = 'Edit Setting Aplikasi';
