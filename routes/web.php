@@ -68,9 +68,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('kegiatan/detail/{id}/destroy', [DetailController::class, 'destroy'])->name('detail.destroy');
         // Kartu Kendali
         Route::get('kartu-kendali', [KartuController::class, 'index'])->name('kartukendali.index');
-        // SPJ
-        Route::get('spj', [SpjController::class, 'index'])->name('spj.index');
-        Route::get('spj/create', [SpjController::class, 'create'])->name('spj.create');
+        // SPJ Admin Verifikasi
+        Route::get('data-spj', [SpjController::class, 'indexadm'])->name('spj.indexadm');
+        Route::get('data-spj/verifikasi', [SpjController::class, 'verifikasi'])->name('spj.verifikasi');
         //app-Setting
         Route::get('appsetting', [AppSettingController::class, 'index'])->name('appsetting.index');
         Route::get('appsetting/create', [AppSettingController::class, 'create'])->name('appsetting.create');

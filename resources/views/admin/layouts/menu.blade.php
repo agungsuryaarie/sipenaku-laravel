@@ -84,14 +84,26 @@
         </a>
     </li>
 @endif
-<li class="nav-item">
-    <a href="{{ route('spj.index') }}" class="nav-link {{ request()->segment(1) == 'spj' ? 'active' : '' }}">
-        <i class="nav-icon fas fa-file"></i>
-        <p>
-            SPJ
-        </p>
-    </a>
-</li>
+@if (Auth::user()->level == 1)
+    <li class="nav-item">
+        <a href="{{ route('spj.indexadm') }}"
+            class="nav-link {{ request()->segment(1) == 'data-spj' ? 'active' : '' }}">
+            <i class="nav-icon fas fa-file"></i>
+            <p>
+                SPJ
+            </p>
+        </a>
+    </li>
+@else
+    <li class="nav-item">
+        <a href="{{ route('spj.index') }}" class="nav-link {{ request()->segment(1) == 'spj' ? 'active' : '' }}">
+            <i class="nav-icon fas fa-file"></i>
+            <p>
+                SPJ
+            </p>
+        </a>
+    </li>
+@endif
 <div class="user-panel mt-3">
 </div>
 <li class="nav-item">

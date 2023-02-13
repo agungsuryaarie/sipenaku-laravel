@@ -12,17 +12,18 @@ class SpjController extends Controller
 
     public function index(Request $request)
     {
-        $menu = 'Profil'; {
-        }
-
+        $menu = 'SPJ';
         return view('admin.spj.data', compact('menu'));
+    }
+    public function indexadm(Request $request)
+    {
+        $menu = 'Data SPJ';
+        return view('admin.spj.data-admin', compact('menu'));
     }
 
     public function create()
     {
-        $menu = 'Profil'; {
-        }
-
+        $menu = 'Tambah SPJ';
         return view('admin.spj.create', compact('menu'));
     }
 }
