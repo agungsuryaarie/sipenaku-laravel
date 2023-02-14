@@ -84,14 +84,19 @@ class AppSettingController extends Controller
     {
         //Translate Bahasa Indonesia
         $message = array(
-            'foto.images' => 'File harus image.',
-            'foto.mimes' => 'Foto harus jpeg,png,jpg.',
-            'foto,max' => 'File maksimal 1MB.',
+            'nama_aplikasi.required' => 'Nama Aplikasi harus diisi.',
+            'keterangan_aplikasi.required' => 'Keterangan Aplikasi harus diisi.',
+            'visi.required' => 'Visi harus diisi.',
+            'misi.required' => 'Misi harus diisi.',
+            'gambar.required' => 'Gambar harus diupload.',
+            'gambar.images' => 'File harus image.',
+            'gambar.mimes' => 'Foto harus jpeg,png,jpg.',
+            'gambar.max' => 'File maksimal 1MB.',
         );
         //validate form
         $this->validate($request, [
             'nama_aplikasi' => 'required|string|max:255',
-            'keterangan_aplikasi' => 'required',
+            'keterangan_aplikasi' => 'required|max:255',
             'visi' => 'required',
             'misi' => 'required',
             'gambar' => 'image|mimes:jpeg,png,jpg|max:1024',
