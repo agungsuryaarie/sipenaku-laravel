@@ -5,8 +5,11 @@
         <div class="container-footer">
             <div class="row-footer">
                 <div class="col-lg-4 col-md-6 footer-contact">
-                    <img src="{{ url('front/img/logo-sipenaku-white.png') }}"class="img-fluid mb-3" style="width:50%"
-                        alt="">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <img src="{{ url('front/img/logo-sipenaku-white.png') }}"class="img-fluid mb-3" style="width:45%"
+                            alt="">
+                        <b> V.2.0</b>
+                    </div>
                     <p>{{ old('keterangan_aplikasi', $appsetting->keterangan_aplikasi) }}</p>
                 </div>
 

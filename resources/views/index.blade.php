@@ -6,7 +6,7 @@
         <div class="container-fluid" data-aos="fade-up">
             <div class="row justify-content-center">
                 <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                    <h1>{{ old('nama_aplikasi', $appsetting->nama_aplikasi) }}</h1>
+                    <h1>{{ $appsetting->nama_aplikasi }}</h1>
                     <h2></h2>
                     <div><a href="{{ '/login' }}" class="btn-get-started scrollto">Get Started</a></div>
                 </div>
@@ -26,28 +26,26 @@
                         <img src="{{ url('front/img/logobb.png') }}" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-4 pt-4 pt-lg-0 order-2 order-lg-2 content" data-aos="fade-right">
-                        <h3 class="mb-4">Visi Pemerintah Kab.Batu Bara</h3>
+                        <h3 class="mb-4">VISI PEMERINTAH KAB. BATU BARA</h3>
                         <ul>
-                            <li>Menjadikan masyarakat Kabupaten Batub Bara Masyarakat Industri yang Sejahtera,
-                                Mandiri dan Berbudaya</li>
+                            @foreach ($visi as $v)
+                                {!! $v->visi !!}
+                            @endforeach
                         </ul>
                     </div>
                     <div class="col-lg-4 pt-4 pt-lg-0 order-2 order-lg-2 content" data-aos="fade-right">
-                        <h3 class="mb-4">Misi Pemerintah Kab.Batu Bara</h3>
+                        <h3 class="mb-4">MISI PEMERINTAH KAB. BATU BARA</h3>
                         <ul>
-                            <li>Meningkatkan Pelayanan Aparatur Pemerintah atas Pelayanan Publik dan Investasi
-                            </li>
-                            <li> Meningkatkan Jumlah dan Kualitas Infrastruktur dan Sarana Prasarana pendukung pertumbuhan
-                                Industri dan Perekonomian Masyarakat</li>
-                            <li>Mewujudkan Masyarakat yang Produktif, Inovatif dan Berbu. . .
-                            </li>
+                            @foreach ($misi as $m)
+                                {!! $m->misi !!}
+                            @endforeach
                         </ul>
 
                     </div>
                 </div>
                 <div class="btn-more d-flex align-items-center justify-content-center">
-                    <a href="https://batubarakab.go.id/pages/visi-dan-misi" class="read-more">Read More <i
-                            class="bi bi-long-arrow-right"></i></a>
+                    <a href="https://batubarakab.go.id/pages/visi-dan-misi" class="read-more">Selengkapnya
+                        <i class="bi bi-long-arrow-right"></i></a>
                 </div>
             </div>
         </section>
@@ -65,7 +63,7 @@
                 <div class="cardpokersize">
                     <img src="{{ url('front/img/undraw_investing_re_bov7.svg') }}">
                     <h3>Perencanaan Tahunan</a></h3>
-                    <p>nput data perencanaan tahunan yang dilakukan oleh fungsi perencana pada Pemerintah Daerah</p>
+                    <p>Input data perencanaan tahunan yang dilakukan oleh fungsi perencana pada Pemerintah Daerah</p>
                 </div>
                 <div class="cardpokersize">
                     <img src="{{ url('front/img/undraw_printing_invoices_-5-r4r.svg') }}">
