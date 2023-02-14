@@ -65,24 +65,6 @@
             </li>
         </ul>
     </li>
-    <li class="nav-item">
-        <a href="{{ route('setting.index') }}"
-            class="nav-link {{ request()->segment(1) == 'setting' ? 'active' : '' }}">
-            <i class="nav-icon fa fa-calendar"></i>
-            <p>
-                Schedule
-            </p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{ route('appsetting.index') }}"
-            class="nav-link {{ request()->segment(1) == 'app-setting' ? 'active' : '' }}">
-            <i class="nav-icon fa fa-cogs"></i>
-            <p>
-                Setting Aplikasi
-            </p>
-        </a>
-    </li>
 @endif
 @if (Auth::user()->level == 1)
     <li class="nav-item">
@@ -100,6 +82,26 @@
             <i class="nav-icon fas fa-file"></i>
             <p>
                 SPJ
+            </p>
+        </a>
+    </li>
+@endif
+@if (Auth::user()->level == 1)
+    <li class="nav-item">
+        <a href="{{ route('setting.index') }}"
+            class="nav-link {{ request()->segment(1) == 'setting' ? 'active' : '' }}">
+            <i class="nav-icon fa fa-calendar"></i>
+            <p>
+                Schedule
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('appsetting.index') }}"
+            class="nav-link {{ request()->segment(1) == 'app-setting' ? 'active' : '' }}">
+            <i class="nav-icon fa fa-cogs"></i>
+            <p>
+                Setting Aplikasi
             </p>
         </a>
     </li>

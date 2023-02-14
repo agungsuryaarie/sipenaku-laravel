@@ -17,7 +17,7 @@ class SettingController extends Controller
      */
     public function index(Request $request)
     {
-        $menu = 'Setting Jadwal';
+        $menu = 'Schedule';
         $setting = Setting::first();
         return view('admin.setting.data', compact('setting', 'menu'));
     }

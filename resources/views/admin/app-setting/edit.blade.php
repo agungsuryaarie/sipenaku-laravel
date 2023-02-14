@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ '/dashboard' }}">Dashboard</a></li>
                         <li class="breadcrumb-item active">{{ $menu }}</li>
                     </ol>
                 </div>
@@ -42,12 +42,12 @@
                                         value="{{ old('keterangan_aplikasi', $appsetting->keterangan_aplikasi) }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Visi Kab. Batu Bara</label>
+                                    <label>Visi</label>
                                     <textarea name="visi" id="texteditor1" required>{{ old('visi', $appsetting->visi) }}</textarea>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Misi Kab. Batu Bara</label>
+                                    <label>Misi</label>
                                     <textarea name="misi" id="texteditor2" required>{{ old('misi', $appsetting->misi) }}</textarea>
                                 </div>
 

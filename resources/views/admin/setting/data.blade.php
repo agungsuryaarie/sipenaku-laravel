@@ -9,78 +9,91 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ '/' }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Setting</li>
+                        <li class="breadcrumb-item active">{{ $menu }}</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
     @if ($setting != null)
-        <div class="container-fluid">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="float-right">
-                            <a href="#" class="btn btn-warning btn-xs text-white" data-toggle="modal"
-                                data-target="#modal-lg{{ $setting->id }}">
-                                <i class="fa fa-edit">
-                                </i></a>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-right">
+                                <a href="#" class="btn btn-warning btn-xs text-white" data-toggle="modal"
+                                    data-target="#modal-lg{{ $setting->id }}">
+                                    <i class="fa fa-edit">
+                                    </i></a>
+                            </div>
                         </div>
-                    </div>
-                    <div class=" table-responsive table-hover">
-                        <table class="table">
-                            <tr>
-                                <td rowspan="4" style="width:4%">
-                                    <span class="badge badge-primary btn-sm"> {{ $setting->judul }}</span>
-                                </td>
-                                <td style="width:4%">
-                                    Tanggal Mulai
-                                </td>
-                                <td style="width:0%">
-                                    :
-                                </td>
-                                <td style="width:20%">
-                                    {{ \Carbon\Carbon::parse($setting->tgl_mulai)->translatedFormat('l, d F Y') }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Tanggal Selesai
-                                </td>
-                                <td>
-                                    :
-                                </td>
-                                <td>
-                                    {{ \Carbon\Carbon::parse($setting->tgl_selesai)->translatedFormat('l, d F Y') }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Jam Mulai
-                                </td>
-                                <td>
-                                    :
-                                </td>
-                                <td>
-                                    {{ $setting->jam_mulai }} WIB
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Jam Selesai
-                                </td>
-                                <td>
-                                    :
-                                </td>
-                                <td>
-                                    {{ $setting->jam_selesai }} WIB
-                                </td>
-                            </tr>
-                        </table>
+                        <div class=" table-responsive table-hover">
+                            <table class="table">
+                                <tr>
+                                    <td rowspan="4" style="width:4%">
+                                        <span class="badge badge-primary btn-sm"> {{ $setting->judul }}</span>
+                                        {{-- Validasi GU aktif / nonaktif --}}
+                                        @if (date('Y-m-d') > $setting->tgl_mulai ||
+                                                (date('Y-m-d') == $setting->tgl_mulai && date('Y-m-d') < $setting->tgl_selesai) ||
+                                                (date('Y-m-d') == $setting->tgl_selesai &&
+                                                    date('H:i:s') > $setting->jam_mulai &&
+                                                    date('H:i:s') < $setting->jam_selesai))
+                                            <span class="badge badge-success btn-sm">aktif</span>
+                                        @else
+                                            <span class="badge badge-danger btn-sm">nonaktif</span>
+                                        @endif
+                                        {{-- end --}}
+                                    </td>
+                                    <td style="width:4%">
+                                        Tanggal Mulai
+                                    </td>
+                                    <td style="width:0%">
+                                        :
+                                    </td>
+                                    <td style="width:20%">
+                                        {{ \Carbon\Carbon::parse($setting->tgl_mulai)->translatedFormat('l, d F Y') }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Tanggal Selesai
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        {{ \Carbon\Carbon::parse($setting->tgl_selesai)->translatedFormat('l, d F Y') }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Jam Mulai
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        {{ $setting->jam_mulai }} WIB
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Jam Selesai
+                                    </td>
+                                    <td>
+                                        :
+                                    </td>
+                                    <td>
+                                        {{ $setting->jam_selesai }} WIB
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
         {{-- Modal Edit --}}
         <div class="modal fade" id="modal-lg{{ $setting->id }}">
             <div class="modal-dialog modal-lg">
@@ -160,60 +173,60 @@
                 </div>
             </div>
         </div>
-    @endif
-    <div class="modal fade" id="modal-lg">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Jadwal</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="card">
-                        <form method="POST" action="{{ route('setting.store') }}">
-                            @csrf
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Judul SPM <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="judul" placeholder="Judul SPM"
-                                        autocomplete="off" value="{{ old('judul') }}">
+        <div class="modal fade" id="modal-lg">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Jadwal</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card">
+                            <form method="POST" action="{{ route('setting.store') }}">
+                                @csrf
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Judul SPM <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="judul"
+                                            placeholder="Judul SPM" autocomplete="off" value="{{ old('judul') }}">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Tanggal Mulai</label>
+                                                <input type="date" class="form-control" name="tglm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Tanggal Selesai</label>
+                                                <input type="date" class="form-control" name="tgls">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Jam Mulai</label>
+                                                <input type="time" class="form-control" name="jamm">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Jam Selesai</label>
+                                                <input type="time" class="form-control" name="jams">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="button" class="btn btn-default btn-sm"
+                                            data-dismiss="modal">Kembali</button>
+                                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                                    </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Tanggal Mulai</label>
-                                            <input type="date" class="form-control" name="tglm">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Tanggal Selesai</label>
-                                            <input type="date" class="form-control" name="tgls">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Jam Mulai</label>
-                                            <input type="time" class="form-control" name="jamm">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Jam Selesai</label>
-                                            <input type="time" class="form-control" name="jams">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <button type="button" class="btn btn-default btn-sm"
-                                        data-dismiss="modal">Kembali</button>
-                                    <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 @endsection

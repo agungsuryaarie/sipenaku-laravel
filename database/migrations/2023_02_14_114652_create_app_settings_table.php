@@ -15,6 +15,11 @@ class CreateAppSettingsTable extends Migration
     {
         Schema::create('app_settings', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_aplikasi');
+            $table->string('keterangan_aplikasi');
+            $table->longText('visi');
+            $table->longText('misi');
+            $table->string('gambar');
             $table->timestamps();
         });
     }
