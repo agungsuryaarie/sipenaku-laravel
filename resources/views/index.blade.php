@@ -63,7 +63,7 @@
                 <div class="cardpokersize">
                     <img src="{{ url('front/img/undraw_investing_re_bov7.svg') }}">
                     <h3>Perencanaan Tahunan</a></h3>
-                    <p>nput data perencanaan tahunan yang dilakukan oleh fungsi perencana pada Pemerintah Daerah</p>
+                    <p>Input data perencanaan tahunan yang dilakukan oleh fungsi perencana pada Pemerintah Daerah</p>
                 </div>
                 <div class="cardpokersize">
                     <img src="{{ url('front/img/undraw_printing_invoices_-5-r4r.svg') }}">
