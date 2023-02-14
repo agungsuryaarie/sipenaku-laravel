@@ -26,7 +26,7 @@
                         <img src="{{ url('front/img/logobb.png') }}" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-4 pt-4 pt-lg-0 order-2 order-lg-2 content" data-aos="fade-right">
-                        <h3 class="mb-4">Visi Pemerintah Kab.Batu Bara</h3>
+                        <h3 class="mb-4">VISI PEMERINTAH KAB. BATU BARA</h3>
                         <ul>
                             @foreach ($visi as $v)
                                 {!! $v->visi !!}
@@ -34,7 +34,7 @@
                         </ul>
                     </div>
                     <div class="col-lg-4 pt-4 pt-lg-0 order-2 order-lg-2 content" data-aos="fade-right">
-                        <h3 class="mb-4">Misi Pemerintah Kab.Batu Bara</h3>
+                        <h3 class="mb-4">MISI PEMERINTAH KAB. BATU BARA</h3>
                         <ul>
                             @foreach ($misi as $m)
                                 {!! $m->misi !!}
