@@ -29,7 +29,7 @@
                         <h3 class="mb-4">Visi Pemerintah Kab.Batu Bara</h3>
                         <ul>
                             @foreach ($visi as $v)
-                                <li>{!! $v->visi !!}</li>
+                                {!! $v->visi !!}
                             @endforeach
                         </ul>
                     </div>
@@ -37,15 +37,15 @@
                         <h3 class="mb-4">Misi Pemerintah Kab.Batu Bara</h3>
                         <ul>
                             @foreach ($misi as $m)
-                                <li>{!! $m->misi !!}</li>
+                                {!! $m->misi !!}
                             @endforeach
                         </ul>
 
                     </div>
                 </div>
                 <div class="btn-more d-flex align-items-center justify-content-center">
-                    <a href="https://batubarakab.go.id/pages/visi-dan-misi" class="read-more">Read More <i
-                            class="bi bi-long-arrow-right"></i></a>
+                    <a href="https://batubarakab.go.id/pages/visi-dan-misi" class="read-more">Selengkapnya
+                        <i class="bi bi-long-arrow-right"></i></a>
                 </div>
             </div>
         </section>

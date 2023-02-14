@@ -1854,3 +1854,9 @@ section {
   display: flex;
   justify-content: center;
 }
+
+ol {
+padding-left: 0rem;
+}
+
+
