@@ -4,7 +4,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard {{ Auth::user()->bagian->nama_bagian }}
+                    <h1 class="m-0">Dashboard @if (Auth::user()->level == 1)
+                            Administrator
+                        @else
+                            {{ Auth::user()->bagian->nama_bagian }}
+                        @endif
                     </h1>
                 </div>
             </div>
