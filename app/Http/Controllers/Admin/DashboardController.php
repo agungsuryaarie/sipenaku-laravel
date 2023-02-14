@@ -12,14 +12,14 @@ use DB;
 class DashboardController extends Controller
 {
 
-    public function index(Bagian $bagian)
+    public function index()
     {
-        $id_bagian = Auth::user()->bagian_id;
+        $gu = Setting::first();
+        $idb = Auth::user()->bagian_id;
         $menu = "Dashboard";
         $kegiatan = Kegiatan::select('*')->selectRaw('SUM(pagu_kegiatan) as pagu')
-            ->where('bagian_id', $id_bagian)
+            ->where('bagian_id', $idb)
             ->get();
-        // dd($kegiatan);
-        return view('admin.dashboard', compact('menu', 'kegiatan'));
+        return view('admin.dashboard', compact('menu', 'kegiatan', 'gu'));
     }
 }
