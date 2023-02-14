@@ -8,7 +8,6 @@
                     <div class="d-flex align-items-center justify-content-between">
                         <img src="{{ url('front/img/logo-sipenaku-white.png') }}"class="img-fluid mb-3" style="width:45%"
                             alt="">
-                        <b> V.2.0</b>
                     </div>
                     <p>{{ old('keterangan_aplikasi', $appsetting->keterangan_aplikasi) }}</p>
                 </div>
@@ -27,7 +26,9 @@
         <div class="copyright-wrap d-md-flex py-4">
             <div class="me-md-auto text-center text-md-start">
                 <div class="copyright">
-                    Copyright &copy; 2023 | Hak Cipta Dilindungi
+                    Copyright &copy; {{ date('Y') }} Bagian Keuangan Sekretariat Daerah Kabupaten Batu Bara. All
+                    rights
+                    reserved.
                 </div>
             </div>
         </div>
