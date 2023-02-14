@@ -35,10 +35,10 @@
                                         <span class="badge badge-primary btn-sm"> {{ $setting->judul }}</span>
                                         {{-- Validasi GU aktif / nonaktif --}}
                                         @if (date('Y-m-d') > $setting->tgl_mulai ||
-                                                (date('Y-m-d') == $setting->tgl_mulai && date('Y-m-d') < $setting->tgl_selesai) ||
-                                                (date('Y-m-d') == $setting->tgl_selesai &&
+                                                (date('Y-m-d') == $setting->tgl_mulai &&
                                                     date('H:i:s') > $setting->jam_mulai &&
-                                                    date('H:i:s') < $setting->jam_selesai))
+                                                    date('Y-m-d') < $setting->tgl_selesai) ||
+                                                (date('Y-m-d') == $setting->tgl_selesai && date('H:i:s') < $setting->jam_selesai))
                                             <span class="badge badge-success btn-sm">aktif</span>
                                         @else
                                             <span class="badge badge-danger btn-sm">nonaktif</span>
