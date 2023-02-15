@@ -9,7 +9,7 @@
                         <img src="{{ url('front/img/logo-sipenaku-white.png') }}"class="img-fluid mb-3" style="width:45%"
                             alt="">
                     </div>
-                    <p>{{ old('keterangan_aplikasi', $appsetting->keterangan_aplikasi) }}</p>
+                    <p>{{ old('keterangan_aplikasi', $appsetting->keterangan_aplikasi ?? '') }}</p>
                 </div>
 
                 <div class="col-lg-4 col-md-6 footer-newsletter">
@@ -47,6 +47,7 @@
 <script src="{{ url('front/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
 <script src="{{ url('front/vendor/swiper/swiper-bundle.min.js') }}"></script>
 <script src="{{ url('front/vendor/php-email-form/validate.js') }}"></script>
+
 
 <!-- Template Main JS File -->
 <script src="{{ url('front/js/main.js') }}"></script>

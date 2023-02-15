@@ -30,20 +30,60 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Kode Kegiatan</th>
-                                        <th>Kode Sub Kegiatan</th>
+                                        <th>Tanggal</th>
+                                        <th>Kegiatan</th>
+                                        <th>Sub Kegiatan</th>
+                                        <th>Rekening</th>
                                         <th>Uraian</th>
+                                        <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                    @php $no = 1; @endphp
+                                    @foreach ($spj as $s)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $s->tanggal)->format('d/m/Y') }}
+                                            </td>
+                                            <td>{{ $s->kegiatan->kode_kegiatan }} {{ $s->kegiatan->nama_kegiatan }}</td>
+                                            <td>{{ $s->subkegiatan->kode_sub }} {{ $s->subkegiatan->nama_sub }}</td>
+                                            <td>{{ $s->rekening->kode_rekening }} {{ $s->rekening->nama_rekening }}</td>
+                                            <td>{{ $s->uraian }}</td>
+                                            <td>
+                                                @if ($s->status == 1)
+                                                    <form action="{{ route('spj.kirim', $s->id) }}" method="POST">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-primary btn-xs">Kirim</button>
+                                                    </form>
+                                                @elseif ($s->status == 2)
+                                                    <span class="btn btn-warning btn-xs">
+                                                        Verifikasi
+                                                    </span>
+                                                @elseif ($s->status == 3)
+                                                    <span class="btn btn-danger btn-xs">
+                                                        Ditolak
+                                                    </span>
+                                                @else
+                                                    <span class="btn btn-success btn-xs">
+                                                        Diterima
+                                                    </span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('spj.destroy', $s->id) }}" method="POST">
+                                                    <a class="btn btn-primary btn-xs"
+                                                        href="{{ route('spj.edit', $s->id) }}">
+                                                        <i class="fas fa-edit"></i></a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-xs"><i
+                                                            class="fas fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
                                 </tbody>
                             </table>
                         </div>

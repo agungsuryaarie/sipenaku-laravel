@@ -6,7 +6,7 @@
         <div class="container-fluid" data-aos="fade-up">
             <div class="row justify-content-center">
                 <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                    <h1>{{ $appsetting->nama_aplikasi }}</h1>
+                    <h1>{{ $appsetting->nama_aplikasi ?? '' }}</h1>
                     <h2></h2>
                     <div><a href="{{ '/login' }}" class="btn-get-started scrollto">Get Started</a></div>
                 </div>
