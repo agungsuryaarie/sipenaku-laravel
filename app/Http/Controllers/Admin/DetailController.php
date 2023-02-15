@@ -49,7 +49,7 @@ class DetailController extends Controller
                     $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteDetail"><i class="fas fa-trash"></i></a><center>';
                     return $btn;
                 })
-                ->rawColumns(['nama_detail', 'harga', 'action'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
 

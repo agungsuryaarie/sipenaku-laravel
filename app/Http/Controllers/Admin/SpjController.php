@@ -11,6 +11,7 @@ use App\Models\Subkegiatan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use DataTables;
 
 class SpjController extends Controller
 {
@@ -19,6 +20,63 @@ class SpjController extends Controller
     {
         $menu = 'SPJ';
         $spj = SPJ::where('bagian_id', Auth::user()->bagian_id)->get();
+
+        if ($request->ajax()) {
+            $data = SPJ::where('bagian_id', Auth::user()->bagian_id)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('tanggal', function ($data) {
+                    return  \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal)->format('d/m/Y');
+                })
+                ->addColumn('kegiatan', function ($data) {
+                    $link = $data->kegiatan->kode_kegiatan;
+                    $link = $link . ' ' . $data->kegiatan->nama_kegiatan;
+                    return $link;
+                })
+                ->addColumn('subkeg', function ($data) {
+                    $link = $data->subkegiatan->kode_sub;
+                    $link = $link . ' ' . $data->subkegiatan->nama_sub;
+                    return $link;
+                })
+                ->addColumn('rekening', function ($data) {
+                    $link = $data->rekening->kode_rekening;
+                    $link = $link . ' ' . $data->rekening->nama_rekening;
+                    return $link;
+                })
+                ->addColumn('status', function ($row) {
+                    if ($row->status == 1) {
+                        $btn = '<button class="btn btn-primary btn-xs">Belum dikirim</button>';
+                    } elseif ($row->status == 2) {
+                        $btn = '<button class="btn btn-secondary btn-xs">Menunggu Verifikasi</button>';
+                    } elseif ($row->status == 3) {
+                        $btn = '<button class="btn btn-success btn-xs">Diterima</button>';
+                    } elseif ($row->status == 4) {
+                        $btn = '<button class="btn btn-danger btn-xs">Ditolak</button>';
+                    } else {
+                        $btn = '<button class="btn btn-warning btn-xs">Dikembalikan</button>';
+                    }
+                    return $btn;
+                })
+                ->addColumn('action', function ($row) {
+                    if ($row->status == 1) {
+                        $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Kirim" class="btn btn-primary btn-xs kirim">Kirim</i></a>';
+                        $btn = '<center>' . $btn . ' <a href="' . route('spj.edit', $row->id) . '" class="btn btn-primary btn-xs"><i class="fas fa-edit"></i></a></center>';
+                        $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteSpj">&nbsp;<i class="fas fa-trash"></i>&nbsp;</a></center>';
+                    } elseif ($row->status == 3) {
+                        $btn = '<center><a href="' . route('spj.edit', $row->id) . '" class="btn btn-success btn-xs"><i class="fas fa-download"></i></a></center>';
+                    } elseif ($row->status == 5) {
+                        $btn = '<center><a href="' . route('spj.edit', $row->id) . '" class="btn btn-primary btn-xs"><i class="fas fa-edit"></i></a></center>';
+                        $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteSpj">&nbsp;<i class="fas fa-trash"></i>&nbsp;</a></center>';
+                    } else {
+                        $btn = '';
+                    }
+
+                    return $btn;
+                })
+                ->rawColumns(['status', 'action'])
+                ->make(true);
+        }
+
         return view('admin.spj.data', compact('menu', 'spj'));
     }
     public function indexadm(Request $request)
@@ -91,7 +149,8 @@ class SpjController extends Controller
     public function kirim(SPJ $spj)
     {
         $spj->update(['status' => '2']);
-        return redirect()->route('spj.index')->with('success', 'SPJ Berhasil di Kirim');
+        return response()->json(['success' => 'SPJ Berhasil di Kirim']);
+        // return redirect()->route('spj.index')->with('success', 'SPJ Berhasil di Kirim');
     }
 
 
@@ -100,9 +159,8 @@ class SpjController extends Controller
         if ($spj->file) {
             Storage::delete('public/file/' . $spj->file);
         }
-
         $spj->delete();
-
-        return redirect()->route('spj.index')->with('success', 'SPJ deleted successfully');
+        return response()->json(['success' => 'SPJ deleted successfully.']);
+        // return redirect()->route('spj.index')->with('success', 'SPJ deleted successfully');
     }
 }

@@ -90,7 +90,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('spj/getrekening', [SpjController::class, 'getRekening'])->name('spj.getrekening');
         Route::post('spj/store', [SpjController::class, 'store'])->name('spj.store');
         Route::delete('spj/destroy/{spj}', [SpjController::class, 'destroy'])->name('spj.destroy');
-        Route::post('spj/edit/{id}', [SpjController::class, 'edit'])->name('spj.edit');
+        Route::get('spj/edit/{id}', [SpjController::class, 'edit'])->name('spj.edit');
         Route::post('spj/kirim/{spj}', [SpjController::class, 'kirim'])->name('spj.kirim');
     });
 });

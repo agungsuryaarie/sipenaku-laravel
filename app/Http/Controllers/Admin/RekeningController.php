@@ -37,7 +37,7 @@ class RekeningController extends Controller
                     $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteRekening"><i class="fas fa-trash"></i></a><center>';
                     return $btn;
                 })
-                ->rawColumns(['kode_rekening', 'nama_rekening', 'pagu_rekening', 'action'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
         return view('admin.rekening.data', compact('menu', 'id', 'subkegiatan'));
