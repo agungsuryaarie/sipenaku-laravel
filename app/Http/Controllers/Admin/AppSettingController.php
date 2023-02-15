@@ -29,7 +29,6 @@ class AppSettingController extends Controller
 
     public function store(Request $request, AppSetting $appsetting)
     {
-        // dd($request->all());
         //Translate Bahasa Indonesia
         $message = array(
             'nama_aplikasi.required' => 'Nama Aplikasi harus diisi.',
