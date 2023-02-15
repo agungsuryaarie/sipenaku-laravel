@@ -188,12 +188,12 @@
                                     '</li></strong>');
                                 $(".alert-danger").fadeOut(5000);
                                 $("#saveBtn").html("Simpan");
-                                $('#kegiatanForm').trigger("reset");
+                                // $('#kegiatanForm').trigger("reset");
                             });
                         } else {
                             table.draw();
                             alertSuccess("Kegiatan Berhasil ditambah");
-                            $('#kegiatanForm').trigger("reset");
+                            // $('#kegiatanForm').trigger("reset");
                             $("#saveBtn").html("Simpan");
                             $('#ajaxModel').modal('hide');
                         }

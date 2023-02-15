@@ -216,6 +216,7 @@
             $("#createNewRekening").click(function() {
                 $("#saveBtn").val("create-rekening");
                 $("#rekening_id").val("");
+                $("#rekeningForm").trigger("reset");
                 $("#modelHeading").html("Tambah Rekening");
                 $("#ajaxModel").modal("show");
                 $("#deleteRekening").modal("show");
@@ -260,10 +261,12 @@
                                         '</li></strong>');
                                     $(".alert-danger").fadeOut(5000);
                                     $("#saveBtn").html("Simpan");
+                                    // $('#rekeningForm').trigger("reset");
                                 });
                             } else {
                                 table.draw();
                                 alertSuccess(data.success);
+                                $('#rekeningForm').trigger("reset");
                                 $("#saveBtn").html("Simpan");
                                 $('#ajaxModel').modal('hide');
                             }
@@ -286,10 +289,12 @@
                                         '</li></strong>');
                                     $(".alert-danger").fadeOut(5000);
                                     $("#saveBtn").html("Simpan");
+                                    // $('#rekeningForm').trigger("reset");
                                 });
                             } else {
                                 table.draw();
                                 alertSuccess(data.success);
+                                $('#rekeningForm').trigger("reset");
                                 $("#saveBtn").html("Simpan");
                                 $('#ajaxModel').modal('hide');
                             }
