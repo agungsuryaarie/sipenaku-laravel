@@ -40,10 +40,12 @@
                                                     date('H:i:s') > $setting->jam_mulai &&
                                                     date('H:i:s') < $setting->jam_selesai))
                                             <span class="badge badge-success btn-sm">aktif</span>
-                                        @elseif(date('Y-m-d') < $setting->tgl_mulai && date('H:i:s') > $setting->jam_mulai)
-                                            <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
-                                        @else
+                                        @elseif(date('Y-m-d') > $setting->tgl_selesai ||
+                                                ((date('Y-m-d') == $setting->tgl_selesai && date('H:i:s') > $setting->jam_selesai) ||
+                                                    date('H:i:s') == $setting->jam_selesai))
                                             <span class="badge badge-danger btn-sm">sesi telah berakhir</span>
+                                        @else
+                                            <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
                                         @endif
                                         {{-- end --}}
                                     </td>
@@ -148,7 +150,7 @@
                                     <div class="card-footer">
                                         <button type="button" class="btn btn-default btn-sm"
                                             data-dismiss="modal">Kembali</button>
-                                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
                                     </div>
                                 </div>
                             </form>
@@ -196,25 +198,29 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Tanggal Mulai</label>
-                                                <input type="date" class="form-control" name="tglm">
+                                                <input type="date" class="form-control" name="tglm"
+                                                    value="{{ old('tglm') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Tanggal Selesai</label>
-                                                <input type="date" class="form-control" name="tgls">
+                                                <input type="date" class="form-control" name="tgls"
+                                                    value="{{ old('tgls') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Jam Mulai</label>
-                                                <input type="time" class="form-control" name="jamm">
+                                                <input type="time" class="form-control" name="jamm"
+                                                    value="{{ old('jamm') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Jam Selesai</label>
-                                                <input type="time" class="form-control" name="jams">
+                                                <input type="time" class="form-control" name="jams"
+                                                    value="{{ old('jams') }}">
                                             </div>
                                         </div>
                                     </div>

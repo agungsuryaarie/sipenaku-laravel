@@ -189,7 +189,7 @@
                 e.preventDefault();
                 $(this).html(
                     "<span class='spinner-border spinner-border-sm'></span><span class='visually-hidden'><i> menyimpan...</i></span>"
-                    );
+                );
 
                 $.ajax({
                     data: $("#subkegForm").serialize(),
@@ -206,7 +206,6 @@
                                     '</li></strong>');
                                 $(".alert-danger").fadeOut(5000);
                                 $("#saveBtn").html("Simpan");
-                                $('#subkegForm').trigger("reset");
                             });
                         } else {
                             table.draw();

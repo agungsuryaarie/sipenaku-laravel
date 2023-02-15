@@ -261,7 +261,7 @@
                                         '</li></strong>');
                                     $(".alert-danger").fadeOut(5000);
                                     $("#saveBtn").html("Simpan");
-                                    $('#rekeningForm').trigger("reset");
+                                    // $('#rekeningForm').trigger("reset");
                                 });
                             } else {
                                 table.draw();
@@ -289,7 +289,7 @@
                                         '</li></strong>');
                                     $(".alert-danger").fadeOut(5000);
                                     $("#saveBtn").html("Simpan");
-                                    $('#rekeningForm').trigger("reset");
+                                    // $('#rekeningForm').trigger("reset");
                                 });
                             } else {
                                 table.draw();
