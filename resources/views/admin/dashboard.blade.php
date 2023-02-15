@@ -99,16 +99,35 @@
                             </span>
                         </div>
                         <div class="float-right d-none d-sm-inline-block">
-                            <a href="#" class="btn btn-success btn-round btn-xs mr-2 mb-2"><i
-                                    class="fa fa-wallet"></i>&nbsp;&nbsp;{{ $gu->judul }} mulai
-                                {{ \Carbon\Carbon::parse($gu->tgl_mulai)->translatedFormat('l, d F Y') }}
-                                </td> | Pukul : {{ $gu->jam_mulai }} -
-                                {{ \Carbon\Carbon::parse($gu->tgl_selesai)->translatedFormat('l, d F Y') }}
-                                </td> | Pukul : {{ $gu->jam_selesai }}</a>
-                            <a href="#" class="btn btn-danger btn-round btn-xs mb-2"><i
-                                    class="fas fa-clock"></i>&nbsp;&nbsp;
-                                <span id="berakhir">Berakhir dalam 19 hari 6 jam
-                                    25 menit 34 detik lagi . . .</span></a>
+                            @if ($gu != null)
+                                @if (date('Y-m-d') > $gu->tgl_mulai ||
+                                        (date('Y-m-d') == $gu->tgl_mulai && date('Y-m-d') < $gu->tgl_selesai) ||
+                                        (date('Y-m-d') == $gu->tgl_selesai && date('H:i:s') > $gu->jam_mulai && date('H:i:s') < $gu->jam_selesai))
+                                    <a href="#" class="btn btn-success btn-round btn-xs mr-2 mb-2">
+                                        <i class="fa fa-wallet"></i>&nbsp;&nbsp;{{ $gu->judul }} mulai
+                                        {{ \Carbon\Carbon::parse($gu->tgl_mulai)->translatedFormat('l, d F Y') }}
+                                        </td> | Pukul : {{ $gu->jam_mulai }} -
+                                        {{ \Carbon\Carbon::parse($gu->tgl_selesai)->translatedFormat('l, d F Y') }}
+                                        </td> | Pukul : {{ $gu->jam_selesai }}</a>
+                                    <a href="#" class="btn btn-danger btn-round btn-xs mb-2"><i
+                                            class="fas fa-clock"></i>&nbsp;&nbsp;
+                                        <span id="berakhir"></span></a>
+                                @else
+                                    <a href="#" class="btn btn-success btn-round btn-xs mr-2 mb-2"><i
+                                            class="fa fa-wallet"></i>&nbsp;&nbsp;{{ $gu->judul }} mulai
+                                        {{ \Carbon\Carbon::parse($gu->tgl_mulai)->translatedFormat('l, d F Y') }}
+                                        </td> | Pukul : {{ $gu->jam_mulai }} -
+                                        {{ \Carbon\Carbon::parse($gu->tgl_selesai)->translatedFormat('l, d F Y') }}
+                                        </td> | Pukul : {{ $gu->jam_selesai }}</a>
+                                    <a href="#" class="btn btn-warning btn-round btn-xs mb-2 text-white"><i
+                                            class="fas fa-clock"></i>&nbsp;&nbsp;sesi belum dimulai</a>
+                                @endif
+                            @else
+                                <a href="#" class="btn btn-success btn-round btn-xs mr-2 mb-2"><i
+                                        class="fa fa-wallet"></i>&nbsp;&nbsp;GU belum dimulai</a>
+                                <a href="#" class="btn btn-danger btn-round btn-xs mb-2"><i
+                                        class="fas fa-clock"></i>&nbsp;&nbsp;<span id="berakhir"></span></a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -116,37 +135,28 @@
         </section>
     @endif
 @endsection
-
 @section('script')
-    <!-- GU -->
     <script>
         @if (!$gu == null)
-            var countDownDate4 = new Date("2023-02-15 23:59").getTime();
+            var countDownDate4 = new Date("{{ $gu->tgl_selesai }} {{ $gu->jam_selesai }}").getTime();
         @else
             var countDownDate4 = new Date().getTime();
         @endif
-        // Set the date we're counting down to
-        // Update the count down every 1 second
         var countdownfunction4 = setInterval(function() {
-            // Get todays date and time
             var now = new Date().getTime();
-            // Find the distance between now an the count down date
             var distance4 = countDownDate4 - now;
-            // Time calculations for days, hours, minutes and seconds
             var days4 = Math.floor(distance4 / (1000 * 60 * 60 * 24));
             var hours4 = Math.floor(
                 (distance4 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
             );
             var minutes4 = Math.floor((distance4 % (1000 * 60 * 60)) / (1000 * 60));
             var seconds4 = Math.floor((distance4 % (1000 * 60)) / 1000);
-            // Output the result in an element with id="demo"
             document.getElementById("berakhir").innerHTML = "Berakhir dalam " +
                 days4 + " hari " + hours4 + " jam " + minutes4 + " menit " + seconds4 + " detik " +
                 "lagi . . .";
-            // If the count down is over, write some text
             if (distance4 < 0) {
                 clearInterval(countdownfunction4);
-                document.getElementById("berakhir").innerHTML = "sesi berakhir";
+                document.getElementById("berakhir").innerHTML = "sesi telah berakhir";
             }
         }, 1000);
     </script>
