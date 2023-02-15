@@ -106,6 +106,17 @@
                         <h4 class="modal-title">Jadwal</h4>
                     </div>
                     <div class="modal-body">
+                        <div class="alert alert-danger alert-dismissible">
+                            <h6>Ketentuan :</h6>
+                            <small>
+                                *Tanggal mulai harus diatas atau sama dengan tanggal sekarang.<br>
+                                *Tanggal selesai harus diatas atau sama dengan tanggal mulai.<br>
+                                *Penentuan jam mulai dan jam selesai dalam rentang waktu 12 jam.<br>
+                                Contoh :
+                            </small><br><small class="ml-4">08:00 - 23:59 WIB&nbsp;<i
+                                    class="fa fa-check-circle"></i></small><br>
+                            <small class="ml-4">08:00 - 01:00 WIB&nbsp;<i class="fa fa-ban"></i></small>
+                        </div>
                         <div class="card">
                             <form method="POST" action="{{ route('setting.update', $setting->id) }}">
                                 @csrf
@@ -184,6 +195,17 @@
                         <h4 class="modal-title">Jadwal</h4>
                     </div>
                     <div class="modal-body">
+                        <div class="alert alert-danger alert-dismissible">
+                            <h6>Ketentuan :</h6>
+                            <small>
+                                *Tanggal mulai harus diatas atau sama dengan tanggal sekarang.<br>
+                                *Tanggal selesai harus diatas atau sama dengan tanggal mulai.<br>
+                                *Penentuan jam mulai dan jam selesai dalam rentang waktu 12 jam.<br>
+                                Contoh :
+                            </small><br><small class="ml-4">08:00 - 23:59 WIB&nbsp;<i
+                                    class="fa fa-check-circle"></i></small><br>
+                            <small class="ml-4">08:00 - 01:00 WIB&nbsp;<i class="fa fa-ban"></i></small>
+                        </div>
                         <div class="card">
                             <form method="POST" action="{{ route('setting.store') }}">
                                 @csrf

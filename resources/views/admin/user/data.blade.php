@@ -250,7 +250,7 @@
                                     '</li></strong>');
                                 $(".alert-danger").fadeOut(3000);
                                 $("#saveBtn").html("Simpan");
-                                $('#userForm').trigger("reset");
+                                // $('#userForm').trigger("reset");
                             });
                         } else {
                             table.draw();
