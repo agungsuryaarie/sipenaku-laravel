@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         $data = [
             [
-                'bagian_id' => 3,
+                'bagian_id' => 1,
                 'nip' => 202020202020202020,
                 'nama' => 'Admin',
                 'nohp' => '0813123123123',

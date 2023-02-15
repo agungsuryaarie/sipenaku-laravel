@@ -16,6 +16,10 @@ class BagianSeeder extends Seeder
     {
         $data = [
             [
+                'id' => 1,
+                'nama_bagian' => 'Admin Verifikator',
+            ],
+            [
                 'id' => 3,
                 'nama_bagian' => 'Bagian Umum',
             ],

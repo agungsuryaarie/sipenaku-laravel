@@ -86,6 +86,12 @@ Route::group(['middleware' => ['auth']], function () {
         // SPJ
         Route::get('spj', [SpjController::class, 'index'])->name('spj.index');
         Route::get('spj/create', [SpjController::class, 'create'])->name('spj.create');
+        Route::post('spj/getsubkeg', [SpjController::class, 'getSubkeg'])->name('spj.getsubkeg');
+        Route::post('spj/getrekening', [SpjController::class, 'getRekening'])->name('spj.getrekening');
+        Route::post('spj/store', [SpjController::class, 'store'])->name('spj.store');
+        Route::delete('spj/destroy/{spj}', [SpjController::class, 'destroy'])->name('spj.destroy');
+        Route::post('spj/edit/{id}', [SpjController::class, 'edit'])->name('spj.edit');
+        Route::post('spj/kirim/{spj}', [SpjController::class, 'kirim'])->name('spj.kirim');
     });
 });
 
