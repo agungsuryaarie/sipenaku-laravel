@@ -26,7 +26,7 @@
                                 <i class="fas fa-plus-circle"></i> Tambah</a>
                         </div>
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="example1" class="table table-bordered table-striped data-table">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -40,7 +40,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php $no = 1; @endphp
+
+                                    {{-- @php $no = 1; @endphp
                                     @foreach ($spj as $s)
                                         <tr>
                                             <td>{{ $no++ }}</td>
@@ -82,7 +83,7 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
 
                                 </tbody>
                             </table>
@@ -96,12 +97,90 @@
 @section('script')
     <script>
         $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["excel", "pdf", "print"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+            });
+
+            var table = $(".data-table").DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('spj.index') }}",
+                columns: [{
+                        data: "DT_RowIndex",
+                        name: "DT_RowIndex",
+                    },
+                    {
+                        data: "tanggal",
+                        name: "tanggal",
+                    },
+                    {
+                        data: "kegiatan",
+                        name: "kegiatan",
+                    },
+                    {
+                        data: "subkeg",
+                        name: "subkeg",
+                    },
+                    {
+                        data: "rekening",
+                        name: "rekening",
+                    },
+                    {
+                        data: "uraian",
+                        name: "uraian",
+                    },
+                    {
+                        data: "status",
+                        name: "status",
+                    },
+                    {
+                        data: "action",
+                        name: "action",
+                        orderable: false,
+                        searchable: false,
+                    },
+                ],
+            });
+
+            $("body").on("click", ".deleteSpj", function() {
+                var spj_id = $(this).data("id");
+                confirm("Are You sure want to delete !");
+
+                $.ajax({
+                    type: "DELETE",
+                    url: "{{ url('spj/destroy') }}" + '/' + spj_id,
+                    data: {
+                        _token: "{!! csrf_token() !!}",
+                    },
+                    success: function(data) {
+                        alertDanger("SPJ Berhasil di hapus");
+                        table.draw();
+                    },
+                    error: function(data) {
+                        console.log("Error:", data);
+                    },
+                });
+            });
+
+            $("body").on("click", ".kirim", function() {
+                var spj_id = $(this).data("id");
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('spj/kirim') }}" + '/' + spj_id,
+                    data: {
+                        _token: "{!! csrf_token() !!}",
+                    },
+                    success: function(data) {
+                        alertSuccess("SPJ Berhasil di kirim");
+                        table.draw();
+                    },
+                    error: function(data) {
+                        console.log("Error:", data);
+                    },
+                });
+            });
         });
     </script>
 @endsection

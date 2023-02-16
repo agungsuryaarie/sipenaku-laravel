@@ -41,7 +41,7 @@ class UserController extends Controller
                     $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteUser"><i class="fas fa-trash"></i></a><center>';
                     return $btn;
                 })
-                ->rawColumns(['bagian', 'nip', 'nama', 'username', 'foto', 'action'])
+                ->rawColumns(['foto', 'action'])
                 ->make(true);
         }
         return view('admin.user.data', compact('menu', 'bagian'));
