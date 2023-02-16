@@ -115,25 +115,42 @@
     @if (Auth::user()->level == 2)
         <section class="content">
             <div class="col-md-12">
-                <div class="card shadow mt-2">
+                <div class="card-footer bg-white shadow-sm">
                     <div class="row">
-                        <div class="col-sm-6 col-6">
+                        <div class="col-sm-3 col-6">
                             <div class="description-block border-right">
-                                <div class="image">
-                                    @if (Auth::user()->foto == null)
-                                        <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2">
-                                    @else
-                                        <img src="{{ url('storage/fotouser/' . Auth::user()->foto) }}"
-                                            class="img-circle elevation-2" width="100px">
-                                    @endif
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        @if (Auth::user()->foto == null)
+                                            <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2"
+                                                width="60px">
+                                        @else
+                                            <img src="{{ url('storage/fotouser/' . Auth::user()->foto) }}"
+                                                class="img-circle elevation-2" width="65px">
+                                        @endif
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5 class="description-header mt-2">{{ Auth::user()->nama }}</h5>
+                                        <span class="description-text">{{ Auth::user()->bagian->nama_bagian }}</span>
+                                    </div>
                                 </div>
-                                <span class="description-text">{{ Auth::user()->bagian->nama_bagian }}</span>
                             </div>
                         </div>
-                        <!-- /.col -->
-                        <div class="col-sm-6 col-6">
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-right">
+                                <h5 class="description-header mt-4">SPJ Diterima</h5>
+                                <span class="description-text text-success">{{ $spj_terima }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block border-right">
+                                <h5 class="description-header mt-4">SPJ Ditolak</h5>
+                                <span class="description-text text-danger">{{ $spj_tolak }}</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-6">
                             <div class="description-block">
-                                <h5 class="description-header">Anggaran</h5>
+                                <h5 class="description-header mt-4">Anggaran</h5>
                                 <span class="description-text">
                                     @if (Auth::user()->level == 2)
                                         @foreach ($kegiatan as $keg)

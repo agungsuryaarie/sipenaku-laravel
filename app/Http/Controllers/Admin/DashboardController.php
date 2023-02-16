@@ -24,10 +24,12 @@ class DashboardController extends Controller
         $user = User::count();
         $kegiatan_all = Kegiatan::count();
         $spj = SPJ::count();
+        $spj_terima = SPJ::where('status', 2)->where('bagian_id', $idb)->count();
+        $spj_tolak = SPJ::where('status', 3)->where('bagian_id', $idb)->count();
         $app = AppSetting::first();
         $kegiatan = Kegiatan::select('*')->selectRaw('SUM(pagu_kegiatan) as pagu')
             ->where('bagian_id', $idb)
             ->get();
-        return view('admin.dashboard', compact('menu', 'kegiatan', 'gu', 'bagian', 'user', 'kegiatan_all', 'spj', 'app'));
+        return view('admin.dashboard', compact('menu', 'kegiatan', 'gu', 'bagian', 'user', 'kegiatan_all', 'spj', 'app', 'spj_terima', 'spj_tolak'));
     }
 }
