@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>SPJ</h1>
+                    <h1>{{ $menu }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('spj.index') }}">SPJ</a></li>
-                        <li class="breadcrumb-item active">Tambah SPJ</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">{{ $menu }}</li>
                     </ol>
                 </div>
             </div>
@@ -19,10 +19,15 @@
     <section class="content">
         <div class="container-fluid">
             <div class="col-md-12">
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <h3 class="card-title">Form Input SPJ</h3>
-                    </div>
+
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5>Ketentuan :</h6>
+                        <small>
+                            *Berkas file digabung dalam 1 file dan wajib berbentuk pdf.<br>
+                            *Ukuran file maksimal 5MB.
+                </div>
+                <div class="card">
                     <form action="{{ route('spj.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body-form">
@@ -34,7 +39,7 @@
                                 <label>Kegiatan<span class="text-danger"> *</span></label>
                                 <select class="form-control select2bs4 @error('kegiatan_id') is-invalid @enderror"
                                     id="kegiatan" name="kegiatan_id" style="width: 100%;">
-                                    <option value="">::Pilih::</option>
+                                    <option value="">::Pilih Kegiatan::</option>
                                     @foreach ($kegiatan as $keg)
                                         <option value="{{ $keg->id }}"
                                             {{ $keg->id == old('kegiatan_id') ? 'selected' : '' }}>
@@ -114,8 +119,9 @@
                                         <label for="jenis_spm3" class="custom-control-label">LS</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" value="4" id="jenis_spm4"
-                                            name="jenis_spm" {{ old('jenis_spm') == '4' ? 'checked' : '' }}>
+                                        <input class="custom-control-input" type="radio" value="4"
+                                            id="jenis_spm4" name="jenis_spm"
+                                            {{ old('jenis_spm') == '4' ? 'checked' : '' }}>
                                         <label for="jenis_spm4" class="custom-control-label">UP</label>
                                     </div>
                                 </div>

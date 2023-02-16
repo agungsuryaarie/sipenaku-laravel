@@ -12,7 +12,7 @@
                                     {{ Auth::user()->bagian->nama_bagian }}
                                 @endif
                                 </h2>
-                                <h5 class="text-white op-7 mb-2">SISTEM INFORMASI PENATAUSAHAAN (SIPENAKU)</h5>
+                                <h5 class="text-white op-7 mb-2">{{ $app->nama_aplikasi }}</h5>
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@
     @if (Auth::user()->level == 2)
         <section class="content">
             <div class="col-md-12">
-                <div class="card-footer bg-white shadow mt-2">
+                <div class="card shadow mt-2">
                     <div class="row">
                         <div class="col-sm-6 col-6">
                             <div class="description-block border-right">

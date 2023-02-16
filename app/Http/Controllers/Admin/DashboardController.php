@@ -9,6 +9,7 @@ use App\Models\Kegiatan;
 use App\Models\SPJ;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Setting;
+use App\Models\AppSetting;
 use DB;
 
 class DashboardController extends Controller
@@ -23,9 +24,10 @@ class DashboardController extends Controller
         $user = User::count();
         $kegiatan_all = Kegiatan::count();
         $spj = SPJ::count();
+        $app = AppSetting::first();
         $kegiatan = Kegiatan::select('*')->selectRaw('SUM(pagu_kegiatan) as pagu')
             ->where('bagian_id', $idb)
             ->get();
-        return view('admin.dashboard', compact('menu', 'kegiatan', 'gu', 'bagian', 'user', 'kegiatan_all', 'spj'));
+        return view('admin.dashboard', compact('menu', 'kegiatan', 'gu', 'bagian', 'user', 'kegiatan_all', 'spj', 'app'));
     }
 }

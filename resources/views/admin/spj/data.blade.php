@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>SPJ</h1>
+                    <h1>{{ $menu }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">SPJ</li>
+                        <li class="breadcrumb-item active">{{ $menu }}</li>
                     </ol>
                 </div>
             </div>
@@ -22,8 +22,8 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('spj.create') }}" class="btn btn-info btn-xs float-right">
-                                <i class="fas fa-plus-circle"></i> Tambah</a>
+                            <a href="{{ route('spj.create') }}" class="btn btn-info btn-sm float-right btn-rounded">
+                                <i class="fa fa-paper-plane"></i> Upload Pengajuan</a>
                         </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped data-table">

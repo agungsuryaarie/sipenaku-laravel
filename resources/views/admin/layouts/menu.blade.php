@@ -77,11 +77,56 @@
         </a>
     </li>
 @else
-    <li class="nav-item">
-        <a href="{{ route('spj.index') }}" class="nav-link {{ request()->segment(1) == 'spj' ? 'active' : '' }}">
-            <i class="nav-icon fas fa-file"></i>
+    <li
+        class="nav-item {{ request()->segment(1) == 'spj' || request()->segment(2) == 'diterima' || request()->segment(1) == 'ditolak'
+            ? 'menu-open'
+            : '' }}">
+        <a href="#"
+            class="nav-link {{ request()->segment(1) == 'spj' || request()->segment(2) == 'diterima' || request()->segment(1) == 'ditolak'
+                ? 'active'
+                : '' }}">
+            <i class="nav-icon fas fa-layer-group"></i>
+
             <p>
                 SPJ
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('spj.index') }}"
+                    class="nav-link {{ request()->segment(1) == 'spj' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                        Pengajuan SPJ
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('spj.index') }}"
+                    class="nav-link {{ request()->segment(2) == 'diterima' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                        Pengajuan SPJ Diterima
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('spj.index') }}"
+                    class="nav-link {{ request()->segment(2) == 'ditolak' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                        Pengajuan SPJ Ditolak
+                    </p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link {{ request()->segment(1) == 'rekening' ? 'active' : '' }}">
+            <i class="fas fa-credit-card nav-icon"></i>
+            <p>
+                Rekening Belanja
             </p>
         </a>
     </li>

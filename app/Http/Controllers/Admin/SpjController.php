@@ -18,7 +18,7 @@ class SpjController extends Controller
 
     public function index(Request $request)
     {
-        $menu = 'SPJ';
+        $menu = 'Pengajuan SPJ';
         $spj = SPJ::where('bagian_id', Auth::user()->bagian_id)->get();
 
         if ($request->ajax()) {
@@ -88,7 +88,7 @@ class SpjController extends Controller
 
     public function create()
     {
-        $menu = 'Tambah SPJ';
+        $menu = 'Pengajuan SPJ';
         $kegiatan = Kegiatan::where('bagian_id', Auth::user()->bagian_id)->get();
         return view('admin.spj.create', compact('menu', 'kegiatan'));
     }
