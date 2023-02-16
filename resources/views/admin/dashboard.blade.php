@@ -22,7 +22,7 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>{{ $bagian }}</h3>
                                 <p>Bagian</p>
                             </div>
                             <div class="icon">
@@ -35,8 +35,7 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>0</h3>
-
+                                <h3>{{ $user }}</h3>
                                 <p>Account User</p>
                             </div>
                             <div class="icon">
@@ -49,7 +48,7 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>0</h3>
+                                <h3>{{ $kegiatan_all }}</h3>
                                 <p>Kegiatan</p>
                             </div>
                             <div class="icon">
@@ -62,13 +61,13 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>0</h3>
-                                <p>Sub Kegiatan</p>
+                                <h3>{{ $spj }}</h3>
+                                <p>SPJ</p>
                             </div>
                             <div class="icon">
-                                <i class="fa fa-list"></i>
+                                <i class="fa fa-file"></i>
                             </div>
-                            <a href="{{ 'sub-kegiatan' }}" class="small-box-footer">Selengkapnya <i
+                            <a href="{{ 'data-spj' }}" class="small-box-footer">Selengkapnya <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>

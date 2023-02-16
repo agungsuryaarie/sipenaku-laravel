@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bagian;
+use App\Models\User;
 use App\Models\Kegiatan;
+use App\Models\SPJ;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Setting;
 use DB;
@@ -14,12 +16,16 @@ class DashboardController extends Controller
 
     public function index()
     {
+        $menu = "Dashboard";
         $gu = Setting::first();
         $idb = Auth::user()->bagian_id;
-        $menu = "Dashboard";
+        $bagian = Bagian::count();
+        $user = User::count();
+        $kegiatan_all = Kegiatan::count();
+        $spj = SPJ::count();
         $kegiatan = Kegiatan::select('*')->selectRaw('SUM(pagu_kegiatan) as pagu')
             ->where('bagian_id', $idb)
             ->get();
-        return view('admin.dashboard', compact('menu', 'kegiatan', 'gu'));
+        return view('admin.dashboard', compact('menu', 'kegiatan', 'gu', 'bagian', 'user', 'kegiatan_all', 'spj'));
     }
 }
