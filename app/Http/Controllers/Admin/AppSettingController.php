@@ -69,7 +69,7 @@ class AppSettingController extends Controller
         }
 
         //redirect to index
-        return redirect()->route('appsetting.index')->with(['status' => 'Data Berhasil Diubah!']);
+        return redirect()->route('appsetting.index')->with(['toast_success' => 'Data Berhasil Disimpan!']);
     }
 
     public function edit(Request $request, AppSetting $appsetting)
@@ -125,6 +125,6 @@ class AppSettingController extends Controller
             ]);
         }
         //redirect to index
-        return redirect()->route('appsetting.index')->with(['status' => 'Data Berhasil Diubah!']);
+        return redirect()->route('appsetting.index')->with(['toast_success' => 'Data Berhasil Diupdate!']);
     }
 }

@@ -23,8 +23,9 @@ class SpjController extends Controller
     }
     public function indexadm(Request $request)
     {
+        $data = SPJ::get();
         $menu = 'Data SPJ';
-        return view('admin.spj.data-admin', compact('menu'));
+        return view('admin.spj.data-admin', compact('menu', 'data'));
     }
 
     public function create()
