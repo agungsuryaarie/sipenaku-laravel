@@ -55,7 +55,7 @@
             var table = $(".data-table").DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('spj.diterima') }}",
+                ajax: "{{ route('spj.ditolak') }}",
                 columns: [{
                         data: "DT_RowIndex",
                         name: "DT_RowIndex",

@@ -139,8 +139,8 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-paper-plane"></i>
-                                Kirim</button>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Simpan</button>
                         </div>
                     </form>
                 </div>

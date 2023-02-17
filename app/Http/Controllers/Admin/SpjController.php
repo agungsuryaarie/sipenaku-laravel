@@ -22,7 +22,7 @@ class SpjController extends Controller
         $spj = SPJ::where('bagian_id', Auth::user()->bagian_id)->get();
 
         if ($request->ajax()) {
-            $data = SPJ::where('bagian_id', Auth::user()->bagian_id)->get();
+            $data = SPJ::where('bagian_id', Auth::user()->bagian_id)->where('status', 1)->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('tanggal', function ($data) {
@@ -45,15 +45,15 @@ class SpjController extends Controller
                 })
                 ->addColumn('status', function ($row) {
                     if ($row->status == 1) {
-                        $btn = '<button class="btn btn-primary btn-xs">Belum dikirim</button>';
+                        $btn = '<center><span class="badge badge-primary btn-xs">Belum dikirim</span></center>';
                     } elseif ($row->status == 2) {
-                        $btn = '<button class="btn btn-secondary btn-xs">Menunggu Verifikasi</button>';
+                        $btn = '<center><span class="badge badge-secondary btn-xs">Menunggu Verifikasi</span></center>';
                     } elseif ($row->status == 3) {
-                        $btn = '<button class="btn btn-success btn-xs">Diterima</button>';
+                        $btn = '<center><span class="badge badge-success btn-xs">Diterima</span></center>';
                     } elseif ($row->status == 4) {
-                        $btn = '<button class="btn btn-danger btn-xs">Ditolak</button>';
+                        $btn = '<center><span class="badge badge-danger btn-xs">Ditolak</span></center>';
                     } else {
-                        $btn = '<button class="btn btn-warning btn-xs">Dikembalikan</button>';
+                        $btn = '<center><span class="badge badge-warning btn-xs">Dikembalikan</span></center>';
                     }
                     return $btn;
                 })
@@ -203,7 +203,7 @@ class SpjController extends Controller
         // Update Rekening
         $pagu_rekening = Rekening::where('id', $spj->rekening_id)->value('pagu_rekening');
         $kurangkan_rekening = Rekening::find($spj->rekening_id);
-        $kurangkan_rekening->pagu_rekening = $pagu_rekening - $kwitansi;
+        $kurangkan_rekening->sisa_rekening = $pagu_rekening - $kwitansi;
         $kurangkan_rekening->save();
 
         return response()->json(['success' => 'SPJ Berhasil diterima']);
@@ -213,7 +213,55 @@ class SpjController extends Controller
     {
         $menu = 'SPJ Diterima';
         if ($request->ajax()) {
-            $data = SPJ::where('status', 3)->get();
+            $user = Auth::user()->bagian_id;
+            if (Auth::user()->level == 1) {
+                $data = SPJ::where('status', 3)->get();
+            } else {
+                $data = SPJ::where('status', 3)->where('bagian_id', $user)->get();
+            }
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('tanggal', function ($data) {
+                    return  \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal)->format('d/m/Y');
+                })
+                ->addColumn('kegiatan', function ($data) {
+                    $link = $data->kegiatan->kode_kegiatan;
+                    $link = $link . ' ' . $data->kegiatan->nama_kegiatan;
+                    return $link;
+                })
+                ->addColumn('subkeg', function ($data) {
+                    $link = $data->subkegiatan->kode_sub;
+                    $link = $link . ' ' . $data->subkegiatan->nama_sub;
+                    return $link;
+                })
+                ->addColumn('rekening', function ($data) {
+                    $link = $data->rekening->kode_rekening;
+                    $link = $link . ' ' . $data->rekening->nama_rekening;
+                    return $link;
+                })
+                ->addColumn('action', function ($row) {
+                    $btn = '<center><a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Lihat" class="btn btn-success btn-xs lihat"><i class="fas fa-eye"></i></a><center>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        if (Auth::user()->level == 1) {
+            return view('admin.spj.diterima', compact('menu'));
+        } else {
+            return view('admin.spj.diterimausr', compact('menu'));
+        }
+    }
+    public function ditolak(Request $request)
+    {
+        $menu = 'SPJ Ditolak';
+        if ($request->ajax()) {
+            $user = Auth::user()->bagian_id;
+            if (Auth::user()->level == 1) {
+                $data = SPJ::where('status', 4)->get();
+            } else {
+                $data = SPJ::where('status', 4)->where('bagian_id', $user)->get();
+            }
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('tanggal', function ($data) {
@@ -241,7 +289,11 @@ class SpjController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.spj.diterima', compact('menu'));
+        if (Auth::user()->level == 1) {
+            return view('admin.spj.ditolak', compact('menu'));
+        } else {
+            return view('admin.spj.ditolakusr', compact('menu'));
+        }
     }
 
     public function kembalikan(SPJ $spj)

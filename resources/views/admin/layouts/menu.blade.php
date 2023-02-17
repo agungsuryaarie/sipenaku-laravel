@@ -90,17 +90,15 @@
                     <p>Diterima</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('spj.ditolak') }}"
+                    class="nav-link {{ request()->segment(2) == 'ditolak' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Ditolak</p>
+                </a>
+            </li>
         </ul>
     </li>
-    {{-- <li class="nav-item">
-        <a href="{{ route('spj.verifikasi') }}"
-            class="nav-link {{ request()->segment(2) == 'verifikasi' ? 'active' : '' }}">
-            <i class="nav-icon fas fa-file"></i>
-            <p>
-                SPJ
-            </p>
-        </a>
-    </li> --}}
 @else
     <li
         class="nav-item {{ request()->segment(1) == 'spj' || request()->segment(2) == 'diterima' || request()->segment(1) == 'ditolak'
@@ -128,8 +126,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('spj.index') }}"
-                    class="nav-link {{ request()->segment(2) == 'diterima' ? 'active' : '' }}">
+                <a href="{{ route('spj.terima') }}"
+                    class="nav-link {{ request()->segment(2) == 'terima' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                         Pengajuan SPJ Diterima
@@ -137,8 +135,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('spj.index') }}"
-                    class="nav-link {{ request()->segment(2) == 'ditolak' ? 'active' : '' }}">
+                <a href="{{ route('spj.tolak') }}"
+                    class="nav-link {{ request()->segment(2) == 'tolak' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                         Pengajuan SPJ Ditolak
@@ -151,7 +149,7 @@
         <a href="#" class="nav-link {{ request()->segment(1) == 'rekening' ? 'active' : '' }}">
             <i class="fas fa-credit-card nav-icon"></i>
             <p>
-                Rekening Belanja
+                Kartu Kendali
             </p>
         </a>
     </li>

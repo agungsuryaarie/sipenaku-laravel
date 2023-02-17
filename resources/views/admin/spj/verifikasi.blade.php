@@ -31,7 +31,7 @@
                                         <th>Sub Kegiatan</th>
                                         <th>Rekening</th>
                                         <th>Uraian</th>
-                                        <th>Aksi</th>
+                                        <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>

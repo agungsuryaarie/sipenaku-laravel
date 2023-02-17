@@ -49,16 +49,14 @@ class RekeningController extends Controller
         //Translate Bahasa Indonesia
         $message = array(
             'kegiatan_id.required' => 'Kode Kegiatan harus diisi.',
-            'kegiatan_id.numeric' => 'Kode Kegiatan harus angka.',
             'subkegiatan_id.required' => 'Kode Sub Kegiatan harus diisi.',
-            'subkegiatan_id.numeric' => 'Kode Sub Kegiatan harus angka.',
             'kode_rekening.required' => 'Kode Rekening harus diisi.',
             'nama_rekening.required' => 'Nama Rekening harus diisi.',
             'pagu_rekening.required' => 'Pagu Rekening harus diisi.',
         );
         $validator = Validator::make($request->all(), [
-            'kegiatan_id' => 'required|numeric',
-            'subkegiatan_id' => 'required|numeric',
+            'kegiatan_id' => 'required',
+            'subkegiatan_id' => 'required',
             'kode_rekening' => 'required',
             'nama_rekening' => 'required',
             'pagu_rekening' => 'required',

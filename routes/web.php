@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth']], function () {
         // SPJ Admin Verifikasi
         Route::get('spj/verifikasi', [SpjController::class, 'verifikasi'])->name('spj.verifikasi');
         Route::get('spj/diterima', [SpjController::class, 'diterima'])->name('spj.diterima');
+        Route::get('spj/ditolak', [SpjController::class, 'ditolak'])->name('spj.ditolak');
         Route::post('spj/terima/{id}', [SpjController::class, 'terima'])->name('spj.terima');
         Route::post('spj/kembalikan/{spj}', [SpjController::class, 'kembalikan'])->name('spj.kembalikan');
         Route::post('spj/tolak/{spj}', [SpjController::class, 'tolak'])->name('spj.tolak');
@@ -88,6 +89,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['checkUser:2']], function () {
         // SPJ
         Route::get('spj', [SpjController::class, 'index'])->name('spj.index');
+        Route::get('spj/terima', [SpjController::class, 'diterima'])->name('spj.terima');
+        Route::get('spj/tolak', [SpjController::class, 'ditolak'])->name('spj.tolak');
         Route::get('spj/create', [SpjController::class, 'create'])->name('spj.create');
         Route::post('spj/getsubkeg', [SpjController::class, 'getSubkeg'])->name('spj.getsubkeg');
         Route::post('spj/getrekening', [SpjController::class, 'getRekening'])->name('spj.getrekening');

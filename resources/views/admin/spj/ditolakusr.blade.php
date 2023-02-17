@@ -55,7 +55,7 @@
             var table = $(".data-table").DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('spj.diterima') }}",
+                ajax: "{{ route('spj.tolak') }}",
                 columns: [{
                         data: "DT_RowIndex",
                         name: "DT_RowIndex",
@@ -87,26 +87,6 @@
                         searchable: false,
                     },
                 ],
-            });
-
-            $("body").on("click", ".deleteSpj", function() {
-                var spj_id = $(this).data("id");
-                confirm("Are You sure want to delete !");
-
-                $.ajax({
-                    type: "DELETE",
-                    url: "{{ url('spj/destroy') }}" + '/' + spj_id,
-                    data: {
-                        _token: "{!! csrf_token() !!}",
-                    },
-                    success: function(data) {
-                        alertDanger("SPJ Berhasil di hapus");
-                        table.draw();
-                    },
-                    error: function(data) {
-                        console.log("Error:", data);
-                    },
-                });
             });
         });
     </script>
