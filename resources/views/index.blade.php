@@ -8,7 +8,7 @@
                 <div class="col-xl-5 col-lg-6 pt-3 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
                     <h1>{{ $appsetting->nama_aplikasi ?? '' }}</h1>
                     <h2></h2>
-                    <div><a href="{{ '/login' }}" class="btn-get-started scrollto">Get Started</a></div>
+                    <div><a href="{{ '/login' }}" class="btn-get-started scrollto">Mulai</a></div>
                 </div>
                 <div class="col-xl-4 col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="150">
                     <img src="{{ url('front/img/features.svg') }}" class="img-fluid animated" alt="">
@@ -51,7 +51,7 @@
         </section>
         <section id="features" class="services section-bg">
             <div class="section-tittle">
-                <h3>Features</h3>
+                <h3>Fitur</h3>
             </div>
             <div class="row-card">
                 <div class="cardpokersize">

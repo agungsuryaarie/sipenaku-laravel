@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ '/' }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ 'dashboard' }}">Dashboard</a></li>
                         <li class="breadcrumb-item active">{{ $menu }}</li>
                     </ol>
                 </div>
@@ -107,6 +107,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                             <h6>Ketentuan :</h6>
                             <small>
                                 *Tanggal mulai harus diatas atau sama dengan tanggal sekarang.<br>
@@ -196,6 +197,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                             <h6>Ketentuan :</h6>
                             <small>
                                 *Tanggal mulai harus diatas atau sama dengan tanggal sekarang.<br>
