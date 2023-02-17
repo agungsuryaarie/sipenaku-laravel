@@ -15,7 +15,8 @@ class Rekening extends Model
         'subkegiatan_id',
         'kode_rekening',
         'nama_rekening',
-        'pagu_rekening'
+        'pagu_rekening',
+        'sisa_rekening'
     ];
 
 

@@ -76,6 +76,7 @@ class RekeningController extends Controller
         $rekening->kegiatan_id = $request->kegiatan_id;
         $rekening->subkegiatan_id = $request->subkegiatan_id;
         $rekening->pagu_rekening = $total;
+        $rekening->sisa_rekening = $total;
         $rekening->save();
 
         // Update Kegiatan
@@ -83,6 +84,7 @@ class RekeningController extends Controller
         $get_kegiatan = Kegiatan::where('id', $request->kegiatan_id)->value('pagu_kegiatan');
         $update_kegiatan = Kegiatan::find($kegiatan_id);
         $update_kegiatan->pagu_kegiatan = $total + $get_kegiatan;
+        $update_kegiatan->sisa_kegiatan = $total + $get_kegiatan;
         $update_kegiatan->save();
 
         // Update Sub Kegiatan
@@ -90,6 +92,7 @@ class RekeningController extends Controller
         $get_subkegiatan = Subkegiatan::where('id', $request->subkegiatan_id)->value('pagu_sub');
         $update_subkegiatan = Subkegiatan::find($subkegiatan_id);
         $update_subkegiatan->pagu_sub = $total + $get_subkegiatan;
+        $update_subkegiatan->sisa_sub = $total + $get_subkegiatan;
         $update_subkegiatan->save();
 
         return response()->json(['success' => 'Detail saved successfully.']);
@@ -124,6 +127,7 @@ class RekeningController extends Controller
         $get_kegiatan = Kegiatan::where('id', $request->kegiatan_id)->value('pagu_kegiatan');
         $kembalikan_kegiatan = Kegiatan::find($kegiatan_id);
         $kembalikan_kegiatan->pagu_kegiatan =  $get_kegiatan - $get_old_pagu_rekening;
+        $kembalikan_kegiatan->sisa_kegiatan =  $get_kegiatan - $get_old_pagu_rekening;
         $kembalikan_kegiatan->save();
 
         // Kembalikan Sub Kegiatan
@@ -131,6 +135,7 @@ class RekeningController extends Controller
         $get_subkegiatan = Subkegiatan::where('id', $request->subkegiatan_id)->value('pagu_sub');
         $kembalikan_subkegiatan = Subkegiatan::find($subkegiatan_id);
         $kembalikan_subkegiatan->pagu_sub =  $get_subkegiatan - $get_old_pagu_rekening;
+        $kembalikan_subkegiatan->sisa_sub =  $get_subkegiatan - $get_old_pagu_rekening;
         $kembalikan_subkegiatan->save();
 
         //Update Rekening
@@ -141,18 +146,21 @@ class RekeningController extends Controller
         $rekening->kegiatan_id = $request->kegiatan_id;
         $rekening->subkegiatan_id = $request->subkegiatan_id;
         $rekening->pagu_rekening = $total;
+        $rekening->sisa_rekening = $total;
         $rekening->save();
 
         // Update Kegiatan
         $update_kegiatan = Kegiatan::find($kegiatan_id);
         $get_kegiatan_new = Kegiatan::where('id', $request->kegiatan_id)->value('pagu_kegiatan');
         $update_kegiatan->pagu_kegiatan = $total + $get_kegiatan_new;
+        $update_kegiatan->sisa_kegiatan = $total + $get_kegiatan_new;
         $update_kegiatan->save();
 
         // Update Sub Kegiatan
         $update_subkegiatan = Subkegiatan::find($subkegiatan_id);
         $get_subkegiatan_new = Subkegiatan::where('id', $request->subkegiatan_id)->value('pagu_sub');
         $update_subkegiatan->pagu_sub = $total + $get_subkegiatan_new;
+        $update_subkegiatan->sisa_sub = $total + $get_subkegiatan_new;
         $update_subkegiatan->save();
 
         return response()->json(['success' => 'Detail saved successfully.']);
@@ -174,6 +182,7 @@ class RekeningController extends Controller
         $get_kegiatan = Kegiatan::where('id', $rekening->kegiatan_id)->value('pagu_kegiatan');
         $kembalikan_kegiatan = Kegiatan::find($kegiatan_id);
         $kembalikan_kegiatan->pagu_kegiatan =  $get_kegiatan - $get_old_pagu_rekening;
+        $kembalikan_kegiatan->sisa_kegiatan =  $get_kegiatan - $get_old_pagu_rekening;
         $kembalikan_kegiatan->save();
 
         // Kembalikan Sub Kegiatan
@@ -181,6 +190,7 @@ class RekeningController extends Controller
         $get_subkegiatan = Subkegiatan::where('id', $rekening->subkegiatan_id)->value('pagu_sub');
         $kembalikan_subkegiatan = Subkegiatan::find($subkegiatan_id);
         $kembalikan_subkegiatan->pagu_sub =  $get_subkegiatan - $get_old_pagu_rekening;
+        $kembalikan_subkegiatan->sisa_sub =  $get_subkegiatan - $get_old_pagu_rekening;
         $kembalikan_subkegiatan->save();
 
         Rekening::find($id)->delete();

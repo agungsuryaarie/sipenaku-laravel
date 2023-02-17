@@ -40,7 +40,7 @@ class SubkegiatanController extends Controller
                     $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteSubkeg"><i class="fas fa-trash"></i></a><center>';
                     return $btn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['kode_subkeg', 'nama_subkeg', 'action'])
                 ->make(true);
         }
 

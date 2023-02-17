@@ -44,7 +44,7 @@ class KegiatanController extends Controller
                     $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteKegiatan"><i class="fas fa-trash"></i></a><center>';
                     return $btn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['kode_kegiatan', 'nama_kegiatan', 'action'])
                 ->make(true);
         }
         return view('admin.kegiatan.data', compact('menu', 'bagian'));

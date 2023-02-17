@@ -69,8 +69,11 @@ Route::group(['middleware' => ['auth']], function () {
         // Kartu Kendali
         Route::get('kartu-kendali', [KartuController::class, 'index'])->name('kartukendali.index');
         // SPJ Admin Verifikasi
-        Route::get('data-spj', [SpjController::class, 'indexadm'])->name('spj.indexadm');
-        Route::get('data-spj/verifikasi', [SpjController::class, 'verifikasi'])->name('spj.verifikasi');
+        Route::get('spj/verifikasi', [SpjController::class, 'verifikasi'])->name('spj.verifikasi');
+        Route::get('spj/diterima', [SpjController::class, 'diterima'])->name('spj.diterima');
+        Route::post('spj/terima/{id}', [SpjController::class, 'terima'])->name('spj.terima');
+        Route::post('spj/kembalikan/{spj}', [SpjController::class, 'kembalikan'])->name('spj.kembalikan');
+        Route::post('spj/tolak/{spj}', [SpjController::class, 'tolak'])->name('spj.tolak');
         //app-Setting
         Route::get('appsetting', [AppSettingController::class, 'index'])->name('appsetting.index');
         Route::get('appsetting/create', [AppSettingController::class, 'create'])->name('appsetting.create');

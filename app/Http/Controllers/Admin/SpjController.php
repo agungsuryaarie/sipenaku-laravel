@@ -79,11 +79,6 @@ class SpjController extends Controller
 
         return view('admin.spj.data', compact('menu', 'spj'));
     }
-    public function indexadm(Request $request)
-    {
-        $menu = 'Data SPJ';
-        return view('admin.spj.data-admin', compact('menu'));
-    }
 
     public function create()
     {
@@ -149,10 +144,8 @@ class SpjController extends Controller
     public function kirim(SPJ $spj)
     {
         $spj->update(['status' => '2']);
-        return response()->json(['success' => 'SPJ Berhasil di Kirim']);
-        // return redirect()->route('spj.index')->with('success', 'SPJ Berhasil di Kirim');
+        return response()->json(['success' => 'SPJ Berhasil dikirim']);
     }
-
 
     public function destroy(SPJ $spj)
     {
@@ -161,6 +154,105 @@ class SpjController extends Controller
         }
         $spj->delete();
         return response()->json(['success' => 'SPJ deleted successfully.']);
-        // return redirect()->route('spj.index')->with('success', 'SPJ deleted successfully');
+    }
+
+    public function verifikasi(Request $request)
+    {
+        $menu = 'Verifikasi SPJ';
+        if ($request->ajax()) {
+            $data = SPJ::where('status', 2)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('tanggal', function ($data) {
+                    return  \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal)->format('d/m/Y');
+                })
+                ->addColumn('kegiatan', function ($data) {
+                    $link = $data->kegiatan->kode_kegiatan;
+                    $link = $link . ' ' . $data->kegiatan->nama_kegiatan;
+                    return $link;
+                })
+                ->addColumn('subkeg', function ($data) {
+                    $link = $data->subkegiatan->kode_sub;
+                    $link = $link . ' ' . $data->subkegiatan->nama_sub;
+                    return $link;
+                })
+                ->addColumn('rekening', function ($data) {
+                    $link = $data->rekening->kode_rekening;
+                    $link = $link . ' ' . $data->rekening->nama_rekening;
+                    return $link;
+                })
+                ->addColumn('action', function ($row) {
+
+                    $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Terima" class="btn btn-success btn-xs terima">Terima</a>';
+                    $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Kembalikan" class="btn btn-primary btn-xs kembalikan">Kembalikan</a></center>';
+                    $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Tolak" class="btn btn-danger btn-xs tolak">Tolak</a></center>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('admin.spj.verifikasi', compact('menu'));
+    }
+
+    public function terima($id)
+    {
+        $spj = SPJ::find($id);
+        $spj->update(['status' => '3']);
+        $kwitansi = $spj->kwitansi;
+
+        // Update Rekening
+        $pagu_rekening = Rekening::where('id', $spj->rekening_id)->value('pagu_rekening');
+        $kurangkan_rekening = Rekening::find($spj->rekening_id);
+        $kurangkan_rekening->pagu_rekening = $pagu_rekening - $kwitansi;
+        $kurangkan_rekening->save();
+
+        return response()->json(['success' => 'SPJ Berhasil diterima']);
+    }
+
+    public function diterima(Request $request)
+    {
+        $menu = 'SPJ Diterima';
+        if ($request->ajax()) {
+            $data = SPJ::where('status', 3)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('tanggal', function ($data) {
+                    return  \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal)->format('d/m/Y');
+                })
+                ->addColumn('kegiatan', function ($data) {
+                    $link = $data->kegiatan->kode_kegiatan;
+                    $link = $link . ' ' . $data->kegiatan->nama_kegiatan;
+                    return $link;
+                })
+                ->addColumn('subkeg', function ($data) {
+                    $link = $data->subkegiatan->kode_sub;
+                    $link = $link . ' ' . $data->subkegiatan->nama_sub;
+                    return $link;
+                })
+                ->addColumn('rekening', function ($data) {
+                    $link = $data->rekening->kode_rekening;
+                    $link = $link . ' ' . $data->rekening->nama_rekening;
+                    return $link;
+                })
+                ->addColumn('action', function ($row) {
+                    $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Lihat" class="btn btn-success btn-xs lihat"><i class="fas fa-eye"></i></a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('admin.spj.diterima', compact('menu'));
+    }
+
+    public function kembalikan(SPJ $spj)
+    {
+        $spj->update(['status' => '5']);
+        return response()->json(['success' => 'SPJ Berhasil dikembalikan']);
+    }
+
+    public function tolak(SPJ $spj)
+    {
+        $spj->update(['status' => '4']);
+        return response()->json(['success' => 'SPJ Berhasil ditolak']);
     }
 }

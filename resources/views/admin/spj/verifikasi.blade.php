@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>SPJ</h1>
+                    <h1>{{ $menu }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">SPJ</li>
+                        <li class="breadcrumb-item active">{{ $menu }}</li>
                     </ol>
                 </div>
             </div>
@@ -21,10 +21,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            <a href="{{ route('spj.create') }}" class="btn btn-info btn-xs float-right">
-                                <i class="fas fa-plus-circle"></i> Tambah</a>
-                        </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped data-table">
                                 <thead>
@@ -35,7 +31,6 @@
                                         <th>Sub Kegiatan</th>
                                         <th>Rekening</th>
                                         <th>Uraian</th>
-                                        <th>Status</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -60,7 +55,7 @@
             var table = $(".data-table").DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('spj.index') }}",
+                ajax: "{{ route('spj.verifikasi') }}",
                 columns: [{
                         data: "DT_RowIndex",
                         name: "DT_RowIndex",
@@ -84,10 +79,6 @@
                     {
                         data: "uraian",
                         name: "uraian",
-                    },
-                    {
-                        data: "status",
-                        name: "status",
                     },
                     {
                         data: "action",
@@ -118,16 +109,52 @@
                 });
             });
 
-            $("body").on("click", ".kirim", function() {
+            $("body").on("click", ".terima", function() {
                 var spj_id = $(this).data("id");
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('spj/kirim') }}" + '/' + spj_id,
+                    url: "{{ url('spj/terima') }}" + '/' + spj_id,
                     data: {
                         _token: "{!! csrf_token() !!}",
                     },
                     success: function(data) {
-                        alertSuccess("SPJ Berhasil di kirim");
+                        alertSuccess("SPJ Berhasil diterima");
+                        table.draw();
+                    },
+                    error: function(data) {
+                        console.log("Error:", data);
+                    },
+                });
+            });
+
+            $("body").on("click", ".kembalikan", function() {
+                var spj_id = $(this).data("id");
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('spj/kembalikan') }}" + '/' + spj_id,
+                    data: {
+                        _token: "{!! csrf_token() !!}",
+                    },
+                    success: function(data) {
+                        alertSuccess("SPJ Berhasil dikembalikan");
+                        table.draw();
+                    },
+                    error: function(data) {
+                        console.log("Error:", data);
+                    },
+                });
+            });
+
+            $("body").on("click", ".tolak", function() {
+                var spj_id = $(this).data("id");
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('spj/tolak') }}" + '/' + spj_id,
+                    data: {
+                        _token: "{!! csrf_token() !!}",
+                    },
+                    success: function(data) {
+                        alertSuccess("SPJ Berhasil ditolak");
                         table.draw();
                     },
                     error: function(data) {
