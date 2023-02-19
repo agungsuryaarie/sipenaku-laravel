@@ -137,21 +137,26 @@ class SpjController extends Controller
             'subkegiatan_id.required' => 'Sub Kegiatan harus dipilih.',
             'rekening_id.required' => 'Rekening harus dipilih.',
             'uraian.required' => 'Uraian harus diisi.',
-            'kwitansi.required' => 'Misi harus diisi.',
-            'gambar.required' => 'Gambar harus diupload.',
-            'gambar.images' => 'File harus image.',
-            'gambar.mimes' => 'Foto harus jpeg,png,jpg.',
-            'gambar.max' => 'File maksimal 1MB.',
+            'uraian.max' => 'Uraian maksimal 500 karakter.',
+            'kwitansi.required' => 'Kwitansi harus diisi.',
+            'nama_penerima.required' => 'Nama Penerima harus diisi.',
+            'alamat_penerima.required' => 'Alamat harus diisi.',
+            'alamat_penerima.max' => 'Alamat maksimal 500 karakter.',
+            'jenis_spm.required' => 'Jenis SPM harus dipilih.',
+            'file.required' => 'File harus diupload.',
+            'file.mimes' => 'File harus .pdf',
+            'file.max' => 'File maksimal 5MB.',
         );
         $validator = Validator::make($request->all(), [
             'kegiatan_id' => 'required',
             'subkegiatan_id' => 'required',
             'rekening_id' => 'required',
-            'uraian' => 'required',
+            'uraian' => 'required|max:500',
             'kwitansi' => 'required',
             'nama_penerima' => 'required',
-            'alamat_penerima' => 'required',
+            'alamat_penerima' => 'required|max:500',
             'jenis_spm' => 'required',
+            'file' => 'required|mimes:pdf|max:5120',
         ], $message);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -181,7 +186,7 @@ class SpjController extends Controller
             'status' => '1',
         ]);
 
-        return redirect()->route('spj.index')->with('success', 'SPJ Berhasil di Tambah');
+        return redirect()->route('spj.index')->with('toast_success', 'SPJ Berhasil di Tambah');
     }
 
     public function kirim(SPJ $spj)

@@ -24,6 +24,8 @@
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <h5>Ketentuan :</h6>
                         <small>
+                            *Harap lihat kartu kendali sebelum input SPJ untuk memastikan nilai kwitansi.<br>
+                            *Nilai kwitansi tidak boleh melebihi nilai anggaran.<br>
                             *Berkas file digabung dalam 1 file dan wajib berbentuk pdf.<br>
                             *Ukuran file maksimal 5MB.
                 </div>
@@ -32,7 +34,7 @@
                         @csrf
                         <div class="card-body-form">
                             <div class="form-group">
-                                <label>Tanggal</label>
+                                <label>Tanggal<small> (Opsional)</small></label>
                                 <input type="date" name="tanggal" class="form-control">
                             </div>
                             <div class="form-group">
@@ -64,7 +66,7 @@
                                 <select id="rekening" name="rekening_id"
                                     class="form-control select2bs4 @error('rekening_id') is-invalid @enderror">
                                 </select>
-                                @error('rekening')
+                                @error('rekening_id')
                                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
@@ -126,16 +128,19 @@
                                     </div>
                                 </div>
                                 @error('jenis_spm')
-                                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                                    <small class="text-danger"><strong>{{ $message }}</strong></small>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputFile">Upload File</label>
+                                <label>Upload File</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="file" id="customFile"
-                                        accept=".pdf">
-                                    <label class="custom-file-label" for="customFile">Pilih File</label>
+                                    <input type="file" class="custom-file-input @error('file') is-invalid @enderror"
+                                        name="file" id="customFile" accept=".pdf">
+                                    <label class="custom-file-label">Pilih File</label>
                                 </div>
+                                @error('file')
+                                    <small class="text-danger"><strong>{{ $message }}</strong></small>
+                                @enderror
                             </div>
                         </div>
                         <div class="card-footer">
