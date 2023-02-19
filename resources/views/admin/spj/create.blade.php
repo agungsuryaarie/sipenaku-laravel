@@ -78,8 +78,8 @@
                             <div class="form-group">
                                 <label>Nilai Kwitansi<span class="text-danger"> *</span></label>
                                 <input name="kwitansi" type="text"
-                                    class="form-control @error('kwitansi') is-invalid @enderror" placeholder="Rp."
-                                    value="{{ old('kwitansi') }}">
+                                    class="form-control rupiah @error('kwitansi') is-invalid @enderror" placeholder="Rp."
+                                    value="{{ old('kwitansi') }}" id="kwitansi">
                                 @error('kwitansi')
                                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -133,7 +133,7 @@
                                 <label for="exampleInputFile">Upload File</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="file" id="customFile"
-                                        required>
+                                        accept=".pdf">
                                     <label class="custom-file-label" for="customFile">Pilih File</label>
                                 </div>
                             </div>
@@ -150,6 +150,30 @@
 @endsection
 @section('script')
     <script>
+        var rupiah = document.getElementById("kwitansi");
+        rupiah.addEventListener("keyup", function(e) {
+            rupiah.value = formatRupiah(this.value, "Rp. ");
+        });
+
+
+        /* Fungsi formatRupiah */
+        function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, "").toString(),
+                split = number_string.split(","),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+            if (ribuan) {
+                separator = sisa ? "." : "";
+                rupiah += separator + ribuan.join(".");
+            }
+
+            rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+            return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+        }
+
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         })

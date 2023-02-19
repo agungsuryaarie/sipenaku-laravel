@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use DataTables;
+use Illuminate\Support\Facades\Validator;
+
 
 class SpjController extends Controller
 {
@@ -129,18 +131,31 @@ class SpjController extends Controller
 
     public function store(Request $request)
     {
-
-        // $request->validate([
-        //     'bagian_id' => 'required',
-        //     'kegiatan_id' => 'required',
-        //     'subkegiatan_id' => 'required',
-        //     'rekening_id' => 'required',
-        //     'uraian' => 'required',
-        //     'kwitansi' => 'required',
-        //     'nama_penerima' => 'required',
-        //     'alamat_penerima' => 'required',
-        //     'jenis_spm' => 'required',
-        // ]);
+        //Translate Bahasa Indonesia
+        $message = array(
+            'kegiatan_id.required' => 'Kegiatan harus dipilih.',
+            'subkegiatan_id.required' => 'Sub Kegiatan harus dipilih.',
+            'rekening_id.required' => 'Rekening harus dipilih.',
+            'uraian.required' => 'Uraian harus diisi.',
+            'kwitansi.required' => 'Misi harus diisi.',
+            'gambar.required' => 'Gambar harus diupload.',
+            'gambar.images' => 'File harus image.',
+            'gambar.mimes' => 'Foto harus jpeg,png,jpg.',
+            'gambar.max' => 'File maksimal 1MB.',
+        );
+        $validator = Validator::make($request->all(), [
+            'kegiatan_id' => 'required',
+            'subkegiatan_id' => 'required',
+            'rekening_id' => 'required',
+            'uraian' => 'required',
+            'kwitansi' => 'required',
+            'nama_penerima' => 'required',
+            'alamat_penerima' => 'required',
+            'jenis_spm' => 'required',
+        ], $message);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $fileName = time() . '.' . $request->file->extension();
         $request->file->storeAs('public/file', $fileName);
