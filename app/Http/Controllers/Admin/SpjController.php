@@ -22,7 +22,7 @@ class SpjController extends Controller
         $spj = SPJ::where('bagian_id', Auth::user()->bagian_id)->get();
 
         if ($request->ajax()) {
-            $data = SPJ::where('bagian_id', Auth::user()->bagian_id)->where('status', 1)->get();
+            $data = SPJ::where('bagian_id', Auth::user()->bagian_id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 5)->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('tanggal', function ($data) {
@@ -45,32 +45,60 @@ class SpjController extends Controller
                 })
                 ->addColumn('status', function ($row) {
                     if ($row->status == 1) {
-                        $btn = '<center><span class="badge badge-primary btn-xs">Belum dikirim</span></center>';
+                        $btn = '<center><span class="badge badge-primary badge-xs">Belum dikirim</span></center>';
                     } elseif ($row->status == 2) {
-                        $btn = '<center><span class="badge badge-secondary btn-xs">Menunggu Verifikasi</span></center>';
+                        $btn = '<center><span class="badge badge-info badge-xs">Menunggu Verifikasi</span></center>';
                     } elseif ($row->status == 3) {
-                        $btn = '<center><span class="badge badge-success btn-xs">Diterima</span></center>';
+                        $btn = '<center><span class="badge badge-success badge-xs">Diterima</span></center>';
                     } elseif ($row->status == 4) {
-                        $btn = '<center><span class="badge badge-danger btn-xs">Ditolak</span></center>';
+                        $btn = '<center><span class="badge badge-danger badge-xs text-white">Ditolak</span></center>';
                     } else {
-                        $btn = '<center><span class="badge badge-warning btn-xs">Dikembalikan</span></center>';
+                        $btn = '<center><span class="badge badge-warning badge-xs text-white">Dikembalikan</span></center>';
                     }
                     return $btn;
                 })
                 ->addColumn('action', function ($row) {
                     if ($row->status == 1) {
-                        $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Kirim" class="btn btn-primary btn-xs kirim">Kirim</i></a>';
-                        $btn = '<center>' . $btn . ' <a href="' . route('spj.edit', $row->id) . '" class="btn btn-primary btn-xs"><i class="fas fa-edit"></i></a></center>';
-                        $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteSpj">&nbsp;<i class="fas fa-trash"></i>&nbsp;</a></center>';
-                    } elseif ($row->status == 3) {
-                        $btn = '<center><a href="' . route('spj.edit', $row->id) . '" class="btn btn-success btn-xs"><i class="fas fa-download"></i></a></center>';
+                        $btn = '<center>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item kirim" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Kirim">Kirim</i></a>
+                                <a class="dropdown-item" href="' . route('spj.edit', $row->id) . '">Edit</a>
+                                <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
+                            </div>
+                        </div>
+                    </center>';
+                    } elseif ($row->status == 2) {
+                        $btn = '<center><i>no action</i></center>';
+                    } elseif ($row->status == 4) {
+                        $btn = '<center>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
+                            </div>
+                        </div>
+                    </center>';
                     } elseif ($row->status == 5) {
-                        $btn = '<center><a href="' . route('spj.edit', $row->id) . '" class="btn btn-primary btn-xs"><i class="fas fa-edit"></i></a></center>';
-                        $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteSpj">&nbsp;<i class="fas fa-trash"></i>&nbsp;</a></center>';
+                        $btn = '<center>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" href="' . route('spj.edit', $row->id) . '">Edit</a>
+                                <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
+                            </div>
+                        </div>
+                    </center>';
                     } else {
                         $btn = '';
                     }
-
                     return $btn;
                 })
                 ->rawColumns(['status', 'action'])
@@ -294,6 +322,10 @@ class SpjController extends Controller
         } else {
             return view('admin.spj.ditolakusr', compact('menu'));
         }
+    }
+    public function edit()
+    {
+        echo "Belum ada aksi";
     }
 
     public function kembalikan(SPJ $spj)
