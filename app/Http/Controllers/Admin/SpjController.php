@@ -170,7 +170,10 @@ class SpjController extends Controller
         } else {
             $tanggal = $request->tanggal;
         }
-
+        $rek = Rekening::where('id', $request->rekening_id)->first();
+        if ($request->kwitansi < $rek->sisa_rekening) {
+            return redirect()->route('spj.index')->with(['toast_error' => 'Maaf, anggaran tidak mencukupi!' . "\n" . 'Sisa anggaran : Rp.' . $rek->sisa_rekening]);
+        }
         SPJ::create([
             'tanggal' => $tanggal,
             'bagian_id' => Auth::user()->bagian_id,
@@ -185,10 +188,8 @@ class SpjController extends Controller
             'file' => $fileName,
             'status' => '1',
         ]);
-
-        return redirect()->route('spj.index')->with('toast_success', 'SPJ Berhasil di Tambah');
+        return redirect()->route('spj.index')->with('toast_success', 'SPJ Berhasil ditambah');
     }
-
     public function kirim(SPJ $spj)
     {
         $spj->update(['status' => '2']);
