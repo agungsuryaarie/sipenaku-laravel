@@ -161,10 +161,6 @@ class SpjController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
-        $fileName = time() . '.' . $request->file->extension();
-        $request->file->storeAs('public/file', $fileName);
-
         if ($request->tanggal == '') {
             $tanggal = Carbon::now()->format('Y-m-d');
         } else {
@@ -174,6 +170,10 @@ class SpjController extends Controller
         if ($request->kwitansi < $rek->sisa_rekening) {
             return redirect()->route('spj.index')->with(['toast_error' => 'Maaf, anggaran tidak mencukupi!' . "\n" . 'Sisa anggaran : Rp.' . $rek->sisa_rekening]);
         }
+        $fileName = time() . '.' . $request->file->extension();
+        $request->file->storeAs('public/file', $fileName);
+
+        $total =  preg_replace('/[^0-9]/', '', $request->kwitansi);
         SPJ::create([
             'tanggal' => $tanggal,
             'bagian_id' => Auth::user()->bagian_id,
@@ -181,7 +181,7 @@ class SpjController extends Controller
             'subkegiatan_id' => $request->subkegiatan_id,
             'rekening_id' => $request->rekening_id,
             'uraian' => $request->uraian,
-            'kwitansi' => $request->kwitansi,
+            'kwitansi' => $total,
             'nama_penerima' => $request->nama_penerima,
             'alamat_penerima' => $request->alamat_penerima,
             'jenis_spm' => $request->jenis_spm,
@@ -193,7 +193,7 @@ class SpjController extends Controller
     public function kirim(SPJ $spj)
     {
         $spj->update(['status' => '2']);
-        return response()->json(['success' => 'SPJ Berhasil dikirim']);
+        return response()->json(['toast_success' => 'SPJ Berhasil dikirim']);
     }
 
     public function destroy(SPJ $spj)
@@ -202,7 +202,7 @@ class SpjController extends Controller
             Storage::delete('public/file/' . $spj->file);
         }
         $spj->delete();
-        return response()->json(['success' => 'SPJ deleted successfully.']);
+        return response()->json(['toast_success' => 'SPJ deleted successfully.']);
     }
 
     public function verifikasi(Request $request)
@@ -255,7 +255,7 @@ class SpjController extends Controller
         $kurangkan_rekening->sisa_rekening = $pagu_rekening - $kwitansi;
         $kurangkan_rekening->save();
 
-        return response()->json(['success' => 'SPJ Berhasil diterima']);
+        return response()->json(['toast_success' => 'SPJ Berhasil diterima']);
     }
 
     public function diterima(Request $request)
@@ -289,7 +289,30 @@ class SpjController extends Controller
                     return $link;
                 })
                 ->addColumn('action', function ($row) {
-                    $btn = '<center><a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Lihat" class="btn btn-success btn-xs lihat"><i class="fas fa-eye"></i></a><center>';
+                    if (Auth::user()->level == 1) {
+                        $btn = '<center>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                               <a class="dropdown-item lihat"  href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Lihat">Review</a>
+                               <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
+                               </div>
+                               </div>
+                           </center>';
+                    } else {
+                        $btn = '<center>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                           <a class="dropdown-item lihat"  href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Lihat">Review</a>
+                           </div>
+                           </div>
+                       </center>';
+                    }
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -332,7 +355,30 @@ class SpjController extends Controller
                     return $link;
                 })
                 ->addColumn('action', function ($row) {
-                    $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Lihat" class="btn btn-success btn-xs lihat"><i class="fas fa-eye"></i></a>';
+                    if (Auth::user()->level == 1) {
+                        $btn = '<center>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                               <a class="dropdown-item lihat"  href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Lihat">Review</a>
+                               <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
+                               </div>
+                               </div>
+                           </center>';
+                    } else {
+                        $btn = '<center>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu" role="menu">
+                           <a class="dropdown-item lihat"  href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Lihat">Review</a>
+                           </div>
+                           </div>
+                       </center>';
+                    }
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -344,20 +390,24 @@ class SpjController extends Controller
             return view('admin.spj.ditolakusr', compact('menu'));
         }
     }
-    public function edit()
+    public function edit(SPJ $spj)
     {
-        echo "Belum ada aksi";
+        $menu = 'Pengajuan SPJ';
+        $kegiatan = Kegiatan::where('bagian_id', Auth::user()->bagian_id)->get();
+        // $subkegiatan = Subkegiatan::where('bagian_id', Auth::user()->bagian_id)->get();
+        // $rekening = Rekening::where('bagian_id', Auth::user()->bagian_id)->get();
+        return view('admin.spj.edit', compact('spj', 'menu', 'kegiatan'));
     }
 
     public function kembalikan(SPJ $spj)
     {
         $spj->update(['status' => '5']);
-        return response()->json(['success' => 'SPJ Berhasil dikembalikan']);
+        return response()->json(['toast_success' => 'SPJ Berhasil dikembalikan']);
     }
 
     public function tolak(SPJ $spj)
     {
         $spj->update(['status' => '4']);
-        return response()->json(['success' => 'SPJ Berhasil ditolak']);
+        return response()->json(['toast_success' => 'SPJ Berhasil ditolak']);
     }
 }

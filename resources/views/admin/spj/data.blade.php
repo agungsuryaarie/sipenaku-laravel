@@ -100,8 +100,13 @@
 
             $("body").on("click", ".deleteSpj", function() {
                 var spj_id = $(this).data("id");
-                confirm("Are You sure want to delete !");
-
+                swal({
+                    title: `Are you sure you want to delete this record?`,
+                    text: "If you delete this, it will be gone forever.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
                 $.ajax({
                     type: "DELETE",
                     url: "{{ url('spj/destroy') }}" + '/' + spj_id,

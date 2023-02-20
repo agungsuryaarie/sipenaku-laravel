@@ -26,25 +26,28 @@
                         <small>
                             *Harap lihat kartu kendali sebelum input SPJ untuk memastikan nilai kwitansi.<br>
                             *Nilai kwitansi tidak boleh melebihi nilai anggaran.<br>
+                            *Jika tidak memperbaharui file, kosongkan saja.<br>
                             *Berkas file digabung dalam 1 file dan wajib berbentuk pdf.<br>
                             *Ukuran file maksimal 5MB.
                 </div>
                 <div class="card">
-                    <form action="{{ route('spj.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('spj.update', $spj->id) }}" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <div class="card-body-form">
                             <div class="form-group">
                                 <label>Tanggal<small> (Opsional)</small></label>
-                                <input type="date" name="tanggal" class="form-control">
+                                <input type="date" name="tanggal" class="form-control"
+                                    value="{{ old('tanggal', $spj->tanggal) }}">
                             </div>
                             <div class="form-group">
                                 <label>Kegiatan<span class="text-danger"> *</span></label>
                                 <select class="form-control select2bs4 @error('kegiatan_id') is-invalid @enderror"
                                     id="kegiatan" name="kegiatan_id" style="width: 100%;">
-                                    <option>::Pilih Kegiatan::</option>
+                                    <option value="">::Pilih Kegiatan::</option>
                                     @foreach ($kegiatan as $keg)
                                         <option value="{{ $keg->id }}"
-                                            {{ $keg->id == old('kegiatan_id') ? 'selected' : '' }}>
+                                            {{ $keg->id == $spj->kegiatan_id ? 'selected' : '' }}>
                                             {{ $keg->nama_kegiatan }}</option>
                                     @endforeach
                                 </select>
@@ -72,7 +75,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Uraian<span class="text-danger"> *</span></label>
-                                <textarea name="uraian" class="form-control @error('uraian') is-invalid @enderror" rows="3">{{ old('uraian') }}</textarea>
+                                <textarea name="uraian" class="form-control @error('uraian') is-invalid @enderror" rows="3">{{ old('uraian', $spj->uraian) }}</textarea>
                                 @error('uraian')
                                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -81,7 +84,7 @@
                                 <label>Nilai Kwitansi<span class="text-danger"> *</span></label>
                                 <input name="kwitansi" type="text"
                                     class="form-control rupiah @error('kwitansi') is-invalid @enderror" placeholder="Rp."
-                                    value="{{ old('kwitansi') }}" id="kwitansi">
+                                    value="{{ old('kwitansi', $spj->kwitansi) }}" id="kwitansi">
                                 @error('kwitansi')
                                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -90,14 +93,14 @@
                                 <label>Nama Rekanan/Penerima<span class="text-danger"> *</span></label>
                                 <input name="nama_penerima" type="text"
                                     class="form-control @error('nama_penerima') is-invalid @enderror"
-                                    value="{{ old('nama_penerima') }}">
+                                    value="{{ old('nama_penerima', $spj->nama_penerima) }}">
                                 @error('nama_penerima')
                                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label>Alamat Penerima<span class="text-danger"> *</span></label>
-                                <textarea name="alamat_penerima" class="form-control  @error('alamat_penerima') is-invalid @enderror" rows="3">{{ old('alamat_penerima') }}</textarea>
+                                <textarea name="alamat_penerima" class="form-control  @error('alamat_penerima') is-invalid @enderror" rows="3">{{ old('alamat_penerima', $spj->alamat_penerima) }}</textarea>
                                 @error('alamat_penerima')
                                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -107,23 +110,26 @@
                                 <div class="radio-btn">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" value="1" id="jenis_spm1"
-                                            name="jenis_spm" {{ old('jenis_spm') == '1' ? 'checked' : '' }}>
+                                            name="jenis_spm"
+                                            {{ old('jenis_spm', $spj->jenis_spm) == '1' ? 'checked' : '' }}>
                                         <label for="jenis_spm1" class="custom-control-label">GU</label>
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" value="2" id="jenis_spm2"
-                                            name="jenis_spm" {{ old('jenis_spm') == '2' ? 'checked' : '' }}>
+                                            name="jenis_spm"
+                                            {{ old('jenis_spm', $spj->jenis_spm) == '2' ? 'checked' : '' }}>
                                         <label for="jenis_spm2" class="custom-control-label">TU</label>
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" value="3" id="jenis_spm3"
-                                            name="jenis_spm" {{ old('jenis_spm') == '3' ? 'checked' : '' }}>
+                                            name="jenis_spm"
+                                            {{ old('jenis_spm', $spj->jenis_spm) == '3' ? 'checked' : '' }}>
                                         <label for="jenis_spm3" class="custom-control-label">LS</label>
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" value="4"
                                             id="jenis_spm4" name="jenis_spm"
-                                            {{ old('jenis_spm') == '4' ? 'checked' : '' }}>
+                                            {{ old('jenis_spm', $spj->jenis_spm) == '4' ? 'checked' : '' }}>
                                         <label for="jenis_spm4" class="custom-control-label">UP</label>
                                     </div>
                                 </div>
@@ -132,7 +138,11 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Upload File</label>
+                                <a href="{{ url('storage/file/', $spj->file) }}" target="blank"
+                                    class="link-blue text-sm"><i class="fas fa-link mr-1"></i> File Lama</a>
+                            </div>
+                            <div class="form-group">
+                                <label>Upload File Baru <small>(Opsional)</small></label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input @error('file') is-invalid @enderror"
                                         name="file" id="customFile" accept=".pdf">
@@ -186,25 +196,23 @@
             bsCustomFileInput.init();
         });
         $(document).ready(function() {
-            $('#kegiatan').on('change', function() {
-                var idKegiatan = this.value;
-                $("#subkeg").html('');
-                $.ajax({
-                    url: "{{ route('spj.getsubkeg') }}",
-                    type: "POST",
-                    data: {
-                        kegiatan_id: idKegiatan,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    dataType: 'json',
-                    success: function(result) {
-                        $('#subkeg').html('<option value="">Pilih Sub Kegiatan</option>');
-                        $.each(result.subkeg, function(key, value) {
-                            $("#subkeg").append('<option value="' + value
-                                .id + '">' + value.nama_sub + '</option>');
-                        });
-                    }
-                });
+            var idKegiatan = $('#kegiatan').val();
+            $("#subkeg").html('');
+            $.ajax({
+                url: "{{ route('spj.getsubkeg') }}",
+                type: "POST",
+                data: {
+                    kegiatan_id: idKegiatan,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(result) {
+                    $('#subkeg').html('<option value="">Pilih Sub Kegiatan</option>');
+                    $.each(result.subkeg, function(key, value) {
+                        $("#subkeg").append('<option value="' + value
+                            .id + '">' + value.nama_sub + '</option>');
+                    });
+                }
             });
 
             $('#subkeg').on('change', function() {
