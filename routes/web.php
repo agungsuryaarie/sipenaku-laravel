@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('spj/verifikasi', [SpjController::class, 'verifikasi'])->name('spj.verifikasi');
         Route::get('spj/diterima', [SpjController::class, 'diterima'])->name('spj.diterima');
         Route::get('spj/ditolak', [SpjController::class, 'ditolak'])->name('spj.ditolak');
+        Route::delete('spj/destroyed/{spj}', [SpjController::class, 'destroy'])->name('spj.destroyed');
         Route::post('spj/terima/{id}', [SpjController::class, 'terima'])->name('spj.terima');
         Route::post('spj/kembalikan/{spj}', [SpjController::class, 'kembalikan'])->name('spj.kembalikan');
         Route::post('spj/tolak/{spj}', [SpjController::class, 'tolak'])->name('spj.tolak');
@@ -97,7 +98,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('spj/store', [SpjController::class, 'store'])->name('spj.store');
         Route::delete('spj/destroy/{spj}', [SpjController::class, 'destroy'])->name('spj.destroy');
         Route::get('spj/edit/{spj}', [SpjController::class, 'edit'])->name('spj.edit');
-        Route::post('spj/update', [SpjController::class, 'store'])->name('spj.update');
+        Route::put('spj/{spj}/update', [SpjController::class, 'update'])->name('spj.update');
         Route::post('spj/kirim/{spj}', [SpjController::class, 'kirim'])->name('spj.kirim');
     });
 });

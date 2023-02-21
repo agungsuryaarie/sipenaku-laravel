@@ -166,14 +166,13 @@ class SpjController extends Controller
         } else {
             $tanggal = $request->tanggal;
         }
+        $total =  preg_replace('/[^0-9]/', '', $request->kwitansi);
         $rek = Rekening::where('id', $request->rekening_id)->first();
-        if ($request->kwitansi < $rek->sisa_rekening) {
+        if ($total > $rek->sisa_rekening) {
             return redirect()->route('spj.index')->with(['toast_error' => 'Maaf, anggaran tidak mencukupi!' . "\n" . 'Sisa anggaran : Rp.' . $rek->sisa_rekening]);
         }
         $fileName = time() . '.' . $request->file->extension();
         $request->file->storeAs('public/file', $fileName);
-
-        $total =  preg_replace('/[^0-9]/', '', $request->kwitansi);
         SPJ::create([
             'tanggal' => $tanggal,
             'bagian_id' => Auth::user()->bagian_id,
@@ -254,6 +253,18 @@ class SpjController extends Controller
         $kurangkan_rekening = Rekening::find($spj->rekening_id);
         $kurangkan_rekening->sisa_rekening = $pagu_rekening - $kwitansi;
         $kurangkan_rekening->save();
+
+        // Update Kegiatan
+        $sisa_kegiatan = Kegiatan::where('id', $spj->kegiatan_id)->value('sisa_kegiatan');
+        $update_sisa_kegiatan = Kegiatan::find($spj->kegiatan_id);
+        $update_sisa_kegiatan->sisa_kegiatan = $sisa_kegiatan - $kwitansi;
+        $update_sisa_kegiatan->save();
+
+        // Update Sub Kegiatan
+        $sisa_subkegiatan = Subkegiatan::where('id', $spj->subkegiatan_id)->value('sisa_sub');
+        $update_sisa_subkegiatan = Subkegiatan::find($spj->subkegiatan_id);
+        $update_sisa_subkegiatan->sisa_sub = $sisa_subkegiatan - $kwitansi;
+        $update_sisa_subkegiatan->save();
 
         return response()->json(['toast_success' => 'SPJ Berhasil diterima']);
     }
@@ -394,9 +405,83 @@ class SpjController extends Controller
     {
         $menu = 'Pengajuan SPJ';
         $kegiatan = Kegiatan::where('bagian_id', Auth::user()->bagian_id)->get();
-        // $subkegiatan = Subkegiatan::where('bagian_id', Auth::user()->bagian_id)->get();
-        // $rekening = Rekening::where('bagian_id', Auth::user()->bagian_id)->get();
         return view('admin.spj.edit', compact('spj', 'menu', 'kegiatan'));
+    }
+    public function update(Request $request, SPJ $spj)
+    {
+        //Translate Bahasa Indonesia
+        $message = array(
+            'kegiatan_id.required' => 'Kegiatan harus dipilih.',
+            'subkegiatan_id.required' => 'Sub Kegiatan harus dipilih.',
+            'rekening_id.required' => 'Rekening harus dipilih.',
+            'uraian.required' => 'Uraian harus diisi.',
+            'uraian.max' => 'Uraian maksimal 500 karakter.',
+            'kwitansi.required' => 'Kwitansi harus diisi.',
+            'nama_penerima.required' => 'Nama Penerima harus diisi.',
+            'alamat_penerima.required' => 'Alamat harus diisi.',
+            'alamat_penerima.max' => 'Alamat maksimal 500 karakter.',
+            'jenis_spm.required' => 'Jenis SPM harus dipilih.',
+            'file.mimes' => 'File harus .pdf',
+            'file.max' => 'File maksimal 5MB.',
+        );
+        $validator = Validator::make($request->all(), [
+            'kegiatan_id' => 'required',
+            'subkegiatan_id' => 'required',
+            'rekening_id' => 'required',
+            'uraian' => 'required|max:500',
+            'kwitansi' => 'required',
+            'nama_penerima' => 'required',
+            'alamat_penerima' => 'required|max:500',
+            'jenis_spm' => 'required',
+            'file' => 'mimes:pdf|max:5120',
+        ], $message);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        if ($request->tanggal == '') {
+            $tanggal = Carbon::now()->format('Y-m-d');
+        } else {
+            $tanggal = $request->tanggal;
+        }
+        $total =  preg_replace('/[^0-9]/', '', $request->kwitansi);
+        $rek = Rekening::where('id', $request->rekening_id)->first();
+        if ($total > $rek->sisa_rekening) {
+            return redirect()->route('spj.index')->with(['toast_error' => 'Maaf, anggaran tidak mencukupi!' . "\n" . 'Sisa anggaran : Rp.' . $rek->sisa_rekening]);
+        }
+        if ($request->hasFile('file')) {
+            $berkas = time() . '.' . $request->file->extension();
+            $request->file->storeAs('public/file', $berkas);
+            Storage::delete('public/file/' . $spj->file);
+            $spj->update([
+                'tanggal' => $tanggal,
+                'bagian_id' => Auth::user()->bagian_id,
+                'kegiatan_id' => $request->kegiatan_id,
+                'subkegiatan_id' => $request->subkegiatan_id,
+                'rekening_id' => $request->rekening_id,
+                'uraian' => $request->uraian,
+                'kwitansi' => $total,
+                'nama_penerima' => $request->nama_penerima,
+                'alamat_penerima' => $request->alamat_penerima,
+                'jenis_spm' => $request->jenis_spm,
+                'file' => $berkas,
+                'status' => 1,
+            ]);
+        } else {
+            $spj->update([
+                'tanggal' => $tanggal,
+                'bagian_id' => Auth::user()->bagian_id,
+                'kegiatan_id' => $request->kegiatan_id,
+                'subkegiatan_id' => $request->subkegiatan_id,
+                'rekening_id' => $request->rekening_id,
+                'uraian' => $request->uraian,
+                'kwitansi' => $total,
+                'nama_penerima' => $request->nama_penerima,
+                'alamat_penerima' => $request->alamat_penerima,
+                'jenis_spm' => $request->jenis_spm,
+                'status' => 1,
+            ]);
+        }
+        return redirect()->route('spj.index')->with('toast_success', 'SPJ Berhasil diedit');
     }
 
     public function kembalikan(SPJ $spj)

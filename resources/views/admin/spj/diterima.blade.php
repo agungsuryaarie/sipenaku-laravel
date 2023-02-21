@@ -91,11 +91,10 @@
 
             $("body").on("click", ".deleteSpj", function() {
                 var spj_id = $(this).data("id");
-                confirm("Are You sure want to delete !");
-
+                confirm("Apa kamu yakin menghapus data ini ?");
                 $.ajax({
                     type: "DELETE",
-                    url: "{{ url('spj/destroy') }}" + '/' + spj_id,
+                    url: "{{ url('spj/destroyed') }}" + '/' + spj_id,
                     data: {
                         _token: "{!! csrf_token() !!}",
                     },

@@ -117,7 +117,7 @@
             <div class="col-md-12">
                 <div class="card-footer bg-white shadow-sm">
                     <div class="row">
-                        <div class="col-sm-3 col-6">
+                        {{-- <div class="col-sm-3 col-6">
                             <div class="description-block border-right">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-sm-3 col-6">
                             <div class="description-block border-right">
                                 <h5 class="description-header mt-4">SPJ Diterima</h5>
@@ -149,12 +149,26 @@
                             </div>
                         </div>
                         <div class="col-sm-3 col-6">
-                            <div class="description-block">
+                            <div class="description-block border-right">
                                 <h5 class="description-header mt-4">Anggaran</h5>
                                 <span class="description-text">
                                     @if (Auth::user()->level == 2)
                                         @foreach ($kegiatan as $keg)
-                                            {{ 'Rp. ' . number_format($keg->pagu, 0, ',', '.') }}
+                                            <span
+                                                class="description-text text-success">{{ 'Rp. ' . number_format($keg->pagu_kegiatan, 0, ',', '.') }}</span>
+                                        @endforeach
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-6">
+                            <div class="description-block">
+                                <h5 class="description-header mt-4">Sisa</h5>
+                                <span class="description-text">
+                                    @if (Auth::user()->level == 2)
+                                        @foreach ($kegiatan as $keg)
+                                            <span
+                                                class="description-text text-danger">{{ 'Rp. ' . number_format($keg->sisa_kegiatan, 0, ',', '.') }}</span>
                                         @endforeach
                                     @endif
                                 </span>

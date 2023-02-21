@@ -31,7 +31,7 @@
                             *Ukuran file maksimal 5MB.
                 </div>
                 <div class="card">
-                    <form action="{{ route('spj.update', $spj->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('spj.update', $spj->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="card-body-form">
@@ -83,7 +83,7 @@
                             <div class="form-group">
                                 <label>Nilai Kwitansi<span class="text-danger"> *</span></label>
                                 <input name="kwitansi" type="text"
-                                    class="form-control rupiah @error('kwitansi') is-invalid @enderror" placeholder="Rp."
+                                    class="form-control @error('kwitansi') is-invalid @enderror" placeholder="Rp."
                                     value="{{ old('kwitansi', $spj->kwitansi) }}" id="kwitansi">
                                 @error('kwitansi')
                                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
@@ -110,26 +110,24 @@
                                 <div class="radio-btn">
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" value="1" id="jenis_spm1"
-                                            name="jenis_spm"
-                                            {{ old('jenis_spm', $spj->jenis_spm) == '1' ? 'checked' : '' }}>
+                                            name="jenis_spm" {{ old('jenis_spm', $spj->jenis_spm) == 1 ? 'checked' : '' }}>
                                         <label for="jenis_spm1" class="custom-control-label">GU</label>
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" value="2" id="jenis_spm2"
-                                            name="jenis_spm"
-                                            {{ old('jenis_spm', $spj->jenis_spm) == '2' ? 'checked' : '' }}>
+                                            name="jenis_spm" {{ old('jenis_spm', $spj->jenis_spm) == 2 ? 'checked' : '' }}>
                                         <label for="jenis_spm2" class="custom-control-label">TU</label>
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" value="3" id="jenis_spm3"
                                             name="jenis_spm"
-                                            {{ old('jenis_spm', $spj->jenis_spm) == '3' ? 'checked' : '' }}>
+                                            {{ old('jenis_spm', $spj->jenis_spm) == 3 ? 'checked' : '' }}>
                                         <label for="jenis_spm3" class="custom-control-label">LS</label>
                                     </div>
                                     <div class="custom-control custom-radio">
                                         <input class="custom-control-input" type="radio" value="4"
                                             id="jenis_spm4" name="jenis_spm"
-                                            {{ old('jenis_spm', $spj->jenis_spm) == '4' ? 'checked' : '' }}>
+                                            {{ old('jenis_spm', $spj->jenis_spm) == 4 ? 'checked' : '' }}>
                                         <label for="jenis_spm4" class="custom-control-label">UP</label>
                                     </div>
                                 </div>

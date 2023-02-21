@@ -95,7 +95,7 @@
 
                 $.ajax({
                     type: "DELETE",
-                    url: "{{ url('spj/destroy') }}" + '/' + spj_id,
+                    url: "{{ url('spj/destroyed') }}" + '/' + spj_id,
                     data: {
                         _token: "{!! csrf_token() !!}",
                     },
