@@ -7,6 +7,7 @@ use App\Models\Kegiatan;
 use App\Models\Rekening;
 use Illuminate\Http\Request;
 use App\Models\SPJ;
+use App\Models\User;
 use App\Models\Subkegiatan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -230,16 +231,22 @@ class SpjController extends Controller
                     return $link;
                 })
                 ->addColumn('action', function ($row) {
-
-                    $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Terima" class="btn btn-success btn-xs terima">Terima</a>';
-                    $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Kembalikan" class="btn btn-primary btn-xs kembalikan">Kembalikan</a></center>';
-                    $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Tolak" class="btn btn-danger btn-xs tolak">Tolak</a></center>';
+                    $btn = '<center><a class="btn btn-info btn-xs" href="' . route('spj.verify', $row->id) . '"><i class="fa fa-check-double"></i> Verifikasi</span></a></center>';
+                    // $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Terima" class="btn btn-success btn-xs terima">Terima</a>';
+                    // $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Kembalikan" class="btn btn-primary btn-xs kembalikan">Kembalikan</a></center>';
+                    // $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Tolak" class="btn btn-danger btn-xs tolak">Tolak</a></center>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
         return view('admin.spj.verifikasi', compact('menu'));
+    }
+    public function verify(SPJ $spj)
+    {
+        $user = SPJ::join('users', 'spj.bagian_id', '=', 'users.bagian_id')->first();
+        $menu = 'Verifikasi SPJ';
+        return view('admin.spj.verif', compact('menu', 'spj', 'user'));
     }
 
     public function terima($id)

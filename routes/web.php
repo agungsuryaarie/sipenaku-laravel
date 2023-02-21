@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('kartu-kendali', [KartuController::class, 'index'])->name('kartukendali.index');
         // SPJ Admin Verifikasi
         Route::get('spj/verifikasi', [SpjController::class, 'verifikasi'])->name('spj.verifikasi');
+        Route::get('spj/verify/{spj}', [SpjController::class, 'verify'])->name('spj.verify');
         Route::get('spj/diterima', [SpjController::class, 'diterima'])->name('spj.diterima');
         Route::get('spj/ditolak', [SpjController::class, 'ditolak'])->name('spj.ditolak');
         Route::delete('spj/destroyed/{spj}', [SpjController::class, 'destroy'])->name('spj.destroyed');

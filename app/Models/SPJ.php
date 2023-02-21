@@ -29,4 +29,8 @@ class SPJ extends Model
     {
         return $this->belongsTo(Rekening::class);
     }
+    public function bagian()
+    {
+        return $this->belongsTo(Bagian::class);
+    }
 }
