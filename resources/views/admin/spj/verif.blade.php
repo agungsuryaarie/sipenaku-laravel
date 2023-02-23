@@ -164,20 +164,14 @@
                                             </p>
                                         </div>
                                         <div class="card-footer">
-                                            <a href="javascript:void(0)" data-toggle="tooltip"
-                                                data-id="{{ $spj->id }}" data-original-title="Terima"
-                                                class="btn btn-success btn-xs terima"><i class="fa fa-check"></i> Terima</a>
-                                            <a href="javascript:void(0)" data-toggle="tooltip"
-                                                data-id="{{ $spj->id }}" data-original-title="Kembalikan"
-                                                class="btn btn-warning btn-xs text-white kembalikan"><i
-                                                    class="fa fa-exchange-alt"></i>
-                                                Kembalikan</a>
+                                            <button id="konfirmasi" type="button" data-toggle="modal"
+                                                class="btn btn-success btn-xs text-white"><i class="fa fa-check"></i>
+                                                Terima</button>
+                                            <button id="kembalikan" type="button" data-toggle="modal"
+                                                class="btn btn-warning btn-xs text-white"><i class="fa fa-exchange-alt"></i>
+                                                Kembalikan</button>
                                             <button id="tolak" type="button" data-toggle="modal"
-                                                data-target="#modal-tolak{{ $spj->id }}"
                                                 class="btn btn-danger btn-xs"><i class="fa fa-ban"></i> Tolak</button>
-                                            {{-- <a href="javascript:void(0)" data-toggle="tooltip"
-                                                data-id="{{ $spj->id }}" data-original-title="Tolak"
-                                                class="btn btn-danger btn-xs tolak"><i class="fa fa-ban"></i> Tolak</a> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -190,6 +184,7 @@
     </section>
 @endsection
 @section('modal')
+    {{-- Modal Tolak --}}
     <div class="modal fade" id="ajaxModel">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -203,17 +198,106 @@
                 <form id="tolakForm" name="tolakForm" class="form-horizontal">
                     @csrf
                     <div class="modal-body">
-                        <p>Apakah anda yakin untuk menolak SPJ dari {{ $spj->bagian->nama_bagian }} ?</p>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <center>
+                            <h6 class="text-muted">::KEPUTUSAN INI TIDAK DAPAT DIUBAH KEMBALI::</h6>
+                            <br>
+                        </center>
+                        <h6>Apakah anda yakin untuk menolak SPJ dari {{ $spj->bagian->nama_bagian }} ?</h6>
                         <input type="hidden" id="spj_id" name="spj_id" value="{{ $spj->id }}">
                         <div class="form-group">
-                            <label>Berikan Alasan</label>
-                            <textarea name="alasan" id="alasan" class="form-control" rows="3"></textarea>
+                            <label>Berikan Alasan<span class="text-danger">*</span></label>
+                            <textarea name="alasan" id="alasan" class="form-control" rows="3" placeholder="Alasan . . ."></textarea>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Kembali</button>
                         <button type="submit" class="btn btn-danger btn-sm " id="tolakBtn"><i class="fa fa-ban"></i>
                             Tolak</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- Modal Kembalikan --}}
+    <div class="modal fade" id="ajaxModelback">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modelHeadingBack">
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                </div>
+                <form id="kembaliForm" name="kembaliForm" class="form-horizontal">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                            style="display: none;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <center>
+                            <h6 class="text-muted">::KEPUTUSAN INI TIDAK DAPAT DIUBAH KEMBALI::</h6>
+                            <br>
+                        </center>
+                        <h6>Apakah anda yakin untuk mengembalikan SPJ dari {{ $spj->bagian->nama_bagian }} ?</h6>
+                        <input type="hidden" id="spj_id" name="spj_id" value="{{ $spj->id }}">
+                        <div class="form-group">
+                            <label>Berikan Alasan<span class="text-danger">*</span></label>
+                            <textarea name="alasan" id="alasan" class="form-control" rows="3" placeholder="Alasan . . ."></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-warning btn-sm text-white" id="kembaliBtn"><i
+                                class="fa fa-exchange-alt"></i>
+                            Kembalikan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- Modal Terima --}}
+    <div class="modal fade" id="ajaxModelkonfirm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modelHeadingKonfirm">
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                </div>
+                <form id="konfirmForm" name="konfirmForm" class="form-horizontal">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                            style="display: none;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <center>
+                            <h6 class="text-muted">::KEPUTUSAN INI TIDAK DAPAT DIUBAH KEMBALI::</h6>
+                            <br>
+                        </center>
+                        <center>
+                            <h6>Apakah SPJ dari {{ $spj->bagian->nama_bagian }} sudah sesuai dengan ketentuan ?</h6>
+                        </center>
+                        <input type="hidden" id="spj_id" name="spj_id" value="{{ $spj->id }}">
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-success btn-sm text-white" id="konfirmBtn"><i
+                                class="fa fa-check"></i>
+                            Konfirmasi</button>
                     </div>
                 </form>
             </div>
@@ -228,27 +312,6 @@
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
             });
-
-            $("body").on("click", ".deleteSpj", function() {
-                var spj_id = $(this).data("id");
-                confirm("Are You sure want to delete !");
-
-                $.ajax({
-                    type: "DELETE",
-                    url: "{{ url('spj/destroy') }}" + '/' + spj_id,
-                    data: {
-                        _token: "{!! csrf_token() !!}",
-                    },
-                    success: function(data) {
-                        alertDanger("SPJ Berhasil di hapus");
-                        table.draw();
-                    },
-                    error: function(data) {
-                        console.log("Error:", data);
-                    },
-                });
-            });
-
             $("body").on("click", ".terima", function() {
                 var spj_id = $(this).data("id");
                 confirm("Terima !");
@@ -267,22 +330,79 @@
                     },
                 });
             });
-
-            $("body").on("click", ".kembalikan", function() {
-                var spj_id = $(this).data("id");
-                confirm("Kembalikan !");
+            $("#konfirmasi").click(function() {
+                $("#konfirmForm").trigger("reset");
+                $("#modelHeadingKonfirm").html("Konfirmasi");
+                $("#ajaxModelkonfirm").modal("show");
+            });
+            $("#konfirmBtn").click(function(e) {
+                e.preventDefault();
+                $(this).html(
+                    "<span class='spinner-border spinner-border-sm'></span><span class='visually-hidden'><i> memproses...</i></span>"
+                );
+                var spj_id = $("#spj_id").val();
                 $.ajax({
+                    data: $("#konfirmForm").serialize(),
+                    url: "{{ url('spj/terima') }}" + "/" + spj_id,
                     type: "POST",
-                    url: "{{ url('spj/kembalikan') }}" + '/' + spj_id,
-                    data: {
-                        _token: "{!! csrf_token() !!}",
-                    },
+                    dataType: "json",
                     success: function(data) {
-                        alertSuccess("SPJ Berhasil dikembalikan");
-                        table.draw();
+                        if (data.errors) {
+                            $('.alert-danger').html('');
+                            $.each(data.errors, function(key, value) {
+                                $('.alert-danger').show();
+                                $('.alert-danger').append('<strong><li>' +
+                                    value +
+                                    '</li></strong>');
+                                $(".alert-danger").fadeOut(5000);
+                                $("#konfirmBtn").html(
+                                    "<i class='fa fa-check'></i> Konfirmasi");
+                            });
+                        } else {
+                            alertSuccess(data.success);
+                            $("#konfirmBtn").html(
+                                "<i class='fa fa-check'></i> Konfirmasi");
+                            $('#ajaxModelkonfirm').modal('hide');
+                            window.location.href = "{{ url('spj/verifikasi') }}"
+                        }
                     },
-                    error: function(data) {
-                        console.log("Error:", data);
+                });
+            });
+            $("#kembalikan").click(function() {
+                $("#kembaliForm").trigger("reset");
+                $("#modelHeadingBack").html("Konfirmasi");
+                $("#ajaxModelback").modal("show");
+            });
+            $("#kembaliBtn").click(function(e) {
+                e.preventDefault();
+                $(this).html(
+                    "<span class='spinner-border spinner-border-sm'></span><span class='visually-hidden'><i> memproses...</i></span>"
+                );
+                var spj_id = $("#spj_id").val();
+                $.ajax({
+                    data: $("#kembaliForm").serialize(),
+                    url: "{{ url('spj/kembalikan') }}" + "/" + spj_id,
+                    type: "POST",
+                    dataType: "json",
+                    success: function(data) {
+                        if (data.errors) {
+                            $('.alert-danger').html('');
+                            $.each(data.errors, function(key, value) {
+                                $('.alert-danger').show();
+                                $('.alert-danger').append('<strong><li>' +
+                                    value +
+                                    '</li></strong>');
+                                $(".alert-danger").fadeOut(5000);
+                                $("#kembaliBtn").html(
+                                    "<i class='fa fa-exchange-alt'></i> Kembalikan");
+                            });
+                        } else {
+                            alertSuccess(data.success);
+                            $("#kembaliBtn").html(
+                                "<i class='fa fa-exchange-alt'></i> Kembalikan");
+                            $('#ajaxModelback').modal('hide');
+                            window.location.href = "{{ url('spj/verifikasi') }}"
+                        }
                     },
                 });
             });
@@ -305,14 +425,14 @@
                     success: function(data) {
                         if (data.errors) {
                             $('.alert-danger').html('');
-                            $.each(data.error, function(key, value) {
+                            $.each(data.errors, function(key, value) {
                                 $('.alert-danger').show();
                                 $('.alert-danger').append('<strong><li>' +
                                     value +
                                     '</li></strong>');
                                 $(".alert-danger").fadeOut(5000);
                                 $("#tolakBtn").html("<i class='fa fa-ban'></i> Tolak");
-                                $('#tolakForm').trigger("reset");
+                                // $('#tolakForm').trigger("reset");
                             });
                         } else {
                             alertSuccess(data.success);

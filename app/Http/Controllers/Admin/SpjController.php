@@ -98,6 +98,7 @@ class SpjController extends Controller
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu" role="menu">
+                                <a class="dropdown-item" href="' . route('spj.show', $row->id) . '">Review</a>
                                 <a class="dropdown-item" href="' . route('spj.edit', $row->id) . '">Edit</a>
                                 <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                             </div>
@@ -273,7 +274,7 @@ class SpjController extends Controller
         $update_sisa_subkegiatan->sisa_sub = $sisa_subkegiatan - $kwitansi;
         $update_sisa_subkegiatan->save();
 
-        return response()->json(['toast_success' => 'SPJ Berhasil diterima']);
+        return response()->json(['success' => 'SPJ Berhasil diterima']);
     }
 
     public function diterima(Request $request)
@@ -491,14 +492,39 @@ class SpjController extends Controller
         return redirect()->route('spj.index')->with('toast_success', 'SPJ Berhasil diedit');
     }
 
-    public function kembalikan(SPJ $spj)
+    public function kembalikan(Request $request, SPJ $spj)
     {
-        $spj->update(['status' => '5']);
+        //Translate Bahasa Indonesia
+        $message = array(
+            'alasan.required' => 'Mohon isi alasan.',
+        );
+        $validator = Validator::make($request->all(), [
+            'alasan' => 'required',
+        ], $message);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+        $spj->update([
+            'status' => '5',
+            'alasan' => $request->alasan
+        ]);
         return response()->json(['success' => 'SPJ Berhasil dikembalikan']);
     }
 
     public function tolak(Request $request, SPJ $spj)
     {
+        //Translate Bahasa Indonesia
+        $message = array(
+            'alasan.required' => 'Mohon isi alasan.',
+        );
+        $validator = Validator::make($request->all(), [
+            'alasan' => 'required',
+        ], $message);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
         $spj->update([
             'status' => '4',
             'alasan' => $request->alasan

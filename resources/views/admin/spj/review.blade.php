@@ -169,6 +169,8 @@
                                                 <span class="badge badge-success badge-xs text-white">Diterima</span>
                                             @elseif($spj->status == 4)
                                                 <span class="badge badge-danger badge-xs text-white">Ditolak</span>
+                                            @elseif($spj->status == 5)
+                                                <span class="badge badge-warning badge-xs text-white">Dikembalikan</span>
                                             @endif
                                             <br>
                                             @if ($spj->alasan != null)
