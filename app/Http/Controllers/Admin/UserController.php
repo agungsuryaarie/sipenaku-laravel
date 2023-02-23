@@ -34,7 +34,11 @@ class UserController extends Controller
                     return $data->bagian->nama_bagian;
                 })
                 ->addColumn('foto', function ($data) {
-                    $foto = '<center><img src="' . url("storage/fotouser/" . $data->foto) . '" width="40px" class="img rounded"><center>';
+                    if ($data->foto != null) {
+                        $foto = '<center><img src="' . url("storage/fotouser/" . $data->foto) . '" width="30px" class="img rounded"><center>';
+                    } else {
+                        $foto = '<center><img src="' . url("storage/fotouser/blank.png") . '" width="30px" class="img rounded"><center>';
+                    }
                     return $foto;
                 })
                 ->addColumn('action', function ($row) {

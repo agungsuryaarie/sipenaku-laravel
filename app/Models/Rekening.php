@@ -24,7 +24,10 @@ class Rekening extends Model
     {
         return $this->belongsTo(Subkegiatan::class);
     }
-
+    public function kegiatan()
+    {
+        return $this->belongsTo(Kegiatan::class);
+    }
     public function detail()
     {
         return $this->hasMany(Detail::class);

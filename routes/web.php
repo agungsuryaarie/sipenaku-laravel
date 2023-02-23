@@ -103,6 +103,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('spj/show/{spj}', [SpjController::class, 'show'])->name('spj.show');
         Route::put('spj/{spj}/update', [SpjController::class, 'update'])->name('spj.update');
         Route::post('spj/kirim/{spj}', [SpjController::class, 'kirim'])->name('spj.kirim');
+        // Kartu Kendali
+        Route::get('kartu-kendali-detail', [KartuController::class, 'kegusr'])->name('kartukendali.kegusr');
+        Route::get('kartu-kendali-detail/sub-kegiatan/{id}', [KartuController::class, 'subkegusr'])->name('kartukendali.subkegusr');
+        Route::get('kartu-kendali-detail/rekening', [KartuController::class, 'rekusr'])->name('kartukendali.rekusr');
     });
 });
 

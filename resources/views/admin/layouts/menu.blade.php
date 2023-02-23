@@ -58,7 +58,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('kartukendali.index') }}"
-                    class="nav-link {{ request()->segment(1) == 'kartukendali' ? 'active' : '' }}">
+                    class="nav-link {{ request()->segment(1) == 'kartu-kendali' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Kartu Kendali</p>
                 </a>
@@ -146,7 +146,8 @@
         </ul>
     </li>
     <li class="nav-item">
-        <a href="#" class="nav-link {{ request()->segment(1) == 'rekening' ? 'active' : '' }}">
+        <a href="{{ route('kartukendali.kegusr') }}"
+            class="nav-link {{ request()->segment(1) == 'kartu-kendali-detail' ? 'active' : '' }}">
             <i class="fas fa-credit-card nav-icon"></i>
             <p>
                 Kartu Kendali

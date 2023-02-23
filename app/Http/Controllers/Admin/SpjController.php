@@ -23,7 +23,6 @@ class SpjController extends Controller
     {
         $menu = 'Pengajuan SPJ';
         $spj = SPJ::where('bagian_id', Auth::user()->bagian_id)->get();
-
         if ($request->ajax()) {
             $data = SPJ::where('bagian_id', Auth::user()->bagian_id)
                 ->where('status', 1)
