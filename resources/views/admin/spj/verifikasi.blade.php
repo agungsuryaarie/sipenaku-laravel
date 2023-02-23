@@ -25,13 +25,11 @@
                             <table id="example1" class="table table-bordered table-striped data-table">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Tanggal</th>
-                                        <th>Kegiatan</th>
-                                        <th>Sub Kegiatan</th>
-                                        <th>Rekening</th>
+                                        <th style="width: 5%">No</th>
+                                        <th style="width: 10%">Tanggal</th>
+                                        <th style="width: 20%">Instansi</th>
                                         <th>Uraian</th>
-                                        <th class="text-center">Aksi</th>
+                                        <th class="text-center" style="width: 8%">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -65,16 +63,8 @@
                         name: "tanggal",
                     },
                     {
-                        data: "kegiatan",
-                        name: "kegiatan",
-                    },
-                    {
-                        data: "subkeg",
-                        name: "subkeg",
-                    },
-                    {
-                        data: "rekening",
-                        name: "rekening",
+                        data: "bagian",
+                        name: "bagian",
                     },
                     {
                         data: "uraian",
@@ -89,79 +79,79 @@
                 ],
             });
 
-            $("body").on("click", ".deleteSpj", function() {
-                var spj_id = $(this).data("id");
-                confirm("Are You sure want to delete !");
+            // $("body").on("click", ".deleteSpj", function() {
+            //     var spj_id = $(this).data("id");
+            //     confirm("Are You sure want to delete !");
 
-                $.ajax({
-                    type: "DELETE",
-                    url: "{{ url('spj/destroy') }}" + '/' + spj_id,
-                    data: {
-                        _token: "{!! csrf_token() !!}",
-                    },
-                    success: function(data) {
-                        alertDanger("SPJ Berhasil di hapus");
-                        table.draw();
-                    },
-                    error: function(data) {
-                        console.log("Error:", data);
-                    },
-                });
-            });
+            //     $.ajax({
+            //         type: "DELETE",
+            //         url: "{{ url('spj/destroy') }}" + '/' + spj_id,
+            //         data: {
+            //             _token: "{!! csrf_token() !!}",
+            //         },
+            //         success: function(data) {
+            //             alertDanger("SPJ Berhasil di hapus");
+            //             table.draw();
+            //         },
+            //         error: function(data) {
+            //             console.log("Error:", data);
+            //         },
+            //     });
+            // });
 
-            $("body").on("click", ".terima", function() {
-                var spj_id = $(this).data("id");
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('spj/terima') }}" + '/' + spj_id,
-                    data: {
-                        _token: "{!! csrf_token() !!}",
-                    },
-                    success: function(data) {
-                        alertSuccess("SPJ Berhasil diterima");
-                        table.draw();
-                    },
-                    error: function(data) {
-                        console.log("Error:", data);
-                    },
-                });
-            });
+            // $("body").on("click", ".terima", function() {
+            //     var spj_id = $(this).data("id");
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "{{ url('spj/terima') }}" + '/' + spj_id,
+            //         data: {
+            //             _token: "{!! csrf_token() !!}",
+            //         },
+            //         success: function(data) {
+            //             alertSuccess("SPJ Berhasil diterima");
+            //             table.draw();
+            //         },
+            //         error: function(data) {
+            //             console.log("Error:", data);
+            //         },
+            //     });
+            // });
 
-            $("body").on("click", ".kembalikan", function() {
-                var spj_id = $(this).data("id");
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('spj/kembalikan') }}" + '/' + spj_id,
-                    data: {
-                        _token: "{!! csrf_token() !!}",
-                    },
-                    success: function(data) {
-                        alertSuccess("SPJ Berhasil dikembalikan");
-                        table.draw();
-                    },
-                    error: function(data) {
-                        console.log("Error:", data);
-                    },
-                });
-            });
+            // $("body").on("click", ".kembalikan", function() {
+            //     var spj_id = $(this).data("id");
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "{{ url('spj/kembalikan') }}" + '/' + spj_id,
+            //         data: {
+            //             _token: "{!! csrf_token() !!}",
+            //         },
+            //         success: function(data) {
+            //             alertSuccess("SPJ Berhasil dikembalikan");
+            //             table.draw();
+            //         },
+            //         error: function(data) {
+            //             console.log("Error:", data);
+            //         },
+            //     });
+            // });
 
-            $("body").on("click", ".tolak", function() {
-                var spj_id = $(this).data("id");
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('spj/tolak') }}" + '/' + spj_id,
-                    data: {
-                        _token: "{!! csrf_token() !!}",
-                    },
-                    success: function(data) {
-                        alertSuccess("SPJ Berhasil ditolak");
-                        table.draw();
-                    },
-                    error: function(data) {
-                        console.log("Error:", data);
-                    },
-                });
-            });
+            // $("body").on("click", ".tolak", function() {
+            //     var spj_id = $(this).data("id");
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "{{ url('spj/tolak') }}" + '/' + spj_id,
+            //         data: {
+            //             _token: "{!! csrf_token() !!}",
+            //         },
+            //         success: function(data) {
+            //             alertSuccess("SPJ Berhasil ditolak");
+            //             table.draw();
+            //         },
+            //         error: function(data) {
+            //             console.log("Error:", data);
+            //         },
+            //     });
+            // });
         });
     </script>
 @endsection

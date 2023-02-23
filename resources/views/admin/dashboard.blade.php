@@ -39,13 +39,13 @@
                                 </td> | Pukul : {{ $gu->jam_mulai }} -
                                 {{ \Carbon\Carbon::parse($gu->tgl_selesai)->translatedFormat('l, d F Y') }}
                                 </td> | Pukul : {{ $gu->jam_selesai }}</a>
-                            <a href="#" class="btn btn-warning btn-round btn-xs mb-2 text-white"><i
+                            <a href="#" class="btn btn-warning btn-round btn-xs mb-2 text-white mr-2"><i
                                     class="fas fa-clock"></i>&nbsp;&nbsp;sesi belum dimulai</a>
                         @endif
                     @else
                         <a href="#" class="btn btn-success btn-round btn-xs mr-2 mb-2"><i
                                 class="fa fa-wallet"></i>&nbsp;&nbsp;GU belum dimulai</a>
-                        <a href="#" class="btn btn-danger btn-round btn-xs mb-2"><i
+                        <a href="#" class="btn btn-danger btn-round btn-xs mb-2 mr-2"><i
                                 class="fas fa-clock"></i>&nbsp;&nbsp;<span id="berakhir"></span></a>
                     @endif
                 </div>

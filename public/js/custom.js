@@ -35,7 +35,7 @@ function alertSuccess(message) {
     $(window).scrollTop(0);
     setTimeout(function () {
         $(".alert").alert("close");
-    }, 3000);
+    }, 5000);
 }
 
 function alertDanger(message) {
@@ -49,5 +49,5 @@ function alertDanger(message) {
     $(window).scrollTop(0);
     setTimeout(function () {
         $(".alert").alert("close");
-    }, 3000);
+    }, 5000);
 }

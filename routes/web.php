@@ -71,12 +71,12 @@ Route::group(['middleware' => ['auth']], function () {
         // SPJ Admin Verifikasi
         Route::get('spj/verifikasi', [SpjController::class, 'verifikasi'])->name('spj.verifikasi');
         Route::get('spj/verify/{spj}', [SpjController::class, 'verify'])->name('spj.verify');
+        Route::post('spj/decline/{spj}', [SpjController::class, 'tolak'])->name('spj.decline');
         Route::get('spj/diterima', [SpjController::class, 'diterima'])->name('spj.diterima');
         Route::get('spj/ditolak', [SpjController::class, 'ditolak'])->name('spj.ditolak');
         Route::delete('spj/destroyed/{spj}', [SpjController::class, 'destroy'])->name('spj.destroyed');
         Route::post('spj/terima/{id}', [SpjController::class, 'terima'])->name('spj.terima');
         Route::post('spj/kembalikan/{spj}', [SpjController::class, 'kembalikan'])->name('spj.kembalikan');
-        Route::post('spj/tolak/{spj}', [SpjController::class, 'tolak'])->name('spj.tolak');
         //app-Setting
         Route::get('appsetting', [AppSettingController::class, 'index'])->name('appsetting.index');
         Route::get('appsetting/create', [AppSettingController::class, 'create'])->name('appsetting.create');

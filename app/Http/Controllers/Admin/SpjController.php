@@ -25,7 +25,11 @@ class SpjController extends Controller
         $spj = SPJ::where('bagian_id', Auth::user()->bagian_id)->get();
 
         if ($request->ajax()) {
-            $data = SPJ::where('bagian_id', Auth::user()->bagian_id)->where('status', 1)->orWhere('status', 2)->orWhere('status', 5)->get();
+            $data = SPJ::where('bagian_id', Auth::user()->bagian_id)
+                ->where('status', 1)
+                ->orWhere('status', 2)
+                ->orWhere('status', 5)
+                ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('tanggal', function ($data) {
@@ -215,26 +219,12 @@ class SpjController extends Controller
                 ->addColumn('tanggal', function ($data) {
                     return  \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal)->format('d/m/Y');
                 })
-                ->addColumn('kegiatan', function ($data) {
-                    $link = $data->kegiatan->kode_kegiatan;
-                    $link = $link . ' ' . $data->kegiatan->nama_kegiatan;
-                    return $link;
-                })
-                ->addColumn('subkeg', function ($data) {
-                    $link = $data->subkegiatan->kode_sub;
-                    $link = $link . ' ' . $data->subkegiatan->nama_sub;
-                    return $link;
-                })
-                ->addColumn('rekening', function ($data) {
-                    $link = $data->rekening->kode_rekening;
-                    $link = $link . ' ' . $data->rekening->nama_rekening;
+                ->addColumn('bagian', function ($data) {
+                    $link = $data->bagian->nama_bagian;
                     return $link;
                 })
                 ->addColumn('action', function ($row) {
-                    $btn = '<center><a class="btn btn-info btn-xs" href="' . route('spj.verify', $row->id) . '"><i class="fa fa-check-double"></i> Verifikasi</span></a></center>';
-                    // $btn = ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Terima" class="btn btn-success btn-xs terima">Terima</a>';
-                    // $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Kembalikan" class="btn btn-primary btn-xs kembalikan">Kembalikan</a></center>';
-                    // $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Tolak" class="btn btn-danger btn-xs tolak">Tolak</a></center>';
+                    $btn = '<center><a class="btn btn-success btn-xs" href="' . route('spj.verify', $row->id) . '"><i class="fa fa-check-double"></i> Verifikasi</span></a></center>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -244,7 +234,18 @@ class SpjController extends Controller
     }
     public function verify(SPJ $spj)
     {
-        $user = SPJ::join('users', 'spj.bagian_id', '=', 'users.bagian_id')->first();
+        $user = User::join('spj', 'users.bagian_id', '=', 'spj.bagian_id')
+            ->where('spj.status', '=', 2)->first();
+        // dd($user);
+        $menu = 'Verifikasi SPJ';
+        return view('admin.spj.verif', compact('menu', 'spj', 'user'));
+    }
+    public function show(SPJ $spj)
+    {
+        $user = SPJ::join('users', 'spj.bagian_id', '=', 'users.bagian_id')
+            ->where('spj.status', 4)
+            ->orwhere('spj.status', 4)
+            ->first();
         $menu = 'Verifikasi SPJ';
         return view('admin.spj.verif', compact('menu', 'spj', 'user'));
     }
@@ -494,12 +495,15 @@ class SpjController extends Controller
     public function kembalikan(SPJ $spj)
     {
         $spj->update(['status' => '5']);
-        return response()->json(['toast_success' => 'SPJ Berhasil dikembalikan']);
+        return response()->json(['success' => 'SPJ Berhasil dikembalikan']);
     }
 
-    public function tolak(SPJ $spj)
+    public function tolak(Request $request, SPJ $spj)
     {
-        $spj->update(['status' => '4']);
-        return response()->json(['toast_success' => 'SPJ Berhasil ditolak']);
+        $spj->update([
+            'status' => '4',
+            'alasan' => $request->alasan
+        ]);
+        return response()->json(['success' => 'SPJ Berhasil ditolak']);
     }
 }

@@ -60,6 +60,7 @@
         <div class="content-wrapper">
             <div id="alerts"></div>
             @yield('content')
+            @yield('modal')
         </div>
     </div>
     @include('sweetalert::alert')
