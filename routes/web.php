@@ -77,6 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('spj/destroyed/{spj}', [SpjController::class, 'destroy'])->name('spj.destroyed');
         Route::post('spj/terima/{id}', [SpjController::class, 'terima'])->name('spj.terima');
         Route::post('spj/kembalikan/{spj}', [SpjController::class, 'kembalikan'])->name('spj.kembalikan');
+        Route::get('spj/view/{spj}', [SpjController::class, 'show'])->name('spj.view');
         //app-Setting
         Route::get('appsetting', [AppSettingController::class, 'index'])->name('appsetting.index');
         Route::get('appsetting/create', [AppSettingController::class, 'create'])->name('appsetting.create');
@@ -99,6 +100,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('spj/store', [SpjController::class, 'store'])->name('spj.store');
         Route::delete('spj/destroy/{spj}', [SpjController::class, 'destroy'])->name('spj.destroy');
         Route::get('spj/edit/{spj}', [SpjController::class, 'edit'])->name('spj.edit');
+        Route::get('spj/show/{spj}', [SpjController::class, 'show'])->name('spj.show');
         Route::put('spj/{spj}/update', [SpjController::class, 'update'])->name('spj.update');
         Route::post('spj/kirim/{spj}', [SpjController::class, 'kirim'])->name('spj.kirim');
     });

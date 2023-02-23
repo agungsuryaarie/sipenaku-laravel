@@ -244,10 +244,9 @@ class SpjController extends Controller
     {
         $user = SPJ::join('users', 'spj.bagian_id', '=', 'users.bagian_id')
             ->where('spj.status', 4)
-            ->orwhere('spj.status', 4)
             ->first();
-        $menu = 'Verifikasi SPJ';
-        return view('admin.spj.verif', compact('menu', 'spj', 'user'));
+        $menu = 'SPJ';
+        return view('admin.spj.review', compact('menu', 'spj', 'user'));
     }
 
     public function terima($id)
@@ -315,7 +314,7 @@ class SpjController extends Controller
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu" role="menu">
-                               <a class="dropdown-item lihat"  href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Lihat">Review</a>
+                            <a class="dropdown-item" href="' . route('spj.view', $row->id) . '">Review</a>
                                <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                                </div>
                                </div>
@@ -327,7 +326,7 @@ class SpjController extends Controller
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu" role="menu">
-                           <a class="dropdown-item lihat"  href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Lihat">Review</a>
+                        <a class="dropdown-item" href="' . route('spj.show', $row->id) . '">Review</a>
                            </div>
                            </div>
                        </center>';
@@ -381,7 +380,7 @@ class SpjController extends Controller
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu" role="menu">
-                               <a class="dropdown-item lihat"  href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Lihat">Review</a>
+                            <a class="dropdown-item" href="' . route('spj.view', $row->id) . '">Review</a>
                                <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                                </div>
                                </div>
@@ -393,7 +392,7 @@ class SpjController extends Controller
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu" role="menu">
-                           <a class="dropdown-item lihat"  href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Lihat">Review</a>
+                        <a class="dropdown-item" href="' . route('spj.show', $row->id) . '">Review</a>
                            </div>
                            </div>
                        </center>';

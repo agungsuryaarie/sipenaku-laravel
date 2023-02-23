@@ -161,7 +161,21 @@
                                             <a href="{{ url('storage/file/', $spj->file) }}" target="blank"
                                                 class="link-blue text-sm"><i class="fas fa-link mr-1"></i>
                                                 File Berkas</a>
-                                            </p>
+                                            <hr>
+                                            <h5>
+                                                Status
+                                            </h5>
+                                            @if ($spj->status == 3)
+                                                <span class="badge badge-success badge-xs text-white">Diterima</span>
+                                            @elseif($spj->status == 4)
+                                                <span class="badge badge-danger badge-xs text-white">Ditolak</span>
+                                            @endif
+                                            <br>
+                                            @if ($spj->alasan != null)
+                                                <h6>Alasan : <br><i
+                                                        class="fas fa-headset"></i>&nbsp;:&nbsp;<i>{{ $spj->alasan }}</i>
+                                                </h6>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
