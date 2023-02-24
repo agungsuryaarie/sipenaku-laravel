@@ -56,6 +56,48 @@ class KartuController extends Controller
         }
         return view('admin.kartukendali.keg', compact('menu'));
     }
+    public function kegiatanadm(Request $request)
+    {
+        $menu = 'Kartu Kendali';
+        if ($request->ajax()) {
+            $data = Kegiatan::get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('kode_kegiatan', function ($data) {
+                    $link = '<a href="' . route('kartu.subkeg', Crypt::encryptString($data->id))  . '">' . $data->kode_kegiatan . '</a>';
+                    return $link;
+                })
+                ->addColumn('nama_kegiatan', function ($data) {
+                    $link = '<a href="' . route('kartu.subkeg', Crypt::encryptString($data->id))  . '">' . $data->nama_kegiatan . '</a>';
+                    return $link;
+                })
+                ->addColumn('bagian', function ($data) {
+                    $link = $data->bagian->nama_bagian;
+                    return $link;
+                })
+                ->addColumn('pagu_kegiatan', function ($data) {
+                    if ($data->pagu_kegiatan == "") {
+                        $link = "Rp. " . "0";
+                    } else {
+                        $link = 'Rp. ' . number_format($data->pagu_kegiatan, 0, ',', '.');
+                    }
+                    return $link;
+                })
+                ->addColumn('sisa_kegiatan', function ($data) {
+                    if ($data->sisa_kegiatan == "") {
+                        $link = '<span
+                        class="description-text text-danger">Rp. ' . "0" . '</span>';
+                    } else {
+                        $link = '<span
+                        class="description-text text-danger">Rp. ' . number_format($data->sisa_kegiatan, 0, ',', '.') . '</pan>';
+                    }
+                    return $link;
+                })
+                ->rawColumns(['kode_kegiatan', 'nama_kegiatan', 'sisa_kegiatan'])
+                ->make(true);
+        }
+        return view('admin.kartukendali.kegadm', compact('menu'));
+    }
     public function subkeg(Request $request, $id)
     {
         $menu = 'Sub Kegiatan';
@@ -65,11 +107,11 @@ class KartuController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_subkeg', function ($data) {
-                    $link = '<a href="' . route('kartukendali.rek', Crypt::encryptString($data->id))  . '">' . $data->kode_sub . '</a>';
+                    $link = '<a href="' . route('kartu.rek', Crypt::encryptString($data->id))  . '">' . $data->kode_sub . '</a>';
                     return $link;
                 })
                 ->addColumn('nama_subkeg', function ($data) {
-                    $link = '<a href="' . route('kartukendali.rek', Crypt::encryptString($data->id))  . '">' . $data->nama_sub . '</a>';
+                    $link = '<a href="' . route('kartu.rek', Crypt::encryptString($data->id))  . '">' . $data->nama_sub . '</a>';
                     return $link;
                 })
                 ->addColumn('pagu_sub', function ($data) {
@@ -93,8 +135,11 @@ class KartuController extends Controller
                 ->rawColumns(['kode_subkeg', 'nama_subkeg', 'sisa_sub'])
                 ->make(true);
         }
-
-        return view('admin.kartukendali.subkeg', compact('menu', 'id', 'kegiatan'));
+        if (Auth::user()->level == 1) {
+            return view('admin.kartukendali.subkegadm', compact('menu', 'id', 'kegiatan'));
+        } else {
+            return view('admin.kartukendali.subkeg', compact('menu', 'id', 'kegiatan'));
+        }
     }
     public function rek(Request $request, $id)
     {
@@ -124,6 +169,10 @@ class KartuController extends Controller
                 ->rawColumns(['sisa_rekening'])
                 ->make(true);
         }
-        return view('admin.kartukendali.rek', compact('menu', 'id', 'subkegiatan'));
+        if (Auth::user()->level == 1) {
+            return view('admin.kartukendali.rekadm', compact('menu', 'id', 'subkegiatan'));
+        } else {
+            return view('admin.kartukendali.rek', compact('menu', 'id', 'subkegiatan'));
+        }
     }
 }

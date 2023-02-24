@@ -57,7 +57,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('kartukendali.index') }}"
+                <a href="{{ route('kartu.kegiatan') }}"
                     class="nav-link {{ request()->segment(1) == 'kartu-kendali' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Kartu Kendali</p>
