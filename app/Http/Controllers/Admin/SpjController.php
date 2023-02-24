@@ -25,7 +25,7 @@ class SpjController extends Controller
         $menu = 'Pengajuan SPJ';
         $spj = SPJ::where('bagian_id', Auth::user()->bagian_id)->get();
         if ($request->ajax()) {
-            $data = SPJ::where('bagian_id', Auth::user()->bagian_id)
+            $data = SPJ::where('bagian_id', '=', Auth::user()->bagian_id)->whereIn('status', [1, 2, 5])
                 ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -95,8 +95,8 @@ class SpjController extends Controller
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" href="' . route('spj.show', $row->id) . '">Review</a>
-                                <a class="dropdown-item" href="' . route('spj.edit', $row->id) . '">Edit</a>
+                                <a class="dropdown-item" href="' . route('spj.show',  Crypt::encryptString($row->id)) . '">Review</a>
+                                <a class="dropdown-item" href="' . route('spj.edit',  Crypt::encryptString($row->id)) . '">Edit</a>
                                 <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                             </div>
                         </div>
@@ -242,16 +242,26 @@ class SpjController extends Controller
     public function show($id)
     {
         $spj = SPJ::find(Crypt::decryptString($id));
-        $user = SPJ::join('users', 'spj.bagian_id', '=', 'users.bagian_id')
-            ->where('spj.status', 4)
-            ->first();
+        if (Auth::user()->level == 1) {
+            $user = User::join('spj', 'users.bagian_id', '=', 'spj.bagian_id')
+                ->where('spj.id', '=', Crypt::decryptString($id))->first();
+            // dd($user);
+        } else {
+            $user = User::join('spj', 'users.bagian_id', '=', 'spj.bagian_id')
+                ->where('spj.id', '=',  Crypt::decryptString($id))->first();
+        }
+        // dd($user);
         $menu = 'SPJ';
-        return view('admin.spj.review', compact('menu', 'spj', 'user'));
+        return view('admin.spj.review', compact('menu', 'user', 'spj'));
     }
 
     public function terima($id)
     {
         $spj = SPJ::find($id);
+        $spj->update(['status' => '3']);
+        if ($spj->alasan != null) {
+            $spj->update(['alasan' => null]);
+        }
         $spj->update(['status' => '3']);
         $kwitansi = $spj->kwitansi;
 

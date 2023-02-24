@@ -24,8 +24,13 @@
                         <div class="col-12">
                             <div class="post">
                                 <div class="user-block">
-                                    <img src="{{ url('storage/fotouser/' . $user->foto) }}"
-                                        class="img-circle img-bordered-sm" alt="User Image">
+                                    @if ($user->foto != null)
+                                        <img src="{{ url('storage/fotouser/' . $user->foto) }}"
+                                            class="img-circle img-bordered-sm" alt="User Image">
+                                    @else
+                                        <img src="{{ url('storage/fotouser/blank.png') }}"
+                                            class="img-circle img-bordered-sm" alt="User Image">
+                                    @endif
                                     <span class="username">
                                         <a href="#">{{ $user->nama }}</a>
                                     </span>
@@ -198,7 +203,8 @@
                 <form id="tolakForm" name="tolakForm" class="form-horizontal">
                     @csrf
                     <div class="modal-body">
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                            style="display: none;">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

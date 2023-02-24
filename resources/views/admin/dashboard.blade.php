@@ -153,10 +153,8 @@
                                 <h5 class="description-header mt-4">Anggaran</h5>
                                 <span class="description-text">
                                     @if (Auth::user()->level == 2)
-                                        @foreach ($kegiatan as $keg)
-                                            <span
-                                                class="description-text text-success">{{ 'Rp. ' . number_format($keg->pagu_kegiatan, 0, ',', '.') }}</span>
-                                        @endforeach
+                                        <span
+                                            class="description-text text-success">{{ 'Rp. ' . number_format($pagu_kegiatan->pagu, 0, ',', '.') }}</span>
                                     @endif
                                 </span>
                             </div>
@@ -166,10 +164,8 @@
                                 <h5 class="description-header mt-4">Sisa</h5>
                                 <span class="description-text">
                                     @if (Auth::user()->level == 2)
-                                        @foreach ($kegiatan as $keg)
-                                            <span
-                                                class="description-text text-danger">{{ 'Rp. ' . number_format($keg->sisa_kegiatan, 0, ',', '.') }}</span>
-                                        @endforeach
+                                        <span
+                                            class="description-text text-danger">{{ 'Rp. ' . number_format($sisa_kegiatan->sisa, 0, ',', '.') }}</span>
                                     @endif
                                 </span>
                             </div>

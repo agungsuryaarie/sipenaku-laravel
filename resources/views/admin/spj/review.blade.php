@@ -24,8 +24,13 @@
                         <div class="col-12">
                             <div class="post">
                                 <div class="user-block">
-                                    <img src="{{ url('storage/fotouser/' . $user->foto) }}"
-                                        class="img-circle img-bordered-sm" alt="User Image">
+                                    @if ($user->foto != null)
+                                        <img src="{{ url('storage/fotouser/' . $user->foto) }}"
+                                            class="img-circle img-bordered-sm" alt="User Image">
+                                    @else
+                                        <img src="{{ url('storage/fotouser/blank.png') }}"
+                                            class="img-circle img-bordered-sm" alt="User Image">
+                                    @endif
                                     <span class="username">
                                         <a href="#">{{ $user->nama }}</a>
                                     </span>

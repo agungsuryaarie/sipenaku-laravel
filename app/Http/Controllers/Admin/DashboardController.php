@@ -10,7 +10,6 @@ use App\Models\SPJ;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Setting;
 use App\Models\AppSetting;
-use DB;
 
 class DashboardController extends Controller
 {
@@ -27,11 +26,12 @@ class DashboardController extends Controller
         $spj_terima = SPJ::where('status', 3)->where('bagian_id', $idb)->count();
         $spj_tolak = SPJ::where('status', 4)->where('bagian_id', $idb)->count();
         $app = AppSetting::first();
-        // $kegiatan = Kegiatan::select('*')->selectRaw('SUM(sisa_kegiatan) as sisa')
-        //     ->where('bagian_id', $idb)
-        //     ->get();
-        $kegiatan = Kegiatan::where('bagian_id', $idb)
-            ->get();
-        return view('admin.dashboard', compact('menu', 'kegiatan', 'gu', 'bagian', 'user', 'kegiatan_all', 'spj', 'app', 'spj_terima', 'spj_tolak'));
+        $pagu_kegiatan = Kegiatan::select('*')->selectRaw('SUM(pagu_kegiatan) as pagu')
+            ->where('bagian_id', $idb)
+            ->first();
+        $sisa_kegiatan = Kegiatan::select('*')->selectRaw('SUM(sisa_kegiatan) as sisa')
+            ->where('bagian_id', $idb)
+            ->first();
+        return view('admin.dashboard', compact('menu', 'pagu_kegiatan', 'sisa_kegiatan',  'gu', 'bagian', 'user', 'kegiatan_all', 'spj', 'app', 'spj_terima', 'spj_tolak'));
     }
 }
