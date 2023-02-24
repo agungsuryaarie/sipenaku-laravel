@@ -105,7 +105,7 @@
                             <div class="icon">
                                 <i class="fa fa-file"></i>
                             </div>
-                            <a href="{{ 'data-spj' }}" class="small-box-footer">Selengkapnya <i
+                            <a href="{{ route('spj.diterima') }}" class="small-box-footer">Selengkapnya <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>

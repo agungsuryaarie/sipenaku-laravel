@@ -27,7 +27,7 @@
                                     <tr>
                                         <th style="width: 5%">No</th>
                                         <th style="width: 10%">Tanggal</th>
-                                        <th style="width: 20%">Bagiann</th>
+                                        <th style="width: 20%">Bagian</th>
                                         <th>Uraian</th>
                                         <th class="text-center" style="width: 8%">Aksi</th>
                                     </tr>

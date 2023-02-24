@@ -23,7 +23,6 @@ class SpjController extends Controller
     public function index(Request $request)
     {
         $menu = 'Pengajuan SPJ';
-        $spj = SPJ::where('bagian_id', Auth::user()->bagian_id)->get();
         if ($request->ajax()) {
             $data = SPJ::where('bagian_id', '=', Auth::user()->bagian_id)->whereIn('status', [1, 2, 5])
                 ->get();
@@ -71,7 +70,7 @@ class SpjController extends Controller
                             <div class="dropdown-menu" role="menu">
                                 <a class="dropdown-item kirim" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Kirim">Kirim</i></a>
                                 <a class="dropdown-item" href="' . route('spj.edit', Crypt::encryptString($row->id)) . '">Edit</a>
-                                <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
+                                <a class="dropdown-item delete" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                             </div>
                         </div>
                     </center>';
@@ -110,7 +109,7 @@ class SpjController extends Controller
                 ->make(true);
         }
 
-        return view('admin.spj.data', compact('menu', 'spj'));
+        return view('admin.spj.data', compact('menu'));
     }
 
     public function create()
@@ -204,7 +203,7 @@ class SpjController extends Controller
             Storage::delete('public/file/' . $spj->file);
         }
         $spj->delete();
-        return response()->json(['toast_success' => 'SPJ deleted successfully.']);
+        return response()->json(['success' => 'SPJ deleted successfully.']);
     }
 
     public function verifikasi(Request $request)

@@ -318,24 +318,6 @@
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
             });
-            $("body").on("click", ".terima", function() {
-                var spj_id = $(this).data("id");
-                confirm("Terima !");
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('spj/terima') }}" + '/' + spj_id,
-                    data: {
-                        _token: "{!! csrf_token() !!}",
-                    },
-                    success: function(data) {
-                        alertSuccess("SPJ Berhasil diterima");
-                        table.draw();
-                    },
-                    error: function(data) {
-                        console.log("Error:", data);
-                    },
-                });
-            });
             $("#konfirmasi").click(function() {
                 $("#konfirmForm").trigger("reset");
                 $("#modelHeadingKonfirm").html("Konfirmasi");
