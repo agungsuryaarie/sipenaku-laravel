@@ -9,42 +9,49 @@
                 <div class="card-body">
                     <div class="col-12">
                         <div class="row">
-                            <div class="col-1">
+                            <div class="col-2">
                                 <div>Kegiatan</div>
                             </div>
-                            <div class="col-8">
-                                <div>: {{ $kegiatan->kode_kegiatan ?? 'None' }}
-                                    {{ $kegiatan->nama_kegiatan ?? 'None' }}</div>
+                            <div class="col-10">
+                                <div>: {{ $subkegiatan->kegiatan->kode_kegiatan ?? 'None' }}
+                                    {{ $subkegiatan->kegiatan->nama_kegiatan ?? 'None' }}</div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-1">
+                            <div class="col-2">
+                                <div>Sub Kegiatan</div>
+                            </div>
+                            <div class="col-10">
+                                <div>: {{ $subkegiatan->kode_sub ?? 'None' }} {{ $subkegiatan->nama_sub ?? 'None' }}</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
                                 <div>Bagian</div>
                             </div>
-                            <div class="col-8">
-                                <div>: {{ $kegiatan->bagian->nama_bagian ?? 'None' }}</div>
+                            <div class="col-10">
+                                <div>: {{ $subkegiatan->kegiatan->bagian->nama_bagian ?? 'None' }}</div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('kartukendali.kegusr') }}" class="btn btn-warning btn-xs float-right">
+                            <a href="{{ route('subkegiatan.index', $subkegiatan->kegiatan->id ?? 'None') }}"
+                                id="createNewSubkeg" class="btn btn-warning btn-xs float-right">
                                 <i class="fas fa-reply"></i> Kembali
                             </a>
                         </div>
-                        <!-- /.card-header -->
                         <div class="card-body">
-                            <table class="table table-bordered table-striped data-table">
+                            <table id="data-table" class="table table-bordered table-striped ">
                                 <thead>
                                     <tr>
                                         <th style="width:3%">No</th>
-                                        <th style="width:15%">Kode Sub Kegiatan</th>
-                                        <th>Nama Sub Kegiatan</th>
+                                        <th style="width:15%">Kode Rekening</th>
+                                        <th>Nama Rekening</th>
                                         <th style="width:13%">Jumlah</th>
                                         <th style="width:13%">Sisa</th>
                                     </tr>
@@ -58,7 +65,6 @@
         </div>
     </section>
 @endsection
-
 @section('script')
     <script>
         $(function() {
@@ -68,7 +74,7 @@
                 },
             });
 
-            var table = $(".data-table").DataTable({
+            var table = $("#data-table").DataTable({
                 processing: true,
                 serverSide: true,
                 responsive: true,
@@ -76,29 +82,29 @@
                 autoWidth: false,
                 dom: 'Bfrtip',
                 buttons: ["excel", "pdf", "print", "colvis"],
-                ajax: "{{ route('kartukendali.subkegusr', $id) }}",
+                ajax: "{{ route('kartukendali.rek', $id) }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'kode_subkeg',
-                        name: 'kode_subkeg'
+                        data: 'kode_rekening',
+                        name: 'kode_rekening'
                     },
                     {
-                        data: 'nama_subkeg',
-                        name: 'nama_subkeg'
+                        data: 'nama_rekening',
+                        name: 'nama_rekening'
                     },
                     {
-                        data: 'pagu_sub',
-                        name: 'pagu_sub'
+                        data: 'pagu_rekening',
+                        name: 'pagu_rekening'
                     },
                     {
-                        data: 'sisa_sub',
-                        name: 'sisa_sub'
+                        data: 'sisa_rekening',
+                        name: 'sisa_rekening'
                     },
                 ]
-            });
+            })
         });
     </script>
 @endsection

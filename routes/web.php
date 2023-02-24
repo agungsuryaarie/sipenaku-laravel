@@ -104,9 +104,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('spj/{spj}/update', [SpjController::class, 'update'])->name('spj.update');
         Route::post('spj/kirim/{spj}', [SpjController::class, 'kirim'])->name('spj.kirim');
         // Kartu Kendali
-        Route::get('kartu-kendali-detail', [KartuController::class, 'kegusr'])->name('kartukendali.kegusr');
-        Route::get('kartu-kendali-detail/sub-kegiatan/{id}', [KartuController::class, 'subkegusr'])->name('kartukendali.subkegusr');
-        Route::get('kartu-kendali-detail/rekening', [KartuController::class, 'rekusr'])->name('kartukendali.rekusr');
+        Route::get('kartu-kendali-detail', [KartuController::class, 'kegiatan'])->name('kartukendali.kegiatan');
+        Route::get('kartu-kendali-detail/sub-kegiatan/{id}', [KartuController::class, 'subkeg'])->name('kartukendali.subkeg');
+        Route::get('kartu-kendali-detail/rekening/{id}', [KartuController::class, 'rek'])->name('kartukendali.rek');
     });
 });
 

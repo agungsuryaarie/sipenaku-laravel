@@ -56,7 +56,7 @@
                 autoWidth: false,
                 dom: 'Bfrtip',
                 buttons: ["excel", "pdf", "print", "colvis"],
-                ajax: "{{ route('kartukendali.kegusr') }}",
+                ajax: "{{ route('kartukendali.kegiatan') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'

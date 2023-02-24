@@ -19,7 +19,7 @@ class KartuController extends Controller
         $menu = 'Kartu Kendali';
         return view('admin.kartukendali.data', compact('menu'));
     }
-    public function kegusr(Request $request)
+    public function kegiatan(Request $request)
     {
         $menu = 'Kartu Kendali';
         if ($request->ajax()) {
@@ -27,11 +27,11 @@ class KartuController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_kegiatan', function ($data) {
-                    $link = '<a href="' . route('kartukendali.subkegusr', $data->id)  . '">' . $data->kode_kegiatan . '</a>';
+                    $link = '<a href="' . route('kartukendali.subkeg', $data->id)  . '">' . $data->kode_kegiatan . '</a>';
                     return $link;
                 })
                 ->addColumn('nama_kegiatan', function ($data) {
-                    $link = '<a href="' . route('kartukendali.subkegusr', $data->id)  . '">' . $data->nama_kegiatan . '</a>';
+                    $link = '<a href="' . route('kartukendali.subkeg', $data->id)  . '">' . $data->nama_kegiatan . '</a>';
                     return $link;
                 })
                 ->addColumn('pagu_kegiatan', function ($data) {
@@ -52,12 +52,12 @@ class KartuController extends Controller
                     }
                     return $link;
                 })
-                ->rawColumns(['kode_kegiatan', 'nama_kegiatan', 'pagu_kegiatan', 'sisa_kegiatan'])
+                ->rawColumns(['kode_kegiatan', 'nama_kegiatan', 'sisa_kegiatan'])
                 ->make(true);
         }
-        return view('admin.kartukendali.datausr', compact('menu'));
+        return view('admin.kartukendali.keg', compact('menu'));
     }
-    public function subkegusr(Request $request, $id)
+    public function subkeg(Request $request, $id)
     {
         $menu = 'Sub Kegiatan';
         $kegiatan = Kegiatan::where('id', $id)->first();
@@ -66,11 +66,11 @@ class KartuController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_subkeg', function ($data) {
-                    $link = '<a href="' . route('rekening.index', $data->id)  . '">' . $data->kode_sub . '</a>';
+                    $link = '<a href="' . route('kartukendali.rek', $data->id)  . '">' . $data->kode_sub . '</a>';
                     return $link;
                 })
                 ->addColumn('nama_subkeg', function ($data) {
-                    $link = '<a href="' . route('rekening.index', $data->id)  . '">' . $data->nama_sub . '</a>';
+                    $link = '<a href="' . route('kartukendali.rek', $data->id)  . '">' . $data->nama_sub . '</a>';
                     return $link;
                 })
                 ->addColumn('pagu_sub', function ($data) {
@@ -83,17 +83,48 @@ class KartuController extends Controller
                 })
                 ->addColumn('sisa_sub', function ($data) {
                     if ($data->sisa_sub == "") {
-                        $link = "Rp. " . "0";
+                        $link = '<span
+                        class="description-text text-danger">Rp. ' . "0" . '</span>';
                     } else {
                         $link = '<span
                         class="description-text text-danger">Rp. ' . number_format($data->sisa_sub, 0, ',', '.') . '</span>';
                     }
                     return $link;
                 })
-                ->rawColumns(['kode_subkeg', 'nama_subkeg', 'pagu_sub', 'sisa_sub'])
+                ->rawColumns(['kode_subkeg', 'nama_subkeg', 'sisa_sub'])
                 ->make(true);
         }
 
-        return view('admin.kartukendali.subkegusr', compact('menu', 'id', 'kegiatan'));
+        return view('admin.kartukendali.subkeg', compact('menu', 'id', 'kegiatan'));
+    }
+    public function rek(Request $request, $id)
+    {
+        $menu = 'Rekening';
+        $subkegiatan = Subkegiatan::where('id', $id)->first();
+        if ($request->ajax()) {
+            $data = Rekening::where('subkegiatan_id', $id)->latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('kode_rekening', function ($data) {
+                    $link = $data->kode_rekening;
+                    return $link;
+                })
+                ->addColumn('nama_rekening', function ($data) {
+                    $link = $data->nama_rekening;
+                    return $link;
+                })
+                ->addColumn('pagu_rekening', function ($data) {
+                    $link = 'Rp. ' . number_format($data->pagu_rekening, 0, ',', '.');
+                    return $link;
+                })
+                ->addColumn('sisa_rekening', function ($data) {
+                    $link = '<span
+                    class="description-text text-danger">Rp. ' . number_format($data->sisa_rekening, 0, ',', '.') . '</span>';
+                    return $link;
+                })
+                ->rawColumns(['sisa_rekening'])
+                ->make(true);
+        }
+        return view('admin.kartukendali.rek', compact('menu', 'id', 'subkegiatan'));
     }
 }

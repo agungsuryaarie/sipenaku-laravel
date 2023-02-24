@@ -146,7 +146,7 @@
         </ul>
     </li>
     <li class="nav-item">
-        <a href="{{ route('kartukendali.kegusr') }}"
+        <a href="{{ route('kartukendali.kegiatan') }}"
             class="nav-link {{ request()->segment(1) == 'kartu-kendali-detail' ? 'active' : '' }}">
             <i class="fas fa-credit-card nav-icon"></i>
             <p>
