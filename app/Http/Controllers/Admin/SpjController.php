@@ -12,8 +12,9 @@ use App\Models\Subkegiatan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use DataTables;
+use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 
 
 class SpjController extends Controller
@@ -25,9 +26,6 @@ class SpjController extends Controller
         $spj = SPJ::where('bagian_id', Auth::user()->bagian_id)->get();
         if ($request->ajax()) {
             $data = SPJ::where('bagian_id', Auth::user()->bagian_id)
-                ->where('status', 1)
-                ->orWhere('status', 2)
-                ->orWhere('status', 5)
                 ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -72,7 +70,7 @@ class SpjController extends Controller
                             </button>
                             <div class="dropdown-menu" role="menu">
                                 <a class="dropdown-item kirim" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Kirim">Kirim</i></a>
-                                <a class="dropdown-item" href="' . route('spj.edit', $row->id) . '">Edit</a>
+                                <a class="dropdown-item" href="' . route('spj.edit', Crypt::encryptString($row->id)) . '">Edit</a>
                                 <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                             </div>
                         </div>
@@ -224,7 +222,7 @@ class SpjController extends Controller
                     return $link;
                 })
                 ->addColumn('action', function ($row) {
-                    $btn = '<center><a class="btn btn-success btn-xs" href="' . route('spj.verify', $row->id) . '"><i class="fa fa-check-double"></i> Verifikasi</span></a></center>';
+                    $btn = '<center><a class="btn btn-success btn-xs" href="' . route('spj.verify', Crypt::encryptString($row->id)) . '"><i class="fa fa-check-double"></i> Verifikasi</span></a></center>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -232,16 +230,18 @@ class SpjController extends Controller
         }
         return view('admin.spj.verifikasi', compact('menu'));
     }
-    public function verify(SPJ $spj)
+    public function verify($id)
     {
+        $spj = SPJ::find(Crypt::decryptString($id));
         $user = User::join('spj', 'users.bagian_id', '=', 'spj.bagian_id')
             ->where('spj.status', '=', 2)->first();
         // dd($user);
         $menu = 'Verifikasi SPJ';
         return view('admin.spj.verif', compact('menu', 'spj', 'user'));
     }
-    public function show(SPJ $spj)
+    public function show($id)
     {
+        $spj = SPJ::find(Crypt::decryptString($id));
         $user = SPJ::join('users', 'spj.bagian_id', '=', 'users.bagian_id')
             ->where('spj.status', 4)
             ->first();
@@ -314,7 +314,7 @@ class SpjController extends Controller
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="' . route('spj.view', $row->id) . '">Review</a>
+                            <a class="dropdown-item" href="' . route('spj.view', Crypt::encryptString($row->id)) . '">Review</a>
                                <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                                </div>
                                </div>
@@ -326,7 +326,7 @@ class SpjController extends Controller
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item" href="' . route('spj.show', $row->id) . '">Review</a>
+                        <a class="dropdown-item" href="' . route('spj.show', Crypt::encryptString($row->id)) . '">Review</a>
                            </div>
                            </div>
                        </center>';
@@ -380,7 +380,7 @@ class SpjController extends Controller
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu" role="menu">
-                            <a class="dropdown-item" href="' . route('spj.view', $row->id) . '">Review</a>
+                            <a class="dropdown-item" href="' . route('spj.view', Crypt::encryptString($row->id)) . '">Review</a>
                                <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                                </div>
                                </div>
@@ -392,7 +392,7 @@ class SpjController extends Controller
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item" href="' . route('spj.show', $row->id) . '">Review</a>
+                        <a class="dropdown-item" href="' . route('spj.show', Crypt::encryptString($row->id)) . '">Review</a>
                            </div>
                            </div>
                        </center>';
@@ -408,14 +408,16 @@ class SpjController extends Controller
             return view('admin.spj.ditolakusr', compact('menu'));
         }
     }
-    public function edit(SPJ $spj)
+    public function edit($id)
     {
+        $spj = SPJ::find(Crypt::decryptString($id));
         $menu = 'Pengajuan SPJ';
         $kegiatan = Kegiatan::where('bagian_id', Auth::user()->bagian_id)->get();
         return view('admin.spj.edit', compact('spj', 'menu', 'kegiatan'));
     }
-    public function update(Request $request, SPJ $spj)
+    public function update(Request $request, $id)
     {
+        $spj = SPJ::find(Crypt::decryptString($id));
         //Translate Bahasa Indonesia
         $message = array(
             'kegiatan_id.required' => 'Kegiatan harus dipilih.',

@@ -43,7 +43,7 @@
                             <a href="javascript:void(0)" id="createNewRekening" class="btn btn-info btn-xs">
                                 <i class="fas fa-plus-circle"></i> Tambah
                             </a>
-                            <a href="{{ route('subkegiatan.index', $subkegiatan->kegiatan->id ?? 'None') }}"
+                            <a href="{{ route('subkegiatan.index', Crypt::encryptString($subkegiatan->kegiatan->id)) ?? 'None' }}"
                                 id="createNewSubkeg" class="btn btn-warning btn-xs float-right">
                                 <i class="fas fa-reply"></i> Kembali
                             </a>

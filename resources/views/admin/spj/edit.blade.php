@@ -31,7 +31,8 @@
                             *Ukuran file maksimal 5MB.
                 </div>
                 <div class="card">
-                    <form method="POST" action="{{ route('spj.update', $spj->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('spj.update', Crypt::encryptString($spj->id)) }}"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="card-body-form">

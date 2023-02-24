@@ -24,7 +24,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="float-right">
-                                <a href="{{ route('appsetting.edit', $appsetting->id) }}"
+                                <a href="{{ route('appsetting.edit', Crypt::encryptString($appsetting->id)) }}"
                                     class="btn btn-warning btn-xs text-white">
                                     <i class="fa fa-edit">
                                     </i></a>

@@ -6,25 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Models\Subkegiatan;
 use App\Models\Kegiatan;
 use Illuminate\Http\Request;
-use DataTables;
+use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 
 class SubkegiatanController extends Controller
 {
     public function index(Request $request, $id)
     {
         $menu = 'Daftar Sub Kegiatan';
-        $kegiatan = Kegiatan::where('id', $id)->first();
+        $kegiatan = Kegiatan::where('id', Crypt::decryptString($id))->first();
         if ($request->ajax()) {
-            $data = Subkegiatan::with('rekening')->where('kegiatan_id', $id)->latest()->get();
+            $data = Subkegiatan::with('rekening')->where('kegiatan_id', Crypt::decryptString($id))->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_subkeg', function ($data) {
-                    $link = '<a href="' . route('rekening.index', $data->id)  . '">' . $data->kode_sub . '</a>';
+                    $link = '<a href="' . route('rekening.index', Crypt::encryptString($data->id))  . '">' . $data->kode_sub . '</a>';
                     return $link;
                 })
                 ->addColumn('nama_subkeg', function ($data) {
-                    $link = '<a href="' . route('rekening.index', $data->id)  . '">' . $data->nama_sub . '</a>';
+                    $link = '<a href="' . route('rekening.index', Crypt::encryptString($data->id))  . '">' . $data->nama_sub . '</a>';
                     return $link;
                 })
                 ->addColumn('pagu_sub', function ($data) {

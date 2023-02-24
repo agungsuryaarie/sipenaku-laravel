@@ -40,7 +40,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('subkegiatan.index', $subkegiatan->kegiatan->id ?? 'None') }}"
+                            <a href="{{ route('kartukendali.subkeg', Crypt::encryptString($subkegiatan->kegiatan->id)) }}"
                                 id="createNewSubkeg" class="btn btn-warning btn-xs float-right">
                                 <i class="fas fa-reply"></i> Kembali
                             </a>

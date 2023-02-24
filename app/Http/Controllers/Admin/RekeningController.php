@@ -7,17 +7,18 @@ use App\Models\Kegiatan;
 use App\Models\Subkegiatan;
 use App\Models\Rekening;
 use Illuminate\Http\Request;
-use DataTables;
+use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 
 class RekeningController extends Controller
 {
     public function index(Request $request, $id)
     {
         $menu = 'Daftar Rekening';
-        $subkegiatan = Subkegiatan::where('id', $id)->first();
+        $subkegiatan = Subkegiatan::where('id', Crypt::decryptString($id))->first();
         if ($request->ajax()) {
-            $data = Rekening::where('subkegiatan_id', $id)->latest()->get();
+            $data = Rekening::where('subkegiatan_id', Crypt::decryptString($id))->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_rekening', function ($data) {

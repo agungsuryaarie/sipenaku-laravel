@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\SPJ;
 use App\Models\Kegiatan;
 use App\Models\Subkegiatan;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Rekening;
-use Illuminate\Support\Facades\Hash;
-use DataTables;
+use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Crypt;
 
 class KartuController extends Controller
 {
@@ -27,11 +26,11 @@ class KartuController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_kegiatan', function ($data) {
-                    $link = '<a href="' . route('kartukendali.subkeg', $data->id)  . '">' . $data->kode_kegiatan . '</a>';
+                    $link = '<a href="' . route('kartukendali.subkeg', Crypt::encryptString($data->id))  . '">' . $data->kode_kegiatan . '</a>';
                     return $link;
                 })
                 ->addColumn('nama_kegiatan', function ($data) {
-                    $link = '<a href="' . route('kartukendali.subkeg', $data->id)  . '">' . $data->nama_kegiatan . '</a>';
+                    $link = '<a href="' . route('kartukendali.subkeg', Crypt::encryptString($data->id))  . '">' . $data->nama_kegiatan . '</a>';
                     return $link;
                 })
                 ->addColumn('pagu_kegiatan', function ($data) {
@@ -60,17 +59,17 @@ class KartuController extends Controller
     public function subkeg(Request $request, $id)
     {
         $menu = 'Sub Kegiatan';
-        $kegiatan = Kegiatan::where('id', $id)->first();
+        $kegiatan = Kegiatan::where('id', Crypt::decryptString($id))->first();
         if ($request->ajax()) {
-            $data = Subkegiatan::with('rekening')->where('kegiatan_id', $id)->latest()->get();
+            $data = Subkegiatan::with('rekening')->where('kegiatan_id', Crypt::decryptString($id))->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_subkeg', function ($data) {
-                    $link = '<a href="' . route('kartukendali.rek', $data->id)  . '">' . $data->kode_sub . '</a>';
+                    $link = '<a href="' . route('kartukendali.rek', Crypt::encryptString($data->id))  . '">' . $data->kode_sub . '</a>';
                     return $link;
                 })
                 ->addColumn('nama_subkeg', function ($data) {
-                    $link = '<a href="' . route('kartukendali.rek', $data->id)  . '">' . $data->nama_sub . '</a>';
+                    $link = '<a href="' . route('kartukendali.rek', Crypt::encryptString($data->id))  . '">' . $data->nama_sub . '</a>';
                     return $link;
                 })
                 ->addColumn('pagu_sub', function ($data) {
@@ -100,9 +99,9 @@ class KartuController extends Controller
     public function rek(Request $request, $id)
     {
         $menu = 'Rekening';
-        $subkegiatan = Subkegiatan::where('id', $id)->first();
+        $subkegiatan = Subkegiatan::where('id', Crypt::decryptString($id))->first();
         if ($request->ajax()) {
-            $data = Rekening::where('subkegiatan_id', $id)->latest()->get();
+            $data = Rekening::where('subkegiatan_id', Crypt::decryptString($id))->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_rekening', function ($data) {

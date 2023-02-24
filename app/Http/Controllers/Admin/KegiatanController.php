@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Kegiatan;
 use App\Models\Bagian;
-use DataTables;
+use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 
 class KegiatanController extends Controller
 {
@@ -21,11 +22,11 @@ class KegiatanController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_kegiatan', function ($data) {
-                    $link = '<a href="' . route('subkegiatan.index', $data->id)  . '">' . $data->kode_kegiatan . '</a>';
+                    $link = '<a href="' . route('subkegiatan.index', Crypt::encryptString($data->id))  . '">' . $data->kode_kegiatan . '</a>';
                     return $link;
                 })
                 ->addColumn('nama_kegiatan', function ($data) {
-                    $link = '<a href="' . route('subkegiatan.index', $data->id)  . '">' . $data->nama_kegiatan . '</a>';
+                    $link = '<a href="' . route('subkegiatan.index', Crypt::encryptString($data->id))  . '">' . $data->nama_kegiatan . '</a>';
                     return $link;
                 })
                 ->addColumn('bagian', function ($data) {
