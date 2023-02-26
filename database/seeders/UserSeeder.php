@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         $data = [
             [
-                'bagian_id' => 1,
+                'bagian_id' => 4,
                 'nip' => 202020202020202020,
                 'nama' => 'Admin',
                 'nohp' => '0813123123123',
@@ -26,18 +26,6 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('12345678'),
                 'foto' => 'blank.png',
                 'level' => 1,
-                'status' => 1,
-            ],
-            [
-                'bagian_id' => 2,
-                'nip' => 402020202020202020,
-                'nama' => 'User',
-                'nohp' => '0813123123100',
-                'email' => 'user@gmail.com',
-                'username' => 'userbagian',
-                'password' => Hash::make('12345678'),
-                'foto' => 'blank.png',
-                'level' => 2,
                 'status' => 1,
             ],
         ];

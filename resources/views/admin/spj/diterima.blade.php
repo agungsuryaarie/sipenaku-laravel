@@ -88,25 +88,24 @@
                     },
                 ],
             });
-
-            $("body").on("click", ".deleteSpj", function() {
-                var spj_id = $(this).data("id");
-                confirm("Apa kamu yakin menghapus data ini ?");
-                $.ajax({
-                    type: "DELETE",
-                    url: "{{ url('spj/destroyed') }}" + '/' + spj_id,
-                    data: {
-                        _token: "{!! csrf_token() !!}",
-                    },
-                    success: function(data) {
-                        alertDanger("SPJ Berhasil di hapus");
-                        table.draw();
-                    },
-                    error: function(data) {
-                        console.log("Error:", data);
-                    },
-                });
-            });
+            // $("body").on("click", ".deleteSpj", function() {
+            //     var spj_id = $(this).data("id");
+            //     confirm("Apa kamu yakin menghapus data ini ?");
+            //     $.ajax({
+            //         type: "DELETE",
+            //         url: "{{ url('spj/destroyed') }}" + '/' + spj_id,
+            //         data: {
+            //             _token: "{!! csrf_token() !!}",
+            //         },
+            //         success: function(data) {
+            //             alertDanger("SPJ Berhasil di hapus");
+            //             table.draw();
+            //         },
+            //         error: function(data) {
+            //             console.log("Error:", data);
+            //         },
+            //     });
+            // });
         });
     </script>
 @endsection

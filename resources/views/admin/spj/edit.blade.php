@@ -194,7 +194,7 @@
         $(function() {
             bsCustomFileInput.init();
         });
-        $(document).ready(function() {
+        $('#kegiatan').on('change', function() {
             var idKegiatan = $('#kegiatan').val();
             $("#subkeg").html('');
             $.ajax({
@@ -213,9 +213,8 @@
                     });
                 }
             });
-
             $('#subkeg').on('change', function() {
-                var idSubkeg = this.value;
+                var idSubkeg = $('#subkeg').val();
                 console.log(idSubkeg);
                 $("#rekening").html('');
                 $.ajax({

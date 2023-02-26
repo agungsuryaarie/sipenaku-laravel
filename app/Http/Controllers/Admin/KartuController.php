@@ -107,6 +107,45 @@ class KartuController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_subkeg', function ($data) {
+                    $link = '<a href="' . route('kartukendali.rek', Crypt::encryptString($data->id))  . '">' . $data->kode_sub . '</a>';
+                    return $link;
+                })
+                ->addColumn('nama_subkeg', function ($data) {
+                    $link = '<a href="' . route('kartukendali.rek', Crypt::encryptString($data->id))  . '">' . $data->nama_sub . '</a>';
+                    return $link;
+                })
+                ->addColumn('pagu_sub', function ($data) {
+                    if ($data->pagu_sub == "") {
+                        $link = "Rp. " . "0";
+                    } else {
+                        $link = 'Rp. ' . number_format($data->pagu_sub, 0, ',', '.');
+                    }
+                    return $link;
+                })
+                ->addColumn('sisa_sub', function ($data) {
+                    if ($data->sisa_sub == "") {
+                        $link = '<span
+                        class="description-text text-danger">Rp. ' . "0" . '</span>';
+                    } else {
+                        $link = '<span
+                        class="description-text text-danger">Rp. ' . number_format($data->sisa_sub, 0, ',', '.') . '</span>';
+                    }
+                    return $link;
+                })
+                ->rawColumns(['kode_subkeg', 'nama_subkeg', 'sisa_sub'])
+                ->make(true);
+        }
+        return view('admin.kartukendali.subkeg', compact('menu', 'id', 'kegiatan'));
+    }
+    public function subkegadm(Request $request, $id)
+    {
+        $menu = 'Sub Kegiatan';
+        $kegiatan = Kegiatan::where('id', Crypt::decryptString($id))->first();
+        if ($request->ajax()) {
+            $data = Subkegiatan::with('rekening')->where('kegiatan_id', Crypt::decryptString($id))->latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('kode_subkeg', function ($data) {
                     $link = '<a href="' . route('kartu.rek', Crypt::encryptString($data->id))  . '">' . $data->kode_sub . '</a>';
                     return $link;
                 })
@@ -135,11 +174,7 @@ class KartuController extends Controller
                 ->rawColumns(['kode_subkeg', 'nama_subkeg', 'sisa_sub'])
                 ->make(true);
         }
-        if (Auth::user()->level == 1) {
-            return view('admin.kartukendali.subkegadm', compact('menu', 'id', 'kegiatan'));
-        } else {
-            return view('admin.kartukendali.subkeg', compact('menu', 'id', 'kegiatan'));
-        }
+        return view('admin.kartukendali.subkegadm', compact('menu', 'id', 'kegiatan'));
     }
     public function rek(Request $request, $id)
     {

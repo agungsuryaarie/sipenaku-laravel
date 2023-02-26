@@ -69,24 +69,12 @@ class SpjController extends Controller
                             </button>
                             <div class="dropdown-menu" role="menu">
                                 <a class="dropdown-item kirim" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Kirim">Kirim</i></a>
-                                <a class="dropdown-item" href="' . route('spj.edit', Crypt::encryptString($row->id)) . '">Edit</a>
                                 <a class="dropdown-item delete" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                             </div>
                         </div>
                     </center>';
                     } elseif ($row->status == 2) {
                         $btn = '<center><i>no action</i></center>';
-                    } elseif ($row->status == 4) {
-                        $btn = '<center>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
-                            </div>
-                        </div>
-                    </center>';
                     } elseif ($row->status == 5) {
                         $btn = '<center>
                         <div class="btn-group">
@@ -95,8 +83,8 @@ class SpjController extends Controller
                             </button>
                             <div class="dropdown-menu" role="menu">
                                 <a class="dropdown-item" href="' . route('spj.show',  Crypt::encryptString($row->id)) . '">Review</a>
-                                <a class="dropdown-item" href="' . route('spj.edit',  Crypt::encryptString($row->id)) . '">Edit</a>
-                                <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
+                                <a class="dropdown-item" href="' . route('spj.edit',  Crypt::encryptString($row->id)) . '">Edit Ulang</a>
+                                <a class="dropdown-item delete" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                             </div>
                         </div>
                     </center>';
@@ -324,7 +312,6 @@ class SpjController extends Controller
                             </button>
                             <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item" href="' . route('spj.view', Crypt::encryptString($row->id)) . '">Review</a>
-                               <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                                </div>
                                </div>
                            </center>';
@@ -390,7 +377,7 @@ class SpjController extends Controller
                             </button>
                             <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item" href="' . route('spj.view', Crypt::encryptString($row->id)) . '">Review</a>
-                               <a class="dropdown-item deleteSpj" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
+                            <a class="dropdown-item delete" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                                </div>
                                </div>
                            </center>';
