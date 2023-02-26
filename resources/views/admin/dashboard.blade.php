@@ -20,7 +20,25 @@
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                 <div class="ml-md-auto">
                     @if ($gu != null)
-                        @if (date('Y-m-d') > $gu->tgl_mulai ||
+                        @if (date('Y-m-d') < $gu->tgl_mulai && date('H:i:s') < $gu->jam_mulai)
+                            <a href="#" class="btn btn-success btn-round btn-xs mr-2 mb-2"><i
+                                    class="fa fa-wallet"></i>&nbsp;&nbsp;{{ $gu->judul }} mulai
+                                {{ \Carbon\Carbon::parse($gu->tgl_mulai)->translatedFormat('l, d F Y') }}
+                                </td> | Pukul : {{ $gu->jam_mulai }} -
+                                {{ \Carbon\Carbon::parse($gu->tgl_selesai)->translatedFormat('l, d F Y') }}
+                                </td> | Pukul : {{ $gu->jam_selesai }}</a>
+                            <a href="#" class="btn btn-warning btn-round btn-xs mb-2 text-white mr-2"><i
+                                    class="fas fa-clock"></i>&nbsp;&nbsp;sesi belum dimulai</a>
+                        @elseif(date('Y-m-d') == $gu->tgl_mulai && date('H:i:s') < $gu->jam_mulai)
+                            <a href="#" class="btn btn-success btn-round btn-xs mr-2 mb-2"><i
+                                    class="fa fa-wallet"></i>&nbsp;&nbsp;{{ $gu->judul }} mulai
+                                {{ \Carbon\Carbon::parse($gu->tgl_mulai)->translatedFormat('l, d F Y') }}
+                                </td> | Pukul : {{ $gu->jam_mulai }} -
+                                {{ \Carbon\Carbon::parse($gu->tgl_selesai)->translatedFormat('l, d F Y') }}
+                                </td> | Pukul : {{ $gu->jam_selesai }}</a>
+                            <a href="#" class="btn btn-warning btn-round btn-xs mb-2 text-white mr-2"><i
+                                    class="fas fa-clock"></i>&nbsp;&nbsp;sesi belum dimulai</a>
+                        @elseif (date('Y-m-d') > $gu->tgl_mulai ||
                                 (date('Y-m-d') == $gu->tgl_mulai && date('Y-m-d') < $gu->tgl_selesai) ||
                                 (date('Y-m-d') == $gu->tgl_selesai && date('H:i:s') > $gu->jam_mulai && date('H:i:s') < $gu->jam_selesai))
                             <a href="#" class="btn btn-success btn-round btn-xs mr-2 ml-2">
@@ -33,18 +51,19 @@
                                     class="fas fa-clock"></i>&nbsp;&nbsp;
                                 <span id="berakhir"></span></a>
                         @else
-                            <a href="#" class="btn btn-success btn-round btn-xs mr-2 mb-2"><i
-                                    class="fa fa-wallet"></i>&nbsp;&nbsp;{{ $gu->judul }} mulai
+                            <a href="#" class="btn btn-success btn-round btn-xs mr-2 ml-2">
+                                <i class="fa fa-wallet"></i>&nbsp;&nbsp;{{ $gu->judul }} mulai
                                 {{ \Carbon\Carbon::parse($gu->tgl_mulai)->translatedFormat('l, d F Y') }}
                                 </td> | Pukul : {{ $gu->jam_mulai }} -
                                 {{ \Carbon\Carbon::parse($gu->tgl_selesai)->translatedFormat('l, d F Y') }}
                                 </td> | Pukul : {{ $gu->jam_selesai }}</a>
-                            <a href="#" class="btn btn-warning btn-round btn-xs mb-2 text-white mr-2"><i
-                                    class="fas fa-clock"></i>&nbsp;&nbsp;sesi belum dimulai</a>
+                            <a href="#" class="btn btn-danger btn-round btn-xs mr-2 ml-2"><i
+                                    class="fas fa-clock"></i>&nbsp;&nbsp;
+                                <span id="berakhir"></span></a>
                         @endif
                     @else
                         <a href="#" class="btn btn-success btn-round btn-xs mr-2 mb-2"><i
-                                class="fa fa-wallet"></i>&nbsp;&nbsp;GU belum dimulai</a>
+                                class="fa fa-wallet"></i>&nbsp;&nbsp;Belum ada GU</a>
                         <a href="#" class="btn btn-danger btn-round btn-xs mb-2 mr-2"><i
                                 class="fas fa-clock"></i>&nbsp;&nbsp;<span id="berakhir"></span></a>
                     @endif

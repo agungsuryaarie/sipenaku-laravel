@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\SPJ;
 use App\Models\User;
 use App\Models\Subkegiatan;
+use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -103,8 +104,9 @@ class SpjController extends Controller
     public function create()
     {
         $menu = 'Pengajuan SPJ';
+        $setting = Setting::first();
         $kegiatan = Kegiatan::where('bagian_id', Auth::user()->bagian_id)->get();
-        return view('admin.spj.create', compact('menu', 'kegiatan'));
+        return view('admin.spj.create', compact('menu', 'kegiatan', 'setting'));
     }
 
     public function getSubkeg(Request $request)
