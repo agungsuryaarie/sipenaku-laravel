@@ -26,7 +26,7 @@ class UserController extends Controller
         $menu = 'User';
         $bagian = Bagian::latest()->get();
         if ($request->ajax()) {
-            $data = User::latest()->get();
+            $data = User::where('level', '!=', 1)->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('bagian', function ($data) {
@@ -152,9 +152,12 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::find($id)->delete();
+        $user->delete();
+        if ($user->foto) {
+            Storage::delete('public/fotouser/' . $user->foto);
+        }
         return response()->json(['success' => 'User deleted successfully.']);
     }
 
