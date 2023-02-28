@@ -281,7 +281,7 @@
                 if (rekening_id == '') {
                     $.ajax({
                         data: $("#rekeningForm").serialize(),
-                        url: "{{ route('rekening.store') }}" + "/" + rekening_id,
+                        url: "{{ route('rekening.store') }}",
                         type: "POST",
                         dataType: "json",
                         success: function(data) {

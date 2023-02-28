@@ -141,7 +141,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         @if (Auth::user()->foto == null)
-                                            <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2"
+                                            <img src="{{ url('storage/fotouser/blank.png') }}" class="img-circle elevation-2"
                                                 width="60px">
                                         @else
                                             <img src="{{ url('storage/fotouser/' . Auth::user()->foto) }}"

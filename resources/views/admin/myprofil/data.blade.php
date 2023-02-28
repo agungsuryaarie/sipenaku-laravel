@@ -27,7 +27,7 @@
                             </div>
                             <div class="widget-user-image">
                                 @if (Auth::user()->foto == null)
-                                    <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2"
+                                    <img src="{{ url('storage/fotouser/blank.png') }}" class="img-circle elevation-2"
                                         alt="User Image">
                                 @else
                                     <img src="{{ url('storage/fotouser/' . Auth::user()->foto) }}"
@@ -206,7 +206,7 @@
                             <div class="card-body">
                                 <div class="col-md-12">
                                     <div class="col-md-4">
-                                        <img src="{{ url('fotouser/blank.png') }}" alt="Image Profile"
+                                        <img src="{{ url('storage/fotouser/blank.png') }}" alt="Image Profile"
                                             class="img-thumbnail rounded img-preview" width="120px">
                                     </div>
                                     <div class="col-md-12 mt-2">
