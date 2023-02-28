@@ -255,9 +255,9 @@ class SpjController extends Controller
         $kwitansi = $spj->kwitansi;
 
         // Update Rekening
-        $pagu_rekening = Rekening::where('id', $spj->rekening_id)->value('pagu_rekening');
+        $sisa_rekening = Rekening::where('id', $spj->rekening_id)->value('sisa_rekening');
         $kurangkan_rekening = Rekening::find($spj->rekening_id);
-        $kurangkan_rekening->sisa_rekening = $pagu_rekening - $kwitansi;
+        $kurangkan_rekening->sisa_rekening = $sisa_rekening - $kwitansi;
         $kurangkan_rekening->save();
 
         // Update Kegiatan

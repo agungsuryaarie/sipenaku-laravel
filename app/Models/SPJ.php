@@ -17,7 +17,7 @@ class SPJ extends Model
 
     public function kegiatan()
     {
-        return $this->belongsTo(kegiatan::class);
+        return $this->belongsTo(Kegiatan::class);
     }
 
     public function subkegiatan()
