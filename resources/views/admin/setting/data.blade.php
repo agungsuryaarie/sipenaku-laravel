@@ -39,10 +39,10 @@
                                         @elseif(date('Y-m-d') == $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
                                             <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
                                         @elseif (date('Y-m-d') > $setting->tgl_mulai ||
-                                                (date('Y-m-d') == $setting->tgl_mulai && date('Y-m-d') < $setting->tgl_selesai) ||
-                                                (date('Y-m-d') == $setting->tgl_selesai &&
+                                                (date('Y-m-d') == $setting->tgl_mulai &&
                                                     date('H:i:s') > $setting->jam_mulai &&
-                                                    date('H:i:s') < $setting->jam_selesai))
+                                                    date('Y-m-d') < $setting->tgl_selesai) ||
+                                                (date('Y-m-d') == $setting->tgl_selesai && date('H:i:s') < $setting->jam_selesai))
                                             <span class="badge badge-success btn-sm">aktif</span>
                                         @else
                                             <span class="badge badge-danger btn-sm">sesi telah berakhir</span>
