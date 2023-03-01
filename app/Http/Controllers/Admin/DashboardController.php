@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $gu = Setting::first();
         $idb = Auth::user()->bagian_id;
         $bagian = Bagian::count();
-        $user = User::count();
+        $user = User::where('level', '!=', 1)->count();
         $kegiatan_all = Kegiatan::count();
         $spj = SPJ::count();
         $spj_terima = SPJ::where('status', 3)->where('bagian_id', $idb)->count();
