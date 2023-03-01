@@ -6,7 +6,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h4 class="text-white pb-2 fw-bold">Dashboard @if (Auth::user()->level == 1)
+                            <h4 class="text-white pb-2 fw-bold">Dashboard ffffffff @if (Auth::user()->level == 1)
                                     Administrator
                                 @else
                                     {{ Auth::user()->bagian->nama_bagian }}
