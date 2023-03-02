@@ -124,9 +124,8 @@
                                 @method('put')
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Judul SPM <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="judul" placeholder="Judul SPM"
+                                        <label for="exampleInputPassword1">Judul<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="judul" placeholder="Judul"
                                             autocomplete="off" value="{{ old('judul', $setting->judul) }}">
                                     </div>
                                     <div class="row">
@@ -213,10 +212,9 @@
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Judul SPM <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="judul"
-                                            placeholder="Judul SPM" autocomplete="off" value="{{ old('judul') }}">
+                                        <label for="exampleInputPassword1">Judul<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="judul" placeholder="Judul"
+                                            autocomplete="off" value="{{ old('judul') }}">
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
