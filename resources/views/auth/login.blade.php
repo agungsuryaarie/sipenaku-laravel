@@ -36,6 +36,27 @@
                                         <span class="text-danger text-sm">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                {{-- aktifkan ketika sudah berjalan 1 tahun dari sekarang (2023) --}}
+                                {{-- =========================================================== --}}
+                                {{-- <div class="form-group mb-3">
+                                    <label class="label" for="tahun"><i class="fa fa-calendar"></i> Tahun
+                                        Anggaran</label>
+                                    <select name="tahun" class="form-control @error('tahun') is-invalid @enderror"
+                                        required>
+                                        <?php
+                                        $now = date('Y');
+                                        $min = $now;
+                                        $max = $now;
+                                        for ($i = $max; $i >= $min; $i--) {
+                                            echo '<option value=' . $i . '>' . $i . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                    @error('tahun')
+                                        <span class="text-danger text-sm">{{ $message }}</span>
+                                    @enderror
+                                </div> --}}
+                                {{-- =========================================================== --}}
                                 <div class="form-group">
                                     <button type="submit"
                                         class="form-control btn btn-primary rounded submit px-3">Masuk</button>
