@@ -129,8 +129,8 @@
                                             <input class="custom-control-input" type="radio" disabled>
                                             <label class="custom-control-label text-danger">GU</label>
                                         </div>
-                                    @elseif (date('Y-m-d') > $setting->tgl_mulai ||
-                                            (date('Y-m-d') == $setting->tgl_mulai &&
+                                    @elseif (date('Y-m-d') == $setting->tgl_mulai ||
+                                            (date('Y-m-d') > $setting->tgl_mulai &&
                                                 date('H:i:s') > $setting->jam_mulai &&
                                                 date('Y-m-d') < $setting->tgl_selesai) ||
                                             (date('Y-m-d') == $setting->tgl_selesai && date('H:i:s') < $setting->jam_selesai))
