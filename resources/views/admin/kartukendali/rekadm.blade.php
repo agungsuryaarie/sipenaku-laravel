@@ -53,6 +53,7 @@
                                         <th style="width:15%">Kode Rekening</th>
                                         <th>Nama Rekening</th>
                                         <th style="width:13%">Jumlah</th>
+                                        <th style="width:13%">Terpakai</th>
                                         <th style="width:13%">Sisa</th>
                                     </tr>
                                 </thead>
@@ -98,6 +99,10 @@
                     {
                         data: 'pagu_rekening',
                         name: 'pagu_rekening'
+                    },
+                    {
+                        data: 'terpakai',
+                        name: 'terpakai'
                     },
                     {
                         data: 'sisa_rekening',

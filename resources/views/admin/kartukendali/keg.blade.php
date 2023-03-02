@@ -27,6 +27,7 @@
                                     <th style="width:15%">Kode Kegiatan</th>
                                     <th>Nama Kegiatan</th>
                                     <th style="width:13%">Jumlah</th>
+                                    <th style="width:13%">Terpakai</th>
                                     <th style="width:13%">Sisa</th>
                                 </tr>
                             </thead>
@@ -72,6 +73,10 @@
                     {
                         data: 'pagu_kegiatan',
                         name: 'pagu_kegiatan'
+                    },
+                    {
+                        data: 'terpakai',
+                        name: 'terpakai'
                     },
                     {
                         data: 'sisa_kegiatan',

@@ -41,6 +41,11 @@ class KartuController extends Controller
                     }
                     return $link;
                 })
+                ->addColumn('terpakai', function ($data) {
+                    $terpakai = $data->pagu_kegiatan - $data->sisa_kegiatan;
+                    $terpakai = 'Rp. ' . number_format($terpakai, 0, ',', '.');
+                    return $terpakai;
+                })
                 ->addColumn('sisa_kegiatan', function ($data) {
                     if ($data->sisa_kegiatan == "") {
                         $link = '<span
@@ -83,6 +88,11 @@ class KartuController extends Controller
                     }
                     return $link;
                 })
+                ->addColumn('terpakai', function ($data) {
+                    $terpakai = $data->pagu_kegiatan - $data->sisa_kegiatan;
+                    $terpakai = 'Rp. ' . number_format($terpakai, 0, ',', '.');
+                    return $terpakai;
+                })
                 ->addColumn('sisa_kegiatan', function ($data) {
                     if ($data->sisa_kegiatan == "") {
                         $link = '<span
@@ -121,6 +131,11 @@ class KartuController extends Controller
                         $link = 'Rp. ' . number_format($data->pagu_sub, 0, ',', '.');
                     }
                     return $link;
+                })
+                ->addColumn('terpakai', function ($data) {
+                    $terpakai = $data->pagu_sub - $data->sisa_sub;
+                    $terpakai = 'Rp. ' . number_format($terpakai, 0, ',', '.');
+                    return $terpakai;
                 })
                 ->addColumn('sisa_sub', function ($data) {
                     if ($data->sisa_sub == "") {
@@ -161,6 +176,11 @@ class KartuController extends Controller
                     }
                     return $link;
                 })
+                ->addColumn('terpakai', function ($data) {
+                    $terpakai = $data->pagu_sub - $data->sisa_sub;
+                    $terpakai = 'Rp. ' . number_format($terpakai, 0, ',', '.');
+                    return $terpakai;
+                })
                 ->addColumn('sisa_sub', function ($data) {
                     if ($data->sisa_sub == "") {
                         $link = '<span
@@ -195,6 +215,11 @@ class KartuController extends Controller
                 ->addColumn('pagu_rekening', function ($data) {
                     $link = 'Rp. ' . number_format($data->pagu_rekening, 0, ',', '.');
                     return $link;
+                })
+                ->addColumn('terpakai', function ($data) {
+                    $terpakai = $data->pagu_rekening - $data->sisa_rekening;
+                    $terpakai = 'Rp. ' . number_format($terpakai, 0, ',', '.');
+                    return $terpakai;
                 })
                 ->addColumn('sisa_rekening', function ($data) {
                     $link = '<span
