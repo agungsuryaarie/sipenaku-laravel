@@ -43,7 +43,6 @@
                                 <thead>
                                     <tr>
                                         <th style="width:3%">No</th>
-                                        <th style="width:15%">Kode Sub Kegiatan</th>
                                         <th>Nama Sub Kegiatan</th>
                                         <th style="width:13%">Jumlah</th>
                                         <th style="width:13%">Terpakai</th>
@@ -81,10 +80,6 @@
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
-                    },
-                    {
-                        data: 'kode_subkeg',
-                        name: 'kode_subkeg'
                     },
                     {
                         data: 'nama_subkeg',

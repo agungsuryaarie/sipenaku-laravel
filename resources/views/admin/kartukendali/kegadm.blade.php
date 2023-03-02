@@ -61,7 +61,6 @@
                             <thead>
                                 <tr>
                                     <th style="width:3%">No</th>
-                                    <th style="width:15%">Kode Kegiatan</th>
                                     <th>Nama Kegiatan</th>
                                     <th style="width:15%">Bagian</th>
                                     <th style="width:13%">Jumlah</th>
@@ -99,10 +98,6 @@
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
-                    },
-                    {
-                        data: 'kode_kegiatan',
-                        name: 'kode_kegiatan'
                     },
                     {
                         data: 'nama_kegiatan',

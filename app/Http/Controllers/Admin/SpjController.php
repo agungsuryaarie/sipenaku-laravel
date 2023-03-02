@@ -410,8 +410,9 @@ class SpjController extends Controller
     {
         $spj = SPJ::find(Crypt::decryptString($id));
         $menu = 'Pengajuan SPJ';
+        $setting = Setting::first();
         $kegiatan = Kegiatan::where('bagian_id', Auth::user()->bagian_id)->get();
-        return view('admin.spj.edit', compact('spj', 'menu', 'kegiatan'));
+        return view('admin.spj.edit', compact('spj', 'menu', 'kegiatan', 'setting'));
     }
     public function update(Request $request, $id)
     {
