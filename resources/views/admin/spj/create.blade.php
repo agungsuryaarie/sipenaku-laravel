@@ -40,7 +40,7 @@
                                 <label>Kegiatan<span class="text-danger"> *</span></label>
                                 <select class="form-control select2bs4 @error('kegiatan_id') is-invalid @enderror"
                                     id="kegiatan" name="kegiatan_id" style="width: 100%;">
-                                    <option>::Pilih Kegiatan::</option>
+                                    <option value="">::Pilih Kegiatan::</option>
                                     @foreach ($kegiatan as $keg)
                                         <option value="{{ $keg->id }}"
                                             {{ $keg->id == old('kegiatan_id') ? 'selected' : '' }}>
@@ -108,8 +108,8 @@
                                         <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
                                     @elseif(date('Y-m-d') == $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
                                         <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
-                                    @elseif (date('Y-m-d') > $setting->tgl_mulai ||
-                                            (date('Y-m-d') == $setting->tgl_mulai &&
+                                    @elseif (date('Y-m-d') == $setting->tgl_mulai ||
+                                            (date('Y-m-d') > $setting->tgl_mulai &&
                                                 date('H:i:s') > $setting->jam_mulai &&
                                                 date('Y-m-d') < $setting->tgl_selesai) ||
                                             (date('Y-m-d') == $setting->tgl_selesai && date('H:i:s') < $setting->jam_selesai))

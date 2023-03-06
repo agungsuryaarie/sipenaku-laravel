@@ -161,7 +161,7 @@ class SpjController extends Controller
         $total =  preg_replace('/[^0-9]/', '', $request->kwitansi);
         $rek = Rekening::where('id', $request->rekening_id)->first();
         if ($total > $rek->sisa_rekening) {
-            return redirect()->route('spj.index')->with(['toast_error' => 'Maaf, anggaran tidak mencukupi!' . "\n" . 'Sisa anggaran : Rp.' . $rek->sisa_rekening]);
+            return redirect()->route('spj.index')->with(['toast_error' => 'Maaf, anggaran tidak mencukupi!' . "\n" . 'Sisa anggaran : Rp.' . number_format($rek->sisa_rekening, 0, ',', '.')]);
         }
         $fileName = time() . '.' . $request->file->extension();
         $request->file->storeAs('public/file', $fileName);
@@ -410,8 +410,9 @@ class SpjController extends Controller
     {
         $spj = SPJ::find(Crypt::decryptString($id));
         $menu = 'Pengajuan SPJ';
+        $setting = Setting::first();
         $kegiatan = Kegiatan::where('bagian_id', Auth::user()->bagian_id)->get();
-        return view('admin.spj.edit', compact('spj', 'menu', 'kegiatan'));
+        return view('admin.spj.edit', compact('spj', 'menu', 'kegiatan', 'setting'));
     }
     public function update(Request $request, $id)
     {
