@@ -28,6 +28,7 @@
                                 <label>Bagian</label>
                                 <select class="form-control select2bs4" style="width: 100%;">
                                     <option selected="selected">::Pilih Bagian::</option>
+                                    
                                 </select>
                             </div>
                         </div>
