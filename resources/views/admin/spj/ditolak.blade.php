@@ -90,6 +90,9 @@
             var table = $(".data-table").DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
+                lengthChange: false,
+                autoWidth: false,
                 ajax: "{{ route('spj.ditolak') }}",
                 columns: [{
                         data: "DT_RowIndex",

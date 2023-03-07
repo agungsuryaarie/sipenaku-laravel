@@ -53,6 +53,9 @@
             var table = $(".data-table").DataTable({
                 processing: true,
                 serverSide: true,
+                responsive: true,
+                lengthChange: false,
+                autoWidth: false,
                 ajax: "{{ route('spj.verifikasi') }}",
                 columns: [{
                         data: "DT_RowIndex",
