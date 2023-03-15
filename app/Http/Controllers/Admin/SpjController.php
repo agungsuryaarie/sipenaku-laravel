@@ -33,18 +33,15 @@ class SpjController extends Controller
                     return  \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal)->format('d/m/Y');
                 })
                 ->addColumn('kegiatan', function ($data) {
-                    $link = $data->kegiatan->kode_kegiatan;
-                    $link = $link . ' ' . $data->kegiatan->nama_kegiatan;
+                    $link = $data->kegiatan->nama_kegiatan;
                     return $link;
                 })
                 ->addColumn('subkeg', function ($data) {
-                    $link = $data->subkegiatan->kode_sub;
-                    $link = $link . ' ' . $data->subkegiatan->nama_sub;
+                    $link = $data->subkegiatan->nama_sub;
                     return $link;
                 })
                 ->addColumn('rekening', function ($data) {
-                    $link = $data->rekening->kode_rekening;
-                    $link = $link . ' ' . $data->rekening->nama_rekening;
+                    $link = $data->rekening->nama_rekening;
                     return $link;
                 })
                 ->addColumn('status', function ($row) {
@@ -291,18 +288,20 @@ class SpjController extends Controller
                     return  \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal)->format('d/m/Y');
                 })
                 ->addColumn('kegiatan', function ($data) {
-                    $link = $data->kegiatan->kode_kegiatan;
-                    $link = $link . ' ' . $data->kegiatan->nama_kegiatan;
+                    $link = $data->kegiatan->nama_kegiatan;
                     return $link;
                 })
                 ->addColumn('subkeg', function ($data) {
-                    $link = $data->subkegiatan->kode_sub;
-                    $link = $link . ' ' . $data->subkegiatan->nama_sub;
+                    $link = $data->subkegiatan->nama_sub;
                     return $link;
                 })
                 ->addColumn('rekening', function ($data) {
-                    $link = $data->rekening->kode_rekening;
-                    $link = $link . ' ' . $data->rekening->nama_rekening;
+                    $link = $data->rekening->nama_rekening;
+                    return $link;
+                })
+                ->addColumn('nilai', function ($data) {
+                    $link = $data->kwitansi;
+                    $link = 'Rp. ' . number_format($link, 0, ',', '.');
                     return $link;
                 })
                 ->addColumn('action', function ($row) {
@@ -368,6 +367,11 @@ class SpjController extends Controller
                 ->addColumn('rekening', function ($data) {
                     $link = $data->rekening->kode_rekening;
                     $link = $link . ' ' . $data->rekening->nama_rekening;
+                    return $link;
+                })
+                ->addColumn('nilai', function ($data) {
+                    $link = $data->kwitansi;
+                    $link = 'Rp. ' . number_format($link, 0, ',', '.');
                     return $link;
                 })
                 ->addColumn('action', function ($row) {

@@ -29,14 +29,14 @@
                             <table id="example1" class="table table-bordered table-striped data-table">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Tanggal</th>
+                                        <th style="width: 5%">No</th>
+                                        <th style="width: 8%">Tanggal</th>
                                         <th>Kegiatan</th>
                                         <th>Sub Kegiatan</th>
                                         <th>Rekening</th>
-                                        <th>Uraian</th>
+                                        <th style="width: 30%">Uraian</th>
                                         <th class="text-center">Status</th>
-                                        <th class="text-center">Aksi</th>
+                                        <th style="width: 5%" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
