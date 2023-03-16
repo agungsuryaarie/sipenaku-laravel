@@ -15,7 +15,6 @@
                 </div>
             </div>
         </div>
-
     </section><!-- End Hero -->
 
     <main id="main">
@@ -40,12 +39,7 @@
                                 {!! $m->misi !!}
                             @endforeach
                         </ul>
-
                     </div>
-                </div>
-                <div class="btn-more d-flex align-items-center justify-content-center">
-                    <a href="https://batubarakab.go.id/pages/visi-dan-misi" class="read-more">Selengkapnya
-                        <i class="bi bi-long-arrow-right"></i></a>
                 </div>
             </div>
         </section>
