@@ -44,6 +44,44 @@
         </div>
     </section>
 @endsection
+@section('modal')
+    {{-- Modal Delete --}}
+    <div class="modal fade" id="ajaxModel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modelHeading">
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <center>
+                        <h6 class="text-muted">::KEPUTUSAN INI TIDAK DAPAT DIUBAH KEMBALI::</h6>
+                        <br>
+                    </center>
+                    <center>
+                        <h6>Apakah anda yakin menghapus SPJ yang sudah dietrima ini ?</h6>
+                    </center><br>
+                    <small class="text-danger"><i class="fa fa-info-circle"></i> Nilai anggaran akan kembali
+                        sesuai
+                        nilai kwitansi & SPJ akan dikembalikan ke user yang mengajukan.</small>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Kembali</button>
+                    <button type="submit" class="btn btn-danger btn-sm " id="hapusBtn"><i
+                            class="fa fa-trash"></i>&nbsp;Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 @section('script')
     <script>
         $(function() {
@@ -95,6 +133,45 @@
                         searchable: false,
                     },
                 ],
+            });
+            $("body").on("click", ".delete", function() {
+                var spj_id = $(this).data("id");
+                $("#modelHeading").html("Hapus");
+                $("#ajaxModel").modal("show");
+                $("#hapusBtn").click(function(e) {
+                    e.preventDefault();
+                    $(this).html(
+                        "<span class='spinner-border spinner-border-sm'></span><span class='visually-hidden'><i> menghapus...</i></span>"
+                    );
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ url('spj/destroyback') }}" + '/' + spj_id,
+                        data: {
+                            _token: "{!! csrf_token() !!}",
+                        },
+                        success: function(data) {
+                            if (data.errors) {
+                                $('.alert-danger').html('');
+                                $.each(data.errors, function(key, value) {
+                                    $('.alert-danger').show();
+                                    $('.alert-danger').append('<strong><li>' +
+                                        value +
+                                        '</li></strong>');
+                                    $(".alert-danger").fadeOut(5000);
+                                    $("#hapusBtn").html(
+                                        "<i class='fa fa-trash'></i>"
+                                    );
+                                });
+                            } else {
+                                table.draw();
+                                alertSuccess(data.success);
+                                $("#hapusBtn").html(
+                                    "<i class='fa fa-trash'></i>");
+                                $('#ajaxModel').modal('hide');
+                            }
+                        },
+                    });
+                });
             });
             // $("body").on("click", ".deleteSpj", function() {
             //     var spj_id = $(this).data("id");

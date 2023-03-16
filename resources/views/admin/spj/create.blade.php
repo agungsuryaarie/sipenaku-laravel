@@ -21,18 +21,20 @@
             <div class="col-md-12">
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h5>Ketentuan :</h6>
-                        <small>
-                            *Harap lihat kartu kendali sebelum input SPJ untuk memastikan nilai kwitansi.<br>
-                            *Nilai kwitansi tidak boleh melebihi nilai anggaran.<br>
-                            *Berkas file digabung dalam 1 file dan wajib berbentuk pdf.<br>
-                            *Ukuran file maksimal 5MB.
+                    <h6>Ketentuan :</h6>
+                    <small>
+                        *Harap lihat kartu kendali sebelum input SPJ untuk memastikan nilai kwitansi.<br>
+                        *Nilai kwitansi tidak boleh melebihi nilai anggaran.<br>
+                        *Berkas file digabung dalam 1 file dan wajib berbentuk pdf.<br>
+                        *Ukuran file maksimal 5MB.
                 </div>
                 <div class="card">
                     <form action="{{ route('spj.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body-form">
-
+                            <div class="form-group">
+                                <input type="hidden" name="gu" class="form-control" value="{{ $setting->judul }}">
+                            </div>
                             <div class="form-group">
                                 <label>Jenis SPM<span class="text-danger mr-2"> *</span>
                                     <span class="badge badge-primary btn-sm"> {{ $setting->judul }}</span>

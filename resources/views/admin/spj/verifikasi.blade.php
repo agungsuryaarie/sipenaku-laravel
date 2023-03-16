@@ -29,6 +29,7 @@
                                         <th style="width: 10%">Tanggal</th>
                                         <th style="width: 20%">Bagian</th>
                                         <th>Uraian</th>
+                                        <th style="width: 12%">Nilai</th>
                                         <th class="text-center" style="width: 8%">Aksi</th>
                                     </tr>
                                 </thead>
@@ -72,6 +73,10 @@
                     {
                         data: "uraian",
                         name: "uraian",
+                    },
+                    {
+                        data: "nilai",
+                        name: "nilai",
                     },
                     {
                         data: "action",

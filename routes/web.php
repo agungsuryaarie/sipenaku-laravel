@@ -77,6 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('spj/diterima', [SpjController::class, 'diterima'])->name('spj.diterima');
         Route::get('spj/ditolak', [SpjController::class, 'ditolak'])->name('spj.ditolak');
         Route::delete('spj/destroyed/{spj}', [SpjController::class, 'destroy'])->name('spj.destroyed');
+        Route::delete('spj/destroyback/{spj}', [SpjController::class, 'destroyback'])->name('spj.destroyback');
         Route::post('spj/terima/{id}', [SpjController::class, 'terima'])->name('spj.terima');
         Route::post('spj/kembalikan/{spj}', [SpjController::class, 'kembalikan'])->name('spj.kembalikan');
         Route::get('spj/{spj}/view', [SpjController::class, 'show'])->name('spj.view');

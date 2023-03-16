@@ -120,6 +120,7 @@ class SpjController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         //Translate Bahasa Indonesia
         $message = array(
             'kegiatan_id.required' => 'Kegiatan harus dipilih.',
@@ -163,6 +164,7 @@ class SpjController extends Controller
         $fileName = time() . '.' . $request->file->extension();
         $request->file->storeAs('public/file', $fileName);
         SPJ::create([
+            'gu' =>  $request->gu,
             'tanggal' => $tanggal,
             'bagian_id' => Auth::user()->bagian_id,
             'kegiatan_id' => $request->kegiatan_id,
@@ -192,6 +194,33 @@ class SpjController extends Controller
         $spj->delete();
         return response()->json(['success' => 'SPJ deleted successfully.']);
     }
+    public function destroyback(SPJ $spj)
+    {
+        $spj->update([
+            'status' => '5',
+        ]);
+        $kwitansi = $spj->kwitansi;
+
+        // Update Rekening
+        $sisa_rekening = Rekening::where('id', $spj->rekening_id)->value('sisa_rekening');
+        $tambahkan_rekening = Rekening::find($spj->rekening_id);
+        $tambahkan_rekening->sisa_rekening = $sisa_rekening + $kwitansi;
+        $tambahkan_rekening->save();
+
+        // Update Kegiatan
+        $sisa_kegiatan = Kegiatan::where('id', $spj->kegiatan_id)->value('sisa_kegiatan');
+        $update_sisa_kegiatan = Kegiatan::find($spj->kegiatan_id);
+        $update_sisa_kegiatan->sisa_kegiatan = $sisa_kegiatan + $kwitansi;
+        $update_sisa_kegiatan->save();
+
+        // Update Sub Kegiatan
+        $sisa_subkegiatan = Subkegiatan::where('id', $spj->subkegiatan_id)->value('sisa_sub');
+        $update_sisa_subkegiatan = Subkegiatan::find($spj->subkegiatan_id);
+        $update_sisa_subkegiatan->sisa_sub = $sisa_subkegiatan + $kwitansi;
+        $update_sisa_subkegiatan->save();
+
+        return response()->json(['success' => 'SPJ deleted & returned to user successfully.']);
+    }
 
     public function verifikasi(Request $request)
     {
@@ -205,6 +234,11 @@ class SpjController extends Controller
                 })
                 ->addColumn('bagian', function ($data) {
                     $link = $data->bagian->nama_bagian;
+                    return $link;
+                })
+                ->addColumn('nilai', function ($data) {
+                    $link = $data->kwitansi;
+                    $link = 'Rp. ' . number_format($link, 0, ',', '.');
                     return $link;
                 })
                 ->addColumn('action', function ($row) {
@@ -244,7 +278,6 @@ class SpjController extends Controller
     public function terima($id)
     {
         $spj = SPJ::find($id);
-        $spj->update(['status' => '3']);
         if ($spj->alasan != null) {
             $spj->update(['alasan' => null]);
         }
@@ -313,6 +346,7 @@ class SpjController extends Controller
                             </button>
                             <div class="dropdown-menu" role="menu">
                             <a class="dropdown-item" href="' . route('spj.view', Crypt::encryptString($row->id)) . '">Review</a>
+                            <a class="dropdown-item delete" href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete">Delete</a>
                                </div>
                                </div>
                            </center>';

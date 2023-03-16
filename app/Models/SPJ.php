@@ -12,7 +12,7 @@ class SPJ extends Model
     protected $table = "spj";
 
     protected $fillable = [
-        'tanggal', 'bagian_id', 'kegiatan_id', 'subkegiatan_id', 'rekening_id', 'uraian', 'kwitansi', 'nama_penerima', 'alamat_penerima', 'jenis_spm', 'file', 'status', 'alasan'
+        'tanggal', 'bagian_id', 'kegiatan_id', 'subkegiatan_id', 'rekening_id', 'uraian', 'kwitansi', 'nama_penerima', 'alamat_penerima', 'jenis_spm', 'file', 'status', 'alasan', 'gu'
     ];
 
     public function kegiatan()
