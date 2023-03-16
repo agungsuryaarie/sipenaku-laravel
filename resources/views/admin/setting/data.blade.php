@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ '/' }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ 'dashboard' }}">Dashboard</a></li>
                         <li class="breadcrumb-item active">{{ $menu }}</li>
                     </ol>
                 </div>
@@ -34,14 +34,18 @@
                                     <td rowspan="4" style="width:4%">
                                         <span class="badge badge-primary btn-sm"> {{ $setting->judul }}</span>
                                         {{-- Validasi GU aktif / nonaktif --}}
-                                        @if (date('Y-m-d') > $setting->tgl_mulai ||
-                                                (date('Y-m-d') == $setting->tgl_mulai &&
+                                        @if (date('Y-m-d') < $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
+                                            <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
+                                        @elseif(date('Y-m-d') == $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
+                                            <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
+                                        @elseif (date('Y-m-d') == $setting->tgl_mulai ||
+                                                (date('Y-m-d') > $setting->tgl_mulai &&
                                                     date('H:i:s') > $setting->jam_mulai &&
                                                     date('Y-m-d') < $setting->tgl_selesai) ||
                                                 (date('Y-m-d') == $setting->tgl_selesai && date('H:i:s') < $setting->jam_selesai))
                                             <span class="badge badge-success btn-sm">aktif</span>
                                         @else
-                                            <span class="badge badge-danger btn-sm">nonaktif</span>
+                                            <span class="badge badge-danger btn-sm">sesi telah berakhir</span>
                                         @endif
                                         {{-- end --}}
                                     </td>
@@ -102,15 +106,26 @@
                         <h4 class="modal-title">Jadwal</h4>
                     </div>
                     <div class="modal-body">
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h6>Ketentuan :</h6>
+                            <small>
+                                *Tanggal mulai harus diatas atau sama dengan tanggal sekarang.<br>
+                                *Tanggal selesai harus diatas atau sama dengan tanggal mulai.<br>
+                                *Penentuan jam mulai dan jam selesai dalam rentang waktu 12 jam.<br>
+                                Contoh :
+                            </small><br><small class="ml-4">08:00 - 23:59 WIB&nbsp;<i
+                                    class="fa fa-check-circle"></i></small><br>
+                            <small class="ml-4">08:00 - 01:00 WIB&nbsp;<i class="fa fa-ban"></i></small>
+                        </div>
                         <div class="card">
                             <form method="POST" action="{{ route('setting.update', $setting->id) }}">
                                 @csrf
                                 @method('put')
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Judul SPM <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="judul" placeholder="Judul SPM"
+                                        <label for="exampleInputPassword1">Judul<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="judul" placeholder="Judul"
                                             autocomplete="off" value="{{ old('judul', $setting->judul) }}">
                                     </div>
                                     <div class="row">
@@ -146,7 +161,7 @@
                                     <div class="card-footer">
                                         <button type="button" class="btn btn-default btn-sm"
                                             data-dismiss="modal">Kembali</button>
-                                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
                                     </div>
                                 </div>
                             </form>
@@ -180,39 +195,54 @@
                         <h4 class="modal-title">Jadwal</h4>
                     </div>
                     <div class="modal-body">
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h6>Ketentuan :</h6>
+                            <small>
+                                *Tanggal mulai harus diatas atau sama dengan tanggal sekarang.<br>
+                                *Tanggal selesai harus diatas atau sama dengan tanggal mulai.<br>
+                                *Penentuan jam mulai dan jam selesai dalam rentang waktu 12 jam.<br>
+                                Contoh :
+                            </small><br><small class="ml-4">08:00 - 23:59 WIB&nbsp;<i
+                                    class="fa fa-check-circle"></i></small><br>
+                            <small class="ml-4">08:00 - 01:00 WIB&nbsp;<i class="fa fa-ban"></i></small>
+                        </div>
                         <div class="card">
                             <form method="POST" action="{{ route('setting.store') }}">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Judul SPM <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="judul"
-                                            placeholder="Judul SPM" autocomplete="off" value="{{ old('judul') }}">
+                                        <label for="exampleInputPassword1">Judul<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="judul" placeholder="Judul"
+                                            autocomplete="off" value="{{ old('judul') }}">
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Tanggal Mulai</label>
-                                                <input type="date" class="form-control" name="tglm">
+                                                <input type="date" class="form-control" name="tglm"
+                                                    value="{{ old('tglm') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Tanggal Selesai</label>
-                                                <input type="date" class="form-control" name="tgls">
+                                                <input type="date" class="form-control" name="tgls"
+                                                    value="{{ old('tgls') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Jam Mulai</label>
-                                                <input type="time" class="form-control" name="jamm">
+                                                <input type="time" class="form-control" name="jamm"
+                                                    value="{{ old('jamm') }}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Jam Selesai</label>
-                                                <input type="time" class="form-control" name="jams">
+                                                <input type="time" class="form-control" name="jams"
+                                                    value="{{ old('jams') }}">
                                             </div>
                                         </div>
                                     </div>

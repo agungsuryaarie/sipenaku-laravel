@@ -23,7 +23,7 @@
                     <div class="card">
                         <!-- form start -->
                         <form method="POST"
-                            action="{{ route('appsetting.update', $appsetting->id) }}"enctype="multipart/form-data">
+                            action="{{ route('appsetting.update', Crypt::encryptString($appsetting->id)) }}"enctype="multipart/form-data">
                             @csrf
                             @method('put')
                             <div class="card-body">

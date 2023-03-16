@@ -7,6 +7,7 @@ use App\Models\AppSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 
 
 class AppSettingController extends Controller
@@ -29,7 +30,6 @@ class AppSettingController extends Controller
 
     public function store(Request $request, AppSetting $appsetting)
     {
-        // dd($request->all());
         //Translate Bahasa Indonesia
         $message = array(
             'nama_aplikasi.required' => 'Nama Aplikasi harus diisi.',
@@ -70,18 +70,19 @@ class AppSettingController extends Controller
         }
 
         //redirect to index
-        return redirect()->route('appsetting.index')->with(['status' => 'Data Berhasil Diubah!']);
+        return redirect()->route('appsetting.index')->with(['toast_success' => 'Data Berhasil Disimpan!']);
     }
 
-    public function edit(Request $request, AppSetting $appsetting)
+    public function edit($id)
     {
         $menu = 'Edit Setting Aplikasi';
-        $appsetting = AppSetting::first();
+        $appsetting = AppSetting::find(Crypt::decryptString($id));
         return view('admin.app-setting.edit', compact('menu', 'appsetting'));
     }
 
-    public function update(Request $request, AppSetting $appsetting)
+    public function update(Request $request, $id)
     {
+        $appsetting = AppSetting::find(Crypt::decryptString($id));
         //Translate Bahasa Indonesia
         $message = array(
             'nama_aplikasi.required' => 'Nama Aplikasi harus diisi.',
@@ -126,6 +127,6 @@ class AppSettingController extends Controller
             ]);
         }
         //redirect to index
-        return redirect()->route('appsetting.index')->with(['status' => 'Data Berhasil Diubah!']);
+        return redirect()->route('appsetting.index')->with(['toast_success' => 'Data Berhasil Diupdate!']);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Bagian;
-use DataTables;
+use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Validator;
 
 class BagianController extends Controller

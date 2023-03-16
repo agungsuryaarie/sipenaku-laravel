@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Bagian;
-use DataTables;
+use Yajra\Datatables\Datatables;
 
 
 class UserController extends Controller
@@ -26,14 +26,18 @@ class UserController extends Controller
         $menu = 'User';
         $bagian = Bagian::latest()->get();
         if ($request->ajax()) {
-            $data = User::latest()->get();
+            $data = User::where('level', '!=', 1)->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('bagian', function ($data) {
                     return $data->bagian->nama_bagian;
                 })
                 ->addColumn('foto', function ($data) {
-                    $foto = '<center><img src="' . url("storage/fotouser/" . $data->foto) . '" width="40px" class="img rounded"><center>';
+                    if ($data->foto != null) {
+                        $foto = '<center><img src="' . url("storage/fotouser/" . $data->foto) . '" width="30px" class="img rounded"><center>';
+                    } else {
+                        $foto = '<center><img src="' . url("storage/fotouser/blank.png") . '" width="30px" class="img rounded"><center>';
+                    }
                     return $foto;
                 })
                 ->addColumn('action', function ($row) {
@@ -41,7 +45,7 @@ class UserController extends Controller
                     $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteUser"><i class="fas fa-trash"></i></a><center>';
                     return $btn;
                 })
-                ->rawColumns(['bagian', 'nip', 'nama', 'username', 'foto', 'action'])
+                ->rawColumns(['foto', 'action'])
                 ->make(true);
         }
         return view('admin.user.data', compact('menu', 'bagian'));
@@ -148,9 +152,12 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::find($id)->delete();
+        $user->delete();
+        if ($user->foto) {
+            Storage::delete('public/fotouser/' . $user->foto);
+        }
         return response()->json(['success' => 'User deleted successfully.']);
     }
 

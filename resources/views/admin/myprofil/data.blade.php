@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ '/dahboard' }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ 'dashboard' }}">Dashboard</a></li>
                         <li class="breadcrumb-item active">{{ $menu }}</li>
                     </ol>
                 </div>
@@ -27,7 +27,7 @@
                             </div>
                             <div class="widget-user-image">
                                 @if (Auth::user()->foto == null)
-                                    <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2"
+                                    <img src="{{ url('storage/fotouser/blank.png') }}" class="img-circle elevation-2"
                                         alt="User Image">
                                 @else
                                     <img src="{{ url('storage/fotouser/' . Auth::user()->foto) }}"
@@ -37,8 +37,6 @@
                             <div class="card-footer">
                                 <div class="col-sm-12 text-center">
                                     <div class="description-block mt-5 mb-4">
-                                        <h5 class="description-header">200</h5>
-                                        <span class="description-text">SPJ</span>
                                     </div>
                                 </div>
                             </div>
@@ -127,9 +125,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Username <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="username"
-                                            placeholder="Username" autocomplete="off"
-                                            value="{{ old('username', $user->username) }}">
+                                        <input type="text" class="form-control" name="username" placeholder="Username"
+                                            autocomplete="off" value="{{ old('username', $user->username) }}">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -209,7 +206,7 @@
                             <div class="card-body">
                                 <div class="col-md-12">
                                     <div class="col-md-4">
-                                        <img src="{{ url('fotouser/blank.png') }}" alt="Image Profile"
+                                        <img src="{{ url('storage/fotouser/blank.png') }}" alt="Image Profile"
                                             class="img-thumbnail rounded img-preview" width="120px">
                                     </div>
                                     <div class="col-md-12 mt-2">

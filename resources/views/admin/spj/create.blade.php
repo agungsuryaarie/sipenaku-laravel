@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>SPJ</h1>
+                    <h1>{{ $menu }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('spj.index') }}">SPJ</a></li>
-                        <li class="breadcrumb-item active">Tambah SPJ</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">{{ $menu }}</li>
                     </ol>
                 </div>
             </div>
@@ -19,113 +19,171 @@
     <section class="content">
         <div class="container-fluid">
             <div class="col-md-12">
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <h3 class="card-title">Form Input SPJ</h3>
-                    </div>
-                    <form>
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h6>Ketentuan :</h6>
+                    <small>
+                        *Harap lihat kartu kendali sebelum input SPJ untuk memastikan nilai kwitansi.<br>
+                        *Nilai kwitansi tidak boleh melebihi nilai anggaran.<br>
+                        *Berkas file digabung dalam 1 file dan wajib berbentuk pdf.<br>
+                        *Ukuran file maksimal 5MB.
+                </div>
+                <div class="card">
+                    <form action="{{ route('spj.store') }}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="card-body-form">
                             <div class="form-group">
+                                <input type="hidden" name="gu" class="form-control" value="{{ $setting->judul }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Jenis SPM<span class="text-danger mr-2"> *</span>
+                                    <span class="badge badge-primary btn-sm"> {{ $setting->judul }}</span>
+                                    @if (date('Y-m-d') < $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
+                                        <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
+                                    @elseif(date('Y-m-d') == $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
+                                        <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
+                                    @elseif (date('Y-m-d') == $setting->tgl_mulai ||
+                                            (date('Y-m-d') > $setting->tgl_mulai &&
+                                                date('H:i:s') > $setting->jam_mulai &&
+                                                date('Y-m-d') < $setting->tgl_selesai) ||
+                                            (date('Y-m-d') == $setting->tgl_selesai && date('H:i:s') < $setting->jam_selesai))
+                                        <span class="badge badge-success btn-sm">aktif</span>
+                                    @else
+                                        <span class="badge badge-danger btn-sm">sesi telah berakhir</span>
+                                    @endif
+                                </label>
+                                <div class="radio-btn">
+                                    @if (date('Y-m-d') < $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" disabled>
+                                            <label class="custom-control-label text-danger">GU</label>
+                                        </div>
+                                    @elseif(date('Y-m-d') == $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" disabled>
+                                            <label class="custom-control-label text-danger">GU</label>
+                                        </div>
+                                    @elseif (date('Y-m-d') == $setting->tgl_mulai ||
+                                            (date('Y-m-d') > $setting->tgl_mulai &&
+                                                date('H:i:s') > $setting->jam_mulai &&
+                                                date('Y-m-d') < $setting->tgl_selesai) ||
+                                            (date('Y-m-d') == $setting->tgl_selesai && date('H:i:s') < $setting->jam_selesai))
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" value="1"
+                                                id="jenis_spm1" name="jenis_spm"
+                                                {{ old('jenis_spm') == '1' ? 'checked' : '' }}>
+                                            <label for="jenis_spm1" class="custom-control-label">GU</label>
+                                        </div>
+                                    @else
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" disabled>
+                                            <label class="custom-control-label text-danger">GU</label>
+                                        </div>
+                                    @endif
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" value="2" id="jenis_spm2"
+                                            name="jenis_spm" {{ old('jenis_spm') == '2' ? 'checked' : '' }}>
+                                        <label for="jenis_spm2" class="custom-control-label">TU</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" value="3" id="jenis_spm3"
+                                            name="jenis_spm" {{ old('jenis_spm') == '3' ? 'checked' : '' }}>
+                                        <label for="jenis_spm3" class="custom-control-label">LS</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio" value="4" id="jenis_spm4"
+                                            name="jenis_spm" {{ old('jenis_spm') == '4' ? 'checked' : '' }}>
+                                        <label for="jenis_spm4" class="custom-control-label">UP</label>
+                                    </div>
+                                </div>
+                                @error('jenis_spm')
+                                    <small class="text-danger"><strong>{{ $message }}</strong></small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal<small> (Opsional)</small></label>
+                                <input type="date" name="tanggal" class="form-control">
+                            </div>
+                            <div class="form-group">
                                 <label>Kegiatan<span class="text-danger"> *</span></label>
-                                <select class="form-control select2bs4" style="width: 100%;">
-                                    <option selected="selected">::Pilih::</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
+                                <select class="form-control select2bs4 @error('kegiatan_id') is-invalid @enderror"
+                                    id="kegiatan" name="kegiatan_id" style="width: 100%;">
+                                    <option value="">::Pilih Kegiatan::</option>
+                                    @foreach ($kegiatan as $keg)
+                                        <option value="{{ $keg->id }}"
+                                            {{ $keg->id == old('kegiatan_id') ? 'selected' : '' }}>
+                                            {{ $keg->nama_kegiatan }}</option>
+                                    @endforeach
                                 </select>
+                                @error('kegiatan_id')
+                                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Sub Kegiatan<span class="text-danger"> *</span></label>
-                                <select class="form-control select2bs4" style="width: 100%;">
-                                    <option selected="selected">::Pilih::</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
+                                <select id="subkeg" name="subkegiatan_id"
+                                    class="form-control select2bs4 @error('subkegiatan_id') is-invalid @enderror">
                                 </select>
+                                @error('subkegiatan_id')
+                                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Rekening Belanja<span class="text-danger"> *</span></label>
-                                <select class="form-control select2bs4" style="width: 100%;">
-                                    <option selected="selected">::Pilih::</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
+                                <select id="rekening" name="rekening_id"
+                                    class="form-control select2bs4 @error('rekening_id') is-invalid @enderror">
                                 </select>
+                                @error('rekening_id')
+                                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Uraian<span class="text-danger"> *</span></label>
-                                <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                <textarea name="uraian" class="form-control @error('uraian') is-invalid @enderror" rows="3">{{ old('uraian') }}</textarea>
+                                @error('uraian')
+                                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Nilai Kwitansi<span class="text-danger"> *</span></label>
-                                <input type="text" class="form-control" id="" placeholder="Rp.">
+                                <input name="kwitansi" type="text"
+                                    class="form-control rupiah @error('kwitansi') is-invalid @enderror" placeholder="Rp."
+                                    value="{{ old('kwitansi') }}" id="kwitansi">
+                                @error('kwitansi')
+                                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Nama Rekanan/Penerima<span class="text-danger"> *</span></label>
-                                <input type="text" class="form-control" id="" placeholder="Enter email">
+                                <input name="nama_penerima" type="text"
+                                    class="form-control @error('nama_penerima') is-invalid @enderror"
+                                    value="{{ old('nama_penerima') }}">
+                                @error('nama_penerima')
+                                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Alamat Penerima<span class="text-danger"> *</span></label>
-                                <textarea class="form-control" rows="3" placeholder="ketik alamat ..."></textarea>
+                                <textarea name="alamat_penerima" class="form-control  @error('alamat_penerima') is-invalid @enderror" rows="3">{{ old('alamat_penerima') }}</textarea>
+                                @error('alamat_penerima')
+                                    <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label>Jenis SPM<span class="text-danger"> *</span></label>
-                                <div class="radio-btn">
-                                    <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" id="customRadio1"
-                                            name="customRadio">
-                                        <label for="customRadio1" class="custom-control-label">GU</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" id="customRadio2"
-                                            name="customRadio">
-                                        <label for="customRadio2" class="custom-control-label">TU</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" id="customRadio3"
-                                            name="customRadio">
-                                        <label for="customRadio3" class="custom-control-label">LS</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" id="customRadio4"
-                                            name="customRadio">
-                                        <label for="customRadio4" class="custom-control-label">UP</label>
-                                    </div>
+                                <label>Upload File</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input @error('file') is-invalid @enderror"
+                                        name="file" id="customFile" accept=".pdf">
+                                    <label class="custom-file-label">Pilih File</label>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Jenis SPJ<span class="text-danger"> *</span></label>
-                                <select class="form-control select2bs4" style="width: 100%;">
-                                    <option selected="selected">::Pilih::</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">Upload File</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Pilih file</label>
-                                    </div>
-                                </div>
+                                @error('file')
+                                    <small class="text-danger"><strong>{{ $message }}</strong></small>
+                                @enderror
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Kirim</button>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -135,8 +193,79 @@
 @endsection
 @section('script')
     <script>
+        var rupiah = document.getElementById("kwitansi");
+        rupiah.addEventListener("keyup", function(e) {
+            rupiah.value = formatRupiah(this.value, "Rp. ");
+        });
+
+
+        /* Fungsi formatRupiah */
+        function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, "").toString(),
+                split = number_string.split(","),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+            if (ribuan) {
+                separator = sisa ? "." : "";
+                rupiah += separator + ribuan.join(".");
+            }
+
+            rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+            return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+        }
+
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         })
+        $(function() {
+            bsCustomFileInput.init();
+        });
+        $(document).ready(function() {
+            $('#kegiatan').on('change', function() {
+                var idKegiatan = this.value;
+                $("#subkeg").html('');
+                $.ajax({
+                    url: "{{ route('spj.getsubkeg') }}",
+                    type: "POST",
+                    data: {
+                        kegiatan_id: idKegiatan,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('#subkeg').html('<option value="">Pilih Sub Kegiatan</option>');
+                        $.each(result.subkeg, function(key, value) {
+                            $("#subkeg").append('<option value="' + value
+                                .id + '">' + value.nama_sub + '</option>');
+                        });
+                    }
+                });
+            });
+
+            $('#subkeg').on('change', function() {
+                var idSubkeg = this.value;
+                console.log(idSubkeg);
+                $("#rekening").html('');
+                $.ajax({
+                    url: "{{ route('spj.getrekening') }}",
+                    type: "POST",
+                    data: {
+                        subkeg_id: idSubkeg,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('#rekening').html('<option value="">Pilih Rekening</option>');
+                        $.each(result.rekening, function(key, value) {
+                            $("#rekening").append('<option value="' + value
+                                .id + '">' + value.nama_rekening + '</option>');
+                        });
+                    }
+                });
+            });
+        });
     </script>
 @endsection

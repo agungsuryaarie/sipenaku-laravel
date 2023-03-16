@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Kegiatan;
 use App\Models\Bagian;
-use DataTables;
+use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 
 class KegiatanController extends Controller
 {
@@ -21,11 +22,11 @@ class KegiatanController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('kode_kegiatan', function ($data) {
-                    $link = '<a href="' . route('subkegiatan.index', $data->id)  . '">' . $data->kode_kegiatan . '</a>';
+                    $link = '<a href="' . route('subkegiatan.index', Crypt::encryptString($data->id))  . '">' . $data->kode_kegiatan . '</a>';
                     return $link;
                 })
                 ->addColumn('nama_kegiatan', function ($data) {
-                    $link = '<a href="' . route('subkegiatan.index', $data->id)  . '">' . $data->nama_kegiatan . '</a>';
+                    $link = '<a href="' . route('subkegiatan.index', Crypt::encryptString($data->id))  . '">' . $data->nama_kegiatan . '</a>';
                     return $link;
                 })
                 ->addColumn('bagian', function ($data) {
@@ -44,7 +45,7 @@ class KegiatanController extends Controller
                     $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteKegiatan"><i class="fas fa-trash"></i></a><center>';
                     return $btn;
                 })
-                ->rawColumns(['kode_kegiatan', 'nama_kegiatan', 'bagian', 'pagu_kegiatan', 'action'])
+                ->rawColumns(['kode_kegiatan', 'nama_kegiatan', 'action'])
                 ->make(true);
         }
         return view('admin.kegiatan.data', compact('menu', 'bagian'));

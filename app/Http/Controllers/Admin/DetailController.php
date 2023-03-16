@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Rekening;
 use App\Models\Detail;
-use App\Models\Kegiatan;
-use App\Models\Subkegiatan;
 use Illuminate\Http\Request;
-use DataTables;
+use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Validator;
 
 class DetailController extends Controller
 {
@@ -49,7 +48,7 @@ class DetailController extends Controller
                     $btn = '<center>' . $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-xs deleteDetail"><i class="fas fa-trash"></i></a><center>';
                     return $btn;
                 })
-                ->rawColumns(['nama_detail', 'harga', 'action'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
 
@@ -58,7 +57,7 @@ class DetailController extends Controller
 
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'nama_detail' => 'required',
             'koefisien1' => 'required',
             'satuan' => 'required',

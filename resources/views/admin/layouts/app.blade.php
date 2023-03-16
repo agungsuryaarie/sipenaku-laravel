@@ -15,7 +15,8 @@
                 <div class="user-panel mt-3 pb-3 mb-1 d-flex">
                     <div class="image">
                         @if (Auth::user()->foto == null)
-                            <img src="{{ url('fotouser/blank.png') }}" class="img-circle elevation-2" alt="User Image">
+                            <img src="{{ url('storage/fotouser/blank.png') }}" class="img-circle elevation-2"
+                                alt="User Image">
                         @else
                             <img src="{{ url('storage/fotouser/' . Auth::user()->foto) }}"
                                 class="img-circle elevation-2" alt="User Image">
@@ -60,6 +61,8 @@
         <div class="content-wrapper">
             <div id="alerts"></div>
             @yield('content')
+            @yield('modal')
         </div>
     </div>
+    @include('sweetalert::alert')
     @include('admin.layouts.footer')

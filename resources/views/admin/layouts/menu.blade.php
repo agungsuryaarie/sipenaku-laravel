@@ -57,8 +57,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('kartukendali.index') }}"
-                    class="nav-link {{ request()->segment(1) == 'kartukendali' ? 'active' : '' }}">
+                <a href="{{ route('kartu.kegiatan') }}"
+                    class="nav-link {{ request()->segment(1) == 'kartu-kendali' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Kartu Kendali</p>
                 </a>
@@ -67,21 +67,90 @@
     </li>
 @endif
 @if (Auth::user()->level == 1)
-    <li class="nav-item">
-        <a href="{{ route('spj.indexadm') }}"
-            class="nav-link {{ request()->segment(1) == 'data-spj' ? 'active' : '' }}">
-            <i class="nav-icon fas fa-file"></i>
+    <li class="nav-item {{ request()->segment(1) == 'spj' ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ request()->segment(1) == 'spj' ? 'active' : '' }}">
+            <i class="nav-icon fas fa-layer-group"></i>
             <p>
                 SPJ
+                <i class="right fas fa-angle-left"></i>
             </p>
         </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('spj.verifikasi') }}"
+                    class="nav-link {{ request()->segment(2) == 'verifikasi' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Verifikasi</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('spj.diterima') }}"
+                    class="nav-link {{ request()->segment(2) == 'diterima' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Diterima</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('spj.ditolak') }}"
+                    class="nav-link {{ request()->segment(2) == 'ditolak' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Ditolak</p>
+                </a>
+            </li>
+        </ul>
     </li>
 @else
-    <li class="nav-item">
-        <a href="{{ route('spj.index') }}" class="nav-link {{ request()->segment(1) == 'spj' ? 'active' : '' }}">
-            <i class="nav-icon fas fa-file"></i>
+    <li
+        class="nav-item {{ request()->segment(1) == 'spj' || request()->segment(2) == 'diterima' || request()->segment(1) == 'ditolak'
+            ? 'menu-open'
+            : '' }}">
+        <a href="#"
+            class="nav-link {{ request()->segment(1) == 'spj' || request()->segment(2) == 'diterima' || request()->segment(1) == 'ditolak'
+                ? 'active'
+                : '' }}">
+            <i class="nav-icon fas fa-layer-group"></i>
+
             <p>
                 SPJ
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('spj.index') }}"
+                    class="nav-link {{ request()->segment(1) == 'spj' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                        Pengajuan SPJ
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('spj.terima') }}"
+                    class="nav-link {{ request()->segment(2) == 'terima' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                        Pengajuan SPJ Diterima
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('spj.tolak') }}"
+                    class="nav-link {{ request()->segment(2) == 'tolak' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>
+                        Pengajuan SPJ Ditolak
+                    </p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('kartukendali.kegiatan') }}"
+            class="nav-link {{ request()->segment(1) == 'kartu-kendali-detail' ? 'active' : '' }}">
+            <i class="fas fa-credit-card nav-icon"></i>
+            <p>
+                Kartu Kendali
             </p>
         </a>
     </li>

@@ -43,7 +43,7 @@
                             <a href="javascript:void(0)" id="createNewRekening" class="btn btn-info btn-xs">
                                 <i class="fas fa-plus-circle"></i> Tambah
                             </a>
-                            <a href="{{ route('subkegiatan.index', $subkegiatan->kegiatan->id ?? 'None') }}"
+                            <a href="{{ route('subkegiatan.index', Crypt::encryptString($subkegiatan->kegiatan->id)) ?? 'None' }}"
                                 id="createNewSubkeg" class="btn btn-warning btn-xs float-right">
                                 <i class="fas fa-reply"></i> Kembali
                             </a>
@@ -144,7 +144,40 @@
         </div>
     </div>
 @endsection
-
+@section('modal')
+    {{-- Modal Delete --}}
+    <div class="modal fade" id="ajaxModelHps">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modelHeadingHps">
+                        </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-dismissible fade show" role="alert" style="display: none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <center>
+                        <h6 class="text-muted">::KEPUTUSAN INI TIDAK DAPAT DIUBAH KEMBALI::</h6>
+                    </center>
+                    <center>
+                        <h6>Apakah anda yakin menghapus Rekening ini ?</h6>
+                    </center>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Kembali</button>
+                    <button type="submit" class="btn btn-danger btn-sm " id="hapusBtn"><i class="fa fa-trash"></i>
+                        Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
 @section('script')
     <script>
         var rupiah = document.getElementById("pagu_rekening");
@@ -248,7 +281,7 @@
                 if (rekening_id == '') {
                     $.ajax({
                         data: $("#rekeningForm").serialize(),
-                        url: "{{ route('rekening.store') }}" + "/" + rekening_id,
+                        url: "{{ route('rekening.store') }}",
                         type: "POST",
                         dataType: "json",
                         success: function(data) {
@@ -261,7 +294,7 @@
                                         '</li></strong>');
                                     $(".alert-danger").fadeOut(5000);
                                     $("#saveBtn").html("Simpan");
-                                    $('#rekeningForm').trigger("reset");
+                                    // $('#rekeningForm').trigger("reset");
                                 });
                             } else {
                                 table.draw();
@@ -289,7 +322,7 @@
                                         '</li></strong>');
                                     $(".alert-danger").fadeOut(5000);
                                     $("#saveBtn").html("Simpan");
-                                    $('#rekeningForm').trigger("reset");
+                                    // $('#rekeningForm').trigger("reset");
                                 });
                             } else {
                                 table.draw();
@@ -302,23 +335,44 @@
                     });
                 }
             });
-
             $("body").on("click", ".deleteRekening", function() {
                 var rekening_id = $(this).data("id");
-                confirm("Are You sure want to delete !");
-                $.ajax({
-                    type: "DELETE",
-                    url: "{{ route('rekening.store') }}" + "/" + rekening_id + "/destroy",
-                    data: {
-                        _token: "{!! csrf_token() !!}",
-                    },
-                    success: function(data) {
-                        alertDanger(data.success);
-                        table.draw();
-                    },
-                    error: function(data) {
-                        console.log("Error:", data);
-                    },
+                $("#modelHeadingHps").html("Hapus");
+                $("#ajaxModelHps").modal("show");
+                $("#hapusBtn").click(function(e) {
+                    e.preventDefault();
+                    $(this).html(
+                        "<span class='spinner-border spinner-border-sm'></span><span class='visually-hidden'><i> menghapus...</i></span>"
+                    );
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ route('rekening.store') }}" + "/" + rekening_id +
+                            "/destroy",
+                        data: {
+                            _token: "{!! csrf_token() !!}",
+                        },
+                        success: function(data) {
+                            if (data.errors) {
+                                $('.alert-danger').html('');
+                                $.each(data.errors, function(key, value) {
+                                    $('.alert-danger').show();
+                                    $('.alert-danger').append('<strong><li>' +
+                                        value +
+                                        '</li></strong>');
+                                    $(".alert-danger").fadeOut(5000);
+                                    $("#hapusBtn").html(
+                                        "<i class='fa fa-trash'></i>"
+                                    );
+                                });
+                            } else {
+                                table.draw();
+                                alertSuccess(data.success);
+                                $("#hapusBtn").html(
+                                    "<i class='fa fa-trash'></i>");
+                                $('#ajaxModelHps').modal('hide');
+                            }
+                        },
+                    });
                 });
             });
         });
