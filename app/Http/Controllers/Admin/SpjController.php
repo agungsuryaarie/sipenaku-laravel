@@ -146,7 +146,7 @@ class SpjController extends Controller
             'nama_penerima' => 'required',
             'alamat_penerima' => 'required|max:500',
             'jenis_spm' => 'required',
-            'file' => 'required|mimes:pdf|max:5120',
+            'file' => 'required|mimes:pdf,application/pdf|max:5120',
         ], $message);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -479,7 +479,7 @@ class SpjController extends Controller
             'nama_penerima' => 'required',
             'alamat_penerima' => 'required|max:500',
             'jenis_spm' => 'required',
-            'file' => 'mimes:pdf|max:5120',
+            'file' => 'mimes:pdf,application/pdf|max:5120',
         ], $message);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();

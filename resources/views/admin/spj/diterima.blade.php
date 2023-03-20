@@ -46,7 +46,7 @@
 @endsection
 @section('modal')
     {{-- Modal Delete --}}
-    <div class="modal fade" id="ajaxModel">
+    <div class="modal fade" id="ajaxModeldb">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -67,7 +67,7 @@
                         <br>
                     </center>
                     <center>
-                        <h6>Apakah anda yakin menghapus SPJ yang sudah dietrima ini ?</h6>
+                        <h6>Apakah anda yakin menghapus SPJ yang sudah diterima ini ?</h6>
                     </center><br>
                     <small class="text-danger"><i class="fa fa-info-circle"></i> Nilai anggaran akan kembali
                         sesuai
@@ -137,7 +137,7 @@
             $("body").on("click", ".delete", function() {
                 var spj_id = $(this).data("id");
                 $("#modelHeading").html("Hapus");
-                $("#ajaxModel").modal("show");
+                $("#ajaxModeldb").modal("show");
                 $("#hapusBtn").click(function(e) {
                     e.preventDefault();
                     $(this).html(
@@ -159,15 +159,15 @@
                                         '</li></strong>');
                                     $(".alert-danger").fadeOut(5000);
                                     $("#hapusBtn").html(
-                                        "<i class='fa fa-trash'></i>"
+                                        "<i class='fa fa-trash'>&nbsp;Hapus</i>"
                                     );
                                 });
                             } else {
-                                table.draw();
                                 alertSuccess(data.success);
                                 $("#hapusBtn").html(
-                                    "<i class='fa fa-trash'></i>");
-                                $('#ajaxModel').modal('hide');
+                                    "<i class='fa fa-trash'>&nbsp;Hapus</i>");
+                                $('#ajaxModeldb').modal('hide');
+                                window.location.href = "{{ url('spj/diterima') }}"
                             }
                         },
                     });
