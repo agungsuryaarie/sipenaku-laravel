@@ -15,7 +15,6 @@
                 </div>
             </div>
         </div>
-
     </section><!-- End Hero -->
 
     <main id="main">
@@ -40,7 +39,6 @@
                                 {!! $m->misi !!}
                             @endforeach
                         </ul>
-
                     </div>
                 </div>
             </div>
