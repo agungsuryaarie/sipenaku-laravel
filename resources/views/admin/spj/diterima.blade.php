@@ -21,6 +21,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        <div class="card-header">
+                            @if ($export != null)
+                                <a href="{{ route('spj.export') }}" class="btn btn-success btn-xs float-right btn-rounded">
+                                    <i class="fa fa-file-export"></i> Export</a>
+                            @endif
+                        </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped data-table">
                                 <thead>

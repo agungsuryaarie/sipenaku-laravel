@@ -75,6 +75,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('spj/{spj}/verify', [SpjController::class, 'verify'])->name('spj.verify');
         Route::post('spj/decline/{spj}', [SpjController::class, 'tolak'])->name('spj.decline');
         Route::get('spj/diterima', [SpjController::class, 'diterima'])->name('spj.diterima');
+        Route::get('spj/export', [SpjController::class, 'export'])->name('spj.export');
         Route::get('spj/ditolak', [SpjController::class, 'ditolak'])->name('spj.ditolak');
         Route::delete('spj/destroyed/{spj}', [SpjController::class, 'destroy'])->name('spj.destroyed');
         Route::delete('spj/destroyback/{spj}', [SpjController::class, 'destroyback'])->name('spj.destroyback');
