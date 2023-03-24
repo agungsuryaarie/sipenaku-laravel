@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Storage;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Crypt;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
 class SpjController extends Controller
@@ -368,7 +370,9 @@ class SpjController extends Controller
                 ->make(true);
         }
         if (Auth::user()->level == 1) {
-            return view('admin.spj.diterima', compact('menu'));
+            $export = SPJ::where('status', '=', 3)->get();
+            // dd($ex);
+            return view('admin.spj.diterima', compact('menu', 'export'));
         } else {
             return view('admin.spj.diterimausr', compact('menu'));
         }
@@ -568,5 +572,89 @@ class SpjController extends Controller
             'alasan' => $request->alasan
         ]);
         return response()->json(['success' => 'SPJ Berhasil ditolak']);
+    }
+    public function export()
+    {
+        // Fetch Data SPJ
+        $data = SPJ::where('status', '=', 3)->get();
+        // Design Table
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet()->setTitle('SPJ Exported');
+        $sheet->setCellValue('A2', 'NO');
+        $sheet->setCellValue('B2', 'NO. BKU');
+        $sheet->setCellValue('C2', 'JENIS KEGIATAN');
+        $sheet->setCellValue('D2', 'URAIAN KEGIATAN');
+        $sheet->setCellValue('E2', 'KODE SUB KEGIATAN');
+        $sheet->setCellValue('F2', 'KODE REKENING');
+        $sheet->setCellValue('G2', 'NAMA SUB KEGIATAN');
+        $sheet->setCellValue('H2', 'NAMA REKENING');
+        $sheet->setCellValue('I2', 'NILAI KWITANSI');
+        $sheet->setCellValue('J2', 'PENERIMA PEMBAYARAN');
+        $sheet->setCellValue('J3', 'NAMA REKANAN');
+        $sheet->setCellValue('K3', 'ALAMAT');
+        $no =  1;
+        $row = 4;
+        foreach ($data as $r) :
+            $sheet->setCellValue('A' . $row, $no);
+            $sheet->setCellValue('B' . $row, '');
+            $sheet->setCellValue('C' . $row, '');
+            $sheet->setCellValue('D' . $row, $r->uraian);
+            $sheet->setCellValue('E' . $row, $r->subkegiatan->kode_sub);
+            $sheet->setCellValue('F' . $row, $r->rekening->kode_rekening);
+            $sheet->setCellValue('G' . $row, $r->subkegiatan->nama_sub);
+            $sheet->setCellValue('H' . $row, $r->rekening->nama_rekening);
+            $sheet->setCellValue('I' . $row, $r->kwitansi);
+            $sheet->setCellValue('J' . $row, $r->nama_penerima);
+            $sheet->setCellValue('K' . $row, $r->alamat_penerima);
+            //Style
+            $styleBorder = [
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                    ],
+                ],
+            ];
+            $styleColumnCenter = [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                ],
+            ];
+            $sheet->getStyle('A2:K' . $row)->applyFromArray($styleBorder);
+            $sheet->getStyle('A2:A' . $row)->applyFromArray($styleColumnCenter);
+            $sheet->getStyle('A2:K' . $row)->applyFromArray($styleColumnCenter);
+            $no++;
+            $row++;
+        endforeach;
+        $sheet->mergeCells('A1:K1');
+        $sheet->mergeCells('A2:A3');
+        $sheet->mergeCells('B2:B3');
+        $sheet->mergeCells('C2:C3');
+        $sheet->mergeCells('D2:D3');
+        $sheet->mergeCells('E2:E3');
+        $sheet->mergeCells('F2:F3');
+        $sheet->mergeCells('G2:G3');
+        $sheet->mergeCells('H2:H3');
+        $sheet->mergeCells('I2:I3');
+        $sheet->mergeCells('J2:K2');
+        $sheet->getStyle('A1')->getFont()->setBold(true);
+        $sheet->getColumnDimension('A')->setAutoSize(true);
+        $sheet->getColumnDimension('B')->setAutoSize(true);
+        $sheet->getColumnDimension('C')->setAutoSize(true);
+        $sheet->getColumnDimension('D')->setWidth(200, 'pt');
+        $sheet->getColumnDimension('E')->setAutoSize(true);
+        $sheet->getColumnDimension('F')->setAutoSize(true);
+        $sheet->getColumnDimension('G')->setAutoSize(true);
+        $sheet->getColumnDimension('H')->setAutoSize(true);
+        $sheet->getColumnDimension('I')->setAutoSize(true);
+        $sheet->getColumnDimension('J')->setWidth(150, 'pt');
+        $sheet->getColumnDimension('K')->setWidth(200, 'pt');
+        // Export
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . time() . '_SPJ Exported.xlsx');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+        exit();
     }
 }
