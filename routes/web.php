@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AppSettingController;
 use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\RkaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('kegiatan/rekening/{id}/update', [RekeningController::class, 'update'])->name('rekening.update');
         Route::get('kegiatan/rekening/{subkegiatan_id}/{id}/edit', [RekeningController::class, 'edit'])->name('rekening.edit');
         Route::delete('kegiatan/rekening/{id}/destroy', [RekeningController::class, 'destroy'])->name('rekening.destroy');
+        // RKA
+        Route::get('rka', [RkaController::class, 'index'])->name('rka.index');
+        Route::get('rka/{id}', [RkaController::class, 'get'])->name('rka.get');
+        Route::post('rka/fetch-kegiatan', [RkaController::class, 'fetchKegiatan']);
+        Route::post('rka/fetch-subkeg', [RkaController::class, 'fetchSubkeg']);
         // detail
         Route::get('kegiatan/detail/{id}', [DetailController::class, 'index'])->name('detail.index');
         Route::post('kegiatan/detail', [DetailController::class, 'store'])->name('detail.store');

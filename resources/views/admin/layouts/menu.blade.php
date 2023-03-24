@@ -57,6 +57,13 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('rka.index') }}"
+                    class="nav-link {{ request()->segment(1) == 'rka' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>RKA</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('kartu.kegiatan') }}"
                     class="nav-link {{ request()->segment(1) == 'kartu-kendali' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
