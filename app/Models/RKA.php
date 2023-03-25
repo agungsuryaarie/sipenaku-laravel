@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TW extends Model
+class RKA extends Model
 {
     use HasFactory;
 
-    protected $table = 'tw';
+    protected $table = 'rka';
 
     protected $fillable = [
-        'kegiatan_id',
-        'subkegiatan_id',
         'rekening_id',
         '1',
         '2',

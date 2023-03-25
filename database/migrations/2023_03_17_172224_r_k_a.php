@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TW extends Migration
+class RKA extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class TW extends Migration
      */
     public function up()
     {
-        Schema::create('tw', function (Blueprint $table) {
+        Schema::create('rka', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('kegiatan_id');
-            $table->unsignedBigInteger('subkegiatan_id');
             $table->unsignedBigInteger('rekening_id');
-            $table->foreign('kegiatan_id')->references('id')->on('kegiatan');
-            $table->foreign('subkegiatan_id')->references('id')->on('subkegiatan');
             $table->foreign('rekening_id')->references('id')->on('rekening');
             $table->bigInteger('1')->default(0);
             $table->bigInteger('2')->default(0);

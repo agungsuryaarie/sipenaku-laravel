@@ -11,6 +11,7 @@
         class="nav-item {{ request()->segment(1) == 'user' ||
         request()->segment(1) == 'bagian' ||
         request()->segment(1) == 'kegiatan' ||
+        request()->segment(1) == 'rka' ||
         request()->segment(1) == 'sub-kegiatan' ||
         request()->segment(1) == 'rekening' ||
         request()->segment(1) == 'kartu-kendali' ||
@@ -21,6 +22,7 @@
             class="nav-link {{ request()->segment(1) == 'user' ||
             request()->segment(1) == 'bagian' ||
             request()->segment(1) == 'kegiatan' ||
+            request()->segment(1) == 'rka' ||
             request()->segment(1) == 'sub-kegiatan' ||
             request()->segment(1) == 'rekening' ||
             request()->segment(1) == 'kartu-kendali' ||

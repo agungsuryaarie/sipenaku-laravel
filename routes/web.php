@@ -64,14 +64,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('kegiatan/rekening/{id}/destroy', [RekeningController::class, 'destroy'])->name('rekening.destroy');
         // RKA
         Route::get('rka', [RkaController::class, 'index'])->name('rka.index');
-        Route::get('rka/{id}', [RkaController::class, 'get'])->name('rka.get');
-        Route::post('rka/fetch-kegiatan', [RkaController::class, 'fetchKegiatan']);
-        Route::post('rka/fetch-subkeg', [RkaController::class, 'fetchSubkeg']);
-        // detail
-        Route::get('kegiatan/detail/{id}', [DetailController::class, 'index'])->name('detail.index');
-        Route::post('kegiatan/detail', [DetailController::class, 'store'])->name('detail.store');
-        Route::get('kegiatan/detail/{rekening_id}/{id}/edit', [DetailController::class, 'edit'])->name('detail.edit');
-        Route::delete('kegiatan/detail/{id}/destroy', [DetailController::class, 'destroy'])->name('detail.destroy');
+        Route::get('rka/kegiatan/{id}', [RkaController::class, 'kegiatan'])->name('rka.kegiatan');
+        Route::get('rka/subkegiatan/{id}', [RkaController::class, 'subkegiatan'])->name('rka.subkegiatan');
+        Route::get('rka/rekening/{id}', [RkaController::class, 'rekening'])->name('rka.rekening');
         // Kartu Kendali
         Route::get('kartu-kendali', [KartuController::class, 'kegiatanadm'])->name('kartu.kegiatan');
         Route::get('kartu-kendali/{id}/sub-kegiatan', [KartuController::class, 'subkegadm'])->name('kartu.subkeg');
