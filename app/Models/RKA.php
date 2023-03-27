@@ -13,18 +13,23 @@ class RKA extends Model
 
     protected $fillable = [
         'rekening_id',
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-        '8',
-        '9',
-        '10',
-        '11',
-        '12',
+        'january',
+        'february',
+        'march',
+        'april',
+        'may',
+        'june',
+        'july',
+        'august',
+        'september',
+        'october',
+        'november',
+        'december',
 
     ];
+
+    public function rekening()
+    {
+        return $this->belongsTo(Rekening::class);
+    }
 }

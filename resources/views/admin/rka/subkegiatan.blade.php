@@ -21,10 +21,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            {{-- <a href="{{ route('rka.kegiatan', Crypt::encryptString($kegiatan->id)) ?? 'None' }}"
+                            <span>Kegiatan :
+                                {{ $kegiatan->kode_kegiatan . ' ' . $kegiatan->nama_kegiatan }}
+                            </span>
+                            <a href="{{ route('rka.kegiatan', Crypt::encryptString($kegiatan->bagian_id)) ?? 'None' }}"
                                 class="btn btn-warning btn-xs float-right">
                                 <i class="fas fa-reply"></i> Kembali
-                            </a> --}}
+                            </a>
                         </div>
                         <div class="card-body">
                             <table id="data-table" class="table table-bordered table-striped ">
@@ -62,14 +65,12 @@
                 buttons: ["excel", "pdf", "print", "colvis"],
                 ajax: "{{ route('rka.subkegiatan', $id) }}",
                 columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
-                    },
-                    {
-                        data: 'nama_sub',
-                        name: 'nama_sub'
-                    }
-                ]
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                }, {
+                    data: 'nama_sub',
+                    name: 'nama_sub'
+                }]
             })
         });
     </script>

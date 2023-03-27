@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('rka/kegiatan/{id}', [RkaController::class, 'kegiatan'])->name('rka.kegiatan');
         Route::get('rka/subkegiatan/{id}', [RkaController::class, 'subkegiatan'])->name('rka.subkegiatan');
         Route::get('rka/rekening/{id}', [RkaController::class, 'rekening'])->name('rka.rekening');
+        Route::post('rka', [KegiatanController::class, 'store'])->name('rka.store');
         // Kartu Kendali
         Route::get('kartu-kendali', [KartuController::class, 'kegiatanadm'])->name('kartu.kegiatan');
         Route::get('kartu-kendali/{id}/sub-kegiatan', [KartuController::class, 'subkegadm'])->name('kartu.subkeg');

@@ -21,6 +21,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
+                            <span>Bagian :
+                                {{ $bagian->nama_bagian }}
+                            </span>
                             <a href="{{ route('rka.index') ?? 'None' }}" class="btn btn-warning btn-xs float-right">
                                 <i class="fas fa-reply"></i> Kembali
                             </a>
