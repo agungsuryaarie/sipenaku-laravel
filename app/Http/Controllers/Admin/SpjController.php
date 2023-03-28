@@ -129,11 +129,10 @@ class SpjController extends Controller
             'subkegiatan_id.required' => 'Sub Kegiatan harus dipilih.',
             'rekening_id.required' => 'Rekening harus dipilih.',
             'uraian.required' => 'Uraian harus diisi.',
-            'uraian.max' => 'Uraian maksimal 500 karakter.',
             'kwitansi.required' => 'Kwitansi harus diisi.',
             'nama_penerima.required' => 'Nama Penerima harus diisi.',
             'alamat_penerima.required' => 'Alamat harus diisi.',
-            'alamat_penerima.max' => 'Alamat maksimal 500 karakter.',
+            'alamat_penerima.max' => 'Alamat melebihi maksimal karakter.',
             'jenis_spm.required' => 'Jenis SPM harus dipilih.',
             'file.required' => 'File harus diupload.',
             'file.mimes' => 'File harus .pdf',
@@ -143,10 +142,10 @@ class SpjController extends Controller
             'kegiatan_id' => 'required',
             'subkegiatan_id' => 'required',
             'rekening_id' => 'required',
-            'uraian' => 'required|max:500',
+            'uraian' => 'required',
             'kwitansi' => 'required',
             'nama_penerima' => 'required',
-            'alamat_penerima' => 'required|max:500',
+            'alamat_penerima' => 'required|max:225',
             'jenis_spm' => 'required',
             'file' => 'required|mimes:pdf,application/pdf|max:5120',
         ], $message);
@@ -165,8 +164,13 @@ class SpjController extends Controller
         }
         $fileName = time() . '.' . $request->file->extension();
         $request->file->storeAs('public/file', $fileName);
+        if ($request->jenis_spm == 1) {
+            $gu = $request->gu;
+        } else {
+            $gu = null;
+        }
         SPJ::create([
-            'gu' =>  $request->gu,
+            'gu' =>  $gu,
             'tanggal' => $tanggal,
             'bagian_id' => Auth::user()->bagian_id,
             'kegiatan_id' => $request->kegiatan_id,
@@ -340,6 +344,26 @@ class SpjController extends Controller
                     $link = 'Rp. ' . number_format($link, 0, ',', '.');
                     return $link;
                 })
+                ->addColumn('spm', function ($data) {
+                    if ($data->jenis_spm == 1) {
+                        $link = '<span class="badge badge-primary btn-xs">GU</span>';
+                    } elseif ($data->jenis_spm == 2) {
+                        $link = '<span class="badge badge-primary btn-xs">TU</span>';
+                    } elseif ($data->jenis_spm == 3) {
+                        $link = '<span class="badge badge-primary btn-xs">LS</span>';
+                    } elseif ($data->jenis_spm == 4) {
+                        $link = '<span class="badge badge-primary btn-xs">UP</span>';
+                    }
+                    return $link;
+                })
+                ->addColumn('gu', function ($data) {
+                    if ($data->gu != null) {
+                        $link = $data->gu;
+                    } else {
+                        $link = '<i>tidak ada</i>';
+                    }
+                    return $link;
+                })
                 ->addColumn('action', function ($row) {
                     if (Auth::user()->level == 1) {
                         $btn = '<center>
@@ -367,7 +391,7 @@ class SpjController extends Controller
                     }
                     return $btn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['spm', 'gu', 'action'])
                 ->make(true);
         }
         if (Auth::user()->level == 1) {
@@ -394,23 +418,40 @@ class SpjController extends Controller
                     return  \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal)->format('d/m/Y');
                 })
                 ->addColumn('kegiatan', function ($data) {
-                    $link = $data->kegiatan->kode_kegiatan;
-                    $link = $link . ' ' . $data->kegiatan->nama_kegiatan;
+                    $link =  $data->kegiatan->nama_kegiatan;
                     return $link;
                 })
                 ->addColumn('subkeg', function ($data) {
-                    $link = $data->subkegiatan->kode_sub;
-                    $link = $link . ' ' . $data->subkegiatan->nama_sub;
+                    $link = $data->subkegiatan->nama_sub;
                     return $link;
                 })
                 ->addColumn('rekening', function ($data) {
-                    $link = $data->rekening->kode_rekening;
-                    $link = $link . ' ' . $data->rekening->nama_rekening;
+                    $link = $data->rekening->nama_rekening;
                     return $link;
                 })
                 ->addColumn('nilai', function ($data) {
                     $link = $data->kwitansi;
                     $link = 'Rp. ' . number_format($link, 0, ',', '.');
+                    return $link;
+                })
+                ->addColumn('spm', function ($data) {
+                    if ($data->jenis_spm == 1) {
+                        $link = '<span class="badge badge-primary btn-xs">GU</span>';
+                    } elseif ($data->jenis_spm == 2) {
+                        $link = '<span class="badge badge-primary btn-xs">TU</span>';
+                    } elseif ($data->jenis_spm == 3) {
+                        $link = '<span class="badge badge-primary btn-xs">LS</span>';
+                    } elseif ($data->jenis_spm == 4) {
+                        $link = '<span class="badge badge-primary btn-xs">UP</span>';
+                    }
+                    return $link;
+                })
+                ->addColumn('gu', function ($data) {
+                    if ($data->gu != null) {
+                        $link = $data->gu;
+                    } else {
+                        $link = '<i>tidak ada</i>';
+                    }
                     return $link;
                 })
                 ->addColumn('action', function ($row) {
@@ -440,7 +481,7 @@ class SpjController extends Controller
                     }
                     return $btn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['spm', 'gu', 'action'])
                 ->make(true);
         }
         if (Auth::user()->level == 1) {
@@ -500,10 +541,16 @@ class SpjController extends Controller
             return redirect()->route('spj.index')->with(['toast_error' => 'Maaf, anggaran tidak mencukupi!' . "\n" . 'Sisa anggaran : Rp.' . $rek->sisa_rekening]);
         }
         if ($request->hasFile('file')) {
+            if ($request->jenis_spm == 1) {
+                $gu = $request->gu;
+            } else {
+                $gu = null;
+            }
             $berkas = time() . '.' . $request->file->extension();
             $request->file->storeAs('public/file', $berkas);
             Storage::delete('public/file/' . $spj->file);
             $spj->update([
+                'gu' => $gu,
                 'tanggal' => $tanggal,
                 'bagian_id' => Auth::user()->bagian_id,
                 'kegiatan_id' => $request->kegiatan_id,
@@ -518,7 +565,13 @@ class SpjController extends Controller
                 'status' => 1,
             ]);
         } else {
+            if ($request->jenis_spm == 1) {
+                $gu = $request->gu;
+            } else {
+                $gu = null;
+            }
             $spj->update([
+                'gu' => $gu,
                 'tanggal' => $tanggal,
                 'bagian_id' => Auth::user()->bagian_id,
                 'kegiatan_id' => $request->kegiatan_id,

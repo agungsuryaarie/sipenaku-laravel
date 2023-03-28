@@ -32,6 +32,8 @@
                                         <th>Rekening</th>
                                         <th style="width: 30%">Uraian</th>
                                         <th style="width: 10%">Nilai</th>
+                                        <th style="width: 5%">SPM</th>
+                                        <th style="width: 5%">GU</th>
                                         <th style="width: 5%" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
@@ -86,6 +88,14 @@
                     {
                         data: "nilai",
                         name: "nilai",
+                    },
+                    {
+                        data: "spm",
+                        name: "spm",
+                    },
+                    {
+                        data: "gu",
+                        name: "gu",
                     },
                     {
                         data: "action",

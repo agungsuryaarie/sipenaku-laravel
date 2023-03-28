@@ -160,14 +160,14 @@
                                         '</li></strong>');
                                     $(".alert-danger").fadeOut(5000);
                                     $("#hapusBtn").html(
-                                        "<i class='fa fa-trash'></i>"
+                                        "<i class='fa fa-trash'></i>&nbsp;Hapus"
                                     );
                                 });
                             } else {
                                 table.draw();
                                 alertSuccess(data.success);
                                 $("#hapusBtn").html(
-                                    "<i class='fa fa-trash'></i>");
+                                    "<i class='fa fa-trash'></i>&nbsp;Hapus");
                                 $('#ajaxModel').modal('hide');
                             }
                         },

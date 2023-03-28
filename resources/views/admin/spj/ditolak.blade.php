@@ -32,6 +32,8 @@
                                         <th>Rekening</th>
                                         <th style="width: 30%">Uraian</th>
                                         <th style="width: 10%">Nilai</th>
+                                        <th style="width: 5%">SPM</th>
+                                        <th style="width: 5%">GU</th>
                                         <th style="width: 5%" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
@@ -124,6 +126,14 @@
                         name: "nilai",
                     },
                     {
+                        data: "spm",
+                        name: "spm",
+                    },
+                    {
+                        data: "gu",
+                        name: "gu",
+                    },
+                    {
                         data: "action",
                         name: "action",
                         orderable: false,
@@ -156,14 +166,14 @@
                                         '</li></strong>');
                                     $(".alert-danger").fadeOut(5000);
                                     $("#hapusBtn").html(
-                                        "<i class='fa fa-trash'></i>"
+                                        "<i class='fa fa-trash'></i>&nbsp;Hapus"
                                     );
                                 });
                             } else {
                                 table.draw();
                                 alertSuccess(data.success);
                                 $("#hapusBtn").html(
-                                    "<i class='fa fa-trash'></i>");
+                                    "<i class='fa fa-trash'></i>&nbsp;Hapus");
                                 $('#ajaxModel').modal('hide');
                             }
                         },
