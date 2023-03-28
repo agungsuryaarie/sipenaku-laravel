@@ -11,6 +11,7 @@
         class="nav-item {{ request()->segment(1) == 'user' ||
         request()->segment(1) == 'bagian' ||
         request()->segment(1) == 'kegiatan' ||
+        request()->segment(1) == 'rka' ||
         request()->segment(1) == 'sub-kegiatan' ||
         request()->segment(1) == 'rekening' ||
         request()->segment(1) == 'kartu-kendali' ||
@@ -21,6 +22,7 @@
             class="nav-link {{ request()->segment(1) == 'user' ||
             request()->segment(1) == 'bagian' ||
             request()->segment(1) == 'kegiatan' ||
+            request()->segment(1) == 'rka' ||
             request()->segment(1) == 'sub-kegiatan' ||
             request()->segment(1) == 'rekening' ||
             request()->segment(1) == 'kartu-kendali' ||
@@ -54,6 +56,13 @@
                     class="nav-link {{ request()->segment(1) == 'kegiatan' ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Anggaran</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('rka.index') }}"
+                    class="nav-link {{ request()->segment(1) == 'rka' ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>RKA</p>
                 </a>
             </li>
             <li class="nav-item">

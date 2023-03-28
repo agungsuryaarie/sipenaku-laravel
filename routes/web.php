@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AppSettingController;
 use App\Http\Controllers\Admin\DetailController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\RkaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,11 +62,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('kegiatan/rekening/{id}/update', [RekeningController::class, 'update'])->name('rekening.update');
         Route::get('kegiatan/rekening/{subkegiatan_id}/{id}/edit', [RekeningController::class, 'edit'])->name('rekening.edit');
         Route::delete('kegiatan/rekening/{id}/destroy', [RekeningController::class, 'destroy'])->name('rekening.destroy');
-        // detail
-        Route::get('kegiatan/detail/{id}', [DetailController::class, 'index'])->name('detail.index');
-        Route::post('kegiatan/detail', [DetailController::class, 'store'])->name('detail.store');
-        Route::get('kegiatan/detail/{rekening_id}/{id}/edit', [DetailController::class, 'edit'])->name('detail.edit');
-        Route::delete('kegiatan/detail/{id}/destroy', [DetailController::class, 'destroy'])->name('detail.destroy');
+        // RKA
+        Route::get('rka', [RkaController::class, 'index'])->name('rka.index');
+        Route::get('rka/kegiatan/{id}', [RkaController::class, 'kegiatan'])->name('rka.kegiatan');
+        Route::get('rka/subkegiatan/{id}', [RkaController::class, 'subkegiatan'])->name('rka.subkegiatan');
+        Route::get('rka/rekening/{id}', [RkaController::class, 'rekening'])->name('rka.rekening');
+        Route::post('rka', [KegiatanController::class, 'store'])->name('rka.store');
         // Kartu Kendali
         Route::get('kartu-kendali', [KartuController::class, 'kegiatanadm'])->name('kartu.kegiatan');
         Route::get('kartu-kendali/{id}/sub-kegiatan', [KartuController::class, 'subkegadm'])->name('kartu.subkeg');

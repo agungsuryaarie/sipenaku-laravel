@@ -28,8 +28,8 @@ class Rekening extends Model
     {
         return $this->belongsTo(Kegiatan::class);
     }
-    public function detail()
+    public function rka()
     {
-        return $this->hasMany(Detail::class);
+        return $this->hasMany(RKA::class);
     }
 }
