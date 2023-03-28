@@ -256,6 +256,7 @@ class SpjController extends Controller
     {
         $spj = SPJ::find(Crypt::decryptString($id));
         $user = User::join('spj', 'users.bagian_id', '=', 'spj.bagian_id')
+            ->where('spj.id', '=', Crypt::decryptString($id))
             ->where('spj.status', '=', 2)->first();
         // dd($user);
         $menu = 'Verifikasi SPJ';
