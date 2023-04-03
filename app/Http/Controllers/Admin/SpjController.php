@@ -674,9 +674,19 @@ class SpjController extends Controller
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
                 ],
             ];
+            $styleNumberLeft = [
+                'alignment' => [
+                    'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+                ],
+            ];
             $sheet->getStyle('A2:K' . $row)->applyFromArray($styleBorder);
             $sheet->getStyle('A2:A' . $row)->applyFromArray($styleColumnCenter);
             $sheet->getStyle('A2:K' . $row)->applyFromArray($styleColumnCenter);
+            $sheet->getStyle('D4:D' . $row)->applyFromArray($styleNumberLeft);
+            $sheet->getStyle('G4:G' . $row)->applyFromArray($styleNumberLeft);
+            $sheet->getStyle('H4:H' . $row)->applyFromArray($styleNumberLeft);
+            $sheet->getStyle('J4:J' . $row)->applyFromArray($styleNumberLeft);
+            $sheet->getStyle('K4:K' . $row)->applyFromArray($styleNumberLeft);
             $no++;
             $row++;
         endforeach;
@@ -695,14 +705,14 @@ class SpjController extends Controller
         $sheet->getColumnDimension('A')->setAutoSize(true);
         $sheet->getColumnDimension('B')->setAutoSize(true);
         $sheet->getColumnDimension('C')->setAutoSize(true);
-        $sheet->getColumnDimension('D')->setWidth(200, 'pt');
+        $sheet->getColumnDimension('D')->setAutoSize(true);
         $sheet->getColumnDimension('E')->setAutoSize(true);
         $sheet->getColumnDimension('F')->setAutoSize(true);
         $sheet->getColumnDimension('G')->setAutoSize(true);
         $sheet->getColumnDimension('H')->setAutoSize(true);
         $sheet->getColumnDimension('I')->setAutoSize(true);
-        $sheet->getColumnDimension('J')->setWidth(150, 'pt');
-        $sheet->getColumnDimension('K')->setWidth(200, 'pt');
+        $sheet->getColumnDimension('J')->setAutoSize(true);
+        $sheet->getColumnDimension('K')->setAutoSize(true);
         // Export
         $writer = new Xlsx($spreadsheet);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

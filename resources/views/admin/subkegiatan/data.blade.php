@@ -166,7 +166,7 @@
                 pageLength: 10,
                 lengthMenu: [10, 50, 100, 200, 500],
                 lengthChange: true,
-                autoWidth: true,
+                autoWidth: false,
                 ajax: "{{ route('subkegiatan.index', $id) }}",
                 columns: [{
                         data: 'DT_RowIndex',
