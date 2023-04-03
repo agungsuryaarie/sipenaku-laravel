@@ -96,8 +96,10 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                lengthChange: false,
-                autoWidth: false,
+                pageLength: 10,
+                lengthMenu: [10, 50, 100, 200, 500],
+                lengthChange: true,
+                autoWidth: true,
                 ajax: "{{ route('spj.index') }}",
                 columns: [{
                         data: "DT_RowIndex",

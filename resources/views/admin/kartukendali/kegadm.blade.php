@@ -28,7 +28,7 @@
                                 <label>Bagian</label>
                                 <select class="form-control select2bs4" style="width: 100%;">
                                     <option selected="selected">::Pilih Bagian::</option>
-                                    
+
                                 </select>
                             </div>
                         </div>
@@ -91,10 +91,10 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                lengthChange: false,
-                autoWidth: false,
-                dom: 'Bfrtip',
-                buttons: ["excel", "pdf", "print", "colvis"],
+                pageLength: 10,
+                lengthMenu: [10, 50, 100, 200, 500],
+                lengthChange: true,
+                autoWidth: true,
                 ajax: "{{ route('kartu.kegiatan') }}",
                 columns: [{
                         data: 'DT_RowIndex',
