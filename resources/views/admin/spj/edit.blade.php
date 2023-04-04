@@ -36,7 +36,9 @@
                         @csrf
                         @method('put')
                         <div class="card-body-form">
-
+                            <div class="form-group">
+                                <input type="hidden" name="gu" class="form-control" value="{{ $setting->judul }}">
+                            </div>
                             <div class="form-group">
                                 <label>Jenis SPM<span class="text-danger"> *</span></label>
                                 <span class="badge badge-primary btn-sm"> {{ $setting->judul }}</span>

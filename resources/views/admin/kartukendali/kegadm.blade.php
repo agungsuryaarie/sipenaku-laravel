@@ -23,35 +23,28 @@
                         <h3>Filter Berdasarkan : </h3>
                     </div>
                     <div class="row-kartu">
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Bagian</label>
-                                <select class="form-control select2bs4" style="width: 100%;">
-                                    <option selected="selected">::Pilih Bagian::</option>
-
+                                <select data-column="2" class="form-control select2bs4 bagian">
+                                    <option value="">::Semua Bagian::</option>
+                                    @foreach ($bagian as $item)
+                                        <option value="{{ $item->nama_bagian }}">
+                                            {{ $item->nama_bagian }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Kegiatan</label>
-                                <select class="form-control select2bs4" style="width: 100%;">
-                                    <option selected="selected">::Pilih Kegiatan::</option>
+                                <select data-column="1" class="form-control select2bs4 kegiatan">
+                                    <option value="">::Semua Kegiatan::</option>
+                                    @foreach ($kegiatan as $k)
+                                        <option value="{{ $k->nama_kegiatan }}">
+                                            {{ $k->nama_kegiatan }}</option>
+                                    @endforeach
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Sub Kegiatan</label>
-                                <select class="form-control select2bs4" style="width: 100%;">
-                                    <option selected="selected">::Pilih Sub Kegiatan::</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group-append mt-10" id="#">
-                                <button type="button" class="btn btn-block btn-primary btn-flat">
-                                    Search <i class="fas fa-search"></i></button>
                             </div>
                         </div>
                     </div>
@@ -86,7 +79,6 @@
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
             });
-
             var table = $(".data-table").DataTable({
                 processing: true,
                 serverSide: true,
@@ -122,6 +114,32 @@
                     },
                 ]
             });
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+            $('.bagian').change(function() {
+                table.column($(this).data('column'))
+                    .search($(this).val())
+                    .draw();
+            });
+            $('.kegiatan').change(function() {
+                table.column($(this).data('column'))
+                    .search($(this).val())
+                    .draw();
+            });
         });
+        //Filter Bagian
+        // $(document).ready(function() {
+        //     let table = $(".data-table")
+        //     $('#pilih').on('change', function() {
+        //         teble.on('preXhr.dt', function(e, settings, data) {
+        //                 data.bagian_id = $('#pilih').val();
+        //             })
+        //             .dataTable({
+        //                 ajax: "data.json"
+        //             });
+        //         table.DataTable().ajax.reload()
+        //     })
+        // })
     </script>
 @endsection

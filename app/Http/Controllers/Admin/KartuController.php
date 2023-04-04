@@ -8,6 +8,7 @@ use App\Models\Kegiatan;
 use App\Models\Subkegiatan;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Rekening;
+use App\Models\Bagian;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Crypt;
 
@@ -59,6 +60,8 @@ class KartuController extends Controller
     }
     public function kegiatanadm(Request $request)
     {
+        $bagian = Bagian::get();
+        $kegiatan = Kegiatan::get();
         $menu = 'Kartu Kendali';
         if ($request->ajax()) {
             $data = Kegiatan::get();
@@ -98,7 +101,7 @@ class KartuController extends Controller
                 ->rawColumns(['nama_kegiatan', 'sisa_kegiatan'])
                 ->make(true);
         }
-        return view('admin.kartukendali.kegadm', compact('menu'));
+        return view('admin.kartukendali.kegadm', compact('menu', 'bagian', 'kegiatan'));
     }
     public function subkeg(Request $request, $id)
     {

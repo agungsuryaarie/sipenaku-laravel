@@ -71,11 +71,11 @@ class SettingController extends Controller
         if ($validator->fails()) {
             return back()->with('toast_error', $validator->messages()->all()[0])->withInput();
         }
-        if ($request->tglm < date('Y-m-d')) {
-            return redirect()->route('setting.index')->with(['toast_error' => 'Tanggal mulai harus diatas Tanggal hari ini!'])->withInput();
-        } elseif ($request->tgls < date('Y-m-d')) {
+        if ($request->tgls < date('Y-m-d')) {
             return redirect()->route('setting.index')->with(['toast_error' => 'Tanggal selesai harus diatas Tanggal hari ini!'])->withInput();
         } elseif ($request->jamm > $request->jams) {
+            return redirect()->route('setting.index')->with(['toast_error' => 'Jam tidak masuk akal'])->withInput();
+        } elseif ($request->jams < $request->jamm) {
             return redirect()->route('setting.index')->with(['toast_error' => 'Jam tidak masuk akal'])->withInput();
         } else {
             $set->update(
