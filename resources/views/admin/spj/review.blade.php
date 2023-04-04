@@ -47,7 +47,7 @@
                                             </h5>
                                             <table>
                                                 <tr>
-                                                    <td rowspan="5" style="width:4%">
+                                                    <td rowspan="6" style="width:4%">
                                                         @if ($spj->jenis_spm == 1)
                                                             <span class="badge badge-primary btn-sm">GU</span>
                                                         @elseif($spj->jenis_spm == 2)
@@ -56,6 +56,21 @@
                                                             <span class="badge badge-primary btn-sm">LS</span>
                                                         @elseif($spj->jenis_spm == 4)
                                                             <span class="badge badge-primary btn-sm">UP</span>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 4%">
+                                                        Nomor BKU
+                                                    </td>
+                                                    <td style="width: 1%">
+                                                        :
+                                                    </td>
+                                                    <td style="width: 20%">
+                                                        @if ($spj->bku == null)
+                                                            <i class="text-danger">(*tidak ada)</i>
+                                                        @else
+                                                            {{ $spj->bku }}
                                                         @endif
                                                     </td>
                                                 </tr>

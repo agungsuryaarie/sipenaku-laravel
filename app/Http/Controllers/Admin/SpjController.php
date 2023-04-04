@@ -170,7 +170,8 @@ class SpjController extends Controller
             $gu = null;
         }
         SPJ::create([
-            'gu' =>  $gu,
+            'bku' => $request->bku,
+            'gu' => $gu,
             'tanggal' => $tanggal,
             'bagian_id' => Auth::user()->bagian_id,
             'kegiatan_id' => $request->kegiatan_id,
@@ -550,6 +551,7 @@ class SpjController extends Controller
             $request->file->storeAs('public/file', $berkas);
             Storage::delete('public/file/' . $spj->file);
             $spj->update([
+                'bku' => $request->bku,
                 'gu' => $gu,
                 'tanggal' => $tanggal,
                 'bagian_id' => Auth::user()->bagian_id,
@@ -571,6 +573,7 @@ class SpjController extends Controller
                 $gu = null;
             }
             $spj->update([
+                'bku' => $request->bku,
                 'gu' => $gu,
                 'tanggal' => $tanggal,
                 'bagian_id' => Auth::user()->bagian_id,
@@ -650,7 +653,7 @@ class SpjController extends Controller
         $row = 4;
         foreach ($data as $r) :
             $sheet->setCellValue('A' . $row, $no);
-            $sheet->setCellValue('B' . $row, '');
+            $sheet->setCellValue('B' . $row, $r->bku);
             $sheet->setCellValue('C' . $row, '');
             $sheet->setCellValue('D' . $row, $r->uraian);
             $sheet->setCellValue('E' . $row, $r->subkegiatan->kode_sub);

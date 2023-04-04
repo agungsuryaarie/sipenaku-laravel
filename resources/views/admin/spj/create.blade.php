@@ -100,6 +100,19 @@
                                     <small class="text-danger"><strong>{{ $message }}</strong></small>
                                 @enderror
                             </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Nomor BKU<small> (Opsional)</small></label>
+                                        <input name="bku" type="text"
+                                            class="form-control @error('bku') is-invalid @enderror"
+                                            value="{{ old('bku') }}" onkeypress="return hanyaAngka(event)">
+                                        @error('bku')
+                                            <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label>Tanggal<small> (Opsional)</small></label>
                                 <input type="date" name="tanggal" class="form-control">
@@ -198,7 +211,14 @@
             rupiah.value = formatRupiah(this.value, "Rp. ");
         });
 
+        // Fungsi hanyaAngka
+        function hanyaAngka(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
 
+                return false;
+            return true;
+        }
         /* Fungsi formatRupiah */
         function formatRupiah(angka, prefix) {
             var number_string = angka.replace(/[^,\d]/g, "").toString(),
