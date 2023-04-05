@@ -22,6 +22,48 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Filter SPM</label>
+                                        <select data-column="7" class="form-control select2bs4 spm">
+                                            <option value="">::Semua SPM::</option>
+                                            <option value="GU">GU</option>
+                                            <option value="TU">TU</option>
+                                            <option value="LS">LS</option>
+                                            <option value="UP">UP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Filter GU</label>
+                                        <select data-column="8" class="form-control select2bs4 gu">
+                                            <option value="">::Semua GU::</option>
+                                            <option value="GU 1">GU 1</option>
+                                            <option value="GU 2">GU 2</option>
+                                            <option value="GU 3">GU 3</option>
+                                            <option value="GU 4">GU 4</option>
+                                            <option value="GU 5">GU 5</option>
+                                            <option value="GU 6">GU 6</option>
+                                            <option value="GU 7">GU 7</option>
+                                            <option value="GU 8">GU 8</option>
+                                            <option value="GU 9">GU 9</option>
+                                            <option value="GU 10">GU 10</option>
+                                            <option value="GU 11">GU 11</option>
+                                            <option value="GU 12">GU 12</option>
+                                            <option value="GU 13">GU 13</option>
+                                            <option value="GU 14">GU 14</option>
+                                            <option value="GU 15">GU 15</option>
+                                            <option value="GU 16">GU 16</option>
+                                            <option value="GU 17">GU 17</option>
+                                            <option value="GU 18">GU 18</option>
+                                            <option value="GU 19">GU 19</option>
+                                            <option value="GU 20">GU 20</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <table id="example1" class="table table-bordered table-striped data-table">
                                 <thead>
                                     <tr>
@@ -106,6 +148,19 @@
                         searchable: false,
                     },
                 ],
+            });
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+            $('.spm').change(function() {
+                table.column($(this).data('column'))
+                    .search($(this).val())
+                    .draw();
+            });
+            $('.gu').change(function() {
+                table.column($(this).data('column'))
+                    .search($(this).val())
+                    .draw();
             });
         });
     </script>
