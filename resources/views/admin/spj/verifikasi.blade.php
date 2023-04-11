@@ -26,7 +26,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 5%">No</th>
-                                        <th style="width: 10%">Tanggal</th>
+                                        <th style="width: 10%">No BKU</th>
                                         <th style="width: 20%">Bagian</th>
                                         <th>Uraian</th>
                                         <th style="width: 12%">Nilai</th>
@@ -65,8 +65,8 @@
                         name: "DT_RowIndex",
                     },
                     {
-                        data: "tanggal",
-                        name: "tanggal",
+                        data: "nobku",
+                        name: "nobku",
                     },
                     {
                         data: "bagian",

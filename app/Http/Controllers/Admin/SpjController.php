@@ -31,8 +31,13 @@ class SpjController extends Controller
                 ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('tanggal', function ($data) {
-                    return  \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal)->format('d/m/Y');
+                ->addColumn('nobku', function ($data) {
+                    if ($data->bku == null) {
+                        $link = '<i class="text-danger">(*tidak ada)</i>';
+                    } else {
+                        $link = $data->bku;
+                    }
+                    return $link;
                 })
                 ->addColumn('kegiatan', function ($data) {
                     $link = $data->kegiatan->nama_kegiatan;
@@ -93,7 +98,7 @@ class SpjController extends Controller
                     }
                     return $btn;
                 })
-                ->rawColumns(['status', 'action'])
+                ->rawColumns(['nobku', 'status', 'action'])
                 ->make(true);
         }
 
@@ -233,11 +238,16 @@ class SpjController extends Controller
     {
         $menu = 'Verifikasi SPJ';
         if ($request->ajax()) {
-            $data = SPJ::where('status', 2)->get();
+            $data = SPJ::where('status', 2)->orderBy('id', 'desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('tanggal', function ($data) {
-                    return  \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal)->format('d/m/Y');
+                ->addColumn('nobku', function ($data) {
+                    if ($data->bku == null) {
+                        $link = '<i class="text-danger">(*tidak ada)</i>';
+                    } else {
+                        $link = $data->bku;
+                    }
+                    return $link;
                 })
                 ->addColumn('bagian', function ($data) {
                     $link = $data->bagian->nama_bagian;
@@ -252,7 +262,7 @@ class SpjController extends Controller
                     $btn = '<center><a class="btn btn-success btn-xs" href="' . route('spj.verify', Crypt::encryptString($row->id)) . '"><i class="fa fa-check-double"></i> Verifikasi</span></a></center>';
                     return $btn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['nobku', 'action'])
                 ->make(true);
         }
         return view('admin.spj.verifikasi', compact('menu'));
@@ -319,14 +329,19 @@ class SpjController extends Controller
         if ($request->ajax()) {
             $user = Auth::user()->bagian_id;
             if (Auth::user()->level == 1) {
-                $data = SPJ::where('status', 3)->get();
+                $data = SPJ::where('status', 3)->orderBy('id', 'desc')->get();
             } else {
-                $data = SPJ::where('status', 3)->where('bagian_id', $user)->get();
+                $data = SPJ::where('status', 3)->where('bagian_id', $user)->orderBy('id', 'desc')->get();
             }
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('tanggal', function ($data) {
-                    return  \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal)->format('d/m/Y');
+                ->addColumn('nobku', function ($data) {
+                    if ($data->bku == null) {
+                        $link = '<i class="text-danger">(*tidak ada)</i>';
+                    } else {
+                        $link = $data->bku;
+                    }
+                    return $link;
                 })
                 ->addColumn('kegiatan', function ($data) {
                     $link = $data->kegiatan->nama_kegiatan;
@@ -392,7 +407,7 @@ class SpjController extends Controller
                     }
                     return $btn;
                 })
-                ->rawColumns(['spm', 'gu', 'action'])
+                ->rawColumns(['spm', 'gu', 'nobku', 'action'])
                 ->make(true);
         }
         if (Auth::user()->level == 1) {
@@ -409,14 +424,19 @@ class SpjController extends Controller
         if ($request->ajax()) {
             $user = Auth::user()->bagian_id;
             if (Auth::user()->level == 1) {
-                $data = SPJ::where('status', 4)->get();
+                $data = SPJ::where('status', 4)->orderBy('id', 'desc')->get();
             } else {
-                $data = SPJ::where('status', 4)->where('bagian_id', $user)->get();
+                $data = SPJ::where('status', 4)->orderBy('id', 'desc')->where('bagian_id', $user)->get();
             }
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('tanggal', function ($data) {
-                    return  \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal)->format('d/m/Y');
+                ->addColumn('nobku', function ($data) {
+                    if ($data->bku == null) {
+                        $link = '<i class="text-danger">(*tidak ada)</i>';
+                    } else {
+                        $link = $data->bku;
+                    }
+                    return $link;
                 })
                 ->addColumn('kegiatan', function ($data) {
                     $link =  $data->kegiatan->nama_kegiatan;
@@ -482,7 +502,7 @@ class SpjController extends Controller
                     }
                     return $btn;
                 })
-                ->rawColumns(['spm', 'gu', 'action'])
+                ->rawColumns(['nobku', 'spm', 'gu', 'action'])
                 ->make(true);
         }
         if (Auth::user()->level == 1) {

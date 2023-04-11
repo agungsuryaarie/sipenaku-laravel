@@ -30,7 +30,7 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 5%">No</th>
-                                        <th style="width: 8%">Tanggal</th>
+                                        <th style="width: 8%">No BKU</th>
                                         <th>Kegiatan</th>
                                         <th>Sub Kegiatan</th>
                                         <th>Rekening</th>
@@ -106,8 +106,8 @@
                         name: "DT_RowIndex",
                     },
                     {
-                        data: "tanggal",
-                        name: "tanggal",
+                        data: "nobku",
+                        name: "nobku",
                     },
                     {
                         data: "kegiatan",
