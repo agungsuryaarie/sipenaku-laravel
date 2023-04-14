@@ -34,10 +34,16 @@
                                     <td rowspan="4" style="width:4%">
                                         <span class="badge badge-primary btn-sm"> {{ $setting->judul }}</span>
                                         {{-- Validasi GU aktif / nonaktif --}}
-                                        @if (date('Y-m-d') < $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
+                                        @if (date('Y-m-d') < $setting->tgl_mulai)
+                                            <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
+                                        @elseif (date('Y-m-d') < $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
                                             <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
                                         @elseif(date('Y-m-d') == $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
                                             <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
+                                        @elseif (date('Y-m-d') == $setting->tgl_mulai ||
+                                                (date('Y-m-d') > $setting->tgl_mulai && date('Y-m-d') < $setting->tgl_selesai) ||
+                                                date('Y-m-d') == $setting->tgl_selesai)
+                                            <span class="badge badge-success btn-sm">aktif</span>
                                         @elseif (date('Y-m-d') == $setting->tgl_mulai ||
                                                 (date('Y-m-d') > $setting->tgl_mulai &&
                                                     date('H:i:s') > $setting->jam_mulai &&

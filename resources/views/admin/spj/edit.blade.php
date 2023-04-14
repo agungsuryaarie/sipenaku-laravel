@@ -42,7 +42,9 @@
                             <div class="form-group">
                                 <label>Jenis SPM<span class="text-danger"> *</span></label>
                                 <span class="badge badge-primary btn-sm"> {{ $setting->judul }}</span>
-                                @if (date('Y-m-d') < $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
+                                @if (date('Y-m-d') < $setting->tgl_mulai)
+                                    <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
+                                @elseif (date('Y-m-d') < $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
                                     <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
                                 @elseif(date('Y-m-d') == $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
                                     <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
@@ -56,7 +58,12 @@
                                     <span class="badge badge-danger btn-sm">sesi telah berakhir</span>
                                 @endif
                                 <div class="radio-btn">
-                                    @if (date('Y-m-d') < $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
+                                    @if (date('Y-m-d') < $setting->tgl_mulai)
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" disabled>
+                                            <label class="custom-control-label text-danger">GU</label>
+                                        </div>
+                                    @elseif (date('Y-m-d') < $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
                                         <div class="custom-control custom-radio">
                                             <input class="custom-control-input" type="radio" disabled>
                                             <label class="custom-control-label text-danger">GU</label>
@@ -65,6 +72,15 @@
                                         <div class="custom-control custom-radio">
                                             <input class="custom-control-input" type="radio" disabled>
                                             <label class="custom-control-label text-danger">GU</label>
+                                        </div>
+                                    @elseif (date('Y-m-d') == $setting->tgl_mulai ||
+                                            (date('Y-m-d') > $setting->tgl_mulai && date('Y-m-d') < $setting->tgl_selesai) ||
+                                            date('Y-m-d') == $setting->tgl_selesai)
+                                        <div class="custom-control custom-radio">
+                                            <input class="custom-control-input" type="radio" value="1"
+                                                id="jenis_spm1" name="jenis_spm"
+                                                {{ old('jenis_spm', $spj->jenis_spm) == 1 ? 'checked' : '' }}>
+                                            <label for="jenis_spm1" class="custom-control-label">GU</label>
                                         </div>
                                     @elseif (date('Y-m-d') == $setting->tgl_mulai ||
                                             (date('Y-m-d') > $setting->tgl_mulai &&
