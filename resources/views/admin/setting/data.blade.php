@@ -41,13 +41,24 @@
                                         @elseif(date('Y-m-d') == $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai)
                                             <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
                                         @elseif (date('Y-m-d') == $setting->tgl_mulai ||
-                                                (date('Y-m-d') > $setting->tgl_mulai && date('Y-m-d') < $setting->tgl_selesai) ||
-                                                date('Y-m-d') == $setting->tgl_selesai)
-                                            <span class="badge badge-success btn-sm">aktif</span>
-                                        @elseif (date('Y-m-d') == $setting->tgl_mulai ||
                                                 (date('Y-m-d') > $setting->tgl_mulai &&
                                                     date('H:i:s') > $setting->jam_mulai &&
                                                     date('Y-m-d') < $setting->tgl_selesai) ||
+                                                (date('Y-m-d') == $setting->tgl_selesai && date('H:i:s') < $setting->jam_selesai))
+                                            <span class="badge badge-success btn-sm">aktif</span>
+                                        @elseif (date('Y-m-d') == $setting->tgl_selesai ||
+                                                (date('Y-m-d') > $setting->tgl_selesai && date('H:i:s') > $setting->jam_selesai))
+                                            <span class="badge badge-danger btn-sm">sesi telah berakhir</span>
+                                        @else
+                                            <span class="badge badge-danger btn-sm">sesi telah berakhir</span>
+                                        @endif
+                                        {{-- end --}}
+                                        {{-- Validasi GU aktif / nonaktif from AI --}}
+                                        @if (date('Y-m-d') < $setting->tgl_mulai ||
+                                                (date('Y-m-d') == $setting->tgl_mulai && date('H:i:s') < $setting->jam_mulai))
+                                            <span class="badge badge-warning btn-sm text-white">sesi belum dimulai</span>
+                                        @elseif (date('Y-m-d') == $setting->tgl_mulai ||
+                                                (date('Y-m-d') > $setting->tgl_mulai && date('Y-m-d') < $setting->tgl_selesai) ||
                                                 (date('Y-m-d') == $setting->tgl_selesai && date('H:i:s') < $setting->jam_selesai))
                                             <span class="badge badge-success btn-sm">aktif</span>
                                         @else

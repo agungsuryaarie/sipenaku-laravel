@@ -47,7 +47,7 @@
                                             </h5>
                                             <table>
                                                 <tr>
-                                                    <td rowspan="6" style="width:4%">
+                                                    <td rowspan="8" style="width:4%">
                                                         @if ($spj->jenis_spm == 1)
                                                             <span class="badge badge-primary btn-sm">GU</span>
                                                         @elseif($spj->jenis_spm == 2)
@@ -116,6 +116,28 @@
                                                     </td>
                                                     <td style="width: 20%">
                                                         {{ $spj->subkegiatan->nama_sub }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 4%">
+                                                        Kode Rekening
+                                                    </td>
+                                                    <td style="width: 1%">
+                                                        :
+                                                    </td>
+                                                    <td style="width: 20%">
+                                                        {{ $spj->rekening->kode_rekening }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 4%">
+                                                        Nama Rekening
+                                                    </td>
+                                                    <td style="width: 1%">
+                                                        :
+                                                    </td>
+                                                    <td style="width: 20%">
+                                                        {{ $spj->rekening->nama_rekening }}
                                                     </td>
                                                 </tr>
                                             </table>

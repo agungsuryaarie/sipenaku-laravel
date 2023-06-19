@@ -164,6 +164,7 @@ class SpjController extends Controller
         }
         $total =  preg_replace('/[^0-9]/', '', $request->kwitansi);
         $rek = Rekening::where('id', $request->rekening_id)->first();
+        // dd($rek->sisa_rekening);
         if ($total > $rek->sisa_rekening) {
             return redirect()->route('spj.index')->with(['toast_error' => 'Maaf, anggaran tidak mencukupi!' . "\n" . 'Sisa anggaran : Rp.' . number_format($rek->sisa_rekening, 0, ',', '.')]);
         }
